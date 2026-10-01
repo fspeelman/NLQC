@@ -1,0 +1,267 @@
+import NLQCLean.Approx.FiniteClassicalSpectralFloors
+import NLQCLean.Models.ClassicalCommunication.BorelMixedCompression
+import NLQCLean.Bounds.UniversalMaxBounds
+import NLQCLean.Bounds.SwapNeighborhoodAlmostEvery
+import NLQCLean.Models.ClassicalCommunication.BorelRankCompression
+import NLQCLean.Bounds.ProvedProjection
+import NLQCLean.Bounds.AlmostEveryFourInputs
+import NLQCLean.Bounds.AlmostEveryExact
+import NLQCLean.Bounds.QualitativeDiamond
+import NLQCLean.Bounds.StrongUniversalResources
+import NLQCLean.Bounds.SwapFloor
+import NLQCLean.Bounds.AlmostEveryQualitativeGap
+import NLQCLean.Approx.SpectralFootprintFloors
+import NLQCLean.Bounds.ControlledPhaseLength
+import NLQCLean.Approx.GenericSpectralThresholds
+import NLQCLean.Bounds.ControlledPhaseAlmostEvery
+import NLQCLean.Models.ClassicalCommunication.FiniteMixedCompression
+import NLQCLean.Bounds.FiniteControlledPhaseAlmostEvery
+import NLQCLean.Bounds.FiniteClassicalHaar
+import NLQCLean.Bounds.FiniteClassicalAlmostEvery
+import NLQCLean.Bounds.ArbitraryFiniteClassicalAlmostEvery
+import NLQCLean.Bounds.FiniteClassicalStrongUniversal
+import NLQCLean.Bounds.FiniteClassicalQubits
+import NLQCLean.Bounds.FiniteControlledPhaseQubits
+import NLQCLean.Bounds.FiniteControlledPhaseLength
+import NLQCLean.Models.ClassicalCommunication.FiniteOutputRestriction
+
+/-!
+# Main unitary results
+
+Reader-facing entry point for unconditional impossibility, full-group and
+near-SWAP quantitative bounds, and almost-every fixed-target conclusions.
+Supporting definitions and conditional theorems remain in their mathematical
+modules. The almost-every exact impossibility `ae_no_finite_exact_implementation`
+has no hypotheses.
+
+Semialgebraic projection closure is proved (`semialgebraicProjectionTheorem`).
+The full-group, near-SWAP and almost-every rate bounds therefore take exactly
+three explicit external inputs, `LRTTheorem44`,
+`SemialgebraicSmoothStratificationTheorem` and
+`SemialgebraicComponentBoundTheorem`, through `NLQCLean.ProvedProjection`.
+-/
+
+namespace NLQCLean.Results.Unitary
+
+/-- Direct spectral bounds for the resource and quantum messages alone. -/
+alias finite_classical_score_spectral_bound :=
+  NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.scoreU_le_schmidtMass
+
+alias finite_mixed_classical_score_spectral_bound :=
+  NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.mixed_scoreU_le_schmidtMass
+
+alias finite_classical_diamond_spectral_floor :=
+  NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.unitary_spectral_floor_of_diamondError
+
+alias finite_mixed_classical_diamond_spectral_floor :=
+  NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.mixed_unitary_spectral_floor_of_diamondError
+
+alias finite_classical_swap_quantum_footprint_floor :=
+  NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.swap_quantumFootprint_floor
+
+alias finite_mixed_classical_swap_quantum_footprint_floor :=
+  NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.mixed_swap_quantumFootprint_floor
+
+alias finite_classical_swap_diamond_quantum_footprint_floor :=
+  NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.swap_quantumFootprint_floor_of_diamondError
+
+alias finite_mixed_classical_swap_diamond_quantum_footprint_floor :=
+  NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.mixed_swap_quantumFootprint_floor_of_diamondError
+
+alias finite_classical_full_spectral_floor :=
+  NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.unitary_full_spectral_floor
+
+alias finite_mixed_classical_full_spectral_floor :=
+  NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.mixed_unitary_full_spectral_floor
+
+alias ae_finite_classical_full_spectral_threshold :=
+  NLQCLean.ae_finite_classical_full_spectral_threshold
+
+/-- The universal unitary dimension and precision lower bounds in one form. -/
+alias exists_universal_max_resource_bound_of_external :=
+  NLQCLean.exists_strongUniversalMaxResourceBound_of_external
+
+alias exists_universal_max_diamond_resource_bound_of_external :=
+  NLQCLean.exists_strongUniversalMaxDiamondResourceBound_of_external
+
+/-- One fixed-target threshold throughout the near-SWAP region. -/
+alias exists_ae_swap_neighborhood_resource_bound_of_external :=
+  NLQCLean.exists_ae_swapNeighborhood_resource_constant_of_external
+
+alias exists_ae_swap_neighborhood_physical_resource_bound_of_external :=
+  NLQCLean.exists_ae_swapNeighborhood_physical_resource_constant_of_external
+
+alias borel_mixed_classical_score_reachable_transfer :=
+  NLQCLean.ClassicalCommunication.StandardBorelClassicalProtocol.mem_pureReachable_of_mixedQuantumFootprint
+
+alias borel_mixed_classical_diamond_reachable_transfer :=
+  NLQCLean.ClassicalCommunication.StandardBorelClassicalProtocol.mem_pureReachable_of_mixedQuantumFootprint_diamondError
+
+alias borel_classical_score_reachable_transfer :=
+  NLQCLean.ClassicalCommunication.StandardBorelClassicalProtocol.mem_pureReachable_of_quantumFootprint
+
+alias borel_classical_diamond_reachable_transfer :=
+  NLQCLean.ClassicalCommunication.StandardBorelClassicalProtocol.mem_pureReachable_of_quantumFootprint_diamondError
+
+/-- Actual finite-protocol restriction, with the resource and both quantum
+messages unchanged and the original normalized diamond error contracted. -/
+alias finite_rectangular_diagonal_diamond_error_le :=
+  NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.restrictRectangularDiagonal_diamondError_le
+
+/-- The same actual restriction applies to common-map finite mixed resources. -/
+alias finite_mixed_rectangular_diagonal_diamond_error_le :=
+  NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.restrictRectangularDiagonal_mixedDiamondError_le
+
+alias exists_no_finite_exact_implementation :=
+  NLQCLean.exists_unitary_no_finite_exact_implementation
+
+alias exists_qualitative_score_gap := NLQCLean.exists_unitary_qualitative_gap
+
+alias exists_qualitative_diamond_gap := NLQCLean.exists_unitary_qualitative_diamond_gap
+
+alias pure_swap_footprint_floor := NLQCLean.PureProtocol.swap_footprint_floor
+
+alias mixed_swap_footprint_floor := NLQCLean.MixedResource.swap_footprint_floor
+
+alias pure_spectral_floor := NLQCLean.PureProtocol.unitary_spectral_floor
+
+alias mixed_spectral_floor := NLQCLean.MixedResource.unitary_spectral_floor
+
+alias pure_exact_schmidt_rank_floor := NLQCLean.PureProtocol.unitary_exact_schmidt_rank_floor
+
+alias mixed_exact_schmidt_rank_floor := NLQCLean.MixedResource.unitary_exact_schmidt_rank_floor
+
+alias pure_full_spectral_floor := NLQCLean.PureProtocol.unitary_full_spectral_floor
+
+alias mixed_full_spectral_floor := NLQCLean.MixedResource.unitary_full_spectral_floor
+
+alias ae_full_schmidt_rank := NLQCLean.ae_unitary_operatorSchmidtRank_full
+
+alias ae_positive_smallest_schmidt_weight := NLQCLean.ae_unitary_pos_schmidtWeight_lower_bound
+
+alias ae_full_spectral_footprint_threshold := NLQCLean.ae_full_spectral_footprint_threshold
+
+alias exists_score_maximum_protocol := NLQCLean.exists_unitaryScoreMaximum_protocol
+
+alias score_deficit_eq_zero_iff := NLQCLean.unitaryScoreDeficit_eq_zero_iff
+
+alias isCompact_pure_reachable := NLQCLean.isCompact_pureReachable
+
+alias isCompact_mixed_reachable := NLQCLean.isCompact_mixedReachable
+
+alias exists_general_target_gap := NLQCLean.exists_general_target_unitary_gap_of_no_finite_exact
+
+alias ae_general_target_gap := NLQCLean.ae_general_target_unitary_gap
+
+alias exists_charged_controlled_phase_length_bound_of_external :=
+  NLQCLean.exists_chargedControlledPhase_length_constant_of_external
+
+alias exists_ae_charged_controlled_phase_resource_bound_of_external :=
+  NLQCLean.exists_ae_chargedControlledPhase_resource_constant_of_external
+
+alias exists_ae_finite_classical_controlled_phase_log_bound_of_external :=
+  NLQCLean.exists_ae_finiteControlledPhase_log_bound_of_external
+
+alias finite_classical_score_reachable_transfer :=
+  NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.mem_pureReachable_of_quantumFootprint
+
+alias finite_classical_diamond_reachable_transfer :=
+  NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.mem_pureReachable_of_quantumFootprint_diamondError
+
+alias finite_mixed_classical_score_reachable_transfer :=
+  NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.mem_pureReachable_of_mixedQuantumFootprint
+
+alias finite_mixed_classical_diamond_reachable_transfer :=
+  NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.mem_pureReachable_of_mixedQuantumFootprint_diamondError
+
+alias exists_finite_classical_haar_bound_of_external :=
+  NLQCLean.ClassicalCommunication.exists_finite_classical_unitary_haar_constant_of_external
+
+alias exists_finite_classical_universal_log_bound_of_external :=
+  NLQCLean.ClassicalCommunication.exists_finite_classical_unitary_universal_log_constant_of_external
+
+alias exists_ae_finite_classical_log_bound_of_external :=
+  NLQCLean.ClassicalCommunication.exists_ae_finite_classical_log_constant_of_external
+
+alias exists_ae_arbitrary_finite_classical_log_bound_of_external :=
+  NLQCLean.ClassicalCommunication.exists_ae_arbitrary_finite_classical_log_constant_of_external
+
+alias exists_finite_classical_strong_universal_log_bound_of_external :=
+  NLQCLean.ClassicalCommunication.exists_finite_classical_strong_unitary_universal_log_constant_of_external
+
+alias exists_ae_finite_loscc_controlled_phase_qubit_bound_of_external :=
+  NLQCLean.exists_ae_finiteLOSCCControlledPhase_qubit_bound_of_external
+
+alias exists_finite_classical_controlled_phase_length_bound_of_external :=
+  NLQCLean.exists_finiteControlledPhase_length_constant_of_external
+
+alias exists_finite_classical_controlled_phase_worst_case_bound_of_external :=
+  NLQCLean.exists_finiteControlledPhase_worst_case_constant_of_external
+
+alias exists_finite_classical_universal_qubit_bound_of_external :=
+  NLQCLean.ClassicalCommunication.exists_finite_classical_unitary_universal_qubit_constant_of_external
+
+alias exists_finite_classical_strong_universal_qubit_bound_of_external :=
+  NLQCLean.ClassicalCommunication.exists_finite_classical_strong_unitary_universal_qubit_constant_of_external
+
+alias exists_ae_finite_classical_qubit_bound_of_external :=
+  NLQCLean.ClassicalCommunication.exists_ae_finite_classical_qubit_constant_of_external
+
+alias exists_full_group_score_haar_bound :=
+  NLQCLean.ProvedProjection.exists_haar_fraction_constant_of_external
+
+alias exists_full_group_resource_bound :=
+  NLQCLean.ProvedProjection.exists_universal_resource_constant_of_external
+
+alias exists_full_group_qubit_bound :=
+  NLQCLean.ProvedProjection.exists_universal_qubit_constant_of_external
+
+alias exists_full_group_diamond_haar_bound :=
+  NLQCLean.ProvedProjection.exists_diamond_haar_constant_of_external
+
+alias exists_full_group_diamond_resource_bound :=
+  NLQCLean.ProvedProjection.exists_universal_diamond_resource_constant_of_external
+
+alias exists_full_group_diamond_qubit_bound :=
+  NLQCLean.ProvedProjection.exists_universal_diamond_qubit_constant_of_external
+
+alias exists_restricted_haar_bound :=
+  NLQCLean.ProvedProjection.exists_strongRestrictedHaarBound_of_external
+
+alias exists_restricted_diamond_haar_bound :=
+  NLQCLean.ProvedProjection.exists_strongRestrictedDiamondHaarBound_of_external
+
+alias exists_universal_resource_bound :=
+  NLQCLean.ProvedProjection.exists_strongUniversalResourceBound_of_external
+
+alias exists_universal_diamond_resource_bound :=
+  NLQCLean.ProvedProjection.exists_strongUniversalDiamondResourceBound_of_external
+
+alias exists_universal_qubit_bound :=
+  NLQCLean.ProvedProjection.exists_strongUniversalQubitBound_of_external
+
+alias exists_universal_diamond_qubit_bound :=
+  NLQCLean.ProvedProjection.exists_strongUniversalDiamondQubitBound_of_external
+
+alias exists_ae_forbidden_error_threshold :=
+  NLQCLean.ProvedProjection.exists_ae_unitary_forbidden_error_constant_of_external
+
+alias exists_ae_resource_bound :=
+  NLQCLean.ProvedProjection.exists_ae_unitary_resource_constant_of_external
+
+alias exists_ae_diamond_resource_bound :=
+  NLQCLean.ProvedProjection.exists_ae_diamond_resource_constant_of_external
+
+alias exists_ae_physical_resource_bound :=
+  NLQCLean.ProvedProjection.exists_ae_unitary_physical_resource_constant_of_external
+
+alias exists_ae_qubit_bound :=
+  NLQCLean.ProvedProjection.exists_ae_unitary_qubit_constant_of_external
+
+alias exists_ae_diamond_qubit_bound :=
+  NLQCLean.ProvedProjection.exists_ae_diamond_qubit_constant_of_external
+
+alias ae_no_finite_exact_implementation :=
+  NLQCLean.ae_unitary_no_finite_exact_implementation_unconditional
+
+end NLQCLean.Results.Unitary

@@ -1,0 +1,69 @@
+import NLQCTests.FiniteClassicalSpectralFloorsAudit
+import NLQCTests.BorelMixedAudit
+import NLQCTests.UniversalMaxBoundsAudit
+import NLQCTests.SwapNeighborhoodAlmostEveryAudit
+import NLQCTests.BorelRankCompressionAudit
+import NLQCTests.ResultInventory
+import NLQCTests.QuantitativeResultTypes
+import NLQCTests.FormatVolumeExamples
+import NLQCTests.VectorSardAudit
+import NLQCTests.CriticalNormalImagesAudit
+import NLQCTests.ExactWitnessAudit
+import NLQCTests.ExactWitnessHaarAudit
+import NLQCTests.ExactHaarResultTypes
+import NLQCTests.SundogProjectionAudit
+import NLQCTests.SundogBridgeAudit
+import NLQCTests.SemialgebraicProjectionAudit
+import NLQCTests.ReducedInputResultTypes
+import NLQCTests.ChargedCompressionAudit
+import NLQCTests.RobustCompanionAudit
+import NLQCTests.ControlledPhaseAudit
+import NLQCTests.FiniteClassicalAudit
+import NLQCTests.ArithmeticSeparationAudit
+import NLQCTests.GenericSpectralAudit
+import NLQCTests.FiniteCompressionAudit
+import NLQCTests.PhysicalCoordinatesAudit
+import NLQCTests.BarycenterSupportAudit
+import NLQCTests.BranchSelectionAudit
+import NLQCTests.FiniteReachabilityAudit
+import NLQCTests.VectorDensityAudit
+import NLQCTests.ControlledPhaseAlmostEveryAudit
+import NLQCTests.FiniteClassicalHaarAudit
+import NLQCTests.FiniteClassicalStrongUniversalAudit
+import NLQCTests.FiniteClassicalQubitsAudit
+import NLQCTests.FiniteClassicalAlmostEveryAudit
+import NLQCTests.FiniteLOSCCQubitAudit
+import NLQCTests.ChoiVectorInstrumentAudit
+import NLQCTests.PositiveChoiDensityAudit
+import NLQCTests.FiniteRandomCompressionAudit
+import NLQCTests.FiniteControlledPhaseLengthAudit
+import NLQCTests.CPInstrumentRepresentationAudit
+import NLQCTests.RectangularControlledPhaseAudit
+import NLQCTests.PhysicalPolynomialConstraintAudit
+import NLQCTests.PhysicalPolynomialEncodingAudit
+import NLQCTests.ArbitraryFiniteClassicalAlmostEveryAudit
+import NLQCTests.ChannelUniformBoundAudit
+import NLQCTests.TwoLevelDecoderAudit
+import NLQCTests.FiniteLogicalRestrictionAudit
+import NLQCTests.DiamondContractivityAudit
+import NLQCTests.RectangularChannelRestrictionAudit
+import NLQCTests.FiniteOutputRestrictionAudit
+import NLQCTests.PhysicalScorePolynomialAudit
+import NLQCTests.ControlledPhaseScorePolynomialAudit
+import NLQCTests.JointDensityChannelAudit
+import NLQCTests.ConditionalDensityChannelAudit
+import NLQCTests.DensityCompressionAudit
+import NLQCTests.DensityScoreFunctionalsAudit
+import NLQCTests.StandardBorelProtocolAudit
+import NLQCTests.BorelOperationalChannelAudit
+import NLQCTests.BorelChannelNormalizationAudit
+import NLQCTests.BorelFiniteCompressionAudit
+import NLQCTests.InstrumentPrecompositionAudit
+import NLQCTests.PhysicalPolynomialHeightAudit
+
+/-!
+# NLQC refactor audit target
+
+This root is deliberately separate from `NLQCLean`. Build it with
+`cluster/lbuild NLQCTests` to check the contracts preserved by the refactor.
+-/

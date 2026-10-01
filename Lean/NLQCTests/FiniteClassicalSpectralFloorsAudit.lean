@@ -1,0 +1,88 @@
+import NLQCLean.Approx.FiniteClassicalSpectralFloors
+
+/-!
+# Finite classical spectral-floor audit
+
+The branch rank, unnormalized trace, duplicated-label projection, and score
+adapters for `lem:free-classical-floors` have no geometric premises. Full
+types retain arbitrary original finite registers and common-map mixed caps.
+-/
+
+open NLQCLean NLQCLean.ClassicalCommunication
+open NLQCLean.ClassicalCommunication.FiniteClassicalProtocol
+
+#check @rank_labChoiMatrix_branchAmplitude_le
+#check @rank_normalizedLabChoiMatrix_branchAmplitude_le
+#check @rank_normalizedLabChoiMatrix_branchKraus_le
+#check @operationalChannel_eq_sum_branchKraus
+#check @sum_norm_sq_normalizedLabChoiMatrix_branchKraus
+#check @norm_frobInner_sq_le_norm_sq_mul_schmidtMass
+#check @rank_pvmBranchReferenceMatrix_le
+#check @sum_norm_sq_diagonal_localProjection_le
+#check @sum_norm_sq_pvmBranchReferenceMatrix_le
+#check @sum_norm_sq_pvm_branch_references_le_one
+#check @scoreU_adConj_eq_norm_sq_normalizedLabChoiOverlap
+#check @scorePVM_adConj_eq_sum_norm_sq_referenceOverlap
+#check @scoreU_le_schmidtMass
+#check @scorePVM_le_max_column_schmidtMass
+#check @unitary_exact_schmidt_rank_floor
+#check @unitary_full_spectral_floor
+#check @pvm_full_spectral_floor
+#check @swap_quantumFootprint_floor
+#check @maximallyEntangledPVM_quantumFootprint_floor
+#check @mixed_scoreU_le_schmidtMass
+#check @mixed_scorePVM_le_max_column_schmidtMass
+#check @mixed_swap_quantumFootprint_floor
+#check @mixed_maximallyEntangledPVM_quantumFootprint_floor
+#check @unitary_spectral_floor_of_diamondError
+#check @pvm_spectral_floor_of_pvmTVError
+#check @mixed_unitary_spectral_floor_of_diamondError
+#check @mixed_pvm_spectral_floor_of_pvmTVError
+#check @mixed_unitary_full_spectral_floor
+#check @mixed_pvm_full_spectral_floor
+#check @swap_quantumFootprint_floor_of_diamondError
+#check @mixed_swap_quantumFootprint_floor_of_diamondError
+#check @unitary_full_spectral_floor_of_diamondError
+#check @pvm_full_spectral_floor_of_pvmTVError
+#check @mixed_unitary_full_spectral_floor_of_diamondError
+#check @mixed_pvm_full_spectral_floor_of_pvmTVError
+#check @generalizedBellPVM_quantumFootprint_floor
+#check @mixed_generalizedBellPVM_quantumFootprint_floor
+#check @generalizedBellPVM_quantumFootprint_floor_of_pvmTVError
+#check @mixed_generalizedBellPVM_quantumFootprint_floor_of_pvmTVError
+#check @ae_finite_classical_full_spectral_threshold
+
+#print axioms rank_labChoiMatrix_branchAmplitude_le
+#print axioms rank_normalizedLabChoiMatrix_branchKraus_le
+#print axioms operationalChannel_eq_sum_branchKraus
+#print axioms sum_norm_sq_normalizedLabChoiMatrix_branchKraus
+#print axioms norm_frobInner_sq_le_norm_sq_mul_schmidtMass
+#print axioms sum_norm_sq_diagonal_localProjection_le
+#print axioms sum_norm_sq_pvm_branch_references_le_one
+#print axioms scoreU_le_schmidtMass
+#print axioms scorePVM_le_max_column_schmidtMass
+#print axioms swap_quantumFootprint_floor
+#print axioms maximallyEntangledPVM_quantumFootprint_floor
+#print axioms mixed_scoreU_le_schmidtMass
+#print axioms mixed_scorePVM_le_max_column_schmidtMass
+#print axioms mixed_swap_quantumFootprint_floor
+#print axioms mixed_maximallyEntangledPVM_quantumFootprint_floor
+#print axioms unitary_spectral_floor_of_diamondError
+#print axioms pvm_spectral_floor_of_pvmTVError
+#print axioms mixed_unitary_spectral_floor_of_diamondError
+#print axioms mixed_pvm_spectral_floor_of_pvmTVError
+#print axioms unitary_full_spectral_floor
+#print axioms pvm_full_spectral_floor
+#print axioms mixed_unitary_full_spectral_floor
+#print axioms mixed_pvm_full_spectral_floor
+#print axioms swap_quantumFootprint_floor_of_diamondError
+#print axioms mixed_swap_quantumFootprint_floor_of_diamondError
+#print axioms unitary_full_spectral_floor_of_diamondError
+#print axioms pvm_full_spectral_floor_of_pvmTVError
+#print axioms mixed_unitary_full_spectral_floor_of_diamondError
+#print axioms mixed_pvm_full_spectral_floor_of_pvmTVError
+#print axioms generalizedBellPVM_quantumFootprint_floor
+#print axioms mixed_generalizedBellPVM_quantumFootprint_floor
+#print axioms generalizedBellPVM_quantumFootprint_floor_of_pvmTVError
+#print axioms mixed_generalizedBellPVM_quantumFootprint_floor_of_pvmTVError
+#print axioms ae_finite_classical_full_spectral_threshold
