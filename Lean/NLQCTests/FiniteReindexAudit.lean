@@ -1,0 +1,49 @@
+import NLQCLean.Models.ClassicalCommunication.ArbitraryFiniteReachability
+
+/-! # Exact original-register finite protocol transport audit -/
+
+set_option pp.all true in
+#check @NLQCLean.ClassicalCommunication.FiniteKrausInstrument.reindex
+#print axioms NLQCLean.ClassicalCommunication.FiniteKrausInstrument.reindex
+set_option pp.all true in
+#check @NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.branchAmplitude_reindex
+#print axioms NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.branchAmplitude_reindex
+set_option pp.all true in
+#check @NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.operationalChannel_reindex
+#print axioms NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.operationalChannel_reindex
+set_option pp.all true in
+#check @NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.quantumFootprint_reindex
+#print axioms NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.quantumFootprint_reindex
+set_option pp.all true in
+#check @NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.operationalChannel_toFin
+#print axioms NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.operationalChannel_toFin
+set_option pp.all true in
+#check @NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.quantumFootprint_toFin
+#print axioms NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.quantumFootprint_toFin
+set_option pp.all true in
+#check @NLQCLean.MixedResource.schmidtNumberLE_reindexRegisters
+#print axioms NLQCLean.MixedResource.schmidtNumberLE_reindexRegisters
+set_option pp.all true in
+#check @NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.mixedOperationalChannel_reindex
+#print axioms NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.mixedOperationalChannel_reindex
+set_option pp.all true in
+#check @NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.mixedQuantumFootprint_reindex
+#print axioms NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.mixedQuantumFootprint_reindex
+set_option pp.all true in
+#check @NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.mixedOperationalChannel_toFin
+#print axioms NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.mixedOperationalChannel_toFin
+set_option pp.all true in
+#check @NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.mixedQuantumFootprint_toFin
+#print axioms NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.mixedQuantumFootprint_toFin
+set_option pp.all true in
+#check @NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.mem_finitePureScoreReachable_of_quantumFootprint
+#print axioms NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.mem_finitePureScoreReachable_of_quantumFootprint
+set_option pp.all true in
+#check @NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.mem_finiteMixedScoreReachable_of_mixedQuantumFootprint
+#print axioms NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.mem_finiteMixedScoreReachable_of_mixedQuantumFootprint
+set_option pp.all true in
+#check @NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.mem_finitePurePVMScoreReachable_of_quantumFootprint
+#print axioms NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.mem_finitePurePVMScoreReachable_of_quantumFootprint
+set_option pp.all true in
+#check @NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.mem_finiteMixedPVMScoreReachable_of_mixedQuantumFootprint
+#print axioms NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.mem_finiteMixedPVMScoreReachable_of_mixedQuantumFootprint

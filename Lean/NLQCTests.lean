@@ -1,3 +1,11 @@
+import NLQCTests.BorelClassicalRatesAudit
+import NLQCTests.BorelClassicalSpectralFloorsAudit
+import NLQCTests.BorelSharedRandomnessAudit
+import NLQCTests.FiniteLocalizationAudit
+import NLQCTests.FiniteReindexAudit
+import NLQCTests.HermiteLindemannAudit
+import NLQCTests.NearBellWitnessCoverAudit
+import NLQCTests.RectangularDiagonalAlmostEveryAudit
 import NLQCTests.FiniteClassicalSpectralFloorsAudit
 import NLQCTests.BorelMixedAudit
 import NLQCTests.UniversalMaxBoundsAudit
@@ -60,6 +68,34 @@ import NLQCTests.BorelChannelNormalizationAudit
 import NLQCTests.BorelFiniteCompressionAudit
 import NLQCTests.InstrumentPrecompositionAudit
 import NLQCTests.PhysicalPolynomialHeightAudit
+
+import NLQCTests.RationalProjectionAudit
+import NLQCTests.RationalSemialgebraicBoundaryAudit
+import NLQCTests.PhaseTranscendenceAudit
+
+import NLQCTests.LocalUnitaryPurityAudit
+import NLQCTests.RationalPolynomialImagesAudit
+import NLQCTests.ComplexMatrixPolynomialsAudit
+
+import NLQCTests.TargetWitnessAudit
+import NLQCTests.WitnessRationalCoordinatesAudit
+import NLQCTests.TargetWitnessPolynomialAudit
+import NLQCTests.ExactPurityAlgebraicityAudit
+import NLQCTests.ControlledPhaseExclusionAudit
+
+import NLQCTests.LocalChannelRestrictionAudit
+import NLQCTests.FiniteExactRestrictionAudit
+import NLQCTests.SpectatorControlledPhaseAudit
+import NLQCTests.SpectatorExactExclusionAudit
+import NLQCTests.BitstringExactExclusionAudit
+import NLQCTests.PurityReindexAudit
+import NLQCTests.SpectatorControlledPhasePurityAudit
+
+import NLQCTests.LocalOrbitDifferentialAudit
+import NLQCTests.RationalPolynomialSmoothnessAudit
+import NLQCTests.RationalInvariantPolynomialAudit
+import NLQCTests.InvariantCriticalValuesAudit
+import NLQCTests.OrbitInvariantAlgebraicityAudit
 
 /-!
 # NLQC refactor audit target

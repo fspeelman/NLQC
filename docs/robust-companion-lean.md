@@ -1,12 +1,12 @@
 # Lean coverage of the robust companion
 
-This guide records the formalized statements of [Almost-perfect non-local quantum computation requires high-dimensional resources](../companion-notes.pdf), with their Lean declarations, hypotheses and limitations. It refers to formalization revision **`7bf81ea` of 1 October 2026**, using Lean and Mathlib **v4.33.1**, supplied in [Lean](../Lean/). It does not claim complete verification of the companion, including its arithmetic appendix.
+This guide records the formalized statements of [Almost-perfect non-local quantum computation requires high-dimensional resources](../companion-notes.pdf), with their Lean declarations, hypotheses and limitations. It describes the sources supplied in [Lean](../Lean/), using Lean and Mathlib **v4.33.1**. It does not claim complete verification of the companion, including its arithmetic appendix.
 
-The public entry points are [Results.Unitary](../Lean/NLQCLean/Results/Unitary.lean) and [Results.PVM](../Lean/NLQCLean/Results/PVM.lean). Names below are relative to `NLQCLean.Results`, except names beginning with `NLQCLean`. The notation `{Unitary,PVM}.name` means the two declarations `Unitary.name` and `PVM.name`; braces around several suffixes similarly abbreviate a list. Further pure/mixed, operational-error, and arbitrary-register variants are listed in the library's [source-to-theorem map](../Lean/docs/PUBLIC_RESULTS.md). That map retains the earlier introduction labels “Theorem D” for diagonal gates and “Theorem E” for the explicit arithmetic bound; those results now appear as a later application and Appendix C, respectively.
+The public entry points are [Results.Unitary](../Lean/NLQCLean/Results/Unitary.lean) and [Results.PVM](../Lean/NLQCLean/Results/PVM.lean). Names below are relative to `NLQCLean.Results`, except names beginning with `NLQCLean`. The notation `{Unitary,PVM}.name` means the two declarations `Unitary.name` and `PVM.name`; braces around several suffixes similarly abbreviate a list. Further pure/mixed, operational-error, and arbitrary-register variants are listed in the library's [source-to-theorem map](../Lean/docs/PUBLIC_RESULTS.md). Result names refer to the statements as presented in the companion PDF.
 
 ## Models and error conventions
 
-The charged model allows private and garbage registers of arbitrary finite dimension, pure resources and finite mixtures of pure resources with Schmidt rank at most $r$, and footprint $K=r m_A m_B$, charging the full dimension of both messages. Mixed components use common local protocol maps. The free-classical model charges $K_{\mathrm q}=r m_A^{\mathrm q}m_B^{\mathrm q}$; its compression theorem allows standard Borel outcome spaces, while the other formalized free-classical statements use finite alphabets.
+The charged model allows private and garbage registers of arbitrary finite dimension, pure resources and finite mixtures of pure resources with Schmidt rank at most $r$, and footprint $K=r m_A m_B$, charging the full dimension of both messages. Mixed components use common local protocol maps. The free-classical model charges $K_{\mathrm q}=r m_A^{\mathrm q}m_B^{\mathrm q}$; its compression, floor and rate results allow standard Borel outcome spaces, including measurable shared randomness with branch-dependent finite systems and almost-everywhere quantum-footprint caps. The diagonal and localization results retain the more restricted scopes below.
 
 Unitary targets are scored by normalized Choi overlap, and measurements by the average probability that both parties output the correct basis label. Many declarations also have normalized diamond-error and worst-case joint total-variation versions. For these operational errors, and with free classical communication, Haar estimates use outer measure because measurability of the reachable sets is not formalized. Score selection need not preserve the channel or its operational error; operational accuracy is transferred to the score before compression.
 
@@ -55,6 +55,14 @@ The common universal unitary declaration assumes $K\ge1$, which every protocol s
 
 The actual standard-Borel channel is defined by a Bochner integral. The formal proof first realizes its score with finitely many outcomes and the same resource, then reduces each alphabet to at most $(dr')^2+1$, where $r'$ is the resource rank. The pure and common-map finite-mixed constructions are in [BorelRankCompression.lean](../Lean/NLQCLean/Models/ClassicalCommunication/BorelRankCompression.lean) and [BorelMixedCompression.lean](../Lean/NLQCLean/Models/ClassicalCommunication/BorelMixedCompression.lean). Complete positivity and trace preservation of the original channels are proved. The selected pure component has score at least the mixed score under the branchwise resource and message cap.
 
+The standard-Borel and shared-randomness extensions are now proved for actual averaged channels. [BorelSharedRandomness](../Lean/NLQCLean/Models/ClassicalCommunication/BorelSharedRandomness.lean) establishes integrability, complete positivity, trace preservation and exact mean scores; selection preserves almost-everywhere resource/message caps.
+
+| Companion statement | Defining declarations under `NLQCLean.ClassicalCommunication` | Hypotheses |
+|---|---|---|
+| Standard-Borel and shared-randomness spectral floors, including SWAP and Bell targets and almost-every full-size thresholds | Pure/mixed/random spectral lemmas and `ae_borel_classical_full_spectral_threshold` in [BorelClassicalSpectralFloors](../Lean/NLQCLean/Approx/BorelClassicalSpectralFloors.lean) | None |
+| Standard-Borel and shared-randomness Haar, universal and almost-every fixed-target rates | `exists_borel_classical_{unitary,pvm}_haar_constant_of_external`, universal-log variants and `exists_ae_borel_classical_log_constant_of_external` in [BorelClassicalRates](../Lean/NLQCLean/Bounds/BorelClassicalRates.lean) | Geometry; the improved universal PVM coefficient is still open |
+| Finite-outcome localization: Haar and almost-every rank bounds | `exists_finite_localization_haar_constant_of_external`, `exists_ae_finite_localization_rank_constant_of_external` in [FiniteLocalization](../Lean/NLQCLean/Bounds/FiniteLocalization.lean) | Geometry; finite local outcomes and arbitrary finite shared density matrices |
+
 ## Controlled phases and diagonal gates
 
 | Companion statement | Lean declarations | Hypotheses |
@@ -66,7 +74,23 @@ The actual standard-Borel channel is defined by a Bochner integral. The formal p
 | Worst case over controlled phases with finite classical alphabets | `Unitary.exists_finite_classical_controlled_phase_worst_case_bound_of_external` | Geometry |
 | Restriction of a rectangular diagonal gate to two levels per party, preserving quantum footprint and not increasing normalized diamond error | `Unitary.{finite_rectangular_diagonal_diamond_error_le,finite_mixed_rectangular_diagonal_diamond_error_le}` | None |
 
-The restriction theorem is proved, but its composition with the controlled-phase bounds and the phase-distribution argument for general diagonal gates is not yet formalized.
+The restriction and phase-distribution arguments are now combined in [RectangularDiagonalAlmostEvery](../Lean/NLQCLean/Bounds/RectangularDiagonalAlmostEvery.lean). The declarations `NLQCLean.exists_ae_{charged,paid,finite}RectangularDiagonal_qubit_bound_of_external` and `NLQCLean.exists_ae_finiteLOSCCRectangularDiagonal_qubit_bound_of_external` prove almost-every bounds for independent uniform phases in local dimensions at least two. They retain Geometry, use the original normalized diamond error and one target-dependent threshold, and cover charged protocols, finite classical alphabets and finite LOSCC. The logarithmic precision coefficients are respectively 1/2, 1/10 and 1/5 for charged footprint, quantum footprint and initial LOSCC resource qubits. These statements do not yet supply standard-Borel or shared-randomness diagonal coverage.
+
+## Exact-paper results
+
+The following results are unconditional: they do not use Geometry.
+
+| Exact-paper statement | Lean declarations |
+|---|---|
+| Almost-every finite exact impossibility for unitary and measurement targets | `{Unitary,PVM}.ae_no_finite_exact_implementation` |
+| Almost-every impossibility of finite exact localization | `NLQCLean.ClassicalCommunication.ae_no_finite_exact_localization` in [FiniteLocalization](../Lean/NLQCLean/Bounds/FiniteLocalization.lean) |
+| Exact first-qubit controlled phase implies an algebraic complex phase, at every real angle | `Unitary.{pure,mixed}_first_qubit_phase_algebraic` |
+| Named angle-one exact exclusion and all local-unitary equivalents | `Unitary.{pure,mixed}_first_qubit_one{,_local_orbit}_exact_exclusion` |
+| Every nonzero algebraic angle is excluded | Algebraic-angle variants in [BitstringExactExclusion](../Lean/NLQCLean/Exact/BitstringExactExclusion.lean) |
+| Normalized first-qubit controlled-phase purity | `Unitary.first_qubit_controlled_phase_purity` |
+| Rational polynomial local-unitary invariants take algebraic values | `Unitary.{pure,mixed}_orbit_invariant_algebraic` |
+
+The first-qubit results use the actual bitstring gate, every positive qubit count and identity spectators. The exact protocol statements allow arbitrary finite original registers and pure/common-map finite-mixed resources. The invariant lemma requires rational polynomiality and local-orbit invariance only on unitary matrices. Its proof combines the exact local differential, scalar Sard, rational projection and rational semialgebraic null-set algebraicity, architecture by architecture. This proves the paper's statement without proving its general finite-orbit structure theorem. The checked Hermite–Lindemann theorem supplies the transcendence contradiction for the explicit gate. Exact exclusion does not prove the companion's effective arithmetic separation bound.
 
 ## Differences from the written proofs
 
@@ -82,11 +106,12 @@ The library also proves almost-every exact impossibility for both models without
 
 ## Exclusions and reproduction
 
-The following are outside the coverage claim at the cited revision:
+The following are outside the coverage claim in the supplied sources:
 
 - The near-Bell measurement argument and its stronger $d^2\sqrt{\ln(1/\epsilon)}$ precision term, including the regional almost-every measurement bound. The universal $d^3$ floor is formalized.
-- The improved universal measurement coefficient with free classical communication, the localization consequence, and full standard-Borel and shared-randomness transfers. Standard-Borel compression itself is formalized; it has not been combined with all these rate and floor statements in Lean.
-- The complete general-diagonal theorem, shared randomness in the resource-qubit bound, and the charged-footprint worst-case diagonal statement. The controlled-phase statements and restriction lemma have the scopes listed above.
+- The improved universal measurement coefficient with free classical communication, and standard-Borel/measurable-postprocessing and shared-randomness extensions of localization. The general Borel/shared-randomness floors and rates, and finite-outcome localization, are formalized.
+- The full standard-Borel/shared-randomness diagonal theorem, shared randomness in its resource-qubit bound, and the charged-footprint worst-case diagonal statement. Almost-every rectangular diagonal rates have the finite scope listed above.
+- The exact paper's general finite-orbit structure theorem.
 - Attainment of minimal diamond or total-variation error. Attainment is proved for optimal scores.
 - The image-volume and tube lemmas in their full written generality; only the specialized forms above are formalized.
 - The explicit arithmetic separation bound for $C_1$ and its proof in Appendix C of the companion.

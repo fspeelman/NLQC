@@ -13,6 +13,8 @@ and their restrictions.
 
 | Result | Assumptions |
 |---|---|
+| Rational polynomial local-unitary orbit invariants at exactly implemented targets | Unconditional algebraicity for arbitrary finite pure/common-map mixed architectures |
+| Named first-qubit controlled phase for every positive qubit count, every nonzero algebraic angle and full local-unitary orbits | Unconditional exact exclusion for arbitrary finite pure/common-map mixed architectures |
 | Almost-every exact impossibility, fixed-target qualitative gaps, compact score optima and spectral footprint floors, for both models | Unconditional |
 | Full-group Haar estimates and universal and almost-every precision bounds, for both models | Three explicit geometry premises |
 | Universal unitary precision bound K≥c d²√ln(1/ε), and the corresponding 2n qubit term | Three explicit geometry premises |

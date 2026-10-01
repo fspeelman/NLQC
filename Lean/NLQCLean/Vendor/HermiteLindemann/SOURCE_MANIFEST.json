@@ -1,0 +1,25 @@
+{
+  "upstream_commit": "5a0057ccc26b13a4e361f503f5f765bf56a8d353",
+  "files": [
+    {
+      "upstream_path": "Mathlib/Data/Finsupp/Quotient.lean",
+      "path": "FinsuppQuotient.lean",
+      "upstream_sha256": "d37c5ae1bc6118dc556fec7d7ee397f37a2631e730287d5242a4b2340e7ca55c"
+    },
+    {
+      "upstream_path": "Mathlib/RingTheory/MvPolynomial/Symmetric/Eval.lean",
+      "path": "SymmetricEval.lean",
+      "upstream_sha256": "173018cc86b306b5a795ea6f403c2ad75153fd786badd31b8fa170aeed13e0b4"
+    },
+    {
+      "upstream_path": "Mathlib/NumberTheory/Transcendental/Lindemann/AlgebraicPart.lean",
+      "path": "AlgebraicPart.lean",
+      "upstream_sha256": "c75a6f331202ee70c51c143031765d8e384ed1f92a96c82d7d9d289216b4c8bf"
+    },
+    {
+      "upstream_path": "Mathlib/NumberTheory/Transcendental/Lindemann/Basic.lean",
+      "path": "Basic.lean",
+      "upstream_sha256": "da45abaa850c871bb5246a6749e856d9069b3baee046f0885b8a914abd98da4c"
+    }
+  ]
+}

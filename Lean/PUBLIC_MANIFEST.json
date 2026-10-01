@@ -7,11 +7,15 @@
     },
     {
       "path": "NLQCLean.lean",
-      "sha256": "d10a21c1cc073ea460ea860b93c16df596edb622f6164155079a01b867681acc"
+      "sha256": "bd2db797c3dfa5e9eeab62cf0f31df85ea668e02fc159c79c20228cf659f0adb"
     },
     {
       "path": "NLQCLean/All.lean",
       "sha256": "c8825022133352b23142a05faedfa013d31654525764c575c7bf00ea7e0f3d7d"
+    },
+    {
+      "path": "NLQCLean/Approx/BorelClassicalSpectralFloors.lean",
+      "sha256": "95fda97e75d3e4ed2460c648ec207ee40e453d37323c030bde3c12ebbe9e4032"
     },
     {
       "path": "NLQCLean/Approx/ChoiProjection.lean",
@@ -40,6 +44,10 @@
     {
       "path": "NLQCLean/Approx/GenericSpectralThresholds.lean",
       "sha256": "3287fd9840f9e75266bf8faad4bc286b5d46183c8ac6a1546fa65c1bf7aa421f"
+    },
+    {
+      "path": "NLQCLean/Approx/NearBellFreezing.lean",
+      "sha256": "ab085888d62e44a5380e25054fc4ecae58f3d89cb5384f61a445ec5224636bd1"
     },
     {
       "path": "NLQCLean/Approx/NormalizedCubicWitness.lean",
@@ -246,12 +254,20 @@
       "sha256": "90aacaf8905ca4b3c9ecb1a6ffa77d043fec0121c6dbd0930d5741f8d8e9d6f4"
     },
     {
+      "path": "NLQCLean/Arithmetic/ComplexMatrixPolynomials.lean",
+      "sha256": "6e66170a985bbd80eed44671c1db158d960c2b6a00bee95178286eaa7517d429"
+    },
+    {
       "path": "NLQCLean/Arithmetic/ControlledPhaseScorePolynomial.lean",
       "sha256": "49715adbe3027830001fe9c70f240125416216206eb2acbbd554c7a3204a7103"
     },
     {
       "path": "NLQCLean/Arithmetic/CosineTransform.lean",
       "sha256": "e47f89070ba7c2c568361276e3d1b1742b00e4c9c3f5779fbfe39b84a0fe0692"
+    },
+    {
+      "path": "NLQCLean/Arithmetic/PhaseTranscendence.lean",
+      "sha256": "649cef00febdf805b1c962b19ed79bea0de96db40359b5f5be5fc1b0857d46b9"
     },
     {
       "path": "NLQCLean/Arithmetic/PhysicalPolynomialConstraints.lean",
@@ -272,6 +288,14 @@
     {
       "path": "NLQCLean/Arithmetic/PolynomialBoundary.lean",
       "sha256": "69a7cc651cef54f2adb5ffec76626301a023f7236be3fe63519b6ed850c7cf9e"
+    },
+    {
+      "path": "NLQCLean/Arithmetic/RationalIntegerPolynomials.lean",
+      "sha256": "31a030929eb72ab3d975af7b3271b10de40c9177d333e11c2d6fe833e583d414"
+    },
+    {
+      "path": "NLQCLean/Arithmetic/RationalSemialgebraicBoundary.lean",
+      "sha256": "45205fa20f08d35a32abbe02eae276c3488d1c5255578acfa39ca44793bec3f7"
     },
     {
       "path": "NLQCLean/Arithmetic/SeparationCertificate.lean",
@@ -308,6 +332,10 @@
     {
       "path": "NLQCLean/Bounds/ArbitraryFiniteClassicalAlmostEvery.lean",
       "sha256": "88065876c62820ed11c567cfa62aa119ee1b7a72c5e80631dfab772e242f2aab"
+    },
+    {
+      "path": "NLQCLean/Bounds/BorelClassicalRates.lean",
+      "sha256": "9eeb52e56d896c9ef641014dbd7fe2600b745f519b8563cf97dcd959a922075c"
     },
     {
       "path": "NLQCLean/Bounds/CodimensionArithmetic.lean",
@@ -352,6 +380,10 @@
     {
       "path": "NLQCLean/Bounds/FiniteControlledPhaseQubits.lean",
       "sha256": "0d6d5f0d1ed017b8209a6d329c7d02c689d75af437ac335bdbb7a6eebc288733"
+    },
+    {
+      "path": "NLQCLean/Bounds/FiniteLocalization.lean",
+      "sha256": "cc87eab6535b5b0d5919cfde928eb4ce54f833c123f8e892efacf7b848c329eb"
     },
     {
       "path": "NLQCLean/Bounds/FourInputConditional.lean",
@@ -414,6 +446,10 @@
       "sha256": "4fc0f11b48cfb5b9a54c1cf997ea2213f3e5207eb768cc043733fc46b71ae071"
     },
     {
+      "path": "NLQCLean/Bounds/RectangularDiagonalAlmostEvery.lean",
+      "sha256": "31a1608e6c60a06af75cb49b88e5e659532218167c0fb66da37cd0f94aa544af"
+    },
+    {
       "path": "NLQCLean/Bounds/ResourceArithmetic.lean",
       "sha256": "fc4a5b914bcfa098699e6fbe424afe1971cdd1cb1a914c49e53e2ab6c65fd86e"
     },
@@ -458,6 +494,38 @@
       "sha256": "bc0359712a518bfbd8fcadf16c309edcb44cf85db22aadab260065116fe2379d"
     },
     {
+      "path": "NLQCLean/Exact/BitstringControlledPhase.lean",
+      "sha256": "fe46beb309179ecd463f0dba63323d8056f3e1256e5bc1436ac38232aaefdeaa"
+    },
+    {
+      "path": "NLQCLean/Exact/BitstringExactExclusion.lean",
+      "sha256": "969e08b3a51e45026809bd78beb1983143eca5337b39c536dbc048ffa3eb9165"
+    },
+    {
+      "path": "NLQCLean/Exact/ControlledPhaseExclusion.lean",
+      "sha256": "ab5f44781f47ae289127070dedc05f581b757bb866099a906e3d0257499a0ce9"
+    },
+    {
+      "path": "NLQCLean/Exact/ExactPurityAlgebraicity.lean",
+      "sha256": "4e922b7e9f870104d6cb56f957f270a3bfc078fccf83a978e45fe1a622499af7"
+    },
+    {
+      "path": "NLQCLean/Exact/FiniteExactRestriction.lean",
+      "sha256": "02343f200be1164a32ea10452b060c80bff856062ac7b6932285db11faaff54c"
+    },
+    {
+      "path": "NLQCLean/Exact/InvariantCriticalValues.lean",
+      "sha256": "5acfcea264e7d7cd2146ac8fe39922eba5be374587a7bb464fd07d6ecec88c3f"
+    },
+    {
+      "path": "NLQCLean/Exact/LocalChannelRestriction.lean",
+      "sha256": "701ce8ddf9917a9544c36deb663e6e7d32fe60add22fe237736fa04eac61c9e2"
+    },
+    {
+      "path": "NLQCLean/Exact/OrbitInvariantAlgebraicity.lean",
+      "sha256": "bfe74ea5e4b8eb58a7821bde75d1bdbc1e47ee6bc6f7d1c2e099ba59d8efc34b"
+    },
+    {
       "path": "NLQCLean/Exact/PVMExactWitness.lean",
       "sha256": "840da6006fb996ab8ad3e9dfb4a17a8d76a4477283cdcebbc52d917b0328ba27"
     },
@@ -474,8 +542,32 @@
       "sha256": "e3a9c162811b4636693714cf4f3608fff67abf65ea620f23b2a0c7e59027609c"
     },
     {
+      "path": "NLQCLean/Exact/RationalInvariantPolynomial.lean",
+      "sha256": "6cb7cbaf51840aea07672ecc96e5fa24e02fb2e37b4c8a0cfce9645e77048329"
+    },
+    {
+      "path": "NLQCLean/Exact/RationalPolynomialSmoothness.lean",
+      "sha256": "89b49c944977088c6f9a04b5c9e5abb4e306aeb36be78b5954db5bcf58ad5357"
+    },
+    {
       "path": "NLQCLean/Exact/ScalarCriticalValues.lean",
       "sha256": "3e0b1edead5cbc02721b2e727e45abcddb41a47be0a4d9bafabf0d029fe7ed5a"
+    },
+    {
+      "path": "NLQCLean/Exact/SpectatorControlledPhase.lean",
+      "sha256": "1fb55f209589a3ba6e96add191d1ad0b16e3b555250447e1c747b040a242fadd"
+    },
+    {
+      "path": "NLQCLean/Exact/SpectatorExactExclusion.lean",
+      "sha256": "0a99ab2f6b5a9aa1c5ad43d0775317f70e7f7298416c749d02ebb248431df5e4"
+    },
+    {
+      "path": "NLQCLean/Exact/TargetWitness.lean",
+      "sha256": "0ea498f8d87566623ee8e0baefc1d6a4a7b4e0dd43b6a61a2e61cafddae3264f"
+    },
+    {
+      "path": "NLQCLean/Exact/TargetWitnessPolynomial.lean",
+      "sha256": "edbcbd9cc6ac573e7d806957767ae14a56ebfded2d890756cad9a36c66f35e5a"
     },
     {
       "path": "NLQCLean/Exact/UnitaryExactWitness.lean",
@@ -484,6 +576,10 @@
     {
       "path": "NLQCLean/Exact/UnitaryWitnessHaar.lean",
       "sha256": "2ac08c290ca84b55c4e93a944d7b225297f42737d8129e7f6f315cd588cd34ab"
+    },
+    {
+      "path": "NLQCLean/Exact/WitnessRationalCoordinates.lean",
+      "sha256": "d80d67f3e955e7b32ff64c028aa644416d8678c2289391e16e906c12156b1def"
     },
     {
       "path": "NLQCLean/External/LRT44.lean",
@@ -524,6 +620,10 @@
     {
       "path": "NLQCLean/Geometry/CubicProjection.lean",
       "sha256": "380bff022a7e27b3905a9c1dc3ea2bd1b7dfef973c26578bde46bafb5866ab09"
+    },
+    {
+      "path": "NLQCLean/Geometry/DiagonalPhaseMeasure.lean",
+      "sha256": "af29309013223586ffae35d716c48969d2ea4391170ea15c7ce3d3f98809da3f"
     },
     {
       "path": "NLQCLean/Geometry/EuclideanBallCaps.lean",
@@ -738,6 +838,14 @@
       "sha256": "95b9dfb36f76e2bfc5a62c521bd538a0a2adae8372a29ed25b017b8cf1e2f721"
     },
     {
+      "path": "NLQCLean/Invariants/LocalOrbitDifferential.lean",
+      "sha256": "efe95107c8ebc17845a8bc58920e248550f679e74d668e60e23677447174b91a"
+    },
+    {
+      "path": "NLQCLean/Invariants/LocalUnitaryPurity.lean",
+      "sha256": "3509446e2ca143a4ba9b395b05125a99e2b7797580b62ec16baa934a66987f8f"
+    },
+    {
       "path": "NLQCLean/Invariants/OperatorSchmidtPurity.lean",
       "sha256": "bffbaf503d18c922816e7cde83b9c8e7caf9a540604fe2b6aa2ef18820be56d3"
     },
@@ -754,8 +862,16 @@
       "sha256": "9784a82fb1e78e36d871223a7fa62d0470bc8af164df0d5b577a5566634ecc4e"
     },
     {
+      "path": "NLQCLean/Invariants/PurityReindex.lean",
+      "sha256": "0dc8a9cc304df8eac426190ca3d38628f1a82c3fb7469454d0b1a6fb5252d406"
+    },
+    {
       "path": "NLQCLean/Invariants/RectangularControlledPhase.lean",
       "sha256": "5a5bd9700f6f7781ea024c656e0046e1cef19345e0e27afffed883af56a4e065"
+    },
+    {
+      "path": "NLQCLean/Invariants/SpectatorControlledPhasePurity.lean",
+      "sha256": "fbf1dcbefaf865cdaeea0cc9cd3484a2921cf80042223fae30aaca6bbc1de008"
     },
     {
       "path": "NLQCLean/LinearAlgebra/AdjointDimension.lean",
@@ -886,6 +1002,14 @@
       "sha256": "98d1b8209a8b47ed0f7f176bfc7fe68f773c93b4362e6b73c46907dbb54f8805"
     },
     {
+      "path": "NLQCLean/Models/ClassicalCommunication/ArbitraryFiniteReachability.lean",
+      "sha256": "39f47a67863522108ef224cd8892ccc69dcaa02d53e58aaea7dd6e0cbec424d8"
+    },
+    {
+      "path": "NLQCLean/Models/ClassicalCommunication/AveragedChannels.lean",
+      "sha256": "242e62de030217b3c944f213483ae54675c30748beffd20b0a24037f764a9248"
+    },
+    {
       "path": "NLQCLean/Models/ClassicalCommunication/BarycenterSupport.lean",
       "sha256": "4fc83d12f293f1c0e70a2d02dac7e433faddcdab44ce00f8516191a7c30c97f2"
     },
@@ -912,6 +1036,10 @@
     {
       "path": "NLQCLean/Models/ClassicalCommunication/BorelRankCompression.lean",
       "sha256": "0c2b754d4280a7bb4f8549f3d96b1488bdd54f37ca23da32be1567bce6f210c8"
+    },
+    {
+      "path": "NLQCLean/Models/ClassicalCommunication/BorelSharedRandomness.lean",
+      "sha256": "3e10aa545009104d1bb5da616dbe1fdf4c18c90a543dd5daa504cd0c5375a5e2"
     },
     {
       "path": "NLQCLean/Models/ClassicalCommunication/BranchChannels.lean",
@@ -974,8 +1102,16 @@
       "sha256": "51b42422342538c7877e0229380f3fd983efd9f2b46a2d0a7348c62395e9c58e"
     },
     {
+      "path": "NLQCLean/Models/ClassicalCommunication/FiniteInstrumentReindex.lean",
+      "sha256": "30b69ed23c65104d461dac8cd823b94a3f791c0d704134b18041f4878c09ef56"
+    },
+    {
       "path": "NLQCLean/Models/ClassicalCommunication/FiniteInstruments.lean",
       "sha256": "85b4f4e38f90410751e89c71e77faa816d6034c5c4d6d314c7bf0d4c041a7a66"
+    },
+    {
+      "path": "NLQCLean/Models/ClassicalCommunication/FiniteLocalization.lean",
+      "sha256": "4d19b8ed1b9ad4e23c4547356be45ed5ea36d6c2f0206be1a428e11814fc3e7d"
     },
     {
       "path": "NLQCLean/Models/ClassicalCommunication/FiniteLogicalRestriction.lean",
@@ -990,12 +1126,20 @@
       "sha256": "a5ec956c032156c84acb910701a3f3bf26fb9ffdbcfbf89b003d8f9ddf0a976e"
     },
     {
+      "path": "NLQCLean/Models/ClassicalCommunication/FiniteMixedReindex.lean",
+      "sha256": "1dcc42a9a5a3b7fe202d1e9cb3211fe977cde4ec0f2f6343d0d0aa5c1c5cc38a"
+    },
+    {
       "path": "NLQCLean/Models/ClassicalCommunication/FiniteOutputRestriction.lean",
       "sha256": "376a87174d8ebff7cfb5e0e916677ec2c099eb5150fba773e3beadc9b3c2c1f4"
     },
     {
       "path": "NLQCLean/Models/ClassicalCommunication/FiniteProtocol.lean",
       "sha256": "35abf34bf57ffc9afb59435cf5d4b49cc8beafc771abdcb970ac34aac6bfb3e1"
+    },
+    {
+      "path": "NLQCLean/Models/ClassicalCommunication/FiniteProtocolReindex.lean",
+      "sha256": "5b43d8a82a6f4e1a6dd197cb5fb5c319f535dcad7e6506b4b1cd593b00a54acb"
     },
     {
       "path": "NLQCLean/Models/ClassicalCommunication/FiniteRandomCompression.lean",
@@ -1092,6 +1236,10 @@
     {
       "path": "NLQCLean/Models/MixedReachability.lean",
       "sha256": "c656e34fb96926c60cf7a7e71484da26e249dac1cecb8c35a139957ad0fdd02f"
+    },
+    {
+      "path": "NLQCLean/Models/NearBellResourceFloors.lean",
+      "sha256": "48eb7eb5926825904720ea3889bf56ac27b216dabee7b68b37cd7baf3c6cf8e4"
     },
     {
       "path": "NLQCLean/Models/OneRound.lean",
@@ -1199,7 +1347,7 @@
     },
     {
       "path": "NLQCLean/Results/Unitary.lean",
-      "sha256": "a86c662bbdd7ae2c245fe5dc6390c512a0128ef1087b7f72aeaf4919d58ca4e5"
+      "sha256": "e240c08fd3c293b2b221bc45de781a65b003e0df73e89647b94070c6996a580f"
     },
     {
       "path": "NLQCLean/Rigidity/Compression.lean",
@@ -1354,12 +1502,68 @@
       "sha256": "e27839b75adb5b489448e940c57aa6e57784c532926238aef985ce67aef2029f"
     },
     {
+      "path": "NLQCLean/Semialgebraic/RationalCoefficients.lean",
+      "sha256": "4a92bba24af3c6b65bf24a119db5310c9f35095802441ebca5f6c8c89c63855b"
+    },
+    {
+      "path": "NLQCLean/Semialgebraic/RationalDiagramAssembly.lean",
+      "sha256": "fba0b8e8a2d31cb4f415ab10b36b5c88250e077313fdd6fc93273e9f74704d30"
+    },
+    {
+      "path": "NLQCLean/Semialgebraic/RationalDiagramBranches.lean",
+      "sha256": "0aa9655fee2a093c0f44d3daf59578bdecb36f184b41cb4e39aadcc9de1055f8"
+    },
+    {
+      "path": "NLQCLean/Semialgebraic/RationalImages.lean",
+      "sha256": "00c73b7e95045a85a5ab10e1994289deda3301df96f679ce7dcff62b23467085"
+    },
+    {
+      "path": "NLQCLean/Semialgebraic/RationalPolynomialImages.lean",
+      "sha256": "52a6932b4b0637078f8e2f4729a0e97bdfb5ba72b09d43d8a8a668477113fac9"
+    },
+    {
+      "path": "NLQCLean/Semialgebraic/RationalProjection.lean",
+      "sha256": "3198bd53bf608afbe886a26bd42dcdf5ed501e68b47c4e5c550e7009b414c52e"
+    },
+    {
+      "path": "NLQCLean/Semialgebraic/RationalSignDiagrams.lean",
+      "sha256": "557e98ec43cca3c77dd156c2b2d1199da074229aa586b1b84d23d66fbb82eba2"
+    },
+    {
       "path": "NLQCLean/Semialgebraic/RegularCoordinateFibers.lean",
       "sha256": "2763cb796161b12fb5daa2cd9d1153f0735ebbde0e085a2bdca31bbe3fdd9b27"
     },
     {
       "path": "NLQCLean/Semialgebraic/SundogBridge.lean",
       "sha256": "be5441cf99ebb10c4e408c4fcc940a5fbbb44651b0220f6ce10c87100dd77d7a"
+    },
+    {
+      "path": "NLQCLean/Vendor/HermiteLindemann/AlgebraicPart.lean",
+      "sha256": "81c0d7c01fe771557197587d81467795429be253b3237dea10d9cec8938b31fa"
+    },
+    {
+      "path": "NLQCLean/Vendor/HermiteLindemann/Basic.lean",
+      "sha256": "227360e4919b5c55cc641c774878147af511b7afdf9ffa5bca00ff064dc46712"
+    },
+    {
+      "path": "NLQCLean/Vendor/HermiteLindemann/FinsuppQuotient.lean",
+      "sha256": "127bbfb3d35aed012b289056bdbd76151ec20604332868e9130ccbb2c598a89a"
+    },
+    {
+      "path": "NLQCLean/Vendor/HermiteLindemann/LICENSE",
+      "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1"
+    },
+    {
+      "path": "NLQCLean/Vendor/HermiteLindemann/README.md",
+      "sha256": "709b1041e46c9754e8b9239e8f1a74d1c5116b5da2c3a6ec51b6143f5bb51810"
+    },
+    {
+      "path": "NLQCLean/Vendor/HermiteLindemann/SOURCE_MANIFEST.json",
+      "sha256": "3d7abff4050576f9259e3e7297fb5d2ff06ff0e0f2ff9ce6800e00ba4c53b567"
+    },
+    {
+      "path": "NLQCLean/Vendor/HermiteLindemann/SymmetricEval.lean",
+      "sha256": "37b3010faec13c72e0e8467f9727a32db62fbd18e8cffec98be8e03a5ed5bcd9"
     },
     {
       "path": "NLQCLean/Vendor/Sundog/AnalyticGate.lean",
@@ -1511,7 +1715,7 @@
     },
     {
       "path": "NLQCTests.lean",
-      "sha256": "fae03df984355485f65b5a757864c5fd8cf56e9df472d188891dadac922bc5b3"
+      "sha256": "ba1a383837ce56f1a096f4121b69f5a4ab7a45cfbb98968ee14b91aa1ec024c5"
     },
     {
       "path": "NLQCTests/ArbitraryFiniteClassicalAlmostEveryAudit.lean",
@@ -1526,8 +1730,20 @@
       "sha256": "5e59098ad0e596e4559ba64dcea768f768b844b8d385b3787655b9f64ae210a0"
     },
     {
+      "path": "NLQCTests/BitstringExactExclusionAudit.lean",
+      "sha256": "91f07c4fe9c0d302acbe6383df95636fd1cb3fab6252e9f7a4c301f804f9fa88"
+    },
+    {
       "path": "NLQCTests/BorelChannelNormalizationAudit.lean",
       "sha256": "aacabe752f489fe0096c4416bd63803c5ce46766d5bec328d8bdbf3ac215e6e0"
+    },
+    {
+      "path": "NLQCTests/BorelClassicalRatesAudit.lean",
+      "sha256": "c6d6e4d396544f4c534188bf3cc7f7fd814d4a6efa43ed6d28850944b1731a14"
+    },
+    {
+      "path": "NLQCTests/BorelClassicalSpectralFloorsAudit.lean",
+      "sha256": "6690677d25b0b616e5295b74a386b4c536002feb679013aa71577198418d8002"
     },
     {
       "path": "NLQCTests/BorelFiniteCompressionAudit.lean",
@@ -1544,6 +1760,10 @@
     {
       "path": "NLQCTests/BorelRankCompressionAudit.lean",
       "sha256": "6724eafb1c902dfb887d3c483fc463dcba1524a2f3b2eb63ba09c53e176d346f"
+    },
+    {
+      "path": "NLQCTests/BorelSharedRandomnessAudit.lean",
+      "sha256": "efb3fb952c5add309c0d23bdac5f2a2b5ad8c93ab61c400391aae2919116620d"
     },
     {
       "path": "NLQCTests/BranchSelectionAudit.lean",
@@ -1566,6 +1786,10 @@
       "sha256": "25a047a964ef7e3b58295758499d33f617faed5d9fd6e66ad7e5b802dd446a58"
     },
     {
+      "path": "NLQCTests/ComplexMatrixPolynomialsAudit.lean",
+      "sha256": "535bcfd4cd219ad0b9c374888db1bacf49215831c8d82b177f7dad9a14342a45"
+    },
+    {
       "path": "NLQCTests/ConditionalDensityChannelAudit.lean",
       "sha256": "3d071e82a447823658d76ad8a339ef8ddef152f9b7fae4c02693f7a9c8620c55"
     },
@@ -1576,6 +1800,10 @@
     {
       "path": "NLQCTests/ControlledPhaseAudit.lean",
       "sha256": "24aef91d4459955bbbde99aceeaec9c807cc8c97bb888ad6db93408d1a271b5b"
+    },
+    {
+      "path": "NLQCTests/ControlledPhaseExclusionAudit.lean",
+      "sha256": "d7cc036d16a720250ab632958c8b2b64441c16b1d56ad6601c4c72fb16f9aae1"
     },
     {
       "path": "NLQCTests/ControlledPhaseScorePolynomialAudit.lean",
@@ -1600,6 +1828,10 @@
     {
       "path": "NLQCTests/ExactHaarResultTypes.lean",
       "sha256": "58a8ae26a90c4a20d4c5e91e3ebfd31c47b80a9ea1a750dc1358a963732c901f"
+    },
+    {
+      "path": "NLQCTests/ExactPurityAlgebraicityAudit.lean",
+      "sha256": "d3489fdcbd76bcd3f5589c5e585982130a35f66da5fcaa3c8ea0dd0cd36a6bb4"
     },
     {
       "path": "NLQCTests/ExactWitnessAudit.lean",
@@ -1642,8 +1874,16 @@
       "sha256": "d24bf89cad8eedd650b32617b588c71494e581c299eb36afd2859cb075aadc2d"
     },
     {
+      "path": "NLQCTests/FiniteExactRestrictionAudit.lean",
+      "sha256": "201d7766e4ffead03efa9e01455c72a5dd3b7dd530cb935c39c440801a4ec793"
+    },
+    {
       "path": "NLQCTests/FiniteLOSCCQubitAudit.lean",
       "sha256": "0039ace8943aff45379aa01d22bfdbbc8439ab76091fb8d2e9803c7b406cffbe"
+    },
+    {
+      "path": "NLQCTests/FiniteLocalizationAudit.lean",
+      "sha256": "3c07e1b320cb4a3f7774eb3e6cf5a396588c0ce16c8297d47163c499202ed5f4"
     },
     {
       "path": "NLQCTests/FiniteLogicalRestrictionAudit.lean",
@@ -1662,6 +1902,10 @@
       "sha256": "3476b4a7ce56c6db75e7da9c1f210954cb77e9a6f685c9ecc4cb5574839c8322"
     },
     {
+      "path": "NLQCTests/FiniteReindexAudit.lean",
+      "sha256": "1e2b726519cb51e3745e94cd45d777a5790e1cb094f65edafef14d4a0057f71b"
+    },
+    {
       "path": "NLQCTests/FormatVolumeExamples.lean",
       "sha256": "a648ec4793e3070536e156665d61954494bdeff7a0a44141544b7e155ca62658"
     },
@@ -1670,12 +1914,44 @@
       "sha256": "7950a79ffc2469f841599d02bb995b62f405f5c82c09b9b050e578f6c5caa42b"
     },
     {
+      "path": "NLQCTests/HermiteLindemannAudit.lean",
+      "sha256": "ec6456d70a8f8981da9be4b3859aab445049c138df631a93dab3b079e047be5c"
+    },
+    {
       "path": "NLQCTests/InstrumentPrecompositionAudit.lean",
       "sha256": "f8142e2c623d66e5f1b9f6706e4eb84ab36f25e190196e3219c3403e123c72cc"
     },
     {
+      "path": "NLQCTests/InvariantCriticalValuesAudit.lean",
+      "sha256": "07d1936791a92b45eaa0af809353469bf11068d12da39143574bdcb323828e6f"
+    },
+    {
       "path": "NLQCTests/JointDensityChannelAudit.lean",
       "sha256": "65998abc6bfa5ddf81a7ae560209bc8e8395eef94b9c4471b1de01d9b97762f2"
+    },
+    {
+      "path": "NLQCTests/LocalChannelRestrictionAudit.lean",
+      "sha256": "e3ee7affefa7d068993a579bebf3978cd84af791e14d57a232c8c8331156cdfb"
+    },
+    {
+      "path": "NLQCTests/LocalOrbitDifferentialAudit.lean",
+      "sha256": "dea6934216d636cd97d183d1b3c4f8ee9a3359b2d8695f3bc824d24949d28d9b"
+    },
+    {
+      "path": "NLQCTests/LocalUnitaryPurityAudit.lean",
+      "sha256": "ea018b52722f38f6d6ad3ade3f951b5da29ac2a3923b133971cc57a96f0c3f2c"
+    },
+    {
+      "path": "NLQCTests/NearBellWitnessCoverAudit.lean",
+      "sha256": "10638f4bf2f1a2e4a8a519d5c26ac2736b0ad4853718c97003579bac4bd252d7"
+    },
+    {
+      "path": "NLQCTests/OrbitInvariantAlgebraicityAudit.lean",
+      "sha256": "8741e9a7ff4be82c964dd5ae1cd515cd6a259f84d952b4e6de63892ae8168311"
+    },
+    {
+      "path": "NLQCTests/PhaseTranscendenceAudit.lean",
+      "sha256": "cf3781bb943e7cd6d40287bc7f5e2eaf6cfc699caaf7cd7bb90642500f11a8e1"
     },
     {
       "path": "NLQCTests/PhysicalCoordinatesAudit.lean",
@@ -1702,8 +1978,32 @@
       "sha256": "123698673f61a355d67442e21f6883e4d7990286163d65378c6157d7439fc722"
     },
     {
+      "path": "NLQCTests/PurityReindexAudit.lean",
+      "sha256": "9f8af3a2c41c8edcbd48aff4c490d24b01cfa8c6486b207a1f132de041937860"
+    },
+    {
       "path": "NLQCTests/QuantitativeResultTypes.lean",
       "sha256": "d6f556c295d12fa3c52be49dffc75d90415265ae12b1365425295c6394d07b6d"
+    },
+    {
+      "path": "NLQCTests/RationalInvariantPolynomialAudit.lean",
+      "sha256": "adfcdc39b7e4ef73844d52be6e0f84fac7767796a2a7add3aab222e1ee46bdd2"
+    },
+    {
+      "path": "NLQCTests/RationalPolynomialImagesAudit.lean",
+      "sha256": "736d8095cd503e16dfa1d3f9470498960770d1cc619bd7cb58a370b178b9e511"
+    },
+    {
+      "path": "NLQCTests/RationalPolynomialSmoothnessAudit.lean",
+      "sha256": "0186bf58c4dc1dfdac2d16731462eae0f78585529925b023ce3bb9cd7e5b8a1c"
+    },
+    {
+      "path": "NLQCTests/RationalProjectionAudit.lean",
+      "sha256": "36f7486602e96ab4d3a87620c926a8419d50ca2535b589e288779391334beee4"
+    },
+    {
+      "path": "NLQCTests/RationalSemialgebraicBoundaryAudit.lean",
+      "sha256": "e4bc799ee406702b291fd69d5fdbc9c790dfb5cbdaed6b424a822645aae6971a"
     },
     {
       "path": "NLQCTests/RectangularChannelRestrictionAudit.lean",
@@ -1712,6 +2012,10 @@
     {
       "path": "NLQCTests/RectangularControlledPhaseAudit.lean",
       "sha256": "cc5cd2f35a3dc5ac95a7857bdea1ccf0d8cefe26c7bba5f9924d9b56c175ba94"
+    },
+    {
+      "path": "NLQCTests/RectangularDiagonalAlmostEveryAudit.lean",
+      "sha256": "f24e6e3ba82098806981c220bfca54036042710636ac5e189bde407c600242ab"
     },
     {
       "path": "NLQCTests/ReducedInputResultTypes.lean",
@@ -1730,6 +2034,18 @@
       "sha256": "0d69d987fedfd66ddc35abda75d5fde451ff520ed165f9ea7381e687a9cc1ac5"
     },
     {
+      "path": "NLQCTests/SpectatorControlledPhaseAudit.lean",
+      "sha256": "4a155c32728711da8482e404a4b5922c48682ac352bfd2a82722e2ff6831c782"
+    },
+    {
+      "path": "NLQCTests/SpectatorControlledPhasePurityAudit.lean",
+      "sha256": "9e4b962552b4e1a0c4a9487590b457e9094ebaa00ce33b32e2e53b188e42f21e"
+    },
+    {
+      "path": "NLQCTests/SpectatorExactExclusionAudit.lean",
+      "sha256": "ff037532382fb796b776e917308a95e4fa96c0f2f671cebf72647c055d8d32b3"
+    },
+    {
       "path": "NLQCTests/StandardBorelProtocolAudit.lean",
       "sha256": "1b36b4002065eb23f54c645b1e88255b955a77b1ff8f4486ade3bb46f0a2da91"
     },
@@ -1744,6 +2060,14 @@
     {
       "path": "NLQCTests/SwapNeighborhoodAlmostEveryAudit.lean",
       "sha256": "b1457624dc89bf1433f59b20394b36e72c959bbafdfcc6f5c0b4cfb5e2dcd095"
+    },
+    {
+      "path": "NLQCTests/TargetWitnessAudit.lean",
+      "sha256": "9df2accd167874b3d33c93c28aee1f55308563efbbd580c9a5e094c628522686"
+    },
+    {
+      "path": "NLQCTests/TargetWitnessPolynomialAudit.lean",
+      "sha256": "dd45cc7a956a872d5a981907a8b3827d09ee2eb05f5cbd85192d7d1ecc95b72e"
     },
     {
       "path": "NLQCTests/TwoLevelDecoderAudit.lean",
@@ -1762,8 +2086,12 @@
       "sha256": "4eb29119484fcf89d9b8aea88bbbb791cded68000e4908e8b121f32fedec31eb"
     },
     {
+      "path": "NLQCTests/WitnessRationalCoordinatesAudit.lean",
+      "sha256": "b97394595aef29658df511bf61426c98bbca8db2ae97851d2f6c0599b44da374"
+    },
+    {
       "path": "README.md",
-      "sha256": "59fb1781e159a160047abe1f09c2a4b0bd1c122f47812d66d8b95e9e45bd14cf"
+      "sha256": "7254c5afb16b1f42c642e2acc4a7ecff7a70a19be504b6d0b3819f53eaf30c54"
     },
     {
       "path": "docs/ASSUMPTIONS.md",
@@ -1771,7 +2099,7 @@
     },
     {
       "path": "docs/PUBLIC_RESULTS.md",
-      "sha256": "f68d573a6aadd2f94a46256c01657e5ae94c963bd55a108bec76b264aa7cff41"
+      "sha256": "1800c2ccd8914b8f04ee851d908623c0d5226732e58cd0559be66ba9bb292b69"
     },
     {
       "path": "lake-manifest.json",
