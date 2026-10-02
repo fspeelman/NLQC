@@ -32,7 +32,7 @@ theorem exists_unit_rank_one_nonnegative_frobInner {m n : Type*}
   have hc_norm : ‖c‖ = 1 := by
     by_cases ha : a = 0
     · simp [c, ha]
-    · simp only [c, if_neg ha, norm_div, Complex.norm_real, Real.norm_eq_abs,
+    · simp only [c, ite_eq_right ha, norm_div, Complex.norm_real, Real.norm_eq_abs,
         abs_of_nonneg (norm_nonneg a)]
       exact div_self (norm_ne_zero_iff.mpr ha)
   have hU_norm : ‖U‖ = 1 := by
@@ -54,7 +54,7 @@ theorem exists_unit_rank_one_nonnegative_frobInner {m n : Type*}
     rw [hsingle]
     by_cases ha : a = 0
     · simp [a, c, ha]
-    · simp only [c, if_neg ha, star_div₀, Complex.star_def, Complex.conj_ofReal]
+    · simp only [c, ite_eq_right ha, star_div₀, Complex.star_def, Complex.conj_ofReal]
       rw [div_mul_eq_mul_div, ← Complex.normSq_eq_conj_mul_self,
         Complex.normSq_eq_norm_sq, pow_two, Complex.ofReal_mul, mul_div_cancel_left₀]
       exact_mod_cast norm_ne_zero_iff.mpr ha

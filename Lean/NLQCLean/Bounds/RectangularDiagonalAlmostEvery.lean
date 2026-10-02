@@ -1,3 +1,4 @@
+import NLQCLean.Geometry.DirectVolume.Assembly
 import NLQCLean.Geometry.DiagonalPhaseMeasure
 import NLQCLean.Bounds.FiniteControlledPhaseQubits
 import NLQCLean.Bounds.ResourceArithmetic
@@ -28,7 +29,7 @@ open Matrix MeasureTheory ClassicalCommunication
 
 /-- Rectangular finite-classical logarithm rate on original channels. The
 same target-only threshold serves pure and common-map mixed protocols. -/
-theorem exists_ae_finiteRectangularDiagonal_log_bound (hGeom : PolynomialImageVolumeBound) :
+theorem exists_ae_finiteRectangularDiagonal_log_bound_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ C : ℝ, 0 < C ∧ ∀ dA dB : ℕ, 2 ≤ dA → 2 ≤ dB →
       ∀ᵐ θ ∂rectangularPhaseMeasure dA dB,
         ∃ ε₀ : ℝ, 0 < ε₀ ∧ ε₀ ≤ 1 / 2 ∧ ∀ (Kq : ℕ) (ε : ℝ), 0 < ε → ε ≤ ε₀ →
@@ -50,7 +51,7 @@ theorem exists_ae_finiteRectangularDiagonal_log_bound (hGeom : PolynomialImageVo
             diamondError (P.mixedOperationalChannel m) (adConj (rectangularDiagonalPhase θ)) ≤ ε →
             Real.log (1 / ε) ≤ C * (Kq : ℝ) ^ 10) := by
   obtain ⟨C, hC, hae⟩ :=
-    exists_ae_finiteControlledPhase_log_bound.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉, u₁₀, u₁₁, u₁₂} hGeom
+    exists_ae_finiteControlledPhase_log_bound_of_imageVolumeBound.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉, u₁₀, u₁₁, u₁₂} hGeom
   refine ⟨C, hC, fun dA dB hA hB => ?_⟩
   filter_upwards [ae_rectangularAlternatingAngleMod_of_ae hA hB hae] with θ hθ
   obtain ⟨ε₀, hε₀, hε₀half, hphase⟩ := hθ
@@ -74,7 +75,7 @@ theorem exists_ae_finiteRectangularDiagonal_log_bound (hGeom : PolynomialImageVo
 
 /-- The original rectangular diamond predicate yields coefficient `1/10`
 on the double logarithm of error versus quantum footprint. -/
-theorem exists_ae_finiteRectangularDiagonal_qubit_bound (hGeom : PolynomialImageVolumeBound) :
+theorem exists_ae_finiteRectangularDiagonal_qubit_bound_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ B : ℝ, 0 ≤ B ∧ ∀ dA dB : ℕ, 2 ≤ dA → 2 ≤ dB →
       ∀ᵐ θ ∂rectangularPhaseMeasure dA dB,
         ∃ ε₀ : ℝ, 0 < ε₀ ∧ ε₀ ≤ 1 / 2 ∧ ∀ (Kq : ℕ) (ε : ℝ), 0 < ε → ε ≤ ε₀ →
@@ -95,7 +96,7 @@ theorem exists_ae_finiteRectangularDiagonal_qubit_bound (hGeom : PolynomialImage
           (∀ (n : ℕ) (m : MixedResource ρA ρB n), P.HasMixedQuantumFootprint m Kq →
             diamondError (P.mixedOperationalChannel m) (adConj (rectangularDiagonalPhase θ)) ≤ ε →
             (1 / 10 : ℝ) * Real.logb 2 (Real.log (1 / ε)) - B ≤ Real.logb 2 (Kq : ℝ)) := by
-  obtain ⟨C, hC, hae⟩ := exists_ae_finiteRectangularDiagonal_log_bound hGeom
+  obtain ⟨C, hC, hae⟩ := exists_ae_finiteRectangularDiagonal_log_bound_of_imageVolumeBound hGeom
   refine ⟨max 0 (Real.logb 2 C / 10), le_max_left _ _, fun dA dB hA hB => ?_⟩
   filter_upwards [hae dA dB hA hB] with θ hθ
   obtain ⟨ε₀, hε₀, hε₀half, hphase⟩ := hθ
@@ -122,7 +123,7 @@ theorem exists_ae_finiteRectangularDiagonal_qubit_bound (hGeom : PolynomialImage
 /-- In finite LOSCC, the original resource dimensions have product at most
 `2^q` and both quantum messages have dimension one. The original rectangular
 diamond predicate then gives coefficient `1/5`. -/
-theorem exists_ae_finiteLOSCCRectangularDiagonal_qubit_bound
+theorem exists_ae_finiteLOSCCRectangularDiagonal_qubit_bound_of_imageVolumeBound
     (hGeom : PolynomialImageVolumeBound) :
     ∃ B : ℝ, 0 ≤ B ∧ ∀ dA dB : ℕ, 2 ≤ dA → 2 ≤ dB →
       ∀ᵐ θ ∂rectangularPhaseMeasure dA dB,
@@ -146,7 +147,7 @@ theorem exists_ae_finiteLOSCCRectangularDiagonal_qubit_bound
             diamondError (P.mixedOperationalChannel m) (adConj (rectangularDiagonalPhase θ)) ≤ ε →
             (1 / 5 : ℝ) * Real.logb 2 (Real.log (1 / ε)) - B ≤ (q : ℝ)) := by
   obtain ⟨B, hB, hae⟩ :=
-    exists_ae_finiteLOSCCControlledPhase_qubit_bound.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉, u₁₀, u₁₁, u₁₂} hGeom
+    exists_ae_finiteLOSCCControlledPhase_qubit_bound_of_imageVolumeBound.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉, u₁₀, u₁₁, u₁₂} hGeom
   refine ⟨B, hB, fun dA dB hA hB => ?_⟩
   filter_upwards [ae_rectangularAlternatingAngleMod_of_ae hA hB hae] with θ hθ
   obtain ⟨ε₀, hε₀, hε₀half, hphase⟩ := hθ
@@ -170,7 +171,7 @@ theorem exists_ae_finiteLOSCCRectangularDiagonal_qubit_bound
 /-- Charging both coherent outcome flags gives coefficient `1/2`. The mixed
 channel is converted to score before any component selection; its common
 Schmidt-number cap charges both original quantum messages and both flags. -/
-theorem exists_ae_paidRectangularDiagonal_qubit_bound (hGeom : PolynomialImageVolumeBound) :
+theorem exists_ae_paidRectangularDiagonal_qubit_bound_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ B : ℝ, 0 ≤ B ∧ ∀ dA dB : ℕ, 2 ≤ dA → 2 ≤ dB →
       ∀ᵐ θ ∂rectangularPhaseMeasure dA dB,
         ∃ ε₀ : ℝ, 0 < ε₀ ∧ ε₀ ≤ 1 / 2 ∧ ∀ (K : ℕ) (ε : ℝ), 0 < ε → ε ≤ ε₀ →
@@ -194,7 +195,7 @@ theorem exists_ae_paidRectangularDiagonal_qubit_bound (hGeom : PolynomialImageVo
               (Fintype.card μB * Fintype.card σB) ≤ K →
             diamondError (P.mixedOperationalChannel m) (adConj (rectangularDiagonalPhase θ)) ≤ ε →
             (1 / 2 : ℝ) * Real.logb 2 (Real.log (1 / ε)) - B ≤ Real.logb 2 (K : ℝ)) := by
-  obtain ⟨c, hc, hae⟩ := exists_ae_chargedControlledPhase_resource_constant hGeom
+  obtain ⟨c, hc, hae⟩ := exists_ae_chargedControlledPhase_resource_constant_of_imageVolumeBound hGeom
   refine ⟨max 0 (-Real.logb 2 c), le_max_left _ _, fun dA dB hA hB => ?_⟩
   filter_upwards [ae_rectangularAlternatingAngleMod_of_ae hA hB hae] with θ hθ
   obtain ⟨ε₀, hε₀, hε₀half, hphase⟩ := hθ
@@ -266,7 +267,7 @@ theorem ClassicalCommunication.FiniteClassicalProtocol.mixedOperationalChannel_o
 /-- Original eight-register charged protocols are the one-outcome
 specialization of the paid-flag theorem. The mixed branch uses the original
 common encoder/decoder maps and a Schmidt-number cap, with both messages. -/
-theorem exists_ae_chargedRectangularDiagonal_qubit_bound
+theorem exists_ae_chargedRectangularDiagonal_qubit_bound_of_imageVolumeBound
     (hGeom : PolynomialImageVolumeBound) :
     ∃ B : ℝ, 0 ≤ B ∧ ∀ dA dB : ℕ, 2 ≤ dA → 2 ≤ dB →
       ∀ᵐ θ ∂rectangularPhaseMeasure dA dB,
@@ -288,7 +289,7 @@ theorem exists_ae_chargedRectangularDiagonal_qubit_bound
               (adConj (rectangularDiagonalPhase θ)) ≤ ε →
             (1 / 2 : ℝ) * Real.logb 2 (Real.log (1 / ε)) - B ≤ Real.logb 2 (K : ℝ)) := by
   obtain ⟨B, hB, hae⟩ :=
-    exists_ae_paidRectangularDiagonal_qubit_bound.{u₁, u₂, u₃, u₄, u₅, u₆, 0, 0, 0, 0, u₇, u₈} hGeom
+    exists_ae_paidRectangularDiagonal_qubit_bound_of_imageVolumeBound.{u₁, u₂, u₃, u₄, u₅, u₆, 0, 0, 0, 0, u₇, u₈} hGeom
   refine ⟨B, hB, fun dA dB hA hB => ?_⟩
   filter_upwards [hae dA dB hA hB] with θ hθ
   obtain ⟨ε₀, hε₀, hε₀half, hphase⟩ := hθ
@@ -310,11 +311,8 @@ theorem exists_ae_chargedRectangularDiagonal_qubit_bound
     · simpa only [Fintype.card_unique, mul_one] using hK
     · simpa only [Q, FiniteClassicalProtocol.mixedOperationalChannel_ofPureProtocol] using he
 
-/-- Exactly the three unchanged geometry arguments, with the original
-rectangular error predicate and a threshold before every budget and register. -/
-theorem exists_ae_finiteRectangularDiagonal_log_bound_of_external (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+/-- With the original rectangular error predicate and a threshold before every budget and register. -/
+theorem exists_ae_finiteRectangularDiagonal_log_bound :
     ∃ C : ℝ, 0 < C ∧ ∀ dA dB : ℕ, 2 ≤ dA → 2 ≤ dB →
       ∀ᵐ θ ∂rectangularPhaseMeasure dA dB,
         ∃ ε₀ : ℝ, 0 < ε₀ ∧ ε₀ ≤ 1 / 2 ∧ ∀ (Kq : ℕ) (ε : ℝ), 0 < ε → ε ≤ ε₀ →
@@ -335,14 +333,11 @@ theorem exists_ae_finiteRectangularDiagonal_log_bound_of_external (hLRT : LRTThe
           (∀ (n : ℕ) (m : MixedResource ρA ρB n), P.HasMixedQuantumFootprint m Kq →
             diamondError (P.mixedOperationalChannel m) (adConj (rectangularDiagonalPhase θ)) ≤ ε →
             Real.log (1 / ε) ≤ C * (Kq : ℝ) ^ 10) :=
-  exists_ae_finiteRectangularDiagonal_log_bound
-    (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_ae_finiteRectangularDiagonal_log_bound_of_imageVolumeBound
+    (DirectVolume.polynomialImageVolumeBound)
 
-/-- Exactly the three unchanged geometry arguments, with the original
-rectangular error predicate and a threshold before every budget and register. -/
-theorem exists_ae_finiteRectangularDiagonal_qubit_bound_of_external (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+/-- With the original rectangular error predicate and a threshold before every budget and register. -/
+theorem exists_ae_finiteRectangularDiagonal_qubit_bound :
     ∃ B : ℝ, 0 ≤ B ∧ ∀ dA dB : ℕ, 2 ≤ dA → 2 ≤ dB →
       ∀ᵐ θ ∂rectangularPhaseMeasure dA dB,
         ∃ ε₀ : ℝ, 0 < ε₀ ∧ ε₀ ≤ 1 / 2 ∧ ∀ (Kq : ℕ) (ε : ℝ), 0 < ε → ε ≤ ε₀ →
@@ -363,15 +358,11 @@ theorem exists_ae_finiteRectangularDiagonal_qubit_bound_of_external (hLRT : LRTT
           (∀ (n : ℕ) (m : MixedResource ρA ρB n), P.HasMixedQuantumFootprint m Kq →
             diamondError (P.mixedOperationalChannel m) (adConj (rectangularDiagonalPhase θ)) ≤ ε →
             (1 / 10 : ℝ) * Real.logb 2 (Real.log (1 / ε)) - B ≤ Real.logb 2 (Kq : ℝ)) :=
-  exists_ae_finiteRectangularDiagonal_qubit_bound
-    (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_ae_finiteRectangularDiagonal_qubit_bound_of_imageVolumeBound
+    (DirectVolume.polynomialImageVolumeBound)
 
-/-- Exactly the three unchanged geometry arguments, with the original
-rectangular error predicate and a threshold before every budget and register. -/
-theorem exists_ae_finiteLOSCCRectangularDiagonal_qubit_bound_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+/-- With the original rectangular error predicate and a threshold before every budget and register. -/
+theorem exists_ae_finiteLOSCCRectangularDiagonal_qubit_bound :
     ∃ B : ℝ, 0 ≤ B ∧ ∀ dA dB : ℕ, 2 ≤ dA → 2 ≤ dB →
       ∀ᵐ θ ∂rectangularPhaseMeasure dA dB,
         ∃ ε₀ : ℝ, 0 < ε₀ ∧ ε₀ ≤ 1 / 2 ∧ ∀ (q : ℕ) (ε : ℝ), 0 < ε → ε ≤ ε₀ →
@@ -393,14 +384,11 @@ theorem exists_ae_finiteLOSCCRectangularDiagonal_qubit_bound_of_external
           (∀ (n : ℕ) (m : MixedResource ρA ρB n),
             diamondError (P.mixedOperationalChannel m) (adConj (rectangularDiagonalPhase θ)) ≤ ε →
             (1 / 5 : ℝ) * Real.logb 2 (Real.log (1 / ε)) - B ≤ (q : ℝ)) :=
-  exists_ae_finiteLOSCCRectangularDiagonal_qubit_bound
-    (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_ae_finiteLOSCCRectangularDiagonal_qubit_bound_of_imageVolumeBound
+    (DirectVolume.polynomialImageVolumeBound)
 
-/-- Exactly the three unchanged geometry arguments, with the original
-rectangular error predicate and a threshold before every budget and register. -/
-theorem exists_ae_paidRectangularDiagonal_qubit_bound_of_external (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+/-- With the original rectangular error predicate and a threshold before every budget and register. -/
+theorem exists_ae_paidRectangularDiagonal_qubit_bound :
     ∃ B : ℝ, 0 ≤ B ∧ ∀ dA dB : ℕ, 2 ≤ dA → 2 ≤ dB →
       ∀ᵐ θ ∂rectangularPhaseMeasure dA dB,
         ∃ ε₀ : ℝ, 0 < ε₀ ∧ ε₀ ≤ 1 / 2 ∧ ∀ (K : ℕ) (ε : ℝ), 0 < ε → ε ≤ ε₀ →
@@ -424,15 +412,11 @@ theorem exists_ae_paidRectangularDiagonal_qubit_bound_of_external (hLRT : LRTThe
               (Fintype.card μB * Fintype.card σB) ≤ K →
             diamondError (P.mixedOperationalChannel m) (adConj (rectangularDiagonalPhase θ)) ≤ ε →
             (1 / 2 : ℝ) * Real.logb 2 (Real.log (1 / ε)) - B ≤ Real.logb 2 (K : ℝ)) :=
-  exists_ae_paidRectangularDiagonal_qubit_bound
-    (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_ae_paidRectangularDiagonal_qubit_bound_of_imageVolumeBound
+    (DirectVolume.polynomialImageVolumeBound)
 
-/-- Exactly the three unchanged geometry arguments, with the original
-rectangular error predicate and a threshold before every budget and register. -/
-theorem exists_ae_chargedRectangularDiagonal_qubit_bound_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+/-- With the original rectangular error predicate and a threshold before every budget and register. -/
+theorem exists_ae_chargedRectangularDiagonal_qubit_bound :
     ∃ B : ℝ, 0 ≤ B ∧ ∀ dA dB : ℕ, 2 ≤ dA → 2 ≤ dB →
       ∀ᵐ θ ∂rectangularPhaseMeasure dA dB,
         ∃ ε₀ : ℝ, 0 < ε₀ ∧ ε₀ ≤ 1 / 2 ∧ ∀ (K : ℕ) (ε : ℝ), 0 < ε → ε ≤ ε₀ →
@@ -452,7 +436,7 @@ theorem exists_ae_chargedRectangularDiagonal_qubit_bound_of_external
             diamondError (m.mixedChannel P.encA P.encB P.decA P.decB)
               (adConj (rectangularDiagonalPhase θ)) ≤ ε →
             (1 / 2 : ℝ) * Real.logb 2 (Real.log (1 / ε)) - B ≤ Real.logb 2 (K : ℝ)) :=
-  exists_ae_chargedRectangularDiagonal_qubit_bound
-    (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_ae_chargedRectangularDiagonal_qubit_bound_of_imageVolumeBound
+    (DirectVolume.polynomialImageVolumeBound)
 
 end NLQCLean

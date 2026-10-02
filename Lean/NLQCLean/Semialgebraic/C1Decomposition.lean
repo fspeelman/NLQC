@@ -63,7 +63,7 @@ theorem contDiffOn_openUnitCube_dimH_image_le {d n : ℕ}
     (hφ : ContDiffOn ℝ 1 φ (openUnitCube d)) :
     dimH (φ '' openUnitCube d) ≤ d := by
   calc
-    _ ≤ dimH (openUnitCube d) := hφ.dimH_image_le (convex_openUnitCube d) Subset.rfl
+    _ ≤ dimH (openUnitCube d) := (hφ.differentiableOn one_ne_zero).dimH_image_le
     _ ≤ dimH (univ : Set (RealEuclidean d)) := dimH_mono (subset_univ _)
     _ = d := by simp [Real.dimH_univ_eq_finrank]
 

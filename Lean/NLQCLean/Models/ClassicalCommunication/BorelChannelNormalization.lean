@@ -139,7 +139,7 @@ variable [DecidableEq ι] [DecidableEq κ] [DecidableEq τ] [DecidableEq υ]
 variable {μ : Measure α} {ν : Measure β} [SFinite μ] [SFinite ν]
 variable {Φ : α → MatrixOperation ι κ} {Ψ : β → MatrixOperation τ υ}
 
-omit [DecidableEq κ] [DecidableEq υ] [SFinite μ] [SFinite ν] in
+omit [DecidableEq κ] [DecidableEq υ] [SFinite μ] in
 /-- Product integrability of the genuine tensor of independent operation densities. -/
 theorem integrable_tensorContinuousChannels_prod (hΦ : Integrable Φ μ) (hΨ : Integrable Ψ ν) :
     Integrable (fun z : α × β => tensorContinuousChannels (Φ z.1) (Ψ z.2)) (μ.prod ν) := by

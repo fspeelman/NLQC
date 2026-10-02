@@ -34,7 +34,7 @@ theorem normDet_le_prod_norm_fin {n : ℕ}
     simp [LinearMap.toMatrix_apply, Basis.toMatrix_apply, v]
   rw [hm]
   rw [← Basis.det_apply, gramSchmidtOrthonormalBasis_det, norm_prod]
-  apply Finset.prod_le_prod (fun _ _ => norm_nonneg _)
+  apply Finset.prod_le_prod₀ (fun _ _ => norm_nonneg _)
   intro i _
   calc
     ‖inner ℝ (c i) (v i)‖ ≤ ‖c i‖ * ‖v i‖ := norm_inner_le_norm _ _
@@ -72,11 +72,11 @@ theorem normDet_le_of_subspace_bounds (L : E →ₗ[ℝ] F) (V : Submodule ℝ E
       rw [Fintype.prod_sum_type]; simp only [hb₀, hb₁]
     _ ≤ (∏ _ : Fin (finrank ℝ V), A) * ∏ _ : Fin (finrank ℝ Vᗮ), B := by
       apply mul_le_mul
-      · apply Finset.prod_le_prod (fun _ _ => norm_nonneg _)
+      · apply Finset.prod_le_prod₀ (fun _ _ => norm_nonneg _)
         intro i _
         simpa only [Submodule.norm_coe, b₀.orthonormal.1 i, mul_one] using
           hVA (b₀ i) (b₀ i).property
-      · apply Finset.prod_le_prod (fun _ _ => norm_nonneg _)
+      · apply Finset.prod_le_prod₀ (fun _ _ => norm_nonneg _)
         intro i _
         simpa only [Submodule.norm_coe, b₁.orthonormal.1 i, mul_one] using
           hVB (b₁ i) (b₁ i).property

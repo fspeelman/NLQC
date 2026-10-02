@@ -2,7 +2,6 @@ import NLQCLean.Invariants.RectangularControlledPhase
 import Mathlib.MeasureTheory.Integral.IntervalIntegral.Periodic
 import Mathlib.MeasureTheory.Constructions.Pi
 import Mathlib.MeasureTheory.Measure.Haar.Unique
-import Mathlib.MeasureTheory.Measure.MeasureSpace
 import Mathlib.Analysis.SpecialFunctions.Complex.Circle
 
 /-!

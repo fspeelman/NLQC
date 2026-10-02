@@ -1,3 +1,4 @@
+import NLQCLean.Geometry.DirectVolume.Assembly
 import NLQCLean.Bounds.ControlledPhaseLength
 import NLQCLean.Bounds.AlmostEveryArithmetic
 import Mathlib.Topology.Instances.Rat
@@ -55,7 +56,7 @@ theorem exists_ae_chargedControlledPhase_forbidden_error_constant
       ((0 < a ∧ b < Real.pi) ∨ (Real.pi < a ∧ b < 2 * Real.pi)) →
       ∀ᵐ θ ∂volume, ∃ K₀ : ℕ, 1 ≤ K₀ ∧ ∀ K : ℕ, K₀ ≤ K →
         θ ∉ chargedControlledPhaseAngles K (Real.exp (-(A * (K : ℝ) ^ 2))) (Set.Icc a b) := by
-  obtain ⟨C, hC, hlength⟩ := exists_chargedControlledPhase_length_constant hGeom
+  obtain ⟨C, hC, hlength⟩ := exists_chargedControlledPhase_length_constant_of_imageVolumeBound hGeom
   refine ⟨2 * (C + 2), by linarith, ?_⟩
   intro a b hab hsemicircle
   obtain ⟨C_J, _, hbound⟩ := hlength a b hab hsemicircle
@@ -109,7 +110,7 @@ theorem exists_ae_chargedControlledPhase_interval_resource_constant
 /-- Rational compact intervals exhaust both open semicircles. Their common
 resource constant survives the countable intersection of conull sets; only
 the error threshold depends on the fixed angle. The three endpoints are null. -/
-theorem exists_ae_chargedControlledPhase_resource_constant
+theorem exists_ae_chargedControlledPhase_resource_constant_of_imageVolumeBound
     (hGeom : PolynomialImageVolumeBound) :
     ∃ c : ℝ, 0 < c ∧ ∀ᵐ θ ∂volume.restrict (Set.Icc 0 (2 * Real.pi)),
       ∃ ε₀ : ℝ, 0 < ε₀ ∧ ε₀ ≤ 1 / 2 ∧ ∀ (K : ℕ) (ε : ℝ), 0 < ε → ε ≤ ε₀ →
@@ -152,19 +153,16 @@ theorem exists_ae_chargedControlledPhase_resource_constant
     obtain ⟨b, hθb, hb2pi⟩ := exists_rat_btwn h2pi
     exact hθ a b (haθ.le.trans hθb.le) (Or.inr ⟨hapi, hb2pi⟩) ⟨haθ.le, hθb.le⟩
 
-/-- Exactly the existing three geometry inputs; the threshold is chosen after
+/-- The threshold is chosen after
 the fixed phase and before every charged budget and allowed score error. -/
-theorem exists_ae_chargedControlledPhase_resource_constant_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+theorem exists_ae_chargedControlledPhase_resource_constant :
     ∃ c : ℝ, 0 < c ∧ ∀ᵐ θ ∂volume.restrict (Set.Icc 0 (2 * Real.pi)),
       ∃ ε₀ : ℝ, 0 < ε₀ ∧ ε₀ ≤ 1 / 2 ∧ ∀ (K : ℕ) (ε : ℝ), 0 < ε → ε ≤ ε₀ →
         (controlledPhaseTarget θ ∈ pureReachable 2 K ε →
           c * Real.sqrt (Real.log (1 / ε)) ≤ K) ∧
         (controlledPhaseTarget θ ∈ mixedReachable 2 K ε →
           c * Real.sqrt (Real.log (1 / ε)) ≤ K) :=
-  exists_ae_chargedControlledPhase_resource_constant
-    (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_ae_chargedControlledPhase_resource_constant_of_imageVolumeBound
+    (DirectVolume.polynomialImageVolumeBound)
 
 end NLQCLean

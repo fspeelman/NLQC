@@ -4,8 +4,8 @@ import NLQCLean.Bounds.ControlledPhaseLength
 # Controlled-phase scalar certificate audit
 
 These boundaries use the full ambient derivative, both signs of sine,
-the corner permutation, charged protocol coverage, and exactly the
-three existing geometry arguments in the image-volume consequence.
+the corner permutation, charged protocol coverage, and the proved
+image-volume bound.
 -/
 
 set_option pp.deepTerms true
@@ -109,18 +109,18 @@ set_option pp.universes true in
 #print axioms NLQCLean.mixedReachable_purity_mem_scalarWitness
 
 set_option pp.universes true in
-#check @NLQCLean.exists_scalarPurityWitness_volume_constant_of_external
+#check @NLQCLean.exists_scalarPurityWitness_volume_constant
 
-/-- info: 'NLQCLean.exists_scalarPurityWitness_volume_constant_of_external' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+/-- info: 'NLQCLean.exists_scalarPurityWitness_volume_constant' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
-#print axioms NLQCLean.exists_scalarPurityWitness_volume_constant_of_external
+#print axioms NLQCLean.exists_scalarPurityWitness_volume_constant
 
 set_option pp.universes true in
-#check @NLQCLean.exists_chargedControlledPhase_length_constant_of_external
+#check @NLQCLean.exists_chargedControlledPhase_length_constant
 
-/-- info: 'NLQCLean.exists_chargedControlledPhase_length_constant_of_external' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+/-- info: 'NLQCLean.exists_chargedControlledPhase_length_constant' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
-#print axioms NLQCLean.exists_chargedControlledPhase_length_constant_of_external
+#print axioms NLQCLean.exists_chargedControlledPhase_length_constant
 
 set_option pp.universes true in
 #check @NLQCLean.chargedControlledPhaseAngles_eq_mixed

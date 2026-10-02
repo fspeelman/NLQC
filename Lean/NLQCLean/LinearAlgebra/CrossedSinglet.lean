@@ -51,7 +51,7 @@ theorem IsIsometry.sum_normSq_mulVec {V : Matrix m n ℂ} (hV : IsIsometry V) (u
         simp only [Finset.mul_sum]
     _ = ∑ j, u j * starRingEnd ℂ (u j) := by
         simp only [hent, mul_ite, mul_one, mul_zero, Finset.sum_ite_eq',
-          Finset.mem_univ, if_true]
+          Finset.mem_univ, ite_true]
     _ = ((∑ j, Complex.normSq (u j) : ℝ) : ℂ) := by
         push_cast
         simp only [Complex.mul_conj]

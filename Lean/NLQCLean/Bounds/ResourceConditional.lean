@@ -36,11 +36,11 @@ theorem MixedUniversalScore.swap_floor {d K : ℕ} {e : ℝ} (hd : 0 < d)
   ((mixedUniversalScore_iff_pure d K e).mp h).swap_floor hd
 
 /-- Resource bound: one positive constant works for pure and finite mixed universal implementations. -/
-theorem exists_universal_resource_constant (hGeom : PolynomialImageVolumeBound) :
+theorem exists_universal_resource_constant_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ c : ℝ, 0 < c ∧ ∀ (d K : ℕ), 2 ≤ d → 1 ≤ K → ∀ e : ℝ, 0 < e → e ≤ 1 / 2 →
       (PureUniversalScore d K e → c * (d : ℝ) * Real.sqrt (Real.log (1 / e)) ≤ K) ∧
       (MixedUniversalScore d K e → c * (d : ℝ) * Real.sqrt (Real.log (1 / e)) ≤ K) := by
-  obtain ⟨C, hC, hHaar⟩ := exists_haar_fraction_constant hGeom
+  obtain ⟨C, hC, hHaar⟩ := exists_haar_fraction_constant_of_imageVolumeBound hGeom
   have hC0 : 0 < C := by linarith
   refine ⟨Real.sqrt (3 / (32 * C)), by positivity, ?_⟩
   intro d K hd hK e he he'
@@ -57,13 +57,13 @@ theorem exists_universal_resource_constant (hGeom : PolynomialImageVolumeBound) 
   exact ⟨hpure, fun hm => hpure ((mixedUniversalScore_iff_pure d K e).mp hm)⟩
 
 /-- Qubit bound: one nonnegative additive constant, with real base-two logarithms. -/
-theorem exists_universal_qubit_constant (hGeom : PolynomialImageVolumeBound) :
+theorem exists_universal_qubit_constant_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ b : ℝ, 0 ≤ b ∧ ∀ (n K : ℕ), 1 ≤ n → 1 ≤ K → ∀ e : ℝ, 0 < e → e ≤ 1 / 2 →
       (PureUniversalScore (2 ^ n) K e →
         (n : ℝ) + (1 / 2 : ℝ) * Real.logb 2 (Real.log (1 / e)) - b ≤ Real.logb 2 (K : ℝ)) ∧
       (MixedUniversalScore (2 ^ n) K e →
         (n : ℝ) + (1 / 2 : ℝ) * Real.logb 2 (Real.log (1 / e)) - b ≤ Real.logb 2 (K : ℝ)) := by
-  obtain ⟨c, hc, hresource⟩ := exists_universal_resource_constant hGeom
+  obtain ⟨c, hc, hresource⟩ := exists_universal_resource_constant_of_imageVolumeBound hGeom
   refine ⟨max 0 (-Real.logb 2 c), le_max_left _ _, ?_⟩
   intro n K hn hK e he he'
   have hd : 2 ≤ 2 ^ n := by

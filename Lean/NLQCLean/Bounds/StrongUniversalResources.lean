@@ -58,9 +58,9 @@ theorem strong_resource_of_patch {C : ℝ} (hC : 0 ≤ C) {d K : ℕ} (hd : 2 �
   linarith
 
 /-- The universal `d²` resource bound from the polynomial image-volume property. -/
-theorem exists_strongUniversalResourceBound (hGeom : PolynomialImageVolumeBound) :
+theorem exists_strongUniversalResourceBound_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ c : ℝ, 0 < c ∧ StrongUniversalResourceBound c := by
-  obtain ⟨C, hC, hH⟩ := exists_strongRestrictedHaarBound hGeom
+  obtain ⟨C, hC, hH⟩ := exists_strongRestrictedHaarBound_of_imageVolumeBound hGeom
   refine ⟨1 / (4 * Real.sqrt (C + 20)), by positivity, ?_⟩
   intro d K hd e he he2
   have hpure (hu : PureUniversalScore d K e) :
@@ -75,9 +75,9 @@ theorem exists_strongUniversalResourceBound (hGeom : PolynomialImageVolumeBound)
   exact ⟨hpure, fun hm => hpure ((mixedUniversalScore_iff_pure d K e).mp hm)⟩
 
 /-- The same for universal normalized diamond implementation. -/
-theorem exists_strongUniversalDiamondResourceBound (hGeom : PolynomialImageVolumeBound) :
+theorem exists_strongUniversalDiamondResourceBound_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ c : ℝ, 0 < c ∧ StrongUniversalDiamondResourceBound.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} c := by
-  obtain ⟨c, hc, h⟩ := exists_strongUniversalResourceBound hGeom
+  obtain ⟨c, hc, h⟩ := exists_strongUniversalResourceBound_of_imageVolumeBound hGeom
   refine ⟨c, hc, ?_⟩
   intro d K hd e he he2
   let : NeZero d := ⟨by omega⟩
@@ -98,9 +98,9 @@ theorem strong_qubit_of_resource {c K e : ℝ} (hc : 0 < c) (he : 0 < e) (he2 : 
   exact hq
 
 /-- The qubit form at `d = 2ⁿ`. -/
-theorem exists_strongUniversalQubitBound (hGeom : PolynomialImageVolumeBound) :
+theorem exists_strongUniversalQubitBound_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ b : ℝ, 0 ≤ b ∧ StrongUniversalQubitBound b := by
-  obtain ⟨c, hc, hres⟩ := exists_strongUniversalResourceBound hGeom
+  obtain ⟨c, hc, hres⟩ := exists_strongUniversalResourceBound_of_imageVolumeBound hGeom
   refine ⟨max 0 (-Real.logb 2 c), le_max_left _ _, ?_⟩
   intro n K hn _ e he he2
   have hd : 2 ≤ 2 ^ n := by
@@ -110,57 +110,13 @@ theorem exists_strongUniversalQubitBound (hGeom : PolynomialImageVolumeBound) :
     fun hu => strong_qubit_of_resource hc he he2 n (hm hu)⟩
 
 /-- The qubit form for universal normalized diamond implementation. -/
-theorem exists_strongUniversalDiamondQubitBound (hGeom : PolynomialImageVolumeBound) :
+theorem exists_strongUniversalDiamondQubitBound_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ b : ℝ, 0 ≤ b ∧ StrongUniversalDiamondQubitBound.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} b := by
-  obtain ⟨b, hb, h⟩ := exists_strongUniversalQubitBound hGeom
+  obtain ⟨b, hb, h⟩ := exists_strongUniversalQubitBound_of_imageVolumeBound hGeom
   refine ⟨b, hb, ?_⟩
   intro n K hn hK e he he2
   let : NeZero (2 ^ n) := ⟨by positivity⟩
   obtain ⟨hp, hm⟩ := h n K hn hK e he he2
   exact ⟨fun h' => hp h'.score, fun h' => hm h'.score⟩
-
-/-- The strong resource bound from the four explicit inputs. -/
-theorem exists_strongUniversalResourceBound_of_external
-    (hLRT : LRTTheorem44)
-    (hProjection : SemialgebraicProjectionTheorem)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
-    ∃ c : ℝ, 0 < c ∧ StrongUniversalResourceBound c :=
-  exists_strongUniversalResourceBound
-    (polynomialImageVolumeBound_of_external hLRT hProjection
-      hStratification hComponents)
-
-/-- The strong diamond resource bound from the four explicit inputs. -/
-theorem exists_strongUniversalDiamondResourceBound_of_external
-    (hLRT : LRTTheorem44)
-    (hProjection : SemialgebraicProjectionTheorem)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
-    ∃ c : ℝ, 0 < c ∧ StrongUniversalDiamondResourceBound.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} c :=
-  exists_strongUniversalDiamondResourceBound
-    (polynomialImageVolumeBound_of_external hLRT hProjection
-      hStratification hComponents)
-
-/-- The strong qubit bound from the four explicit inputs. -/
-theorem exists_strongUniversalQubitBound_of_external
-    (hLRT : LRTTheorem44)
-    (hProjection : SemialgebraicProjectionTheorem)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
-    ∃ b : ℝ, 0 ≤ b ∧ StrongUniversalQubitBound b :=
-  exists_strongUniversalQubitBound
-    (polynomialImageVolumeBound_of_external hLRT hProjection
-      hStratification hComponents)
-
-/-- The strong diamond qubit bound from the four explicit inputs. -/
-theorem exists_strongUniversalDiamondQubitBound_of_external
-    (hLRT : LRTTheorem44)
-    (hProjection : SemialgebraicProjectionTheorem)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
-    ∃ b : ℝ, 0 ≤ b ∧ StrongUniversalDiamondQubitBound.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} b :=
-  exists_strongUniversalDiamondQubitBound
-    (polynomialImageVolumeBound_of_external hLRT hProjection
-      hStratification hComponents)
 
 end NLQCLean

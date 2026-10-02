@@ -29,7 +29,7 @@ theorem rank_move_register {a b μ : Type*} [Fintype a] [Fintype b] [Fintype μ]
     ext i j
     change M (i, j.1) j.2 = ∑ k, L i k * R k j
     simp only [L, R, Fintype.sum_prod_type, mul_ite, mul_zero,
-      Finset.sum_ite_eq', Finset.mem_univ, if_true]
+      Finset.sum_ite_eq', Finset.mem_univ, ite_true]
     exact congrArg (fun N : Matrix (a × μ) b ℂ ↦ N (i, j.1) j.2) hM
   rw [hfac]
   exact (Matrix.rank_mul_le_left L R).trans (by

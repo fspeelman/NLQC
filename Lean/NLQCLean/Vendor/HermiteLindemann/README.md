@@ -5,7 +5,7 @@ Required missing-module closure from [Mathlib PR 28013](https://github.com/leanp
 The original source paths and SHA-256 hashes are in
 [SOURCE_MANIFEST.json](SOURCE_MANIFEST.json). Upstream licenses and genuine
 copyright/author notices are preserved. The project toolchain remains
-Lean/Mathlib v4.33.1.
+Lean/Mathlib v4.34.1.
 
 Initial compatibility modifications: redirect the four missing module
 imports to this directory; remove newer module-system commands and import
@@ -25,3 +25,10 @@ The four source hashes were checked against the pinned upstream commit; the
 Apache license matches upstream byte-for-byte. The missing import closure is
 `Basic` → `AlgebraicPart` and `SymmetricEval`, with `AlgebraicPart` →
 `FinsuppQuotient`. All remaining imports are supplied by pinned Mathlib.
+
+Compatibility update for Lean/Mathlib v4.34.1 (2 October 2026), retaining
+the same upstream pin and source manifest: `AlgebraicPart.lean` uses
+`Finsupp.mapDomain_apply_of_injective`; `SymmetricEval.lean` reuses Mathlib's
+`Multiset.esymm_zero` and `Multiset.esymm_of_card_lt` instead of declaring
+the v4.33.1 compatibility copies; `Basic.lean` supplies the explicit base
+ring to `Complex.isIntegral_I`. The original upstream notices remain.

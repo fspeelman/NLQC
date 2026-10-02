@@ -23,7 +23,7 @@ theorem transcendental_exp_angle_int {θ : ℝ} (hθ0 : θ ≠ 0)
   have hθc : IsAlgebraic ℚ (θ : ℂ) := by
     simpa only [Complex.coe_algebraMap] using hθ.algebraMap (A := ℂ)
   have hiθ : IsAlgebraic ℚ ((θ : ℂ) * Complex.I) :=
-    hθc.mul Complex.isIntegral_rat_I.isAlgebraic
+    hθc.mul (Complex.isIntegral_I ℚ).isAlgebraic
   apply HermiteLindemann.transcendental_exp
   · exact mul_ne_zero (by exact_mod_cast hθ0) Complex.I_ne_zero
   · exact (IsFractionRing.isAlgebraic_iff ℤ ℚ ℂ).mpr hiθ

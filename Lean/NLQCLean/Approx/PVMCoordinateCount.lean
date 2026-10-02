@@ -191,4 +191,41 @@ theorem one_le_coordinateBudget {d K : ℕ} (s : PVMReverseShape d K) (hd : 0 < 
 
 end PVMReverseBlocks
 
+namespace PVMReverseShape
+
+/-- A coordinate budget for the witnesses of one shape: it bounds the real
+coordinate count and the witness speed constant `d √(10 d K)`. -/
+def AdmissibleBudget {d K : ℕ} (s : PVMReverseShape d K) (P : ℕ) : Prop :=
+  Module.finrank ℝ (PVMReverseBlocks s) ≤ P ∧ (d : ℝ) * Real.sqrt (10 * d * K) ≤ P
+
+theorem AdmissibleBudget.one_le {d K : ℕ} {s : PVMReverseShape d K} {P : ℕ}
+    (h : s.AdmissibleBudget P) : 1 ≤ P := by
+  have hr : 1 ≤ s.1.r := s.1.resource_pos
+  have hf := PVMReverseBlocks.finrank_real s
+  have : 2 ≤ Module.finrank ℝ (PVMReverseBlocks s) := by
+    rw [hf]
+    have h1 : 1 ≤ s.1.r ^ 2 := Nat.one_le_pow _ _ hr
+    omega
+  exact le_trans (by omega) (this.trans h.1)
+
+end PVMReverseShape
+
+theorem pvm_witness_speedConstant_le_budget_of_pos {d K : ℕ} (hd : 0 < d) (hK : 1 ≤ K) :
+    (d : ℝ) * Real.sqrt (10 * d * K : ℝ) ≤ (pvmWitnessCoordinateBudget d K : ℝ) := by
+  have hdR : (1 : ℝ) ≤ d := by exact_mod_cast hd
+  have hKR : (1 : ℝ) ≤ K := by exact_mod_cast hK
+  have hdK : (1 : ℝ) ≤ d * K := by nlinarith
+  have hs : Real.sqrt (10 * d * K : ℝ) ≤ 10 * d * K :=
+    Real.sqrt_le_self_iff.mpr (Or.inr (by linarith))
+  calc
+    _ ≤ (d : ℝ) * (10 * d * K) := mul_le_mul_of_nonneg_left hs (Nat.cast_nonneg d)
+    _ ≤ 1024 * (d : ℝ) ^ 2 * (K : ℝ) ^ 2 := by nlinarith [mul_nonneg (sq_nonneg (d : ℝ)) (sq_nonneg (K : ℝ))]
+    _ = _ := by simp [pvmWitnessCoordinateBudget]
+
+/-- The fixed budget `1024 d² K²` is admissible for every shape once `d² ≤ 4K`. -/
+theorem PVMReverseShape.admissibleBudget_full {d K : ℕ} (s : PVMReverseShape d K) (hd : 0 < d)
+    (hfloor : d ^ 2 ≤ 4 * K) : s.AdmissibleBudget (pvmWitnessCoordinateBudget d K) :=
+  ⟨PVMReverseBlocks.finrank_real_le_budget s hd hfloor,
+    pvm_witness_speedConstant_le_budget_of_pos hd s.one_le_budget⟩
+
 end NLQCLean

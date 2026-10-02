@@ -1,3 +1,4 @@
+import NLQCLean.Geometry.DirectVolume.Assembly
 import NLQCLean.Bounds.ControlledPhaseAlmostEvery
 import NLQCLean.Models.ClassicalCommunication.FiniteMixedCompression
 
@@ -36,7 +37,7 @@ theorem log_le_tenth_power_of_charged_sqrt_lower_bound {c L : ℝ} {Kq : ℕ}
 /-- One constant precedes the fixed phase; its small-error threshold precedes
 all quantum budgets, errors, finite architectures and protocols.
 Pure and common-map mixed score and diamond hypotheses share this threshold. -/
-theorem exists_ae_finiteControlledPhase_log_bound
+theorem exists_ae_finiteControlledPhase_log_bound_of_imageVolumeBound
     (hGeom : PolynomialImageVolumeBound) :
     ∃ C : ℝ, 0 < C ∧ ∀ᵐ θ ∂volume.restrict (Set.Icc 0 (2 * Real.pi)),
       ∃ ε₀ : ℝ, 0 < ε₀ ∧ ε₀ ≤ 1 / 2 ∧ ∀ (Kq : ℕ) (ε : ℝ), 0 < ε → ε ≤ ε₀ →
@@ -61,7 +62,7 @@ theorem exists_ae_finiteControlledPhase_log_bound
             Real.log (1 / ε) ≤ C * (Kq : ℝ) ^ 10) ∧
           (diamondError (P.mixedOperationalChannel m) (adConj (controlledPhase θ)) ≤ ε →
             Real.log (1 / ε) ≤ C * (Kq : ℝ) ^ 10)) := by
-  obtain ⟨c, hc, hae⟩ := exists_ae_chargedControlledPhase_resource_constant hGeom
+  obtain ⟨c, hc, hae⟩ := exists_ae_chargedControlledPhase_resource_constant_of_imageVolumeBound hGeom
   refine ⟨4096 / c ^ 2, by positivity, ?_⟩
   filter_upwards [hae] with θ hθ
   obtain ⟨ε₀, hε₀pos, hε₀half, hcharged⟩ := hθ
@@ -90,13 +91,9 @@ theorem exists_ae_finiteControlledPhase_log_bound
         (P.mem_pureReachable_of_mixedQuantumFootprint_diamondError
           m (controlledPhaseTarget θ) (by decide) hK he)⟩
 
-/-- The finite-classical applied logarithm bound uses exactly the unchanged
-three geometry arguments. No arithmetic, instrument or compression contract
-is supplied as an external premise. -/
-theorem exists_ae_finiteControlledPhase_log_bound_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+/-- The finite-classical applied logarithm bound. No arithmetic, instrument or
+compression contract is assumed. -/
+theorem exists_ae_finiteControlledPhase_log_bound :
     ∃ C : ℝ, 0 < C ∧ ∀ᵐ θ ∂volume.restrict (Set.Icc 0 (2 * Real.pi)),
       ∃ ε₀ : ℝ, 0 < ε₀ ∧ ε₀ ≤ 1 / 2 ∧ ∀ (Kq : ℕ) (ε : ℝ), 0 < ε → ε ≤ ε₀ →
         ∀ (ρA : Type u₁) (ρB : Type u₂) (κA : Type u₃) (κB : Type u₄)
@@ -120,7 +117,7 @@ theorem exists_ae_finiteControlledPhase_log_bound_of_external
             Real.log (1 / ε) ≤ C * (Kq : ℝ) ^ 10) ∧
           (diamondError (P.mixedOperationalChannel m) (adConj (controlledPhase θ)) ≤ ε →
             Real.log (1 / ε) ≤ C * (Kq : ℝ) ^ 10)) :=
-  exists_ae_finiteControlledPhase_log_bound
-    (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_ae_finiteControlledPhase_log_bound_of_imageVolumeBound
+    (DirectVolume.polynomialImageVolumeBound)
 
 end NLQCLean

@@ -111,7 +111,7 @@ theorem traceNorm_eq_sum_sqrt_of_diagonal_gram (A : Matrix m n ℂ) (w : m → �
     dsimp only [r]
     by_cases hi : w i = 0
     · simp [hi]
-    · rw [if_neg hi]
+    · rw [ite_eq_right hi]
       calc
         _ = (Real.sqrt (w i))⁻¹ ^ 2 * (Real.sqrt (w i)) ^ 2 := by
           rw [Real.sq_sqrt (hw i)]

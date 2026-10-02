@@ -29,7 +29,7 @@ theorem norm_sq_adjoint_mul_of_diagonal_gram {m n r : Type*}
     simp only [Matrix.conjTranspose_mul, Matrix.conjTranspose_conjTranspose, Matrix.mul_assoc]
   rw [hmul, hgram]
   simp only [Matrix.trace, Matrix.diag, Matrix.mul_apply, Matrix.diagonal_apply,
-    mul_ite, mul_zero, Finset.sum_ite_eq', Finset.mem_univ, if_true,
+    mul_ite, mul_zero, Finset.sum_ite_eq', Finset.mem_univ, ite_true,
     Matrix.conjTranspose_apply, Complex.re_sum]
   rw [Finset.sum_comm]
   apply Finset.sum_congr rfl
@@ -96,7 +96,7 @@ theorem frobInner_truncateRows_of_diagonal_gram {m n : Type*} [Fintype m] [Finty
   have hrow (i : m) : (∑ j, star (truncateRows s M i j) * M i j) =
       if i ∈ s then (w i : ℂ) else 0 := by
     by_cases hi : i ∈ s
-    · simpa only [truncateRows, if_pos hi] using row_inner_of_diagonal_gram M w hgram i
+    · simpa only [truncateRows, ite_eq_left hi] using row_inner_of_diagonal_gram M w hgram i
     · simp [truncateRows, hi]
   simp only [frobInner, hrow]
   simp

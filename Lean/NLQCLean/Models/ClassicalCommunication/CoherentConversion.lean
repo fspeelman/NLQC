@@ -121,12 +121,12 @@ theorem coherentProtocol_globalIsometry_apply
   conv_lhs => simp (maxSteps := 200000) only [Fintype.sum_prod_type]
   conv_lhs => simp (maxSteps := 200000) only [Prod.mk.injEq, ite_and]
   by_cases h : x = x' ∧ y = y'
-  · rw [if_pos h]
+  · rw [ite_eq_left h]
     conv_rhs => rw [globalIsometry_entry]
     obtain ⟨rfl, rfl⟩ := h
     simp (maxSteps := 100000) only [ite_mul, apply_ite, sum_ite_irrel,
-      Finset.sum_ite_eq, Finset.sum_ite_eq', Finset.mem_univ, zero_mul, mul_zero, if_pos]
-  · rw [if_neg h]
+      Finset.sum_ite_eq, Finset.sum_ite_eq', Finset.mem_univ, zero_mul, mul_zero, ite_eq_left]
+  · rw [ite_eq_right h]
     simp (maxSteps := 100000) [ite_mul, apply_ite]
     intro hx hy
     exact (h ⟨hx, hy⟩).elim
@@ -152,7 +152,7 @@ theorem coherentProtocol_operationalChannel :
   rw [channelOf_eq_sum_adConj]
   simp only [Fintype.sum_prod_type, hs, apply_ite, adConj_zero, ite_and]
   simp only [sum_ite_irrel, Finset.sum_ite_eq,
-    Finset.mem_univ, if_true]
+    Finset.mem_univ, ite_true]
   unfold operationalChannel
   simp only [channelOf_eq_sum_adConj, Fintype.sum_prod_type]
   rw [sum_rotate_three]

@@ -1,12 +1,13 @@
+import NLQCLean.Geometry.DirectVolume.Assembly
 import NLQCLean.Invariants.ControlledPhase
 import NLQCLean.Approx.ScalarPurityWitness
-import NLQCLean.Bounds.ProvedProjection
+import NLQCLean.Bounds.Quantitative
 import Mathlib.MeasureTheory.Measure.Hausdorff
 
 /-!
 # Scalar image-volume estimates for the charged two-qubit witnesses
 
-The geometry inputs are used only after checking the exact source format,
+The image-volume bound is applied only after checking the exact source format,
 degree, radius, and full ambient derivative bound. Conversion from invariant
 image volume to length in an angle interval is a separate theorem boundary.
 -/
@@ -107,7 +108,7 @@ theorem chargedControlledPhaseAngles_volume_le_scalarImage {K : ℕ} {ε : ℝ}
   exact h.trans (mul_le_mul le_rfl (measure_mono hImage) zero_le zero_le)
 
 /-- One universal geometric constant bounds every scalar witness image. -/
-theorem exists_scalarPurityWitness_volume_constant (hGeom : PolynomialImageVolumeBound) :
+theorem exists_scalarPurityWitness_volume_constant_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ C : ℝ, 1 ≤ C ∧ ∀ (K : ℕ) (s : ReverseShape 2 K) (δ : ℝ), 0 ≤ δ →
       volume ((ReverseBlocks.thickenedScalarPurityPolynomial s (8 * δ)).eval ''
         (ReverseBlocks.scalarPurityWitnessFormat s δ).source) ≤
@@ -132,7 +133,7 @@ theorem exists_scalarPurityWitness_union_volume_constant (hGeom : PolynomialImag
       (K : ℝ≥0∞) ^ 3 * ENNReal.ofReal (C ^ (witnessCoordinateBudget 2 K + 2)) *
         euclideanUnitBallVolume 1 *
         ENNReal.ofReal (δ * (2 * (witnessCoordinateBudget 2 K : ℝ) + 8)) := by
-  obtain ⟨C, hC, hvolume⟩ := exists_scalarPurityWitness_volume_constant hGeom
+  obtain ⟨C, hC, hvolume⟩ := exists_scalarPurityWitness_volume_constant_of_imageVolumeBound hGeom
   refine ⟨C, hC, ?_⟩
   intro K δ hδ
   calc
@@ -228,7 +229,7 @@ theorem exists_scalarPurityWitness_exponential_constant (hGeom : PolynomialImage
 /-- The same universal exponential constant works on both open semicircles.
 The interval constant is chosen only after its endpoints, and the conclusion
 is Lebesgue outer measure at the original charged footprint. -/
-theorem exists_chargedControlledPhase_length_constant (hGeom : PolynomialImageVolumeBound) :
+theorem exists_chargedControlledPhase_length_constant_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ C : ℝ, 1 ≤ C ∧ ∀ (a b : ℝ), a ≤ b →
       ((0 < a ∧ b < Real.pi) ∨ (Real.pi < a ∧ b < 2 * Real.pi)) →
       ∃ C_J : ℝ, 0 < C_J ∧ ∀ (K : ℕ), 1 ≤ K → ∀ (ε : ℝ), 0 < ε →
@@ -282,30 +283,24 @@ theorem exists_chargedControlledPhase_length_constant (hGeom : PolynomialImageVo
       _ ≤ C_J * Real.exp (C * (K : ℝ) ^ 2) := le_mul_of_one_le_right hCJ.le hexp
       _ ≤ _ := le_mul_of_one_le_right (by positivity) hsqrt
 
-/-- Exactly the current three external inputs, with projection supplied by its proof. -/
-theorem exists_chargedControlledPhase_length_constant_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+/-- The charged controlled-phase length bound. -/
+theorem exists_chargedControlledPhase_length_constant :
     ∃ C : ℝ, 1 ≤ C ∧ ∀ (a b : ℝ), a ≤ b →
       ((0 < a ∧ b < Real.pi) ∨ (Real.pi < a ∧ b < 2 * Real.pi)) →
       ∃ C_J : ℝ, 0 < C_J ∧ ∀ (K : ℕ), 1 ≤ K → ∀ (ε : ℝ), 0 < ε →
         volume (chargedControlledPhaseAngles K ε (Set.Icc a b)) ≤
           ENNReal.ofReal (C_J * Real.exp (C * (K : ℝ) ^ 2) * Real.sqrt ε) :=
-  exists_chargedControlledPhase_length_constant
-    (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_chargedControlledPhase_length_constant_of_imageVolumeBound
+    (DirectVolume.polynomialImageVolumeBound)
 
-/-- The scalar per-shape volume bound with the same three external inputs. -/
-theorem exists_scalarPurityWitness_volume_constant_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+/-- The scalar per-shape volume bound. -/
+theorem exists_scalarPurityWitness_volume_constant :
     ∃ C : ℝ, 1 ≤ C ∧ ∀ (K : ℕ) (s : ReverseShape 2 K) (δ : ℝ), 0 ≤ δ →
       volume ((ReverseBlocks.thickenedScalarPurityPolynomial s (8 * δ)).eval ''
         (ReverseBlocks.scalarPurityWitnessFormat s δ).source) ≤
       ENNReal.ofReal (C ^ (witnessCoordinateBudget 2 K + 2)) * euclideanUnitBallVolume 1 *
         ENNReal.ofReal (δ * (2 * (witnessCoordinateBudget 2 K : ℝ) + 8)) :=
-  exists_scalarPurityWitness_volume_constant
-    (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_scalarPurityWitness_volume_constant_of_imageVolumeBound
+    (DirectVolume.polynomialImageVolumeBound)
 
 end NLQCLean

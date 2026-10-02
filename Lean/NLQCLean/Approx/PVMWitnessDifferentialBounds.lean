@@ -54,10 +54,11 @@ theorem IsValid.norm_fderiv_overlap_rescaled_le {x : PVMReverseBlocks s} (hx : I
   simpa only [mul_assoc] using h
 
 theorem IsValid.norm_fderiv_overlap_rescaled_le_budget {x : PVMReverseBlocks s} (hx : IsValid x)
-    (hd : 2 ≤ d) (hfloor : d ^ 2 ≤ 4 * K) (v : PVMReverseBlocks s) :
-    ‖fderiv ℝ overlap x (rescaleBlocks v)‖ ≤ (pvmWitnessCoordinateBudget d K : ℝ) * euclideanNorm v :=
+    (hd : 2 ≤ d) (hfloor : d ^ 2 ≤ 4 * K) {P : ℕ} (hP : PVMReverseShape.AdmissibleBudget s P)
+    (v : PVMReverseBlocks s) :
+    ‖fderiv ℝ overlap x (rescaleBlocks v)‖ ≤ (P : ℝ) * euclideanNorm v :=
   (hx.norm_fderiv_overlap_rescaled_le hd hfloor v).trans
-    (mul_le_mul_of_nonneg_right (pvm_witness_speedConstant_le_budget hd s.one_le_budget) (euclideanNorm_nonneg v))
+    (mul_le_mul_of_nonneg_right hP.2 (euclideanNorm_nonneg v))
 
 /-- The residual is small for every ambient velocity when the witness has
 small scalar leakage. No tangent premise is needed for this norm estimate. -/
@@ -81,14 +82,13 @@ theorem IsValid.norm_rescaled_residual_le {x : PVMReverseBlocks s} (hx : IsValid
   exact h.trans_eq (by ring)
 
 theorem IsValid.norm_rescaled_residual_le_budget {x : PVMReverseBlocks s} (hx : IsValid x)
-    (hd : 2 ≤ d) (hfloor : d ^ 2 ≤ 4 * K) {δ : ℝ} (hδ : 0 ≤ δ)
+    (hd : 2 ≤ d) (hfloor : d ^ 2 ≤ 4 * K) {P : ℕ} (hP : PVMReverseShape.AdmissibleBudget s P) {δ : ℝ} (hδ : 0 ≤ δ)
     (hdef : (d : ℝ) ^ 2 - ‖overlap x‖ ^ 2 ≤ (d : ℝ) ^ 2 * δ ^ 2) (v : PVMReverseBlocks s) :
     ‖crossGramResidual (forward x) (reverse x)
       (forwardVelocity x (rescaleBlocks v)) (reverseVelocity x (rescaleBlocks v))‖ ≤
-        (δ * pvmWitnessCoordinateBudget d K) * euclideanNorm v :=
+        (δ * P) * euclideanNorm v :=
   (hx.norm_rescaled_residual_le hd hfloor hδ hdef v).trans (mul_le_mul_of_nonneg_right
-    (mul_le_mul_of_nonneg_left (pvm_witness_speedConstant_le_budget hd s.one_le_budget) hδ)
-      (euclideanNorm_nonneg v))
+    (mul_le_mul_of_nonneg_left hP.2 hδ) (euclideanNorm_nonneg v))
 
 end PVMReverseBlocks
 end NLQCLean

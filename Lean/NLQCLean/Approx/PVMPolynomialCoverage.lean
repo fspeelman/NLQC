@@ -35,8 +35,8 @@ theorem PureProtocol.exists_pvm_polynomial_witness
     (hε : 0 ≤ ε ∧ ε ≤ 1 / 2)
     (hscore : 1 - ε ≤ scorePVM M P.operationalChannel) :
     ∃ hfloor : d ^ 2 ≤ 4 * K, ∃ s : PVMReverseShape d K,
-      ∃ y ∈ (PVMReverseBlocks.witnessFormat s hd hfloor (2 * Real.sqrt ε)).source,
-        ‖(PVMReverseBlocks.coordinateRawOverlapPolynomial s hd hfloor).eval y -
+      ∃ y ∈ (PVMReverseBlocks.witnessFormat s hd hfloor (PVMReverseShape.admissibleBudget_full s hd hfloor) (2 * Real.sqrt ε)).source,
+        ‖(PVMReverseBlocks.coordinateRawOverlapPolynomial s hd hfloor (PVMReverseShape.admissibleBudget_full s hd hfloor)).eval y -
             overlapOutputCoordinates d Mᴴ‖ ≤ 2 * (d : ℝ) * Real.sqrt ε := by
   let : NeZero d := ⟨by omega⟩
   have hεone : 0 ≤ ε ∧ ε ≤ 1 := ⟨hε.1, hε.2.trans (by norm_num)⟩
@@ -54,7 +54,7 @@ theorem PureProtocol.exists_pvm_polynomial_witness
     simpa only [mul_pow, Real.sq_sqrt hε.1, show (2 : ℝ) ^ 2 = 4 by norm_num] using hdef
   obtain ⟨y, hy, hdist⟩ :=
     PVMReverseBlocks.exists_mem_witnessFormat_source_approximation
-      s hd hfloor (2 * Real.sqrt ε) hx hdef' Mᴴ hclose
+      s hd hfloor (PVMReverseShape.admissibleBudget_full s hd hfloor) (2 * Real.sqrt ε) hx hdef' Mᴴ hclose
   refine ⟨hfloor, s, y, hy, ?_⟩
   simpa only [mul_assoc, mul_comm, mul_left_comm] using hdist
 
@@ -76,8 +76,8 @@ theorem MixedResource.exists_pvm_polynomial_witness
     (hε : 0 ≤ ε ∧ ε ≤ 1 / 2)
     (hscore : 1 - ε ≤ scorePVM M (m.mixedChannel VA VB DA DB)) :
     ∃ hfloor : d ^ 2 ≤ 4 * K, ∃ s : PVMReverseShape d K,
-      ∃ y ∈ (PVMReverseBlocks.witnessFormat s hd hfloor (2 * Real.sqrt ε)).source,
-        ‖(PVMReverseBlocks.coordinateRawOverlapPolynomial s hd hfloor).eval y -
+      ∃ y ∈ (PVMReverseBlocks.witnessFormat s hd hfloor (PVMReverseShape.admissibleBudget_full s hd hfloor) (2 * Real.sqrt ε)).source,
+        ‖(PVMReverseBlocks.coordinateRawOverlapPolynomial s hd hfloor (PVMReverseShape.admissibleBudget_full s hd hfloor)).eval y -
             overlapOutputCoordinates d Mᴴ‖ ≤ 2 * (d : ℝ) * Real.sqrt ε := by
   obtain ⟨k, hk⟩ := m.exists_component_scorePVM_ge VA VB DA DB M
   let P : PureProtocol (Fin d) (Fin d) ρA ρB κA κB μA μB

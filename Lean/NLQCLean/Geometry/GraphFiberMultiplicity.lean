@@ -3,7 +3,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
 import NLQCLean.Geometry.MaximalCoordinateGraphs
-import NLQCLean.Geometry.LRTGraphSelections
+import NLQCLean.Geometry.CoordinateProjectionNorms
 import Mathlib.MeasureTheory.Integral.Lebesgue.Countable
 
 /-!

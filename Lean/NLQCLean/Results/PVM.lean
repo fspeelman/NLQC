@@ -1,8 +1,7 @@
 import NLQCLean.Approx.FiniteClassicalSpectralFloors
 import NLQCLean.Models.ClassicalCommunication.BorelMixedCompression
 import NLQCLean.Models.ClassicalCommunication.BorelRankCompression
-import NLQCLean.Bounds.ProvedProjection
-import NLQCLean.Bounds.AlmostEveryFourInputs
+import NLQCLean.Bounds.Quantitative
 import NLQCLean.Bounds.AlmostEveryExact
 import NLQCLean.Bounds.PVMQualitativeGap
 import NLQCLean.Approx.PVMRankFloor
@@ -19,14 +18,9 @@ import NLQCLean.Bounds.FiniteClassicalQubits
 # Main projective-measurement results
 
 Reader-facing entry point for unconditional impossibility, score and joint-TV
-quantitative bounds, and almost-every fixed-target conclusions. The almost-every
-exact impossibility `ae_no_finite_exact_implementation` has no hypotheses.
-
-Semialgebraic projection closure is proved (`semialgebraicProjectionTheorem`).
-The full-group and almost-every rate bounds therefore take exactly three
-explicit external inputs, `LRTTheorem44`,
-`SemialgebraicSmoothStratificationTheorem` and
-`SemialgebraicComponentBoundTheorem`, through `NLQCLean.ProvedProjection`.
+quantitative bounds, and almost-every fixed-target conclusions. All results
+here are unconditional; the quantitative bounds rest on the polynomial
+image-volume bound `DirectVolume.polynomialImageVolumeBound`.
 -/
 
 namespace NLQCLean.Results.PVM
@@ -77,8 +71,8 @@ alias borel_classical_score_reachable_transfer :=
 alias borel_classical_tv_reachable_transfer :=
   NLQCLean.ClassicalCommunication.StandardBorelClassicalProtocol.mem_purePVMReachable_of_quantumFootprint_pvmTVError
 
-alias exists_ae_arbitrary_finite_classical_log_bound_of_external :=
-  NLQCLean.ClassicalCommunication.exists_ae_arbitrary_finite_classical_log_constant_of_external
+alias exists_ae_arbitrary_finite_classical_log_bound :=
+  NLQCLean.ClassicalCommunication.exists_ae_arbitrary_finite_classical_log_constant
 
 alias exists_no_finite_exact_implementation :=
   NLQCLean.exists_pvm_no_finite_exact_implementation
@@ -120,20 +114,20 @@ alias finite_mixed_classical_score_reachable_transfer :=
 alias finite_mixed_classical_tv_reachable_transfer :=
   NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.mem_purePVMReachable_of_mixedQuantumFootprint_pvmTVError
 
-alias exists_finite_classical_haar_bound_of_external :=
-  NLQCLean.ClassicalCommunication.exists_finite_classical_pvm_haar_constant_of_external
+alias exists_finite_classical_haar_bound :=
+  NLQCLean.ClassicalCommunication.exists_finite_classical_pvm_haar_constant
 
-alias exists_finite_classical_universal_log_bound_of_external :=
-  NLQCLean.ClassicalCommunication.exists_finite_classical_pvm_universal_log_constant_of_external
+alias exists_finite_classical_universal_log_bound :=
+  NLQCLean.ClassicalCommunication.exists_finite_classical_pvm_universal_log_constant
 
-alias exists_ae_finite_classical_log_bound_of_external :=
-  NLQCLean.ClassicalCommunication.exists_ae_finite_classical_log_constant_of_external
+alias exists_ae_finite_classical_log_bound :=
+  NLQCLean.ClassicalCommunication.exists_ae_finite_classical_log_constant
 
-alias exists_finite_classical_universal_qubit_bound_of_external :=
-  NLQCLean.ClassicalCommunication.exists_finite_classical_pvm_universal_qubit_constant_of_external
+alias exists_finite_classical_universal_qubit_bound :=
+  NLQCLean.ClassicalCommunication.exists_finite_classical_pvm_universal_qubit_constant
 
-alias exists_ae_finite_classical_qubit_bound_of_external :=
-  NLQCLean.ClassicalCommunication.exists_ae_finite_classical_qubit_constant_of_external
+alias exists_ae_finite_classical_qubit_bound :=
+  NLQCLean.ClassicalCommunication.exists_ae_finite_classical_qubit_constant
 
 alias generalized_bell_basis := NLQCLean.generalizedBellUnitary
 
@@ -174,36 +168,36 @@ alias exists_general_target_gap := NLQCLean.exists_general_target_pvm_gap_of_no_
 alias ae_general_target_gap := NLQCLean.ae_general_target_pvm_gap
 
 alias exists_full_group_score_haar_bound :=
-  NLQCLean.ProvedProjection.exists_pvm_haar_fraction_constant_of_external
+  NLQCLean.exists_pvm_haar_fraction_constant
 
 alias exists_full_group_tv_haar_bound :=
-  NLQCLean.ProvedProjection.exists_pvm_tv_haar_constant_of_external
+  NLQCLean.exists_pvm_tv_haar_constant
 
 alias exists_universal_resource_bound :=
-  NLQCLean.ProvedProjection.exists_pvm_universal_resource_constant_of_external
+  NLQCLean.exists_pvm_universal_resource_constant
 
 alias exists_universal_qubit_bound :=
-  NLQCLean.ProvedProjection.exists_pvm_universal_qubit_constant_of_external
+  NLQCLean.exists_pvm_universal_qubit_constant
 
 alias exists_ae_forbidden_error_threshold :=
-  NLQCLean.ProvedProjection.exists_ae_pvm_forbidden_error_constant_of_external
+  NLQCLean.exists_ae_pvm_forbidden_error_constant
 
 alias exists_ae_resource_bound :=
-  NLQCLean.ProvedProjection.exists_ae_pvm_resource_constant_of_external
+  NLQCLean.exists_ae_pvm_resource_constant
 
 alias exists_ae_tv_resource_bound :=
-  NLQCLean.ProvedProjection.exists_ae_pvm_tv_resource_constant_of_external
+  NLQCLean.exists_ae_pvm_tv_resource_constant
 
 alias exists_ae_physical_resource_bound :=
-  NLQCLean.ProvedProjection.exists_ae_pvm_physical_resource_constant_of_external
+  NLQCLean.exists_ae_pvm_physical_resource_constant
 
 alias exists_ae_qubit_bound :=
-  NLQCLean.ProvedProjection.exists_ae_pvm_qubit_constant_of_external
+  NLQCLean.exists_ae_pvm_qubit_constant
 
 alias exists_ae_tv_qubit_bound :=
-  NLQCLean.ProvedProjection.exists_ae_pvm_tv_qubit_constant_of_external
+  NLQCLean.exists_ae_pvm_tv_qubit_constant
 
 alias ae_no_finite_exact_implementation :=
-  NLQCLean.ae_pvm_no_finite_exact_implementation_unconditional
+  NLQCLean.ae_pvm_no_finite_exact_implementation
 
 end NLQCLean.Results.PVM

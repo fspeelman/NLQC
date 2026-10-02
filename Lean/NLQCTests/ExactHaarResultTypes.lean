@@ -7,16 +7,11 @@ import NLQCLean.Results.PVM
 /-!
 # Frozen types of the unconditional almost-every exact results
 
-The two theorems below copy the complete physical conclusions of the frozen
-almost-every exact impossibility statements in `NLQCTests.QuantitativeResultTypes`
-and drop only the four external premises. They are proved by the public result
-aliases alone, so those aliases are callable with no geometry parameter at all.
+The two theorems below state the complete physical conclusions of the
+almost-every exact impossibility results. They are proved by the public result
+aliases alone.
 The full alias types and their axiom lists are frozen with `#guard_msgs`; only
 `propext`, `Classical.choice` and `Quot.sound` may occur.
-
-The former four-input statements remain frozen in
-`NLQCTests.QuantitativeResultTypes`, proved by the retained compatibility
-wrappers.
 -/
 
 set_option format.width 120

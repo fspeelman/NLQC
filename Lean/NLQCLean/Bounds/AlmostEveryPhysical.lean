@@ -30,7 +30,7 @@ open Matrix MeasureTheory
 
 /-- Resource rates and Unitary diamond resource rate/TV together: one constant and, for almost every fixed target,
 one threshold serving all eight reachable sets. -/
-theorem exists_ae_resource_constant (hGeom : PolynomialImageVolumeBound) :
+theorem exists_ae_resource_constant_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ c : ℝ, 0 < c ∧ ∀ d : ℕ, 2 ≤ d → ∀ᵐ (T : unitaryGroup (Fin d × Fin d) ℂ)
       ∂unitaryHaar (Fin d × Fin d),
       ∃ e₀ : ℝ, 0 < e₀ ∧ e₀ ≤ 1 / 2 ∧ ∀ (K : ℕ) (e : ℝ), 0 < e → e ≤ e₀ →
@@ -46,7 +46,7 @@ theorem exists_ae_resource_constant (hGeom : PolynomialImageVolumeBound) :
           c * (d : ℝ) * Real.sqrt (Real.log (1 / e)) ≤ K) ∧
         (T ∈ mixedPVMTVReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} d K e →
           c * (d : ℝ) * Real.sqrt (Real.log (1 / e)) ≤ K) := by
-  obtain ⟨A, hA, hae⟩ := exists_ae_forbidden_error_constant hGeom
+  obtain ⟨A, hA, hae⟩ := exists_ae_forbidden_error_constant_of_imageVolumeBound hGeom
   have hA0 : 0 < A := by linarith
   refine ⟨1 / Real.sqrt A, by positivity, fun d hd => ?_⟩
   have hd0 : 0 < d := by omega
@@ -76,19 +76,19 @@ theorem exists_ae_resource_constant (hGeom : PolynomialImageVolumeBound) :
     fun h => hmP (mixedPVMTVReachable_subset_mixedPVMReachable K e h)⟩
 
 /-- Unitary score resource rate: almost every fixed unitary, pure and finite mixed score reachability. -/
-theorem exists_ae_unitary_resource_constant (hGeom : PolynomialImageVolumeBound) :
+theorem exists_ae_unitary_resource_constant_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ c : ℝ, 0 < c ∧ ∀ d : ℕ, 2 ≤ d → ∀ᵐ (T : unitaryGroup (Fin d × Fin d) ℂ)
       ∂unitaryHaar (Fin d × Fin d),
       ∃ e₀ : ℝ, 0 < e₀ ∧ e₀ ≤ 1 / 2 ∧ ∀ (K : ℕ) (e : ℝ), 0 < e → e ≤ e₀ →
         (T ∈ pureReachable d K e → c * (d : ℝ) * Real.sqrt (Real.log (1 / e)) ≤ K) ∧
         (T ∈ mixedReachable d K e → c * (d : ℝ) * Real.sqrt (Real.log (1 / e)) ≤ K) := by
-  obtain ⟨c, hc, h⟩ := exists_ae_resource_constant.{0, 0, 0, 0, 0, 0, 0, 0} hGeom
+  obtain ⟨c, hc, h⟩ := exists_ae_resource_constant_of_imageVolumeBound.{0, 0, 0, 0, 0, 0, 0, 0} hGeom
   refine ⟨c, hc, fun d hd => (h d hd).mono fun T hT => ?_⟩
   obtain ⟨e₀, h0, h1, hT⟩ := hT
   exact ⟨e₀, h0, h1, fun K e he he' => ⟨(hT K e he he').1, (hT K e he he').2.1⟩⟩
 
 /-- Unitary diamond resource rate: the same target and threshold for normalized diamond error. -/
-theorem exists_ae_diamond_resource_constant (hGeom : PolynomialImageVolumeBound) :
+theorem exists_ae_diamond_resource_constant_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ c : ℝ, 0 < c ∧ ∀ d : ℕ, 2 ≤ d → ∀ᵐ (T : unitaryGroup (Fin d × Fin d) ℂ)
       ∂unitaryHaar (Fin d × Fin d),
       ∃ e₀ : ℝ, 0 < e₀ ∧ e₀ ≤ 1 / 2 ∧ ∀ (K : ℕ) (e : ℝ), 0 < e → e ≤ e₀ →
@@ -96,25 +96,25 @@ theorem exists_ae_diamond_resource_constant (hGeom : PolynomialImageVolumeBound)
           c * (d : ℝ) * Real.sqrt (Real.log (1 / e)) ≤ K) ∧
         (T ∈ mixedDiamondReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} d K e →
           c * (d : ℝ) * Real.sqrt (Real.log (1 / e)) ≤ K) := by
-  obtain ⟨c, hc, h⟩ := exists_ae_resource_constant.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} hGeom
+  obtain ⟨c, hc, h⟩ := exists_ae_resource_constant_of_imageVolumeBound.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} hGeom
   refine ⟨c, hc, fun d hd => (h d hd).mono fun T hT => ?_⟩
   obtain ⟨e₀, h0, h1, hT⟩ := hT
   exact ⟨e₀, h0, h1, fun K e he he' => ⟨(hT K e he he').2.2.2.2.1, (hT K e he he').2.2.2.2.2.1⟩⟩
 
 /-- PVM score resource rate: almost every fixed basis lift, pure and finite mixed PVM score reachability. -/
-theorem exists_ae_pvm_resource_constant (hGeom : PolynomialImageVolumeBound) :
+theorem exists_ae_pvm_resource_constant_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ c : ℝ, 0 < c ∧ ∀ d : ℕ, 2 ≤ d → ∀ᵐ (M : unitaryGroup (Fin d × Fin d) ℂ)
       ∂unitaryHaar (Fin d × Fin d),
       ∃ e₀ : ℝ, 0 < e₀ ∧ e₀ ≤ 1 / 2 ∧ ∀ (K : ℕ) (e : ℝ), 0 < e → e ≤ e₀ →
         (M ∈ purePVMReachable d K e → c * (d : ℝ) * Real.sqrt (Real.log (1 / e)) ≤ K) ∧
         (M ∈ mixedPVMReachable d K e → c * (d : ℝ) * Real.sqrt (Real.log (1 / e)) ≤ K) := by
-  obtain ⟨c, hc, h⟩ := exists_ae_resource_constant.{0, 0, 0, 0, 0, 0, 0, 0} hGeom
+  obtain ⟨c, hc, h⟩ := exists_ae_resource_constant_of_imageVolumeBound.{0, 0, 0, 0, 0, 0, 0, 0} hGeom
   refine ⟨c, hc, fun d hd => (h d hd).mono fun T hT => ?_⟩
   obtain ⟨e₀, h0, h1, hT⟩ := hT
   exact ⟨e₀, h0, h1, fun K e he he' => ⟨(hT K e he he').2.2.1, (hT K e he he').2.2.2.1⟩⟩
 
 /-- PVM joint-TV resource rate: the same basis lift and threshold for worst-case joint TV. -/
-theorem exists_ae_pvm_tv_resource_constant (hGeom : PolynomialImageVolumeBound) :
+theorem exists_ae_pvm_tv_resource_constant_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ c : ℝ, 0 < c ∧ ∀ d : ℕ, 2 ≤ d → ∀ᵐ (M : unitaryGroup (Fin d × Fin d) ℂ)
       ∂unitaryHaar (Fin d × Fin d),
       ∃ e₀ : ℝ, 0 < e₀ ∧ e₀ ≤ 1 / 2 ∧ ∀ (K : ℕ) (e : ℝ), 0 < e → e ≤ e₀ →
@@ -122,7 +122,7 @@ theorem exists_ae_pvm_tv_resource_constant (hGeom : PolynomialImageVolumeBound) 
           c * (d : ℝ) * Real.sqrt (Real.log (1 / e)) ≤ K) ∧
         (M ∈ mixedPVMTVReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} d K e →
           c * (d : ℝ) * Real.sqrt (Real.log (1 / e)) ≤ K) := by
-  obtain ⟨c, hc, h⟩ := exists_ae_resource_constant.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} hGeom
+  obtain ⟨c, hc, h⟩ := exists_ae_resource_constant_of_imageVolumeBound.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} hGeom
   refine ⟨c, hc, fun d hd => (h d hd).mono fun T hT => ?_⟩
   obtain ⟨e₀, h0, h1, hT⟩ := hT
   exact ⟨e₀, h0, h1, fun K e he he' =>
@@ -131,7 +131,7 @@ theorem exists_ae_pvm_tv_resource_constant (hGeom : PolynomialImageVolumeBound) 
 /-- Physical resource rates, unitary: every arbitrary-register pure protocol, and every finite mixed
 resource with common local maps, of footprint at most `K` and score error or
 normalized diamond error at most `e ≤ e₀`, obeys the bound. -/
-theorem exists_ae_unitary_physical_resource_constant (hGeom : PolynomialImageVolumeBound) :
+theorem exists_ae_unitary_physical_resource_constant_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ c : ℝ, 0 < c ∧ ∀ d : ℕ, 2 ≤ d → ∀ᵐ (T : unitaryGroup (Fin d × Fin d) ℂ)
       ∂unitaryHaar (Fin d × Fin d),
       ∃ e₀ : ℝ, 0 < e₀ ∧ e₀ ≤ 1 / 2 ∧ ∀ (K : ℕ) (e : ℝ), 0 < e → e ≤ e₀ →
@@ -153,7 +153,7 @@ theorem exists_ae_unitary_physical_resource_constant (hGeom : PolynomialImageVol
             (1 - e ≤ scoreU (T : Matrix _ _ ℂ) (m.mixedChannel VA VB DA DB) ∨
               diamondError (m.mixedChannel VA VB DA DB) (adConj (T : Matrix _ _ ℂ)) ≤ e) →
             c * (d : ℝ) * Real.sqrt (Real.log (1 / e)) ≤ K) := by
-  obtain ⟨c, hc, h⟩ := exists_ae_unitary_resource_constant hGeom
+  obtain ⟨c, hc, h⟩ := exists_ae_unitary_resource_constant_of_imageVolumeBound hGeom
   refine ⟨c, hc, fun d hd => (h d hd).mono fun T hT => ?_⟩
   obtain ⟨e₀, h0, h1, hT⟩ := hT
   have : NeZero d := ⟨by omega⟩
@@ -170,7 +170,7 @@ theorem exists_ae_unitary_physical_resource_constant (hGeom : PolynomialImageVol
 /-- Physical resource rates, PVM: every arbitrary-register pure protocol, and every finite mixed resource
 with common local maps, of footprint at most `K` and PVM score error or worst-case
 joint-TV error at most `e ≤ e₀`, obeys the bound. -/
-theorem exists_ae_pvm_physical_resource_constant (hGeom : PolynomialImageVolumeBound) :
+theorem exists_ae_pvm_physical_resource_constant_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ c : ℝ, 0 < c ∧ ∀ d : ℕ, 2 ≤ d → ∀ᵐ (M : unitaryGroup (Fin d × Fin d) ℂ)
       ∂unitaryHaar (Fin d × Fin d),
       ∃ e₀ : ℝ, 0 < e₀ ∧ e₀ ≤ 1 / 2 ∧ ∀ (K : ℕ) (e : ℝ), 0 < e → e ≤ e₀ →
@@ -194,7 +194,7 @@ theorem exists_ae_pvm_physical_resource_constant (hGeom : PolynomialImageVolumeB
             (1 - e ≤ scorePVM (M : Matrix _ _ ℂ) (m.mixedChannel VA VB DA DB) ∨
               pvmTVError (M : Matrix _ _ ℂ) (m.mixedChannel VA VB DA DB) ≤ e) →
             c * (d : ℝ) * Real.sqrt (Real.log (1 / e)) ≤ K) := by
-  obtain ⟨c, hc, h⟩ := exists_ae_pvm_resource_constant hGeom
+  obtain ⟨c, hc, h⟩ := exists_ae_pvm_resource_constant_of_imageVolumeBound hGeom
   refine ⟨c, hc, fun d hd => ?_⟩
   have : NeZero d := ⟨by omega⟩
   refine (h d hd).mono fun M hM => ?_
@@ -211,11 +211,11 @@ theorem exists_ae_pvm_physical_resource_constant (hGeom : PolynomialImageVolumeB
       (hs.elim id fun ht => by linarith))
 
 /-- AF4 core: on the AF1 good set no finite budget reaches score error zero. -/
-theorem ae_not_mem_reachable_zero (hGeom : PolynomialImageVolumeBound) :
+theorem ae_not_mem_reachable_zero_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∀ d : ℕ, 2 ≤ d → ∀ᵐ (T : unitaryGroup (Fin d × Fin d) ℂ) ∂unitaryHaar (Fin d × Fin d), ∀ K : ℕ,
       T ∉ pureReachable d K 0 ∧ T ∉ mixedReachable d K 0 ∧
       T ∉ purePVMReachable d K 0 ∧ T ∉ mixedPVMReachable d K 0 := by
-  obtain ⟨A, _hA, hae⟩ := exists_ae_forbidden_error_constant hGeom
+  obtain ⟨A, _hA, hae⟩ := exists_ae_forbidden_error_constant_of_imageVolumeBound hGeom
   intro d hd
   filter_upwards [hae d hd] with T hT
   obtain ⟨K₀, -, hT⟩ := hT
@@ -329,7 +329,7 @@ theorem ae_pvm_no_finite_exact_implementation_of_ae_not_mem_reachable
 /-- Unitary exact impossibility: for almost every fixed unitary, no finite budget admits an exact pure or finite
 mixed implementation on any finite registers: the channel differs from `Ad_T`,
 equivalently its normalized diamond error is positive. -/
-theorem ae_unitary_no_finite_exact_implementation (hGeom : PolynomialImageVolumeBound) :
+theorem ae_unitary_no_finite_exact_implementation_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∀ d : ℕ, 2 ≤ d → ∀ᵐ (T : unitaryGroup (Fin d × Fin d) ℂ) ∂unitaryHaar (Fin d × Fin d), ∀ K : ℕ,
       T ∉ pureReachable d K 0 ∧ T ∉ mixedReachable d K 0 ∧
       ∀ (ρA ρB κA κB μA μB εA εB : Type*)
@@ -349,12 +349,12 @@ theorem ae_unitary_no_finite_exact_implementation (hGeom : PolynomialImageVolume
           m.mixedChannel VA VB DA DB ≠ adConj (T : Matrix _ _ ℂ) ∧
             0 < diamondError (m.mixedChannel VA VB DA DB) (adConj (T : Matrix _ _ ℂ))) :=
   ae_unitary_no_finite_exact_implementation_of_ae_not_mem_reachable fun d hd =>
-    (ae_not_mem_reachable_zero hGeom d hd).mono fun _ hT K => ⟨(hT K).1, (hT K).2.1⟩
+    (ae_not_mem_reachable_zero_of_imageVolumeBound hGeom d hd).mono fun _ hT K => ⟨(hT K).1, (hT K).2.1⟩
 
 /-- PVM exact impossibility: for almost every fixed basis lift, no finite budget admits a pure or finite mixed
 protocol on any finite registers performing the two-sided ordered PVM task exactly;
 equivalently its worst-case joint-TV error is positive. -/
-theorem ae_pvm_no_finite_exact_implementation (hGeom : PolynomialImageVolumeBound) :
+theorem ae_pvm_no_finite_exact_implementation_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∀ d : ℕ, 2 ≤ d → ∀ᵐ (M : unitaryGroup (Fin d × Fin d) ℂ) ∂unitaryHaar (Fin d × Fin d), ∀ K : ℕ,
       M ∉ purePVMReachable d K 0 ∧ M ∉ mixedPVMReachable d K 0 ∧
       ∀ (ρA ρB κA κB μA μB εA εB : Type*)
@@ -376,6 +376,6 @@ theorem ae_pvm_no_finite_exact_implementation (hGeom : PolynomialImageVolumeBoun
           ¬ m.PerformsPVM VA VB DA DB (M : Matrix _ _ ℂ) ∧
             0 < pvmTVError (M : Matrix _ _ ℂ) (m.mixedChannel VA VB DA DB)) :=
   ae_pvm_no_finite_exact_implementation_of_ae_not_mem_reachable fun d hd =>
-    (ae_not_mem_reachable_zero hGeom d hd).mono fun _ hM K => ⟨(hM K).2.2.1, (hM K).2.2.2⟩
+    (ae_not_mem_reachable_zero_of_imageVolumeBound hGeom d hd).mono fun _ hM K => ⟨(hM K).2.2.1, (hM K).2.2.2⟩
 
 end NLQCLean

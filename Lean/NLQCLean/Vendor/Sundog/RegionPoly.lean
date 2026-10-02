@@ -454,13 +454,13 @@ theorem convex_eq_sup_lines {f : ℝ → ℝ} {n : ℕ} (hf : ConvexOn ℝ Set.u
     have hlt : ∀ a, a < nextCut a := by
       intro a; simp only [hnc]
       by_cases h : (S.filter (a < ·)).Nonempty
-      · rw [dif_pos h]; exact (Finset.mem_filter.mp ((S.filter (a < ·)).min'_mem h)).2
-      · rw [dif_neg h]; linarith
+      · rw [dite_eq_left h]; exact (Finset.mem_filter.mp ((S.filter (a < ·)).min'_mem h)).2
+      · rw [dite_eq_right h]; linarith
     -- no cut lies strictly inside the piece `(a, nextCut a)`
     have hmissAt : ∀ a, ∀ s ∈ S, s ∉ Set.Ioo a (nextCut a) := by
       intro a s hs hsin; simp only [hnc] at hsin
       by_cases h : (S.filter (a < ·)).Nonempty
-      · rw [dif_pos h] at hsin
+      · rw [dite_eq_left h] at hsin
         have hle := Finset.min'_le (S.filter (a < ·)) s (Finset.mem_filter.mpr ⟨hs, hsin.1⟩)
         linarith [hsin.2, hle]
       · exact h ⟨s, Finset.mem_filter.mpr ⟨hs, hsin.1⟩⟩
@@ -482,7 +482,7 @@ theorem convex_eq_sup_lines {f : ℝ → ℝ} {n : ℕ} (hf : ConvexOn ℝ Set.u
       simp only [hnc]
       have hne2 : (S.filter (S.min' hSne - 1 < ·)).Nonempty :=
         ⟨S.min' hSne, Finset.mem_filter.mpr ⟨S.min'_mem hSne, by linarith⟩⟩
-      rw [dif_pos hne2]
+      rw [dite_eq_left hne2]
       apply le_antisymm
       · exact Finset.min'_le _ _ (Finset.mem_filter.mpr ⟨S.min'_mem hSne, by linarith⟩)
       · exact Finset.le_min' _ _ _ fun y hy => Finset.min'_le S y (Finset.mem_of_mem_filter y hy)
@@ -504,7 +504,7 @@ theorem convex_eq_sup_lines {f : ℝ → ℝ} {n : ℕ} (hf : ConvexOn ℝ Set.u
     -- on the unbounded RIGHT piece, `f` equals the secant `lineOf (max)`
     have hncM : nextCut (S.max' hSne) = S.max' hSne + 1 := by
       simp only [hnc]
-      rw [dif_neg]
+      rw [dite_eq_right]
       rintro ⟨s, hs⟩
       rw [Finset.mem_filter] at hs
       linarith [Finset.le_max' S s hs.1, hs.2]
@@ -554,11 +554,11 @@ theorem convex_eq_sup_lines {f : ℝ → ℝ} {n : ℕ} (hf : ConvexOn ℝ Set.u
           have hx_lt : x < nextCut a := by
             simp only [hnc]
             by_cases h : (S.filter (a < ·)).Nonempty
-            · rw [dif_pos h]
+            · rw [dite_eq_left h]
               have hmem := Finset.min'_mem (S.filter (a < ·)) h
               rw [Finset.mem_filter] at hmem
               exact hcut_gt _ hmem.1 hmem.2
-            · rw [dif_neg h]
+            · rw [dite_eq_right h]
               have hMa : S.max' hSne ≤ a := by
                 by_contra hc; rw [not_le] at hc
                 exact h ⟨S.max' hSne, Finset.mem_filter.mpr ⟨S.max'_mem hSne, hc⟩⟩

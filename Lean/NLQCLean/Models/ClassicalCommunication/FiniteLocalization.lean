@@ -217,14 +217,14 @@ theorem protocol_operationalChannel_diag
   by_cases hab : a = b
   · subst b
     simp [and_self, reportedProbability, eq_comm]
-  · rw [if_neg hab]
+  · rw [ite_eq_right hab]
     apply Finset.sum_eq_zero
     intro x _
     apply Finset.sum_eq_zero
     intro y _
     have h : ¬ (a = L.report x y ∧ b = L.report x y) :=
       fun h => hab (h.1.trans h.2.symm)
-    exact if_neg h
+    exact ite_eq_right h
 
 /-- The finite localization success probability on the ordered target basis. -/
 noncomputable def successScore
@@ -511,14 +511,14 @@ theorem protocol_twoSidedExactChannel_of_isMixedExact
     TwoSidedExactChannel ((L.protocol γ hγ).mixedOperationalChannel m) M := by
   constructor
   · intro X hX i
-    rw [L.protocol_mixedOperationalChannel_diag, if_pos rfl]
+    rw [L.protocol_mixedOperationalChannel_diag, ite_eq_left rfl]
     exact hex X hX i
   · intro X _
     apply Finset.sum_eq_zero
     intro p hp
     have hneq := (Finset.mem_filter.mp hp).2
     rcases p with ⟨a, b⟩
-    rw [L.protocol_mixedOperationalChannel_diag, if_neg hneq]
+    rw [L.protocol_mixedOperationalChannel_diag, ite_eq_right hneq]
 
 /-- Exact pure localization induces the original joint channel task. -/
 theorem protocol_twoSidedExactChannel_of_isExact
@@ -528,13 +528,13 @@ theorem protocol_twoSidedExactChannel_of_isExact
     TwoSidedExactChannel (L.protocol γ hγ).operationalChannel M := by
   constructor
   · intro X hX i
-    rw [L.protocol_operationalChannel_diag, if_pos rfl]
+    rw [L.protocol_operationalChannel_diag, ite_eq_left rfl]
     exact hex X hX i
   · intro X _
     apply Finset.sum_eq_zero
     intro p hp
     have hneq := (Finset.mem_filter.mp hp).2
     rcases p with ⟨a, b⟩
-    rw [L.protocol_operationalChannel_diag, if_neg hneq]
+    rw [L.protocol_operationalChannel_diag, ite_eq_right hneq]
 
 end NLQCLean.ClassicalCommunication.FiniteLocalizationScheme

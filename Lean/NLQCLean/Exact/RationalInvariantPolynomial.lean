@@ -74,7 +74,7 @@ on the actual finite-dimensional real matrix space with its Frobenius norm. -/
       (fun U : Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ => U v.1.1 v.1.2) :=
     ContDiff.matrixEntry contDiff_id v.1.1 v.1.2
   by_cases hv : v.2 = 0
-  · simpa only [rationalMatrixCoordinates, hv, if_true] using ContDiff.complexRe hentry
-  · simpa only [rationalMatrixCoordinates, hv, if_false] using ContDiff.complexIm hentry
+  · simpa only [rationalMatrixCoordinates, hv, ite_true] using ContDiff.complexRe hentry
+  · simpa only [rationalMatrixCoordinates, hv, ite_false] using ContDiff.complexIm hentry
 
 end NLQCLean

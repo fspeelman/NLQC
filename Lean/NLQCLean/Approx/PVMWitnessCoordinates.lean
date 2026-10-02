@@ -75,58 +75,58 @@ theorem card_realEntry (s : PVMReverseShape d K) :
   simpa only [Module.finrank_pi, Module.finrank_self, Finset.sum_const, Finset.card_univ,
     smul_eq_mul, mul_one] using h.symm
 
-theorem card_realEntry_le_budget (s : PVMReverseShape d K) (hd : 0 < d) (hfloor : d ^ 2 ≤ 4 * K) :
-    Fintype.card (RealEntry s) ≤ pvmWitnessCoordinateBudget d K := by
+theorem card_realEntry_le_budget (s : PVMReverseShape d K) (_hd : 0 < d) (_hfloor : d ^ 2 ≤ 4 * K) {P : ℕ} (hP : PVMReverseShape.AdmissibleBudget s P) :
+    Fintype.card (RealEntry s) ≤ P := by
   rw [card_realEntry]
-  exact finrank_real_le_budget s hd hfloor
+  exact hP.1
 
 /-- A fixed coordinate embedding depending only on the charged shape. -/
-noncomputable def coordinateEmbedding (s : PVMReverseShape d K) (hd : 0 < d) (hfloor : d ^ 2 ≤ 4 * K) :
-    RealEntry s ↪ Fin (pvmWitnessCoordinateBudget d K) :=
+noncomputable def coordinateEmbedding (s : PVMReverseShape d K) (hd : 0 < d) (hfloor : d ^ 2 ≤ 4 * K) {P : ℕ} (hP : PVMReverseShape.AdmissibleBudget s P) :
+    RealEntry s ↪ Fin P :=
   Classical.choice (Function.Embedding.nonempty_of_card_le
-    (by simpa only [Fintype.card_fin] using card_realEntry_le_budget s hd hfloor))
+    (by simpa only [Fintype.card_fin] using card_realEntry_le_budget s hd hfloor hP))
 
 /-- Decode the common source by restricting to the shape's entry coordinates. -/
-noncomputable def decodeCoordinates (s : PVMReverseShape d K) (hd : 0 < d) (hfloor : d ^ 2 ≤ 4 * K) :
-    RealEuclidean (pvmWitnessCoordinateBudget d K) →ₗ[ℝ] PVMReverseBlocks s :=
-  (euclideanCoordEquiv s).symm.toLinearMap.comp (euclideanRestrict (coordinateEmbedding s hd hfloor))
+noncomputable def decodeCoordinates (s : PVMReverseShape d K) (hd : 0 < d) (hfloor : d ^ 2 ≤ 4 * K) {P : ℕ} (hP : PVMReverseShape.AdmissibleBudget s P) :
+    RealEuclidean P →ₗ[ℝ] PVMReverseBlocks s :=
+  (euclideanCoordEquiv s).symm.toLinearMap.comp (euclideanRestrict (coordinateEmbedding s hd hfloor hP))
 
-theorem euclideanNorm_decodeCoordinates_le (s : PVMReverseShape d K) (hd : 0 < d) (hfloor : d ^ 2 ≤ 4 * K)
-    (x : RealEuclidean (pvmWitnessCoordinateBudget d K)) :
-    euclideanNorm (decodeCoordinates s hd hfloor x) ≤ ‖x‖ := by
+theorem euclideanNorm_decodeCoordinates_le (s : PVMReverseShape d K) (hd : 0 < d) (hfloor : d ^ 2 ≤ 4 * K) {P : ℕ} (hP : PVMReverseShape.AdmissibleBudget s P)
+    (x : RealEuclidean P) :
+    euclideanNorm (decodeCoordinates s hd hfloor hP x) ≤ ‖x‖ := by
   rw [← norm_euclideanCoordEquiv s]
   simpa only [decodeCoordinates, LinearMap.comp_apply, LinearEquiv.coe_coe,
-    LinearEquiv.apply_symm_apply] using norm_euclideanRestrict_le (coordinateEmbedding s hd hfloor) x
+    LinearEquiv.apply_symm_apply] using norm_euclideanRestrict_le (coordinateEmbedding s hd hfloor hP) x
 
 /-- Encode all entries and set every unused coordinate to zero. -/
-noncomputable def encodeCoordinates (s : PVMReverseShape d K) (hd : 0 < d) (hfloor : d ^ 2 ≤ 4 * K) :
-    PVMReverseBlocks s →ₗ[ℝ] RealEuclidean (pvmWitnessCoordinateBudget d K) :=
-  (euclideanExtend (coordinateEmbedding s hd hfloor)).comp (euclideanCoordEquiv s).toLinearMap
+noncomputable def encodeCoordinates (s : PVMReverseShape d K) (hd : 0 < d) (hfloor : d ^ 2 ≤ 4 * K) {P : ℕ} (hP : PVMReverseShape.AdmissibleBudget s P) :
+    PVMReverseBlocks s →ₗ[ℝ] RealEuclidean P :=
+  (euclideanExtend (coordinateEmbedding s hd hfloor hP)).comp (euclideanCoordEquiv s).toLinearMap
 
-theorem decode_encodeCoordinates (s : PVMReverseShape d K) (hd : 0 < d) (hfloor : d ^ 2 ≤ 4 * K) (x : PVMReverseBlocks s) :
-    decodeCoordinates s hd hfloor (encodeCoordinates s hd hfloor x) = x := by
+theorem decode_encodeCoordinates (s : PVMReverseShape d K) (hd : 0 < d) (hfloor : d ^ 2 ≤ 4 * K) {P : ℕ} (hP : PVMReverseShape.AdmissibleBudget s P) (x : PVMReverseBlocks s) :
+    decodeCoordinates s hd hfloor hP (encodeCoordinates s hd hfloor hP x) = x := by
   simp only [decodeCoordinates, encodeCoordinates, LinearMap.comp_apply,
     euclideanRestrict_extend, LinearEquiv.coe_coe, LinearEquiv.symm_apply_apply]
 
-theorem norm_encodeCoordinates (s : PVMReverseShape d K) (hd : 0 < d) (hfloor : d ^ 2 ≤ 4 * K) (x : PVMReverseBlocks s) :
-    ‖encodeCoordinates s hd hfloor x‖ = euclideanNorm x :=
-  (norm_euclideanExtend (coordinateEmbedding s hd hfloor) (euclideanCoordEquiv s x)).trans
+theorem norm_encodeCoordinates (s : PVMReverseShape d K) (hd : 0 < d) (hfloor : d ^ 2 ≤ 4 * K) {P : ℕ} (hP : PVMReverseShape.AdmissibleBudget s P) (x : PVMReverseBlocks s) :
+    ‖encodeCoordinates s hd hfloor hP x‖ = euclideanNorm x :=
+  (norm_euclideanExtend (coordinateEmbedding s hd hfloor hP) (euclideanCoordEquiv s x)).trans
     (norm_euclideanCoordEquiv s x)
 
-theorem encodeCoordinates_zero_padding (s : PVMReverseShape d K) (hd : 0 < d) (hfloor : d ^ 2 ≤ 4 * K) (x : PVMReverseBlocks s)
-    {j : Fin (pvmWitnessCoordinateBudget d K)} (hj : j ∉ Set.range (coordinateEmbedding s hd hfloor)) :
-    (encodeCoordinates s hd hfloor x) j = 0 :=
+theorem encodeCoordinates_zero_padding (s : PVMReverseShape d K) (hd : 0 < d) (hfloor : d ^ 2 ≤ 4 * K) {P : ℕ} (hP : PVMReverseShape.AdmissibleBudget s P) (x : PVMReverseBlocks s)
+    {j : Fin P} (hj : j ∉ Set.range (coordinateEmbedding s hd hfloor hP)) :
+    (encodeCoordinates s hd hfloor hP x) j = 0 :=
   euclideanExtend_apply_of_not_mem _ _ hj
 
 /-- Zero padding characterizes the image of the coordinate encoding. -/
-theorem encode_decodeCoordinates_of_padding (s : PVMReverseShape d K) (hd : 0 < d) (hfloor : d ^ 2 ≤ 4 * K)
-    (x : RealEuclidean (pvmWitnessCoordinateBudget d K))
-    (hx : ∀ j ∉ Set.range (coordinateEmbedding s hd hfloor), x j = 0) :
-    encodeCoordinates s hd hfloor (decodeCoordinates s hd hfloor x) = x := by
+theorem encode_decodeCoordinates_of_padding (s : PVMReverseShape d K) (hd : 0 < d) (hfloor : d ^ 2 ≤ 4 * K) {P : ℕ} (hP : PVMReverseShape.AdmissibleBudget s P)
+    (x : RealEuclidean P)
+    (hx : ∀ j ∉ Set.range (coordinateEmbedding s hd hfloor hP), x j = 0) :
+    encodeCoordinates s hd hfloor hP (decodeCoordinates s hd hfloor hP x) = x := by
   simp only [encodeCoordinates, decodeCoordinates, LinearMap.comp_apply,
     LinearEquiv.coe_coe, LinearEquiv.apply_symm_apply]
   ext j
-  by_cases hj : j ∈ Set.range (coordinateEmbedding s hd hfloor)
+  by_cases hj : j ∈ Set.range (coordinateEmbedding s hd hfloor hP)
   · obtain ⟨i, rfl⟩ := hj
     rw [euclideanExtend_apply]
     rfl
@@ -134,32 +134,32 @@ theorem encode_decodeCoordinates_of_padding (s : PVMReverseShape d K) (hd : 0 < 
 
 /-- The raw overlap in common Euclidean input and output coordinates. -/
 noncomputable def coordinateRawOverlap (s : PVMReverseShape d K) (hd : 0 < d)
-    (hfloor : d ^ 2 ≤ 4 * K) (x : RealEuclidean (pvmWitnessCoordinateBudget d K)) :
+    (hfloor : d ^ 2 ≤ 4 * K) {P : ℕ} (hP : PVMReverseShape.AdmissibleBudget s P) (x : RealEuclidean P) :
     RealEuclidean (2 * d ^ 4) :=
-  overlapOutputCoordinates d (overlap (rescaleBlocks (decodeCoordinates s hd hfloor x)))
+  overlapOutputCoordinates d (overlap (rescaleBlocks (decodeCoordinates s hd hfloor hP x)))
 
-theorem norm_padded_valid_eq_sqrt_six (s : PVMReverseShape d K) (hd : 0 < d) (hfloor : d ^ 2 ≤ 4 * K)
-    {x : RealEuclidean (pvmWitnessCoordinateBudget d K)}
-    (hx : IsValid (rescaleBlocks (decodeCoordinates s hd hfloor x)))
-    (hpad : ∀ j ∉ Set.range (coordinateEmbedding s hd hfloor), x j = 0) : ‖x‖ = Real.sqrt 6 := by
-  rw [← encode_decodeCoordinates_of_padding s hd hfloor x hpad, norm_encodeCoordinates]
+theorem norm_padded_valid_eq_sqrt_six (s : PVMReverseShape d K) (hd : 0 < d) (hfloor : d ^ 2 ≤ 4 * K) {P : ℕ} (hP : PVMReverseShape.AdmissibleBudget s P)
+    {x : RealEuclidean P}
+    (hx : IsValid (rescaleBlocks (decodeCoordinates s hd hfloor hP x)))
+    (hpad : ∀ j ∉ Set.range (coordinateEmbedding s hd hfloor hP), x j = 0) : ‖x‖ = Real.sqrt 6 := by
+  rw [← encode_decodeCoordinates_of_padding s hd hfloor hP x hpad, norm_encodeCoordinates]
   exact euclideanNorm_eq_sqrt_six hx hd
 
 /-- Every original valid witness has a padded normalized representative of
 the exact required radius, with its raw overlap unchanged. -/
-theorem exists_normalized_coordinate_witness (s : PVMReverseShape d K) (hd : 0 < d) (hfloor : d ^ 2 ≤ 4 * K)
+theorem exists_normalized_coordinate_witness (s : PVMReverseShape d K) (hd : 0 < d) (hfloor : d ^ 2 ≤ 4 * K) {P : ℕ} (hP : PVMReverseShape.AdmissibleBudget s P)
     {x : PVMReverseBlocks s} (hx : IsValid x) :
-    ∃ y : RealEuclidean (pvmWitnessCoordinateBudget d K),
-      rescaleBlocks (decodeCoordinates s hd hfloor y) = x ∧
-      (∀ j ∉ Set.range (coordinateEmbedding s hd hfloor), y j = 0) ∧
-      ‖y‖ = Real.sqrt 6 ∧ coordinateRawOverlap s hd hfloor y = overlapOutputCoordinates d (overlap x) := by
-  let y := encodeCoordinates s hd hfloor (normalizeBlocks x)
-  have hy : rescaleBlocks (decodeCoordinates s hd hfloor y) = x := by
+    ∃ y : RealEuclidean P,
+      rescaleBlocks (decodeCoordinates s hd hfloor hP y) = x ∧
+      (∀ j ∉ Set.range (coordinateEmbedding s hd hfloor hP), y j = 0) ∧
+      ‖y‖ = Real.sqrt 6 ∧ coordinateRawOverlap s hd hfloor hP y = overlapOutputCoordinates d (overlap x) := by
+  let y := encodeCoordinates s hd hfloor hP (normalizeBlocks x)
+  have hy : rescaleBlocks (decodeCoordinates s hd hfloor hP y) = x := by
     dsimp only [y]
     rw [decode_encodeCoordinates, rescale_normalizeBlocks hd]
-  have hpad : ∀ j ∉ Set.range (coordinateEmbedding s hd hfloor), y j = 0 :=
-    fun _ hj => encodeCoordinates_zero_padding s hd hfloor _ hj
-  refine ⟨y, hy, hpad, norm_padded_valid_eq_sqrt_six s hd hfloor (hy.symm ▸ hx) hpad, ?_⟩
+  have hpad : ∀ j ∉ Set.range (coordinateEmbedding s hd hfloor hP), y j = 0 :=
+    fun _ hj => encodeCoordinates_zero_padding s hd hfloor hP _ hj
+  refine ⟨y, hy, hpad, norm_padded_valid_eq_sqrt_six s hd hfloor hP (hy.symm ▸ hx) hpad, ?_⟩
   rw [coordinateRawOverlap, hy]
 
 end PVMReverseBlocks

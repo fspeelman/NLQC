@@ -75,27 +75,27 @@ theorem extendedResidual_apply {x : PVMReverseBlocks s}
   exact sub_eq_iff_eq_add.mpr (hdec.trans (add_comm _ _))
 
 theorem norm_extendedResidual_le_budget {x : PVMReverseBlocks s}
-    (hx : IsValid (rescaleBlocks x)) (hd : 2 ≤ d) (hfloor : d ^ 2 ≤ 4 * K)
+    (hx : IsValid (rescaleBlocks x)) (hd : 2 ≤ d) (hfloor : d ^ 2 ≤ 4 * K) {P : ℕ} (hP : PVMReverseShape.AdmissibleBudget s P)
     {δ : ℝ} (hδ : 0 ≤ δ)
     (hdef : (d : ℝ) ^ 2 - ‖overlap (rescaleBlocks x)‖ ^ 2 ≤ (d : ℝ) ^ 2 * δ ^ 2)
     (v : PVMReverseBlocks s) :
-    ‖extendedResidual x v‖ ≤ (δ * pvmWitnessCoordinateBudget d K) * euclideanNorm v := by
+    ‖extendedResidual x v‖ ≤ (δ * P) * euclideanNorm v := by
   rw [extendedResidual_apply hx (by omega)]
-  exact norm_projected_residual_le_budget hx hd hfloor hδ hdef v
+  exact norm_projected_residual_le_budget hx hd hfloor hP hδ hdef v
 
 /-- An actual ambient rank-plus-error decomposition, without assumed rank bounds. -/
 theorem exists_extendedOverlap_rank_error_decomposition {x : PVMReverseBlocks s}
-    (hx : IsValid (rescaleBlocks x)) (hd : 2 ≤ d) (hfloor : d ^ 2 ≤ 4 * K)
+    (hx : IsValid (rescaleBlocks x)) (hd : 2 ≤ d) (hfloor : d ^ 2 ≤ 4 * K) {P : ℕ} (hP : PVMReverseShape.AdmissibleBudget s P)
     {δ : ℝ} (hδ : 0 ≤ δ)
     (hdef : (d : ℝ) ^ 2 - ‖overlap (rescaleBlocks x)‖ ^ 2 ≤ (d : ℝ) ^ 2 * δ ^ 2) :
     ∃ T R : PVMReverseBlocks s →ₗ[ℝ] Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ,
       (fderiv ℝ extendedOverlap x).toLinearMap = T + R ∧
       Module.finrank ℝ (LinearMap.range T) ≤ 3 * d ^ 2 - 2 ∧
-      (∀ v, ‖fderiv ℝ extendedOverlap x v‖ ≤ (pvmWitnessCoordinateBudget d K : ℝ) * euclideanNorm v) ∧
-      (∀ v, ‖R v‖ ≤ (δ * pvmWitnessCoordinateBudget d K) * euclideanNorm v) :=
+      (∀ v, ‖fderiv ℝ extendedOverlap x v‖ ≤ (P : ℝ) * euclideanNorm v) ∧
+      (∀ v, ‖R v‖ ≤ (δ * P) * euclideanNorm v) :=
   ⟨extendedLocalTerm x, extendedResidual x, fderiv_extendedOverlap_decomposition x,
-    finrank_extendedLocalTerm_le hx (by omega), norm_fderiv_extendedOverlap_le_budget hx hd hfloor,
-    norm_extendedResidual_le_budget hx hd hfloor hδ hdef⟩
+    finrank_extendedLocalTerm_le hx (by omega), norm_fderiv_extendedOverlap_le_budget hx hd hfloor hP,
+    norm_extendedResidual_le_budget hx hd hfloor hP hδ hdef⟩
 
 end PVMReverseBlocks
 end NLQCLean

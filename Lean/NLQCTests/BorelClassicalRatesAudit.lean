@@ -2,7 +2,7 @@ import NLQCLean.Bounds.BorelClassicalRates
 
 /-! Full types and standard-axiom guards for actual original-channel Borel rates.
 The intrinsic data and target definitions are printed alongside their witnesses.
-External quantitative wrappers expose exactly the three geometry premises. -/
+-/
 
 set_option pp.universes false
 set_option pp.deepTerms true
@@ -135,6 +135,13 @@ set_option pp.universes true in
 #print axioms NLQCLean.ClassicalCommunication.mem_borelSharedRandomPVMScoreReachable_of_mixedSharedRandom_pvmTVError
 
 set_option pp.universes true in
+#check @NLQCLean.ClassicalCommunication.exists_borel_classical_unitary_haar_constant_of_imageVolumeBound
+
+/-- info: 'NLQCLean.ClassicalCommunication.exists_borel_classical_unitary_haar_constant_of_imageVolumeBound' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms NLQCLean.ClassicalCommunication.exists_borel_classical_unitary_haar_constant_of_imageVolumeBound
+
+set_option pp.universes true in
 #check @NLQCLean.ClassicalCommunication.exists_borel_classical_unitary_haar_constant
 
 /-- info: 'NLQCLean.ClassicalCommunication.exists_borel_classical_unitary_haar_constant' depends on axioms: [propext, Classical.choice, Quot.sound] -/
@@ -142,11 +149,11 @@ set_option pp.universes true in
 #print axioms NLQCLean.ClassicalCommunication.exists_borel_classical_unitary_haar_constant
 
 set_option pp.universes true in
-#check @NLQCLean.ClassicalCommunication.exists_borel_classical_unitary_haar_constant_of_external
+#check @NLQCLean.ClassicalCommunication.exists_borel_classical_pvm_haar_constant_of_imageVolumeBound
 
-/-- info: 'NLQCLean.ClassicalCommunication.exists_borel_classical_unitary_haar_constant_of_external' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+/-- info: 'NLQCLean.ClassicalCommunication.exists_borel_classical_pvm_haar_constant_of_imageVolumeBound' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
-#print axioms NLQCLean.ClassicalCommunication.exists_borel_classical_unitary_haar_constant_of_external
+#print axioms NLQCLean.ClassicalCommunication.exists_borel_classical_pvm_haar_constant_of_imageVolumeBound
 
 set_option pp.universes true in
 #check @NLQCLean.ClassicalCommunication.exists_borel_classical_pvm_haar_constant
@@ -156,11 +163,11 @@ set_option pp.universes true in
 #print axioms NLQCLean.ClassicalCommunication.exists_borel_classical_pvm_haar_constant
 
 set_option pp.universes true in
-#check @NLQCLean.ClassicalCommunication.exists_borel_classical_pvm_haar_constant_of_external
+#check @NLQCLean.ClassicalCommunication.exists_borel_classical_unitary_universal_log_constant_of_imageVolumeBound
 
-/-- info: 'NLQCLean.ClassicalCommunication.exists_borel_classical_pvm_haar_constant_of_external' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+/-- info: 'NLQCLean.ClassicalCommunication.exists_borel_classical_unitary_universal_log_constant_of_imageVolumeBound' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
-#print axioms NLQCLean.ClassicalCommunication.exists_borel_classical_pvm_haar_constant_of_external
+#print axioms NLQCLean.ClassicalCommunication.exists_borel_classical_unitary_universal_log_constant_of_imageVolumeBound
 
 set_option pp.universes true in
 #check @NLQCLean.ClassicalCommunication.exists_borel_classical_unitary_universal_log_constant
@@ -170,11 +177,11 @@ set_option pp.universes true in
 #print axioms NLQCLean.ClassicalCommunication.exists_borel_classical_unitary_universal_log_constant
 
 set_option pp.universes true in
-#check @NLQCLean.ClassicalCommunication.exists_borel_classical_unitary_universal_log_constant_of_external
+#check @NLQCLean.ClassicalCommunication.exists_borel_classical_pvm_universal_log_constant_of_imageVolumeBound
 
-/-- info: 'NLQCLean.ClassicalCommunication.exists_borel_classical_unitary_universal_log_constant_of_external' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+/-- info: 'NLQCLean.ClassicalCommunication.exists_borel_classical_pvm_universal_log_constant_of_imageVolumeBound' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
-#print axioms NLQCLean.ClassicalCommunication.exists_borel_classical_unitary_universal_log_constant_of_external
+#print axioms NLQCLean.ClassicalCommunication.exists_borel_classical_pvm_universal_log_constant_of_imageVolumeBound
 
 set_option pp.universes true in
 #check @NLQCLean.ClassicalCommunication.exists_borel_classical_pvm_universal_log_constant
@@ -184,11 +191,11 @@ set_option pp.universes true in
 #print axioms NLQCLean.ClassicalCommunication.exists_borel_classical_pvm_universal_log_constant
 
 set_option pp.universes true in
-#check @NLQCLean.ClassicalCommunication.exists_borel_classical_pvm_universal_log_constant_of_external
+#check @NLQCLean.ClassicalCommunication.exists_borel_classical_strong_unitary_universal_log_constant_of_imageVolumeBound
 
-/-- info: 'NLQCLean.ClassicalCommunication.exists_borel_classical_pvm_universal_log_constant_of_external' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+/-- info: 'NLQCLean.ClassicalCommunication.exists_borel_classical_strong_unitary_universal_log_constant_of_imageVolumeBound' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
-#print axioms NLQCLean.ClassicalCommunication.exists_borel_classical_pvm_universal_log_constant_of_external
+#print axioms NLQCLean.ClassicalCommunication.exists_borel_classical_strong_unitary_universal_log_constant_of_imageVolumeBound
 
 set_option pp.universes true in
 #check @NLQCLean.ClassicalCommunication.exists_borel_classical_strong_unitary_universal_log_constant
@@ -198,11 +205,11 @@ set_option pp.universes true in
 #print axioms NLQCLean.ClassicalCommunication.exists_borel_classical_strong_unitary_universal_log_constant
 
 set_option pp.universes true in
-#check @NLQCLean.ClassicalCommunication.exists_borel_classical_strong_unitary_universal_log_constant_of_external
+#check @NLQCLean.ClassicalCommunication.exists_ae_borel_classical_log_constant_of_imageVolumeBound
 
-/-- info: 'NLQCLean.ClassicalCommunication.exists_borel_classical_strong_unitary_universal_log_constant_of_external' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+/-- info: 'NLQCLean.ClassicalCommunication.exists_ae_borel_classical_log_constant_of_imageVolumeBound' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
-#print axioms NLQCLean.ClassicalCommunication.exists_borel_classical_strong_unitary_universal_log_constant_of_external
+#print axioms NLQCLean.ClassicalCommunication.exists_ae_borel_classical_log_constant_of_imageVolumeBound
 
 set_option pp.universes true in
 #check @NLQCLean.ClassicalCommunication.exists_ae_borel_classical_log_constant
@@ -210,10 +217,3 @@ set_option pp.universes true in
 /-- info: 'NLQCLean.ClassicalCommunication.exists_ae_borel_classical_log_constant' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
 #print axioms NLQCLean.ClassicalCommunication.exists_ae_borel_classical_log_constant
-
-set_option pp.universes true in
-#check @NLQCLean.ClassicalCommunication.exists_ae_borel_classical_log_constant_of_external
-
-/-- info: 'NLQCLean.ClassicalCommunication.exists_ae_borel_classical_log_constant_of_external' depends on axioms: [propext, Classical.choice, Quot.sound] -/
-#guard_msgs (whitespace := lax) in
-#print axioms NLQCLean.ClassicalCommunication.exists_ae_borel_classical_log_constant_of_external

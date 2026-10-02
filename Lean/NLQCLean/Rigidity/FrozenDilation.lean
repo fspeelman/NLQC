@@ -211,7 +211,7 @@ theorem exists_frozen_unitary [Nonempty ι]
   have hoff : ∀ a k : κ, a ≠ k → ∀ e, G (a, e) k = 0 := by
     intro a k hak e
     have h := key a a k k
-    rw [if_neg (fun h' : k = a => hak h'.symm)] at h
+    rw [ite_eq_right (fun h' : k = a => hak h'.symm)] at h
     refine eq_zero_of_sum_mul_star_eq_zero (z := fun e => G (a, e) k) ?_ e
     simpa using h
   -- The diagonal columns are pairwise unit and pairwise "aligned".

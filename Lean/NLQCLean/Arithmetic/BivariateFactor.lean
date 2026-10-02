@@ -193,7 +193,7 @@ noncomputable def bivariateOfMv : MvPolynomial (Fin 2) ℤ →+* IntBivariatePol
 
 theorem bivariateOfMv_coeff (Q : MvPolynomial (Fin 2) ℤ) (j i : ℕ) :
     ((bivariateOfMv Q).coeff j).coeff i =
-      MvPolynomial.coeff (Finsupp.cons j (Finsupp.single (0 : Fin 1) i)) Q := by
+      Q.coeff (Finsupp.cons j (Finsupp.single (0 : Fin 1) i)) := by
   change ((((MvPolynomial.finSuccEquiv ℤ 1) Q).map
     (MvPolynomial.uniqueAlgEquiv ℤ (Fin 1)).toRingHom).coeff j).coeff i = _
   rw [Polynomial.coeff_map]
@@ -232,7 +232,7 @@ theorem bivariateOfMv_degreeLE {Q : MvPolynomial (Fin 2) ℤ} {L : ℕ}
     omega
 
 theorem bivariateOfMv_heightLE {Q : MvPolynomial (Fin 2) ℤ} {H : ℝ}
-    (hheight : ∀ m, |((MvPolynomial.coeff m Q : ℤ) : ℝ)| ≤ H) :
+    (hheight : ∀ m, |((Q.coeff m : ℤ) : ℝ)| ≤ H) :
     BivariateHeightLE (bivariateOfMv Q) H := by
   intro j i
   rw [bivariateOfMv_coeff]

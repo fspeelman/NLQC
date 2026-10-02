@@ -86,14 +86,14 @@ theorem encodedCore_apply (η : ρA × ρB → ℂ) (VA : Matrix (κA × μA) (�
   · refine Finset.sum_congr rfl fun pa _ => ?_
     rw [Fintype.sum_prod_type, Finset.sum_eq_single j]
     · refine Finset.sum_congr rfl fun pb _ => ?_
-      rw [Matrix.kronecker_apply, insertResource_apply_ite, if_pos ⟨rfl, rfl⟩]
+      rw [Matrix.kronecker_apply, insertResource_apply_ite, ite_eq_left ⟨rfl, rfl⟩]
     · intro b _ hb
       refine Finset.sum_eq_zero fun pb _ => ?_
-      rw [insertResource_apply_ite, if_neg (fun h => hb h.2), mul_zero]
+      rw [insertResource_apply_ite, ite_eq_right (fun h => hb h.2), mul_zero]
     · simp
   · intro b _ hb
     refine Finset.sum_eq_zero fun pa _ => Finset.sum_eq_zero fun s _ => ?_
-    rw [insertResource_apply_ite, if_neg (fun h => hb h.1), mul_zero]
+    rw [insertResource_apply_ite, ite_eq_right (fun h => hb h.1), mul_zero]
   · simp
 
 omit [Fintype ιA'] [Fintype ιB'] [Fintype εA] [Fintype εB] [DecidableEq ιA'] [DecidableEq ιB'] [DecidableEq εA] [DecidableEq εB] in
@@ -110,9 +110,9 @@ theorem globalIsometry_apply_expanded (η : ρA × ρB → ℂ)
   rintro ⟨p1, p2⟩ -
   rw [Matrix.kronecker_apply, Matrix.mul_apply,
     Finset.sum_eq_single (exchangeEquiv κA μA κB μB (p1, p2))]
-  · rw [exchangeMatrix_apply, if_pos rfl, one_mul, exchangeEquiv_apply, encodedCore_apply]
+  · rw [exchangeMatrix_apply, ite_eq_left rfl, one_mul, exchangeEquiv_apply, encodedCore_apply]
   · intro q _ hq
-    rw [exchangeMatrix_apply, if_neg (fun h => hq h.symm), zero_mul]
+    rw [exchangeMatrix_apply, ite_eq_right (fun h => hq h.symm), zero_mul]
   · simp
 
 end Formula
@@ -141,11 +141,11 @@ theorem frozenSwap_apply (g : E × F → ℂ) (p : (Fin d × E) × (Fin d × F))
     (q : Fin d × Fin d) :
     frozenSwap d g p q = if p.2.1 = q.1 ∧ p.1.1 = q.2 then g (p.1.2, p.2.2) else 0 := by
   rw [frozenSwap, Matrix.mul_apply, Finset.sum_eq_single (p.1.1, p.2.1)]
-  · rw [insertResource_apply_ite, if_pos ⟨rfl, rfl⟩]
+  · rw [insertResource_apply_ite, ite_eq_left ⟨rfl, rfl⟩]
     simp [swapUnitary, Matrix.one_apply, Prod.ext_iff, mul_ite]
   · intro c _ hc
     have h : ¬ (p.1.1 = c.1 ∧ p.2.1 = c.2) := fun h => hc (Prod.ext h.1.symm h.2.symm)
-    rw [insertResource_apply_ite, if_neg h, zero_mul]
+    rw [insertResource_apply_ite, ite_eq_right h, zero_mul]
   · simp
 
 omit [DecidableEq E] [DecidableEq F] in
@@ -177,7 +177,7 @@ theorem sum_normSq_crossedAliceVector_frozenSwap {g : E × F → ℂ} (hg : IsUn
     intro rb
     rw [Fintype.sum_prod_type, Fintype.sum_prod_type, Finset.sum_eq_single rb]
     · show ∑ ea, ∑ y, Complex.normSq (if rb = rb then g (ea, y) else 0) = 1
-      simp only [if_true]
+      simp only [ite_true]
       rw [← hg', Fintype.sum_prod_type]
     · intro b _ hb
       simp [hb]
@@ -199,7 +199,7 @@ theorem crossedAlice_inner_frozenSwap (G : Matrix ((Fin d × E) × (Fin d × F))
     rw [Fintype.sum_prod_type, Finset.sum_comm, Finset.mul_sum]
     refine Finset.sum_congr rfl fun w _ => ?_
     rw [Finset.sum_eq_single w.1.1]
-    · rw [crossedAliceVector_frozenSwap, if_pos rfl]
+    · rw [crossedAliceVector_frozenSwap, ite_eq_left rfl]
       dsimp only [crossedAliceVector]
       rw [Finset.mul_sum, Finset.mul_sum]
       refine Finset.sum_congr rfl fun r _ => ?_
@@ -215,7 +215,7 @@ theorem crossedAlice_inner_frozenSwap (G : Matrix ((Fin d × E) × (Fin d × F))
     · simp [frozenSwap_apply]
     · intro i _ hi
       have h : ¬ (k.2.1 = i.1 ∧ k.1.1 = i.2) := fun h => hi (Prod.ext h.1.symm h.2.symm)
-      rw [frozenSwap_apply, if_neg h, star_zero, zero_mul]
+      rw [frozenSwap_apply, ite_eq_right h, star_zero, zero_mul]
     · simp
   have hR : frobInner (frozenSwap d g) G = ∑ w : (Fin d × E) × F, ∑ r,
       star (g (w.1.2, w.2)) * G (w.1, (r, w.2)) (r, w.1.1) := by

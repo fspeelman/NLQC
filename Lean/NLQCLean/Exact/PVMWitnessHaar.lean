@@ -37,8 +37,8 @@ theorem unitaryHaar_purePVMReachable_zero {d : ℕ} (hd : 2 ≤ d) (K : ℕ) :
   by_cases hfloor : d ^ 2 ≤ 4 * K
   · exact unitaryHaar_eq_zero_of_rankDeficient_cover (ι := PVMReverseShape d K)
       (fun _ => pvmOutputDecoding d)
-      (fun s => (PVMReverseBlocks.coordinateOverlapPolynomial s hd0 hfloor).eval)
-      (fun s => (PVMReverseBlocks.witnessFormat s hd0 hfloor 0).source)
+      (fun s => (PVMReverseBlocks.coordinateOverlapPolynomial s hd0 hfloor (PVMReverseShape.admissibleBudget_full s hd0 hfloor)).eval)
+      (fun s => (PVMReverseBlocks.witnessFormat s hd0 hfloor (PVMReverseShape.admissibleBudget_full s hd0 hfloor) 0).source)
       (fun s => PVMReverseBlocks.contDiff_coordinateOverlapPolynomial_eval s hd0 hfloor)
       (fun s _ hy =>
         PVMReverseBlocks.finrank_range_fderiv_coordinateOverlapPolynomial_le s hd0 hfloor hd hy)

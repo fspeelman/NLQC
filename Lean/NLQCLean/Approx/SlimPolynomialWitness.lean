@@ -11,7 +11,7 @@ all of degree at most twelve, define a compact source of radius `√6` in `ℝ^(
 normalized cubic overlap `h = H/d` is a polynomial map of degree at most eighteen.
 Thickening adds one ball constraint (radius `√7 < 3`). Every target `U ∈ S_d` that is pure or
 finite-mixed score reachable at `0 ≤ e ≤ 1/16` lies in the compact witness target set of some
-slim shape at normalized distance `√(18 e)`; only inclusion is asserted.
+slim shape at normalized distance `√(21 e / 2)`; only inclusion is asserted.
 -/
 
 namespace NLQCLean
@@ -134,19 +134,19 @@ theorem paddingDefect_eq_zero_iff (x : RealEuclidean (slimCoordinateBudget K)) :
   simp only [Finset.mem_univ, true_implies]
   constructor
   · intro h j hj
-    simpa only [if_neg hj, sq_eq_zero_iff] using h j
+    simpa only [ite_eq_right hj, sq_eq_zero_iff] using h j
   · intro h j
     by_cases hj : j ∈ Set.range (coordinateEmbedding s hd)
-    · simp only [if_pos hj]
-    · simp only [if_neg hj, h j hj, zero_pow (by decide : 2 ≠ 0)]
+    · simp only [ite_eq_left hj]
+    · simp only [ite_eq_right hj, h j hj, zero_pow (by decide : 2 ≠ 0)]
 
 theorem polynomialDegree_paddingDefect : RealPolynomialDegreeLE 2 (paddingDefect s hd) := by
   classical
   apply RealPolynomialDegreeLE.sum Finset.univ
   intro j _
   by_cases hj : j ∈ Set.range (coordinateEmbedding s hd)
-  · simpa only [if_pos hj] using (RealPolynomialDegreeLE.const 0).mono (by decide : 0 ≤ 2)
-  · simpa only [if_neg hj] using (RealPolynomialDegreeLE.coord j).sq
+  · simpa only [ite_eq_left hj] using (RealPolynomialDegreeLE.const 0).mono (by decide : 0 ≤ 2)
+  · simpa only [ite_eq_right hj] using (RealPolynomialDegreeLE.coord j).sq
 
 /-- Two sphere, four Gram, and one padding equation. -/
 noncomputable def witnessEquations (i : Fin 7) (x : RealEuclidean (slimCoordinateBudget K)) : ℝ :=
@@ -344,11 +344,11 @@ end SlimReverseBlocks
 
 set_option maxHeartbeats 800000 in
 /-- Polynomial witness coverage: near SWAP, pure score reachability at `0 ≤ e ≤ 1/16` is covered by the finite
-family of compact slim witness targets at normalized distance `√(18 e)`. -/
+family of compact slim witness targets at normalized distance `√(21 e / 2)`. -/
 theorem swapNeighborhood_inter_pureReachable_subset_slimWitnessTargets {d K : ℕ} (hd : 2 ≤ d)
     {e : ℝ} (he0 : 0 ≤ e) (he : e ≤ 1 / 16) :
     swapNeighborhood d ∩ pureReachable d K e ⊆ ⋃ s : SlimReverseShape d K,
-      SlimReverseBlocks.witnessTargets s hd (Real.sqrt (18 * e)) (Real.sqrt (18 * e)) := by
+      SlimReverseBlocks.witnessTargets s hd (Real.sqrt (21 / 2 * e)) (Real.sqrt (21 / 2 * e)) := by
   rintro U ⟨hUS, t, P, hP, hscore⟩
   have hd0 : 0 < d := by omega
   have hdR : (0 : ℝ) < d := by exact_mod_cast hd0
@@ -356,7 +356,7 @@ theorem swapNeighborhood_inter_pureReachable_subset_slimWitnessTargets {d K : �
   obtain ⟨hHU, -, -, hdef⟩ := hx.approximation (U : Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ)
     (by positivity) hdist
   have hdef' : (d : ℝ) ^ 2 - ‖SlimReverseBlocks.overlap x‖ ^ 2 ≤
-      (d : ℝ) ^ 2 * Real.sqrt (18 * e) ^ 2 := by
+      (d : ℝ) ^ 2 * Real.sqrt (21 / 2 * e) ^ 2 := by
     simpa only [mul_pow] using hdef
   obtain ⟨y, hy, hyeval⟩ := SlimReverseBlocks.exists_mem_witnessFormat_source s hd _ hx hdef'
   refine Set.mem_iUnion.mpr ⟨s, y, hy, ?_⟩
@@ -367,7 +367,7 @@ theorem swapNeighborhood_inter_pureReachable_subset_slimWitnessTargets {d K : �
 theorem swapNeighborhood_inter_mixedReachable_subset_slimWitnessTargets {d K : ℕ} (hd : 2 ≤ d)
     {e : ℝ} (he0 : 0 ≤ e) (he : e ≤ 1 / 16) :
     swapNeighborhood d ∩ mixedReachable d K e ⊆ ⋃ s : SlimReverseShape d K,
-      SlimReverseBlocks.witnessTargets s hd (Real.sqrt (18 * e)) (Real.sqrt (18 * e)) := by
+      SlimReverseBlocks.witnessTargets s hd (Real.sqrt (21 / 2 * e)) (Real.sqrt (21 / 2 * e)) := by
   rw [mixedReachable_eq_pureReachable]
   exact swapNeighborhood_inter_pureReachable_subset_slimWitnessTargets hd he0 he
 

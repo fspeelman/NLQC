@@ -68,19 +68,19 @@ theorem paddingDefect_eq_zero_iff (x : RealEuclidean (witnessCoordinateBudget d 
   simp only [Finset.mem_univ, true_implies]
   constructor
   · intro h j hj
-    simpa only [if_neg hj, sq_eq_zero_iff] using h j
+    simpa only [ite_eq_right hj, sq_eq_zero_iff] using h j
   · intro h j
     by_cases hj : j ∈ Set.range (coordinateEmbedding s hd)
-    · simp only [if_pos hj]
-    · simp only [if_neg hj, h j hj, zero_pow (by decide : 2 ≠ 0)]
+    · simp only [ite_eq_left hj]
+    · simp only [ite_eq_right hj, h j hj, zero_pow (by decide : 2 ≠ 0)]
 
 theorem polynomialDegree_paddingDefect : RealPolynomialDegreeLE 2 (paddingDefect s hd) := by
   classical
   apply RealPolynomialDegreeLE.sum Finset.univ
   intro j _
   by_cases hj : j ∈ Set.range (coordinateEmbedding s hd)
-  · simpa only [if_pos hj] using (RealPolynomialDegreeLE.const 0).mono (by decide : 0 ≤ 2)
-  · simpa only [if_neg hj] using (RealPolynomialDegreeLE.coord j).sq
+  · simpa only [ite_eq_left hj] using (RealPolynomialDegreeLE.const 0).mono (by decide : 0 ≤ 2)
+  · simpa only [ite_eq_right hj] using (RealPolynomialDegreeLE.coord j).sq
 
 /-- Two sphere, four Gram, and one padding equation. -/
 noncomputable def witnessEquations (i : Fin 7) (x : RealEuclidean (witnessCoordinateBudget d K)) : ℝ :=

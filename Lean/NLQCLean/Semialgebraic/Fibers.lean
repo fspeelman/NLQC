@@ -73,7 +73,7 @@ theorem positiveDimensionalFiberBase_eq_iUnion {n m : ℕ}
   · intro hy
     refine ⟨⟨coordinateInteriorDimension (semialgebraicMapFiber A f y),
       Nat.lt_succ_of_le (coordinateInteriorDimension_le _)⟩, ?_⟩
-    simp only [if_pos hy, nonemptyFiberDimensionLocus, mem_ofPred_eq, and_true]
+    simp only [ite_eq_left hy, nonemptyFiberDimensionLocus, mem_ofPred_eq, and_true]
     by_contra hempty
     have hzero := Set.not_nonempty_iff_eq_empty.mp hempty
     simp [hzero] at hy
@@ -93,58 +93,6 @@ theorem semialgebraic_positiveDimensionalFiberBase
   split_ifs
   · exact (hFiber n m A hA f hcont hmap r.val).1
   · exact Semialgebraic.empty
-
-theorem volume_nonemptyFiberDimensionLocus_eq_zero
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hFiber : SemialgebraicDimensionFiberTheorem)
-    {n m : ℕ} {A : Set (RealEuclidean n)} (hA : Semialgebraic A)
-    {f : RealEuclidean n → RealEuclidean m} (hcont : ContinuousOn f A)
-    (hmap : SemialgebraicMapOn A f) (hd : coordinateInteriorDimension A ≤ m)
-    {r : ℕ} (hr : 0 < r) : volume (nonemptyFiberDimensionLocus A f r) = 0 := by
-  obtain ⟨hsem, hbound⟩ := hFiber n m A hA f hcont hmap r
-  by_cases hne : (nonemptyFiberDimensionLocus A f r).Nonempty
-  · apply hsem.volume_eq_zero_of_dimension_lt hStratification
-    have := hbound hne
-    omega
-  · simp [Set.not_nonempty_iff_eq_empty.mp hne]
-
-theorem volume_positiveDimensionalFiberBase_eq_zero
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hFiber : SemialgebraicDimensionFiberTheorem)
-    {n m : ℕ} {A : Set (RealEuclidean n)} (hA : Semialgebraic A)
-    {f : RealEuclidean n → RealEuclidean m} (hcont : ContinuousOn f A)
-    (hmap : SemialgebraicMapOn A f) (hd : coordinateInteriorDimension A ≤ m) :
-    volume (positiveDimensionalFiberBase A f) = 0 := by
-  rw [positiveDimensionalFiberBase_eq_iUnion]
-  apply measure_iUnion_null
-  intro r
-  split_ifs with hr
-  · exact volume_nonemptyFiberDimensionLocus_eq_zero hStratification hFiber hA hcont hmap hd hr
-  · exact measure_empty
-
-theorem ae_finite_semialgebraicMapFiber
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hFiber : SemialgebraicDimensionFiberTheorem)
-    {n m : ℕ} {A : Set (RealEuclidean n)} (hA : Semialgebraic A)
-    {f : RealEuclidean n → RealEuclidean m} (hcont : ContinuousOn f A)
-    (hmap : SemialgebraicMapOn A f) (hd : coordinateInteriorDimension A ≤ m) :
-    ∀ᵐ y, (semialgebraicMapFiber A f y).Finite := by
-  have hae : ∀ᵐ y, y ∉ positiveDimensionalFiberBase A f := by
-    simpa only [ae_iff, not_not, ofPred_mem_eq] using
-      volume_positiveDimensionalFiberBase_eq_zero hStratification hFiber hA hcont hmap hd
-  filter_upwards [hae] with y hy
-  apply (hmap.fiber y).finite_of_dimension_zero hStratification
-  change ¬ 0 < coordinateInteriorDimension (semialgebraicMapFiber A f y) at hy
-  omega
-
-theorem ae_finite_coordinateFiber
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hFiber : SemialgebraicDimensionFiberTheorem)
-    {n m : ℕ} {A : Set (RealEuclidean n)} (hA : Semialgebraic A)
-    (I : Fin m → Fin n) (hd : coordinateInteriorDimension A ≤ m) :
-    ∀ᵐ y, (semialgebraicMapFiber A (coordinateProjection I) y).Finite :=
-  ae_finite_semialgebraicMapFiber hStratification hFiber hA
-    (continuous_coordinateProjection I).continuousOn (hA.coordinate_graph I) hd
 
 end NLQCLean
 end

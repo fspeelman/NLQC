@@ -4,7 +4,7 @@ import Mathlib.Algebra.Order.BigOperators.Group.Finset
 import Mathlib.Algebra.BigOperators.Ring.Finset
 import Mathlib.Data.Fintype.Prod
 import Mathlib.Data.Fin.Tuple.Sort
-import Mathlib.Data.Real.Basic
+import Mathlib.Basic.Real.Basic
 import Mathlib.Tactic.Linarith
 
 /-!
@@ -112,10 +112,10 @@ theorem sum_mul_le_topWeightMass_of_antitone {n : ℕ} (K : ℕ) (w p : Fin n �
         w i * p i ≤ (if i.val < K then w i - t else 0) + t * p i := by
       by_cases hi : i.val < K
       · have hwi : t ≤ w i := hw_mono (show i ≤ ⟨K, hK⟩ from hi.le)
-        simp only [if_pos hi]
+        simp only [ite_eq_left hi]
         nlinarith [mul_nonneg (sub_nonneg.mpr hwi) (sub_nonneg.mpr (hp_one i))]
       · have hwi : w i ≤ t := hw_mono (show (⟨K, hK⟩ : Fin n) ≤ i from Nat.le_of_not_gt hi)
-        simp only [if_neg hi, zero_add]
+        simp only [ite_eq_right hi, zero_add]
         exact mul_le_mul_of_nonneg_right hwi (hp i)
     have hdelta : (∑ i : Fin n, if i.val < K then w i - t else 0) =
         (∑ i ∈ s, w i) - K * t := by

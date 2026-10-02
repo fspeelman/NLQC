@@ -2,7 +2,8 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Geometry.LRTGraphSelections
+import NLQCLean.Geometry.PolynomialGraphFormat
+import NLQCLean.Geometry.CoordinateProjectionNorms
 import Mathlib.Topology.MetricSpace.Thickening
 import Mathlib.Analysis.Normed.Operator.BoundedLinearMaps
 
@@ -10,8 +11,8 @@ import Mathlib.Analysis.Normed.Operator.BoundedLinearMaps
 # Ambient Jacobian bounds near the original source
 
 Continuity of the top Jacobian and compactness give a
-B+eta bound in a neighborhood of X. The source selections eventually
-lie there. There is no additional off-X Jacobian assumption or division by B.
+B+eta bound in a neighborhood of X. There is no additional off-X Jacobian
+assumption or division by B.
 -/
 
 section
@@ -48,19 +49,6 @@ theorem IsCompact.exists_closedNeighborhood_function_le {a : ℕ}
   have hm : x ∈ cthickening r S := mem_cthickening_of_dist_le x s r S hs
     (by simpa only [dist_eq_norm] using hxs)
   exact (hnb hm).le
-
-theorem PolynomialGraphSelections.eventually_topRealJacobian_le {a m κ : ℕ}
-    {F : PolynomialBasicClosedFormat a} {p : BoundedPolynomialMap a m}
-    (P : PolynomialGraphSelections F p κ) (hF : IsCompact F.source)
-    {B : ℝ} (hB : ∀ x ∈ F.source, topRealJacobian (fderiv ℝ p.eval x) ≤ B)
-    {η : ℝ} (hη : 0 < η) :
-    ∀ᶠ j in atTop, ∀ x ∈ P.source j, topRealJacobian (fderiv ℝ p.eval x) ≤ B + η := by
-  obtain ⟨r, hr, hnb⟩ := NLQCLean.IsCompact.exists_closedNeighborhood_function_le hF
-    (NLQCLean.ContDiff.continuous_topRealJacobian_fderiv p.contDiff_eval) hB hη
-  filter_upwards [tendsto_lrtTolerance.eventually (gt_mem_nhds hr)] with j hj
-  intro x hx
-  obtain ⟨s, hs, hxs⟩ := P.source_proximity j hx
-  exact hnb x ⟨s, hs, hxs.trans hj.le⟩
 
 end NLQCLean
 end

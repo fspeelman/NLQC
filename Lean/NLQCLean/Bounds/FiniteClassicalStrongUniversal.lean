@@ -1,3 +1,4 @@
+import NLQCLean.Geometry.DirectVolume.Assembly
 import NLQCLean.Bounds.FiniteClassicalHaar
 
 /-!
@@ -39,7 +40,7 @@ theorem log_le_fourth_tenth_power_of_finite_strong_charged_lower_bound
 /-- One constant precedes all dimensions, quantum budgets and errors.
 Universality allows a different finite-shape protocol for each target.
 The stronger rate applies to unitary score universality only. -/
-theorem exists_finite_classical_strong_unitary_universal_log_constant
+theorem exists_finite_classical_strong_unitary_universal_log_constant_of_imageVolumeBound
     (hGeom : PolynomialImageVolumeBound) :
     ∃ C : ℝ, 0 < C ∧ ∀ (d K : ℕ), 2 ≤ d → 1 ≤ K →
       ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 →
@@ -47,7 +48,7 @@ theorem exists_finite_classical_strong_unitary_universal_log_constant
           Real.log (1 / ε) ≤ C * (d : ℝ) ^ 4 * (K : ℝ) ^ 10) ∧
         ((∀ U, U ∈ finiteMixedScoreReachable d K ε) →
           Real.log (1 / ε) ≤ C * (d : ℝ) ^ 4 * (K : ℝ) ^ 10) := by
-  obtain ⟨c, hc, hbound⟩ := exists_strongUniversalResourceBound hGeom
+  obtain ⟨c, hc, hbound⟩ := exists_strongUniversalResourceBound_of_imageVolumeBound hGeom
   refine ⟨16 / c ^ 2, by positivity, ?_⟩
   intro d K hd _hK ε hε hεhalf
   have hd0 : 0 < d := by omega
@@ -64,20 +65,16 @@ theorem exists_finite_classical_strong_unitary_universal_log_constant
     fun hu => htransfer (fun U =>
       finiteMixedScoreReachable_subset_pureReachable hd0 ε (hu U))⟩
 
-/-- The improved finite-shape unitary universal bound retains exactly the
-three unchanged external geometry arguments. Compression is proved, and the
+/-- The improved finite-shape unitary universal bound. Compression is proved, and the
 restricted near-SWAP argument remains inside the charged universal theorem. -/
-theorem exists_finite_classical_strong_unitary_universal_log_constant_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+theorem exists_finite_classical_strong_unitary_universal_log_constant :
     ∃ C : ℝ, 0 < C ∧ ∀ (d K : ℕ), 2 ≤ d → 1 ≤ K →
       ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 →
         ((∀ U, U ∈ finitePureScoreReachable d K ε) →
           Real.log (1 / ε) ≤ C * (d : ℝ) ^ 4 * (K : ℝ) ^ 10) ∧
         ((∀ U, U ∈ finiteMixedScoreReachable d K ε) →
           Real.log (1 / ε) ≤ C * (d : ℝ) ^ 4 * (K : ℝ) ^ 10) :=
-  exists_finite_classical_strong_unitary_universal_log_constant
-    (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_finite_classical_strong_unitary_universal_log_constant_of_imageVolumeBound
+    (DirectVolume.polynomialImageVolumeBound)
 
 end NLQCLean.ClassicalCommunication

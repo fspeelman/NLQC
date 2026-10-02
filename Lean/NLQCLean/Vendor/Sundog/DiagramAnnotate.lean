@@ -191,7 +191,7 @@ theorem gapValid_incr (g : Fin n → ℝ) (P : Polynomial (MvPolynomial (Fin n) 
   by_cases hsa : SignType.sign ((spec g P).eval a) = SignType.neg
   · by_cases hsb : SignType.sign ((spec g P).eval x) = SignType.pos
     · unfold gapPlanMono
-      rw [if_pos hsa, if_pos hsb]
+      rw [ite_eq_left hsa, ite_eq_left hsb]
       have ha : (spec g P).eval a < 0 := sign_eq_neg_one_iff.mp hsa
       have hb : 0 < (spec g P).eval x := sign_eq_one_iff.mp hsb
       obtain ⟨ρ, hρI, hρ0, hz1, hz2⟩ := gap_cross_mono (spec g P) hmono hax ha hb
@@ -201,12 +201,12 @@ theorem gapValid_incr (g : Fin n → ℝ) (P : Polynomial (MvPolynomial (Fin n) 
       · intro y hρy hyx
         exact sign_pos (hz2 y ⟨hρy, hyx⟩)
     · unfold gapPlanMono
-      rw [if_pos hsa, if_neg hsb]
+      rw [ite_eq_left hsa, ite_eq_right hsb]
       have hb : (spec g P).eval x ≤ 0 := not_lt.mp fun h => hsb (sign_pos h)
       intro y hy hyx
       exact sign_neg (gap_all_neg_mono (spec g P) hmono hax hb y ⟨hy a rfl, hyx⟩)
   · unfold gapPlanMono
-    rw [if_neg hsa]
+    rw [ite_eq_right hsa]
     have ha : 0 ≤ (spec g P).eval a := not_lt.mp fun h => hsa (sign_neg h)
     intro y hy hyx
     exact sign_pos (gap_all_pos_mono (spec g P) hmono hax ha y ⟨hy a rfl, hyx⟩)
@@ -220,7 +220,7 @@ theorem gapValid_anti (g : Fin n → ℝ) (P : Polynomial (MvPolynomial (Fin n) 
   by_cases hsa : SignType.sign ((spec g P).eval a) = SignType.pos
   · by_cases hsb : SignType.sign ((spec g P).eval x) = SignType.neg
     · unfold gapPlanAnti
-      rw [if_pos hsa, if_pos hsb]
+      rw [ite_eq_left hsa, ite_eq_left hsb]
       have ha : 0 < (spec g P).eval a := sign_eq_one_iff.mp hsa
       have hb : (spec g P).eval x < 0 := sign_eq_neg_one_iff.mp hsb
       obtain ⟨ρ, hρI, hρ0, hz1, hz2⟩ := gap_cross_anti (spec g P) hanti hax ha hb
@@ -230,12 +230,12 @@ theorem gapValid_anti (g : Fin n → ℝ) (P : Polynomial (MvPolynomial (Fin n) 
       · intro y hρy hyx
         exact sign_neg (hz2 y ⟨hρy, hyx⟩)
     · unfold gapPlanAnti
-      rw [if_pos hsa, if_neg hsb]
+      rw [ite_eq_left hsa, ite_eq_right hsb]
       have hb : 0 ≤ (spec g P).eval x := not_lt.mp fun h => hsb (sign_neg h)
       intro y hy hyx
       exact sign_pos (gap_all_pos_anti (spec g P) hanti hax hb y ⟨hy a rfl, hyx⟩)
   · unfold gapPlanAnti
-    rw [if_neg hsa]
+    rw [ite_eq_right hsa]
     have ha : (spec g P).eval a ≤ 0 := not_lt.mp fun h => hsa (sign_pos h)
     intro y hy hyx
     exact sign_neg (gap_all_neg_anti (spec g P) hanti hax ha y ⟨hy a rfl, hyx⟩)
@@ -256,13 +256,13 @@ theorem gapValid_left_incr (g : Fin n → ℝ) (P : Polynomial (MvPolynomial (Fi
     simp at h1
   | SignType.pos, hev =>
     unfold gapPlanMono
-    rw [if_neg (by decide : ¬(SignType.pos = SignType.neg))]
+    rw [ite_eq_right (by decide : ¬(SignType.pos = SignType.neg))]
     intro y _ hyx
     exact sign_pos (ray_left_all_pos_mono (spec g P) hmono hev y hyx)
   | SignType.neg, hev =>
     by_cases hsb : SignType.sign ((spec g P).eval x) = SignType.pos
     · unfold gapPlanMono
-      rw [if_pos rfl, if_pos hsb]
+      rw [ite_eq_left rfl, ite_eq_left hsb]
       have hb : 0 < (spec g P).eval x := sign_eq_one_iff.mp hsb
       obtain ⟨ρ, hρx, hρ0, hz1, hz2⟩ := ray_left_cross_mono (spec g P) hmono hev hb
       refine ⟨ρ, fun l hl => by simp at hl, hρx, hρ0, ?_, ?_⟩
@@ -271,7 +271,7 @@ theorem gapValid_left_incr (g : Fin n → ℝ) (P : Polynomial (MvPolynomial (Fi
       · intro y hρy hyx
         exact sign_pos (hz2 y ⟨hρy, hyx⟩)
     · unfold gapPlanMono
-      rw [if_pos rfl, if_neg hsb]
+      rw [ite_eq_left rfl, ite_eq_right hsb]
       have hb : (spec g P).eval x ≤ 0 := not_lt.mp fun h => hsb (sign_pos h)
       intro y _ hyx
       exact sign_neg (ray_left_all_neg_mono (spec g P) hmono hb y hyx)
@@ -290,13 +290,13 @@ theorem gapValid_left_anti (g : Fin n → ℝ) (P : Polynomial (MvPolynomial (Fi
     simp at h1
   | SignType.neg, hev =>
     unfold gapPlanAnti
-    rw [if_neg (by decide : ¬(SignType.neg = SignType.pos))]
+    rw [ite_eq_right (by decide : ¬(SignType.neg = SignType.pos))]
     intro y _ hyx
     exact sign_neg (ray_left_all_neg_anti (spec g P) hanti hev y hyx)
   | SignType.pos, hev =>
     by_cases hsb : SignType.sign ((spec g P).eval x) = SignType.neg
     · unfold gapPlanAnti
-      rw [if_pos rfl, if_pos hsb]
+      rw [ite_eq_left rfl, ite_eq_left hsb]
       have hb : (spec g P).eval x < 0 := sign_eq_neg_one_iff.mp hsb
       obtain ⟨ρ, hρx, hρ0, hz1, hz2⟩ := ray_left_cross_anti (spec g P) hanti hev hb
       refine ⟨ρ, fun l hl => by simp at hl, hρx, hρ0, ?_, ?_⟩
@@ -305,7 +305,7 @@ theorem gapValid_left_anti (g : Fin n → ℝ) (P : Polynomial (MvPolynomial (Fi
       · intro y hρy hyx
         exact sign_neg (hz2 y ⟨hρy, hyx⟩)
     · unfold gapPlanAnti
-      rw [if_pos rfl, if_neg hsb]
+      rw [ite_eq_left rfl, ite_eq_right hsb]
       have hb : 0 ≤ (spec g P).eval x := not_lt.mp fun h => hsb (sign_neg h)
       intro y _ hyx
       exact sign_pos (ray_left_all_pos_anti (spec g P) hanti hb y hyx)
@@ -327,7 +327,7 @@ theorem rayValid_right_incr (g : Fin n → ℝ) (P : Polynomial (MvPolynomial (F
       simp at h1
     | SignType.pos, hev =>
       unfold gapPlanMono
-      rw [if_pos hsa, if_pos rfl]
+      rw [ite_eq_left hsa, ite_eq_left rfl]
       have ha : (spec g P).eval a < 0 := sign_eq_neg_one_iff.mp hsa
       obtain ⟨ρ, haρ, hρ0, hz1, hz2⟩ := ray_right_cross_mono (spec g P) hmono ha hev
       refine ⟨ρ, some_mem_lt haρ, hρ0, ?_, ?_⟩
@@ -337,11 +337,11 @@ theorem rayValid_right_incr (g : Fin n → ℝ) (P : Polynomial (MvPolynomial (F
         exact sign_pos (hz2 y hρy)
     | SignType.neg, hev =>
       unfold gapPlanMono
-      rw [if_pos hsa, if_neg (by decide : ¬(SignType.neg = SignType.pos))]
+      rw [ite_eq_left hsa, ite_eq_right (by decide : ¬(SignType.neg = SignType.pos))]
       intro y hy
       exact sign_neg (ray_right_all_neg_mono (spec g P) hmono hev y (hy a rfl))
   · unfold gapPlanMono
-    rw [if_neg hsa]
+    rw [ite_eq_right hsa]
     have ha : 0 ≤ (spec g P).eval a := not_lt.mp fun h => hsa (sign_neg h)
     intro y hy
     exact sign_pos (ray_right_all_pos_mono (spec g P) hmono ha y (hy a rfl))
@@ -361,7 +361,7 @@ theorem rayValid_right_anti (g : Fin n → ℝ) (P : Polynomial (MvPolynomial (F
       simp at h1
     | SignType.neg, hev =>
       unfold gapPlanAnti
-      rw [if_pos hsa, if_pos rfl]
+      rw [ite_eq_left hsa, ite_eq_left rfl]
       have ha : 0 < (spec g P).eval a := sign_eq_one_iff.mp hsa
       obtain ⟨ρ, haρ, hρ0, hz1, hz2⟩ := ray_right_cross_anti (spec g P) hanti ha hev
       refine ⟨ρ, some_mem_lt haρ, hρ0, ?_, ?_⟩
@@ -371,11 +371,11 @@ theorem rayValid_right_anti (g : Fin n → ℝ) (P : Polynomial (MvPolynomial (F
         exact sign_neg (hz2 y hρy)
     | SignType.pos, hev =>
       unfold gapPlanAnti
-      rw [if_pos hsa, if_neg (by decide : ¬(SignType.pos = SignType.neg))]
+      rw [ite_eq_left hsa, ite_eq_right (by decide : ¬(SignType.pos = SignType.neg))]
       intro y hy
       exact sign_pos (ray_right_all_pos_anti (spec g P) hanti hev y (hy a rfl))
   · unfold gapPlanAnti
-    rw [if_neg hsa]
+    rw [ite_eq_right hsa]
     have ha : (spec g P).eval a ≤ 0 := not_lt.mp fun h => hsa (sign_pos h)
     intro y hy
     exact sign_neg (ray_right_all_neg_anti (spec g P) hanti ha y (hy a rfl))
@@ -394,7 +394,7 @@ theorem rayValid_line_incr (g : Fin n → ℝ) (P : Polynomial (MvPolynomial (Fi
     simp at h1
   | SignType.pos, ⟨M, hM⟩ =>
     unfold gapPlanMono
-    rw [if_neg (by decide : ¬(SignType.pos = SignType.neg))]
+    rw [ite_eq_right (by decide : ¬(SignType.pos = SignType.neg))]
     intro y _
     have h1 : min (M - 1) (y - 1) < M := lt_of_le_of_lt (min_le_left _ _) (by linarith)
     have h2 : min (M - 1) (y - 1) < y := lt_of_le_of_lt (min_le_right _ _) (by linarith)
@@ -408,14 +408,14 @@ theorem rayValid_line_incr (g : Fin n → ℝ) (P : Polynomial (MvPolynomial (Fi
       simp at h1
     | SignType.neg, ⟨M', hM'⟩ =>
       unfold gapPlanMono
-      rw [if_pos rfl, if_neg (by decide : ¬(SignType.neg = SignType.pos))]
+      rw [ite_eq_left rfl, ite_eq_right (by decide : ¬(SignType.neg = SignType.pos))]
       intro y _
       have h1 : M' < max (M' + 1) (y + 1) := lt_of_lt_of_le (by linarith) (le_max_left _ _)
       have h2 : y < max (M' + 1) (y + 1) := lt_of_lt_of_le (by linarith) (le_max_right _ _)
       exact sign_neg (lt_trans (hmono h2) (hM' _ h1))
     | SignType.pos, ⟨M', hM'⟩ =>
       unfold gapPlanMono
-      rw [if_pos rfl, if_pos rfl]
+      rw [ite_eq_left rfl, ite_eq_left rfl]
       have hw : min (M - 1) 0 < M := lt_of_le_of_lt (min_le_left _ _) (by linarith)
       have hw' : M' < max (M' + 1) 1 := lt_of_lt_of_le (by linarith) (le_max_left _ _)
       have hlt : min (M - 1) 0 < max (M' + 1) 1 :=
@@ -444,7 +444,7 @@ theorem rayValid_line_anti (g : Fin n → ℝ) (P : Polynomial (MvPolynomial (Fi
     simp at h1
   | SignType.neg, ⟨M, hM⟩ =>
     unfold gapPlanAnti
-    rw [if_neg (by decide : ¬(SignType.neg = SignType.pos))]
+    rw [ite_eq_right (by decide : ¬(SignType.neg = SignType.pos))]
     intro y _
     have h1 : min (M - 1) (y - 1) < M := lt_of_le_of_lt (min_le_left _ _) (by linarith)
     have h2 : min (M - 1) (y - 1) < y := lt_of_le_of_lt (min_le_right _ _) (by linarith)
@@ -458,14 +458,14 @@ theorem rayValid_line_anti (g : Fin n → ℝ) (P : Polynomial (MvPolynomial (Fi
       simp at h1
     | SignType.pos, ⟨M', hM'⟩ =>
       unfold gapPlanAnti
-      rw [if_pos rfl, if_neg (by decide : ¬(SignType.pos = SignType.neg))]
+      rw [ite_eq_left rfl, ite_eq_right (by decide : ¬(SignType.pos = SignType.neg))]
       intro y _
       have h1 : M' < max (M' + 1) (y + 1) := lt_of_lt_of_le (by linarith) (le_max_left _ _)
       have h2 : y < max (M' + 1) (y + 1) := lt_of_lt_of_le (by linarith) (le_max_right _ _)
       exact sign_pos (lt_trans (hM' _ h1) (hanti h2))
     | SignType.neg, ⟨M', hM'⟩ =>
       unfold gapPlanAnti
-      rw [if_pos rfl, if_pos rfl]
+      rw [ite_eq_left rfl, ite_eq_left rfl]
       have hw : min (M - 1) 0 < M := lt_of_le_of_lt (min_le_left _ _) (by linarith)
       have hw' : M' < max (M' + 1) 1 := lt_of_lt_of_le (by linarith) (le_max_left _ _)
       have hlt : min (M - 1) 0 < max (M' + 1) 1 :=

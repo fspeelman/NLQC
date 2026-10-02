@@ -198,11 +198,11 @@ theorem sadef_resolve_fiber (q t : Polynomial (MvPolynomial (Fin n) ℝ)) :
         · rw [(resolve_eq_self_iff g q).mpr (Or.inr hl)]
           by_cases hqt : q = t
           · exact iff_of_true hqt
-              (Or.inr ⟨hl, by rw [if_pos hqt]; exact Set.mem_univ g⟩)
+              (Or.inr ⟨hl, by rw [ite_eq_left hqt]; exact Set.mem_univ g⟩)
           · refine iff_of_false hqt ?_
             rintro (⟨h1, -⟩ | ⟨-, h2⟩)
             · exact hl h1
-            · rw [if_neg hqt] at h2
+            · rw [ite_eq_right hqt] at h2
               simp at h2
       rw [e]
       refine ((SADef.zero _).inter (ih q.eraseLead ?_)).union
@@ -210,9 +210,9 @@ theorem sadef_resolve_fiber (q t : Polynomial (MvPolynomial (Fin n) ℝ)) :
       · have := Polynomial.eraseLead_support_card_lt hq0
         omega
       · by_cases hqt : q = t
-        · rw [if_pos hqt]
+        · rw [ite_eq_left hqt]
           exact SADef.univ
-        · rw [if_neg hqt]
+        · rw [ite_eq_right hqt]
           exact SADef.empty
 
 /-- A family's resolve-cell is SADef. -/

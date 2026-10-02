@@ -21,7 +21,7 @@ def nonnegativeSign (b : Bool) : PolynomialSign := if b then .positive else .zer
 
 theorem exists_nonnegativeSign (t : ℝ) :
     (∃ b : Bool, (nonnegativeSign b).Holds t) ↔ 0 ≤ t := by
-  simp only [Bool.exists_bool, nonnegativeSign, Bool.false_eq_true, if_false, if_true,
+  simp only [Bool.exists_bool, nonnegativeSign, Bool.false_eq_true, ite_false, ite_true,
     PolynomialSign.Holds]
   constructor
   · rintro (h | h) <;> linarith

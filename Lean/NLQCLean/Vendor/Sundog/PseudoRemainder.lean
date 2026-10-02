@@ -55,11 +55,11 @@ theorem pstep_coeff_eq_zero (P Q : R[X]) (hdeg : P.natDegree ≤ Q.natDegree) :
   rw [pstep, Polynomial.coeff_sub, Polynomial.coeff_C_mul, Polynomial.coeff_C_mul,
     Polynomial.coeff_X_pow_mul']
   rcases eq_or_lt_of_le hm with heq | hlt
-  · rw [if_pos (by omega)]
+  · rw [ite_eq_left (by omega)]
     have h1 : m - (Q.natDegree - P.natDegree) = P.natDegree := by omega
     rw [h1, ← heq, Polynomial.coeff_natDegree, Polynomial.coeff_natDegree]
     ring
-  · rw [Polynomial.coeff_eq_zero_of_natDegree_lt hlt, if_pos (by omega),
+  · rw [Polynomial.coeff_eq_zero_of_natDegree_lt hlt, ite_eq_left (by omega),
       Polynomial.coeff_eq_zero_of_natDegree_lt
         (by omega : P.natDegree < m - (Q.natDegree - P.natDegree))]
     ring
@@ -85,9 +85,9 @@ decreasing_by
   all_goals {
     have hm := pstep_degree P Q (not_lt.mp _hdeg)
     by_cases hps : pstep P Q = 0
-    · rw [if_pos hps, if_neg _hQ0]
+    · rw [ite_eq_left hps, ite_eq_right _hQ0]
       omega
-    · rw [if_neg hps, if_neg _hQ0]
+    · rw [ite_eq_right hps, ite_eq_right _hQ0]
       rcases hm with h0 | hlt
       · exact absurd h0 hps
       · omega
@@ -116,30 +116,30 @@ theorem pseudoModExp_identity (P : R[X]) : ∀ Q : R[X],
     intro Q hQ
     have hQ0 : Q = 0 := by
       by_contra h
-      rw [if_neg h] at hQ
+      rw [ite_eq_right h] at hQ
       omega
     subst hQ0
-    rw [pseudoModExp_unfold, dif_pos rfl]
+    rw [pseudoModExp_unfold, dite_eq_left rfl]
     exact ⟨0, by simp⟩
   | succ N ih =>
     intro Q hQ
     rw [pseudoModExp_unfold]
     by_cases hQ0 : Q = 0
-    · rw [dif_pos hQ0]
+    · rw [dite_eq_left hQ0]
       subst hQ0
       exact ⟨0, by simp⟩
-    rw [dif_neg hQ0]
+    rw [dite_eq_right hQ0]
     by_cases hdeg : Q.natDegree < P.natDegree
-    · rw [dif_pos hdeg]
+    · rw [dite_eq_left hdeg]
       exact ⟨0, by simp⟩
-    · rw [dif_neg hdeg]
+    · rw [dite_eq_right hdeg]
       have hmeas : (if pstep P Q = 0 then 0 else (pstep P Q).natDegree + 1) ≤ N := by
-        rw [if_neg hQ0] at hQ
+        rw [ite_eq_right hQ0] at hQ
         have hm := pstep_degree P Q (not_lt.mp hdeg)
         by_cases hps : pstep P Q = 0
-        · rw [if_pos hps]
+        · rw [ite_eq_left hps]
           omega
-        · rw [if_neg hps]
+        · rw [ite_eq_right hps]
           rcases hm with h0 | hlt
           · exact absurd h0 hps
           · omega
@@ -165,29 +165,29 @@ theorem pseudoModExp_rem (P : R[X]) : ∀ Q : R[X],
     intro Q hQ
     have hQ0 : Q = 0 := by
       by_contra h
-      rw [if_neg h] at hQ
+      rw [ite_eq_right h] at hQ
       omega
     subst hQ0
-    rw [pseudoModExp_unfold, dif_pos rfl]
+    rw [pseudoModExp_unfold, dite_eq_left rfl]
     exact Or.inl rfl
   | succ N ih =>
     intro Q hQ
     rw [pseudoModExp_unfold]
     by_cases hQ0 : Q = 0
-    · rw [dif_pos hQ0]
+    · rw [dite_eq_left hQ0]
       exact Or.inl rfl
-    rw [dif_neg hQ0]
+    rw [dite_eq_right hQ0]
     by_cases hdeg : Q.natDegree < P.natDegree
-    · rw [dif_pos hdeg]
+    · rw [dite_eq_left hdeg]
       exact Or.inr hdeg
-    · rw [dif_neg hdeg]
+    · rw [dite_eq_right hdeg]
       have hmeas : (if pstep P Q = 0 then 0 else (pstep P Q).natDegree + 1) ≤ N := by
-        rw [if_neg hQ0] at hQ
+        rw [ite_eq_right hQ0] at hQ
         have hm := pstep_degree P Q (not_lt.mp hdeg)
         by_cases hps : pstep P Q = 0
-        · rw [if_pos hps]
+        · rw [ite_eq_left hps]
           omega
-        · rw [if_neg hps]
+        · rw [ite_eq_right hps]
           rcases hm with h0 | hlt
           · exact absurd h0 hps
           · omega

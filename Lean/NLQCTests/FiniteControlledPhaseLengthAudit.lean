@@ -7,18 +7,18 @@ set_option pp.deepTerms true
 set_option format.width 120
 
 set_option pp.universes true in
-#check @NLQCLean.exists_finiteControlledPhase_length_constant_of_external
+#check @NLQCLean.exists_finiteControlledPhase_length_constant
 
-/-- info: 'NLQCLean.exists_finiteControlledPhase_length_constant_of_external' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+/-- info: 'NLQCLean.exists_finiteControlledPhase_length_constant' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
-#print axioms NLQCLean.exists_finiteControlledPhase_length_constant_of_external
+#print axioms NLQCLean.exists_finiteControlledPhase_length_constant
 
 set_option pp.universes true in
-#check @NLQCLean.exists_finiteControlledPhase_worst_case_constant_of_external
+#check @NLQCLean.exists_finiteControlledPhase_worst_case_constant
 
-/-- info: 'NLQCLean.exists_finiteControlledPhase_worst_case_constant_of_external' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+/-- info: 'NLQCLean.exists_finiteControlledPhase_worst_case_constant' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
-#print axioms NLQCLean.exists_finiteControlledPhase_worst_case_constant_of_external
+#print axioms NLQCLean.exists_finiteControlledPhase_worst_case_constant
 
 set_option pp.universes true in
 #check @NLQCLean.finiteControlledPhaseAngles_union_subset_charged

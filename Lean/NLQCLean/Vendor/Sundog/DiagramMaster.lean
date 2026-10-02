@@ -321,7 +321,7 @@ theorem colsFrom_master (g : Fin n → ℝ)
             · exact List.mem_cons.mpr (Or.inl rfl)
             · exact List.mem_cons.mpr
                 (Or.inr (o2' Q hQ z (some_mem_lt (hhead z hmem)) hzroot))
-        · rw [baseDrop_cons, if_pos hz]
+        · rw [baseDrop_cons, ite_eq_left hz]
           refine ⟨hlo₀x, ?_, ?_, o3'⟩
           · intro y hy hyx
             rcases pending_or_beyond lo y with hpen | hby
@@ -330,7 +330,7 @@ theorem colsFrom_master (g : Fin n → ℝ)
                 ((Pd :: bres).map fun r => emod r P) g y, hgap y hby hyx]
           · rw [← take_signVec_append (Pd :: bres)
               ((Pd :: bres).map fun r => emod r P) g x, hpt]
-        · rw [readAnnot_cons, if_pos hz]
+        · rw [readAnnot_cons, ite_eq_left hz]
           refine ⟨?_, hsP.symm, o4'⟩
           have hσ : ∀ y : ℝ, (∀ l₀ ∈ lo₀, l₀ < y) → y < x →
               SignType.sign ((spec g Pd).eval y) = c.headD 0 := by
@@ -426,9 +426,9 @@ theorem colsFrom_master (g : Fin n → ℝ)
                 · rw [← take_signVec_append (Pd :: bres)
                     ((Pd :: bres).map fun r => emod r P) g y, hpt, hceq2])
           refine ⟨ξk, o1', o2', ?_, ?_⟩
-          · rw [baseDrop_cons, if_neg hz]
+          · rw [baseDrop_cons, ite_eq_right hz]
             exact o3'
-          · rw [readAnnot_cons, if_neg hz]
+          · rw [readAnnot_cons, ite_eq_right hz]
             exact o4'
         | x₂ :: xs₂, c' :: cpt₂ :: rest₃, ⟨hxx₂, hgap₂, hpt₂, hrest₂⟩ =>
           have hxx₂' : x < x₂ := hxx₂ x rfl
@@ -486,9 +486,9 @@ theorem colsFrom_master (g : Fin n → ℝ)
                 · rw [← take_signVec_append (Pd :: bres)
                     ((Pd :: bres).map fun r => emod r P) g y, hpt, hceq2])
           refine ⟨ξk, o1', o2', ?_, ?_⟩
-          · rw [baseDrop_cons, if_neg hz]
+          · rw [baseDrop_cons, ite_eq_right hz]
             exact o3'
-          · rw [readAnnot_cons, if_neg hz]
+          · rw [readAnnot_cons, ite_eq_right hz]
             exact o4'
 
 /-! ### The capstone -/

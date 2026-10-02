@@ -4,7 +4,7 @@ import Mathlib.Analysis.Complex.ExponentialBounds
 /-!
 # All-error arithmetic for the restricted strong Haar bound
 
-Put `δ = √(18e)`, `x = K/D` and
+Put `δ = √(21e/2)`, `x = K/D` and
 `u = 32 δ √(1 + x)`, with `D = d²`, `N = d⁴`, `K ≥ D/2`.
 
 * Small radius (`e ≤ 1/16`, `u ≤ 1/64`): the per-shape bound times the `K³` shapes is at most
@@ -39,15 +39,15 @@ theorem sqrt_div_sq_le_sqrt_one_add {d K : ℕ} (hd : 0 < d) :
 /-- Small-radius regime: shape count, the strong tube bound and all constants absorbed into `exp(C K²)`. -/
 theorem strong_small_radius_arith {C₀ : ℝ} (hC₀ : 0 ≤ C₀) {d K b : ℕ} (hd : 2 ≤ d)
     (hK : (d : ℝ) ^ 2 / 2 ≤ K) (hb : 8 * b ≤ 7 * d ^ 4) {e : ℝ} (he : 0 < e)
-    (hu : 32 * Real.sqrt (18 * e) * Real.sqrt (1 + K / (d : ℝ) ^ 2) ≤ 1 / 64) :
+    (hu : 32 * Real.sqrt (21 / 2 * e) * Real.sqrt (1 + K / (d : ℝ) ^ 2) ≤ 1 / 64) :
     (K : ℝ) ^ 3 * (Real.exp (C₀ * (64 * (K : ℝ) ^ 2 + (d : ℝ) ^ 4)) *
-      ((4 + 32 * Real.sqrt (18 * e)) * Real.sqrt K / d +
-        2 * (32 * Real.sqrt (18 * e) * Real.sqrt (1 + K / (d : ℝ) ^ 2))) ^ b *
-      (32 * Real.sqrt (18 * e) * Real.sqrt (1 + K / (d : ℝ) ^ 2)) ^ (d ^ 4 - b)) ≤
+      ((4 + 32 * Real.sqrt (21 / 2 * e)) * Real.sqrt K / d +
+        2 * (32 * Real.sqrt (21 / 2 * e) * Real.sqrt (1 + K / (d : ℝ) ^ 2))) ^ b *
+      (32 * Real.sqrt (21 / 2 * e) * Real.sqrt (1 + K / (d : ℝ) ^ 2)) ^ (d ^ 4 - b)) ≤
     Real.exp ((68 * C₀ + 21) * (K : ℝ) ^ 2) * e ^ ((d : ℝ) ^ 4 / 16) := by
   obtain ⟨h18, h32, -⟩ := strong_numeric_exp_bounds
   have hsK := sqrt_div_sq_le_sqrt_one_add (K := K) (by omega : 0 < d)
-  set δ := Real.sqrt (18 * e) with hδdef
+  set δ := Real.sqrt (21 / 2 * e) with hδdef
   set x := (K : ℝ) / (d : ℝ) ^ 2 with hxdef
   set w := Real.sqrt (1 + x) with hwdef
   have hdR : (2 : ℝ) ≤ d := by exact_mod_cast hd
@@ -89,21 +89,22 @@ theorem strong_small_radius_arith {C₀ : ℝ} (hC₀ : 0 ≤ C₀) {d K b : ℕ
     rw [this]
     have h := mul_le_mul_of_nonneg_right h2K (Nat.cast_nonneg K)
     linarith
-  have hδpow : δ ^ (d ^ 4 - b) ≤ (18 : ℝ) ^ ((d : ℝ) ^ 4 / 16) * e ^ ((d : ℝ) ^ 4 / 16) := by
+  have hδpow : δ ^ (d ^ 4 - b) ≤ (21 / 2 : ℝ) ^ ((d : ℝ) ^ 4 / 16) * e ^ ((d : ℝ) ^ 4 / 16) := by
     have hexp : (d : ℝ) ^ 4 / 8 ≤ ((d ^ 4 - b : ℕ) : ℝ) := by
       rw [Nat.cast_sub hbN, hNR]
       have : (8 * b : ℝ) ≤ 7 * (d : ℝ) ^ 4 := by exact_mod_cast hb
       linarith
     calc δ ^ (d ^ 4 - b) = δ ^ (((d ^ 4 - b : ℕ)) : ℝ) := (Real.rpow_natCast δ _).symm
       _ ≤ δ ^ ((d : ℝ) ^ 4 / 8) := Real.rpow_le_rpow_of_exponent_ge hδ0 hδ1 hexp
-      _ = (18 * e) ^ ((d : ℝ) ^ 4 / 16) := by
+      _ = (21 / 2 * e) ^ ((d : ℝ) ^ 4 / 16) := by
           rw [hδdef, Real.sqrt_eq_rpow, ← Real.rpow_mul (by positivity)]
           congr 1; ring
       _ = _ := Real.mul_rpow (by norm_num) he.le
-  have h18N : (18 : ℝ) ^ ((d : ℝ) ^ 4 / 16) ≤ Real.exp ((K : ℝ) ^ 2) := by
+  have hbaseN : (21 / 2 : ℝ) ^ ((d : ℝ) ^ 4 / 16) ≤ Real.exp ((K : ℝ) ^ 2) := by
     rw [Real.rpow_def_of_pos (by norm_num)]
     apply Real.exp_le_exp.mpr
-    have hl : Real.log 18 ≤ 3 := (Real.log_le_iff_le_exp (by norm_num)).mpr h18
+    have hl : Real.log (21 / 2) ≤ 3 :=
+      (Real.log_le_iff_le_exp (by norm_num)).mpr (by linarith)
     linarith [mul_le_mul_of_nonneg_right hl (by positivity : (0 : ℝ) ≤ (d : ℝ) ^ 4 / 16)]
   have hw_exp : w ≤ Real.exp (x / 2) := by
     rw [hwdef, Real.exp_half]
@@ -144,7 +145,7 @@ theorem strong_small_radius_arith {C₀ : ℝ} (hC₀ : 0 ≤ C₀) {d K b : ℕ
         gcongr
         all_goals first
           | exact h32N
-          | exact hδpow.trans (mul_le_mul_of_nonneg_right h18N (by positivity))
+          | exact hδpow.trans (mul_le_mul_of_nonneg_right hbaseN (by positivity))
     _ = _ := by
         rw [show (68 * C₀ + 21) * (K : ℝ) ^ 2 =
           3 * (K : ℝ) ^ 2 + (68 * C₀ * (K : ℝ) ^ 2 + (17 * (K : ℝ) ^ 2 + (K : ℝ) ^ 2)) by ring,
@@ -154,7 +155,7 @@ theorem strong_small_radius_arith {C₀ : ℝ} (hC₀ : 0 ≤ C₀) {d K b : ℕ
 /-- Large-radius or large-error regime: the claimed right side is at least one. -/
 theorem one_le_strong_haar_rhs {C : ℝ} (hC : 21 ≤ C) {d K : ℕ} (hd : 2 ≤ d)
     (hK : (d : ℝ) ^ 2 / 2 ≤ K) {e : ℝ} (he : 0 < e)
-    (hcase : ¬ (e ≤ 1 / 16 ∧ 32 * Real.sqrt (18 * e) * Real.sqrt (1 + K / (d : ℝ) ^ 2) ≤ 1 / 64)) :
+    (hcase : ¬ (e ≤ 1 / 16 ∧ 32 * Real.sqrt (21 / 2 * e) * Real.sqrt (1 + K / (d : ℝ) ^ 2) ≤ 1 / 64)) :
     1 ≤ Real.exp (C * (K : ℝ) ^ 2) * e ^ ((d : ℝ) ^ 4 / 16) := by
   obtain ⟨h18, -, h19⟩ := strong_numeric_exp_bounds
   have hdR : (2 : ℝ) ≤ d := by exact_mod_cast hd
@@ -178,11 +179,11 @@ theorem one_le_strong_haar_rhs {C : ℝ} (hC : 21 ≤ C) {d K : ℕ} (hd : 2 ≤
   have hN0 : (0 : ℝ) ≤ (d : ℝ) ^ 4 / 16 := by positivity
   have key : (d : ℝ) ^ 4 / 16 * Real.log (1 / e) ≤ C * (K : ℝ) ^ 2 := by
     by_cases he16 : e ≤ 1 / 16
-    · have hlarge : 1 / 64 < 32 * Real.sqrt (18 * e) * Real.sqrt (1 + x) := by
+    · have hlarge : 1 / 64 < 32 * Real.sqrt (21 / 2 * e) * Real.sqrt (1 + x) := by
         by_contra h
         exact hcase ⟨he16, not_lt.mp h⟩
-      have hprod : (1 / 2048 : ℝ) < Real.sqrt (18 * e) * Real.sqrt (1 + x) := by linarith
-      have hsq : (1 / 2048 : ℝ) ^ 2 < 18 * e * (1 + x) := by
+      have hprod : (1 / 2048 : ℝ) < Real.sqrt (21 / 2 * e) * Real.sqrt (1 + x) := by linarith
+      have hsq : (1 / 2048 : ℝ) ^ 2 < 21 / 2 * e * (1 + x) := by
         have h := pow_lt_pow_left₀ hprod (by norm_num) (by norm_num : (2 : ℕ) ≠ 0)
         rwa [mul_pow, Real.sq_sqrt (by positivity), Real.sq_sqrt (by positivity)] at h
       have hinv : 1 / e < 75497472 * (1 + x) := by

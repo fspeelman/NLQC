@@ -68,7 +68,7 @@ theorem schmidtMass_tensorChoiMatrix_flag_mul_adjoint_le
     rw [hBnorm, one_pow] at hw
     exact hw
   have hprod : schmidtWeights A p.1.1 * schmidtWeights B p.1.2 ≤ 1 :=
-    mul_le_one₀ hA1 hB0 hB1
+    (mul_le_mul_of_nonneg_right hA1 hB0).trans (by rw [one_mul]; exact hB1)
   simpa only [A, B, mul_one] using
     (mul_le_mul_of_nonneg_left hprod (inv_nonneg.mpr (Nat.cast_nonneg _)))
 

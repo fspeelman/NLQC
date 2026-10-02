@@ -70,7 +70,7 @@ theorem PureProtocol.exists_pvm_reverse_witness
     · simp
   obtain ⟨v, hv, hvrank, hclose⟩ := R.exists_pvm_frozen hU hRK hε
     (hRchan ▸ hscore)
-  obtain ⟨a, x, hx, hcross⟩ := R.exists_pvm_reverse_blocks_of_frozen s hkA hkB v hv hvrank
+  obtain ⟨a, -, x, hx, hcross⟩ := R.exists_pvm_reverse_blocks_of_frozen s hkA hkB v hv hvrank
   refine ⟨(s, a), x, hx, ?_⟩
   have hdist := norm_sub_eq_of_crossGram_eq (PVMReverseBlocks.forward x) (PVMReverseBlocks.reverse x)
     R.globalIsometry (flagIsometry v) Uᴴ

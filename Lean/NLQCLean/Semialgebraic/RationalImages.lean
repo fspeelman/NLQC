@@ -62,7 +62,7 @@ theorem projection {n : ℕ} {S : Set (RealEuclidean (n + 1))}
   rw [toLp_preimage_image_coordinateProjection_castAdd]
   exact RationalQE.sadef_proj hS
 
-/-- Eliminate any finite number of trailing coordinates with no external premise. -/
+/-- Eliminate any finite number of trailing coordinates. -/
 theorem first_projection {n m : ℕ} {S : Set (RealEuclidean (n + m))}
     (hS : RationalSemialgebraic S) :
     RationalSemialgebraic (coordinateProjection (Fin.castAdd m) '' S) := by

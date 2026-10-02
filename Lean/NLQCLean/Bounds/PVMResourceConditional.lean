@@ -38,7 +38,7 @@ theorem MixedPVMUniversalScore.quarter_floor {d K : ℕ} {e : ℝ} (hd : 0 < d)
 
 /-- PVM resource bound: one positive constant for score and joint-TV universality, pure and finite mixed.
 No footprint floor or K≥1 hypothesis is assumed; the geometric property is explicit. -/
-theorem exists_pvm_universal_resource_constant (hGeom : PolynomialImageVolumeBound) :
+theorem exists_pvm_universal_resource_constant_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ c : ℝ, 0 < c ∧ ∀ (d K : ℕ), 2 ≤ d → ∀ e : ℝ, 0 < e → e ≤ 1 / 2 →
       (PurePVMUniversalScore d K e → c * (d : ℝ) * Real.sqrt (Real.log (1 / e)) ≤ K) ∧
       (MixedPVMUniversalScore d K e → c * (d : ℝ) * Real.sqrt (Real.log (1 / e)) ≤ K) ∧
@@ -46,7 +46,7 @@ theorem exists_pvm_universal_resource_constant (hGeom : PolynomialImageVolumeBou
         c * (d : ℝ) * Real.sqrt (Real.log (1 / e)) ≤ K) ∧
       (MixedPVMUniversalTV.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} d K e →
         c * (d : ℝ) * Real.sqrt (Real.log (1 / e)) ≤ K) := by
-  obtain ⟨C, hC, hHaar⟩ := exists_pvm_haar_fraction_constant hGeom
+  obtain ⟨C, hC, hHaar⟩ := exists_pvm_haar_fraction_constant_of_imageVolumeBound hGeom
   have hC0 : 0 < C := by linarith
   refine ⟨Real.sqrt (3 / (32 * C)), by positivity, ?_⟩
   intro d K hd e he he'
@@ -69,7 +69,7 @@ theorem exists_pvm_universal_resource_constant (hGeom : PolynomialImageVolumeBou
     fun hu => hmixed (hu.score (by omega))⟩
 
 /-- PVM qubit bound: for d=2ⁿ, one nonnegative additive constant with real base-two logarithms. -/
-theorem exists_pvm_universal_qubit_constant (hGeom : PolynomialImageVolumeBound) :
+theorem exists_pvm_universal_qubit_constant_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ b : ℝ, 0 ≤ b ∧ ∀ (n K : ℕ), 1 ≤ n → ∀ e : ℝ, 0 < e → e ≤ 1 / 2 →
       (PurePVMUniversalScore (2 ^ n) K e →
         (n : ℝ) + (1 / 2 : ℝ) * Real.logb 2 (Real.log (1 / e)) - b ≤ Real.logb 2 (K : ℝ)) ∧
@@ -80,7 +80,7 @@ theorem exists_pvm_universal_qubit_constant (hGeom : PolynomialImageVolumeBound)
       (MixedPVMUniversalTV.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} (2 ^ n) K e →
         (n : ℝ) + (1 / 2 : ℝ) * Real.logb 2 (Real.log (1 / e)) - b ≤ Real.logb 2 (K : ℝ)) := by
   obtain ⟨c, hc, hresource⟩ :=
-    exists_pvm_universal_resource_constant.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} hGeom
+    exists_pvm_universal_resource_constant_of_imageVolumeBound.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} hGeom
   refine ⟨max 0 (-Real.logb 2 c), le_max_left _ _, ?_⟩
   intro n K hn e he he'
   have hd : 2 ≤ 2 ^ n := by

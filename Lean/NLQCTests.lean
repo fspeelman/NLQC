@@ -12,8 +12,6 @@ import NLQCTests.UniversalMaxBoundsAudit
 import NLQCTests.SwapNeighborhoodAlmostEveryAudit
 import NLQCTests.BorelRankCompressionAudit
 import NLQCTests.ResultInventory
-import NLQCTests.QuantitativeResultTypes
-import NLQCTests.FormatVolumeExamples
 import NLQCTests.VectorSardAudit
 import NLQCTests.CriticalNormalImagesAudit
 import NLQCTests.ExactWitnessAudit
@@ -22,12 +20,13 @@ import NLQCTests.ExactHaarResultTypes
 import NLQCTests.SundogProjectionAudit
 import NLQCTests.SundogBridgeAudit
 import NLQCTests.SemialgebraicProjectionAudit
-import NLQCTests.ReducedInputResultTypes
+import NLQCTests.QuantitativeResultTypes
 import NLQCTests.ChargedCompressionAudit
 import NLQCTests.RobustCompanionAudit
 import NLQCTests.ControlledPhaseAudit
 import NLQCTests.FiniteClassicalAudit
 import NLQCTests.ArithmeticSeparationAudit
+import NLQCTests.PointCountAudit
 import NLQCTests.GenericSpectralAudit
 import NLQCTests.FiniteCompressionAudit
 import NLQCTests.PhysicalCoordinatesAudit
@@ -96,6 +95,12 @@ import NLQCTests.RationalPolynomialSmoothnessAudit
 import NLQCTests.RationalInvariantPolynomialAudit
 import NLQCTests.InvariantCriticalValuesAudit
 import NLQCTests.OrbitInvariantAlgebraicityAudit
+import NLQCTests.ExactFiniteOrbitsAudit
+import NLQCTests.PVMFiniteOrbitsAudit
+import NLQCTests.PathDerivativesAudit
+import NLQCTests.ExactStatementsAudit
+import NLQCTests.ExactPaperAudit
+import NLQCTests.RobustPaperAudit
 
 /-!
 # NLQC refactor audit target

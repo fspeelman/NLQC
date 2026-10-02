@@ -69,13 +69,13 @@ theorem readZeroIdx_spec :
     | s :: rest =>
       simp only [readZeroIdx] at h
       by_cases hs : s = SignType.zero
-      · rw [if_pos hs] at h
+      · rw [ite_eq_left hs] at h
         have h0 : (0 : ℕ) = i := Option.some_injective _ h
         subst h0
         refine ⟨Nat.succ_pos m, ?_⟩
         rw [hs]
         rfl
-      · rw [if_neg hs] at h
+      · rw [ite_eq_right hs] at h
         match hr : readZeroIdx m rest with
         | none =>
           rw [hr] at h
@@ -102,13 +102,13 @@ theorem readZeroIdx_isSome :
     | s :: rest =>
       rw [List.take_succ_cons] at h
       by_cases hs : s = SignType.zero
-      · exact ⟨0, by simp only [readZeroIdx]; rw [if_pos hs]⟩
+      · exact ⟨0, by simp only [readZeroIdx]; rw [ite_eq_left hs]⟩
       · rcases List.mem_cons.mp h with heq | hmem
         · exact absurd heq.symm hs
         · obtain ⟨j, hj⟩ := ih rest hmem
           refine ⟨j + 1, ?_⟩
           simp only [readZeroIdx]
-          rw [if_neg hs, hj]
+          rw [ite_eq_right hs, hj]
           rfl
 
 /-- The sample read: the remainder entry paired to the first base-prefix zero. -/

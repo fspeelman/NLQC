@@ -148,7 +148,7 @@ theorem exchangeMatrix_mul {ν : Type*}
   ext p j
   rw [Matrix.mul_apply, Finset.sum_eq_single_of_mem (exchangeEquiv κA μA κB μB p)
     (Finset.mem_univ _)
-    (fun q _ hq => by rw [exchangeMatrix_apply, if_neg (Ne.symm hq), zero_mul])]
+    (fun q _ hq => by rw [exchangeMatrix_apply, ite_eq_right (Ne.symm hq), zero_mul])]
   simp
 
 /-- `Ex† Ex = I`: the exchange permutation is an isometry.  This is all that
@@ -173,7 +173,7 @@ theorem exchangeMatrix_mul_conjTranspose :
   · simp
   · have hne : ¬ (exchangeEquiv κA μA κB μB q = exchangeEquiv κA μA κB μB p) :=
       fun hh => h (((exchangeEquiv κA μA κB μB).injective hh).symm)
-    rw [if_neg hne, star_zero, Matrix.one_apply_ne h]
+    rw [ite_eq_right hne, star_zero, Matrix.one_apply_ne h]
 
 end Exchange
 

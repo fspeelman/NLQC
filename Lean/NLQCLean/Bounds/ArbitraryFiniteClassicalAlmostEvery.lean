@@ -1,3 +1,4 @@
+import NLQCLean.Geometry.DirectVolume.Assembly
 import NLQCLean.Bounds.FiniteClassicalAlmostEvery
 
 /-!
@@ -63,7 +64,7 @@ def AllFiniteClassicalLogBound (T : unitaryGroup (Fin d × Fin d) ℂ)
 /-- One universal constant and one threshold at each almost-every fixed
 target serve every original finite architecture and all eight accuracy
 predicates. Budget zero is included, not excluded by an extra premise. -/
-theorem exists_ae_arbitrary_finite_classical_log_constant
+theorem exists_ae_arbitrary_finite_classical_log_constant_of_imageVolumeBound
     (hGeom : PolynomialImageVolumeBound) :
     ∃ C : ℝ, 0 < C ∧ ∀ d : ℕ, 2 ≤ d →
       ∀ᵐ (T : unitaryGroup (Fin d × Fin d) ℂ) ∂unitaryHaar (Fin d × Fin d),
@@ -72,7 +73,7 @@ theorem exists_ae_arbitrary_finite_classical_log_constant
           AllFiniteClassicalLogBound.{u₁, u₂, u₃, u₄, u₅, u₆,
             u₇, u₈, u₉, u₁₀, u₁₁, u₁₂} T K ε C := by
   obtain ⟨c, hc, hae⟩ :=
-    exists_ae_resource_constant.{0, 0, 0, 0, 0, 0, 0, 0} hGeom
+    exists_ae_resource_constant_of_imageVolumeBound.{0, 0, 0, 0, 0, 0, 0, 0} hGeom
   refine ⟨16 / c ^ 2, by positivity, fun d hd => ?_⟩
   have hd0 : 0 < d := by omega
   filter_upwards [hae d hd] with T hT
@@ -120,17 +121,14 @@ theorem exists_ae_arbitrary_finite_classical_log_constant
 
 /-- Applied arbitrary-register bounds retain exactly the existing three
 geometry arguments. No finite/Borel instrument contract is an extra premise. -/
-theorem exists_ae_arbitrary_finite_classical_log_constant_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+theorem exists_ae_arbitrary_finite_classical_log_constant :
     ∃ C : ℝ, 0 < C ∧ ∀ d : ℕ, 2 ≤ d →
       ∀ᵐ (T : unitaryGroup (Fin d × Fin d) ℂ) ∂unitaryHaar (Fin d × Fin d),
       ∃ ε₀ : ℝ, 0 < ε₀ ∧ ε₀ ≤ 1 / 2 ∧
         ∀ (K : ℕ) (ε : ℝ), 0 < ε → ε ≤ ε₀ →
           AllFiniteClassicalLogBound.{u₁, u₂, u₃, u₄, u₅, u₆,
             u₇, u₈, u₉, u₁₀, u₁₁, u₁₂} T K ε C :=
-  exists_ae_arbitrary_finite_classical_log_constant
-    (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_ae_arbitrary_finite_classical_log_constant_of_imageVolumeBound
+    (DirectVolume.polynomialImageVolumeBound)
 
 end NLQCLean.ClassicalCommunication

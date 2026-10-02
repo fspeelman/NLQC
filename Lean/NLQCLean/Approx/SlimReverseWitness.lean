@@ -13,7 +13,7 @@ isometry has `d(K+s)` rows and `ds` columns, with row embeddings fixed by the sh
 
 * `PureProtocol.exists_slim_reverse_witness`: every pure protocol on arbitrary finite registers
   with footprint `K`, target `U ∈ S_d` and score `≥ 1 − e`, `0 ≤ e ≤ 1/16`, is covered by a
-  valid slim six-block witness at Frobenius distance `d √(18 e)`.
+  valid slim six-block witness at Frobenius distance `d √(21 e / 2)`.
 * `SlimReverseBlocks.finrank_real` is the exact real dimension of the block space, and
   `SlimReverseBlocks.finrank_real_le` bounds it by `64 K²`.
 -/
@@ -283,7 +283,7 @@ variable [Fintype μA] [Fintype μB] [Fintype eA] [Fintype eB]
 variable [DecidableEq ρA] [DecidableEq ρB] [DecidableEq κA] [DecidableEq κB]
 variable [DecidableEq μA] [DecidableEq μB] [DecidableEq eA] [DecidableEq eB]
 
-/-- Physical coverage near SWAP: a valid slim witness at distance `d √(18 e)`. -/
+/-- Physical coverage near SWAP: a valid slim witness at distance `d √(21 e / 2)`. -/
 theorem PureProtocol.exists_slim_reverse_witness
     (P : PureProtocol (Fin d) (Fin d) ρA ρB κA κB μA μB (Fin d) (Fin d) eA eB) (hd : 2 ≤ d)
     {U : Matrix.unitaryGroup (Fin d × Fin d) ℂ} (hU : U ∈ swapNeighborhood d)
@@ -293,7 +293,7 @@ theorem PureProtocol.exists_slim_reverse_witness
     ∃ s : SlimReverseShape d K, ∃ x : SlimReverseBlocks s, SlimReverseBlocks.IsValid x ∧
       ‖SlimReverseBlocks.forward x -
           SlimReverseBlocks.reverse x * (U : Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ)‖ ≤
-        (d : ℝ) * Real.sqrt (18 * e) := by
+        (d : ℝ) * Real.sqrt (21 / 2 * e) := by
   have hd0 : 0 < d := by omega
   let : NeZero d := ⟨hd0.ne'⟩
   obtain ⟨r, kA, kB, eA', eB', hr, hkA, hkB, _, _, Q, hchan⟩ :=

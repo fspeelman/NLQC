@@ -186,9 +186,9 @@ theorem tensorChoiMatrix_flag_mul_adjoint_blockDiagonal
     outcomeBlock (flagIsometry ω * Mᴴ) x.2 y.2 (x.1.1,y.1.1) (x.1.2,y.1.2) = _
   rw [outcomeBlock_flag_mul_adjoint_apply]
   by_cases h : x.2 = y.2
-  · rw [if_pos h, if_pos h]
+  · rw [ite_eq_left h, ite_eq_left h]
     rfl
-  · simp only [if_neg h, mul_zero]
+  · simp only [ite_eq_right h, mul_zero]
 
 /-- The conjugated target-column coefficient matrix across the laboratory cut. -/
 def pvmConjugateColumnMatrix

@@ -87,28 +87,28 @@ theorem pseudoModExp_mem (hP : P ∈ polynomialSubring S)
     intro Q hN _
     have hQ0 : Q = 0 := by
       by_contra h
-      rw [if_neg h] at hN
+      rw [ite_eq_right h] at hN
       omega
-    rw [Sundog.TarskiQE.pseudoModExp, dif_pos hQ0]
+    rw [Sundog.TarskiQE.pseudoModExp, dite_eq_left hQ0]
     exact (polynomialSubring S).zero_mem
   | succ N ih =>
     intro Q hN hQ
     rw [Sundog.TarskiQE.pseudoModExp]
     by_cases hQ0 : Q = 0
-    · rw [dif_pos hQ0]
+    · rw [dite_eq_left hQ0]
       exact (polynomialSubring S).zero_mem
-    rw [dif_neg hQ0]
+    rw [dite_eq_right hQ0]
     by_cases hdeg : Q.natDegree < P.natDegree
-    · rw [dif_pos hdeg]
+    · rw [dite_eq_left hdeg]
       exact hQ
-    rw [dif_neg hdeg]
+    rw [dite_eq_right hdeg]
     apply ih _ _ (pstep_mem hP hQ)
-    rw [if_neg hQ0] at hN
+    rw [ite_eq_right hQ0] at hN
     have hstep := Sundog.TarskiQE.pstep_degree P Q (not_lt.mp hdeg)
     by_cases h0 : Sundog.TarskiQE.pstep P Q = 0
-    · rw [if_pos h0]
+    · rw [ite_eq_left h0]
       omega
-    · rw [if_neg h0]
+    · rw [ite_eq_right h0]
       rcases hstep with hzero | hlt
       · exact (h0 hzero).elim
       · omega
@@ -182,17 +182,17 @@ theorem rationalPolynomialSubring_truncChain {n : ℕ}
     have h0 : P = 0 := by
       rw [← Polynomial.support_eq_empty, ← Finset.card_eq_zero]
       omega
-    rw [Sundog.TarskiQE.truncChain, dif_pos h0, List.mem_singleton] at hQ
+    rw [Sundog.TarskiQE.truncChain, dite_eq_left h0, List.mem_singleton] at hQ
     subst Q
     exact (polynomialSubring _).zero_mem
   | succ N ih =>
     intro P hN hP Q hQ
     rw [Sundog.TarskiQE.truncChain] at hQ
     by_cases h0 : P = 0
-    · rw [dif_pos h0, List.mem_singleton] at hQ
+    · rw [dite_eq_left h0, List.mem_singleton] at hQ
       subst Q
       exact (polynomialSubring _).zero_mem
-    · rw [dif_neg h0, List.mem_cons] at hQ
+    · rw [dite_eq_right h0, List.mem_cons] at hQ
       rcases hQ with rfl | hQ
       · exact hP
       · apply ih _ _ (polynomialSubring.eraseLead_mem hP) Q hQ

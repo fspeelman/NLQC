@@ -117,7 +117,7 @@ theorem pvmColumnMatrix_motion (M : Matrix (ι × ι) (ι × ι) ℂ) (aA aB : M
   simp only [Matrix.add_apply, Matrix.mul_apply, Fintype.sum_prod_type, Matrix.kroneckerMap_apply,
     Matrix.one_apply, pvmColumnMatrix_apply, Matrix.smul_apply, smul_eq_mul, Matrix.transpose_apply,
     mul_ite, ite_mul, mul_one, one_mul, mul_zero, zero_mul, Finset.sum_ite_eq,
-    Finset.mem_univ, if_true, add_mul]
+    Finset.mem_univ, ite_true, add_mul]
   have h2 : ∑ x₁, ∑ x₂, (if x = x₁ then aB y x₂ * M (x₁, x₂) i else 0) =
       ∑ x₂, aB y x₂ * M (x, x₂) i := by
     rw [Finset.sum_eq_single x (fun x₁ _ hx₁ => by simp [Ne.symm hx₁]) (by simp)]

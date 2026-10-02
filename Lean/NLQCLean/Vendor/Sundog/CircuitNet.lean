@@ -74,7 +74,7 @@ on the imported definability machinery.
 * Cormen–Leiserson–Rivest–Stein, *Introduction to Algorithms*, §24 (Bellman–Ford / the
   min-plus relaxation step).
 -/
-import Mathlib.Data.Real.Basic
+import Mathlib.Basic.Real.Basic
 import Mathlib.Tactic
 
 namespace Sundog.CircuitNet
@@ -472,7 +472,7 @@ theorem RProg.eval_snoc_lt {n m : ℕ} (p : RProg n m) (g : RGate n m) (x : Fin 
     (i : Fin (n + (m + 1))) (hi : i.val < n + m) :
     (p.snoc g).eval x i = p.eval x ⟨i.val, hi⟩ := by
   simp only [RProg.eval, extendEnv]
-  exact dif_pos hi
+  exact dite_eq_left hi
 
 /-- **Preservation.** Compiling a tropical tree onto a DAG `p` never changes the value of
 `p`'s existing wires: any output wire `w'` whose index equals an original wire `w`'s index

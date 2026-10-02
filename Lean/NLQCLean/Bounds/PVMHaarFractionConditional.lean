@@ -57,11 +57,11 @@ theorem exists_small_radius_pvm_reachable_haar_constant (hGeom : PolynomialImage
     (C * (pvmWitnessCoordinateBudget d K : ℝ)) ^ (3 * d ^ 2 - 2) *
       (C * pvmWitnessTubeRadius d K e) ^ (d ^ 4 - (3 * d ^ 2 - 2))
   let S := fun s : PVMReverseShape d K =>
-    PVMReverseBlocks.witnessTargets s hd hfloor (2 * Real.sqrt e) (2 * (d : ℝ) * Real.sqrt e)
+    PVMReverseBlocks.witnessTargets s hd hfloor (PVMReverseShape.admissibleBudget_full s hd hfloor) (2 * Real.sqrt e) (2 * (d : ℝ) * Real.sqrt e)
   have hfamily (s : PVMReverseShape d K) :
       unitaryHaar (Fin d × Fin d) (S s) ≤ ENNReal.ofReal B :=
     hbound d K s hd hfloor hd2 _ _ _ hδ.le hδ1 hr hr' hLeak hρ (S s)
-      (PVMReverseBlocks.measurableSet_witnessTargets s hd hfloor _ _) (fun _ hx => hx)
+      (PVMReverseBlocks.measurableSet_witnessTargets s hd hfloor (PVMReverseShape.admissibleBudget_full s hd hfloor) _ _) (fun _ hx => hx)
   have hcard : (Fintype.card (PVMReverseShape d K) : ℝ≥0∞) ≤
       ENNReal.ofReal (Real.exp (3 * (pvmWitnessCoordinateBudget d K : ℝ))) := by
     simpa only [ENNReal.ofReal_natCast] using
@@ -84,7 +84,7 @@ theorem exists_small_radius_pvm_reachable_haar_constant (hGeom : PolynomialImage
 
 /-- PVM Haar bound / one constant covers both error regimes and pure and finite mixed resources.
 The exponent uses real division by two. The sole geometric property remains explicit. -/
-theorem exists_pvm_haar_fraction_constant (hGeom : PolynomialImageVolumeBound) :
+theorem exists_pvm_haar_fraction_constant_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ C : ℝ, 1 ≤ C ∧ ∀ (d K : ℕ), 2 ≤ d → 1 ≤ K → (d : ℝ) ^ 2 / 4 ≤ K →
       ∀ e : ℝ, 0 < e → e ≤ 1 / 2 →
         MeasurableSet (purePVMReachable d K e) ∧ MeasurableSet (mixedPVMReachable d K e) ∧

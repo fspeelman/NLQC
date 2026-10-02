@@ -55,7 +55,7 @@ theorem SmoothCubeDecomposition.volume_image_le_coordinateFibers {a m : ℕ}
     · exact Or.inl ⟨x, mem_iUnion.mpr ⟨⟨i, hdimeq⟩, hi⟩, rfl⟩
     · apply Or.inr
       refine mem_iUnion.mpr ⟨i, ?_⟩
-      rw [if_pos (lt_of_le_of_ne (hd i) hdimeq)]
+      rw [ite_eq_left (lt_of_le_of_ne (hd i) hdimeq)]
       exact ⟨x, hi, rfl⟩
   calc
     _ ≤ volume ((p '' (⋃ i : Top, S i)) ∪ Z) := measure_mono hcover
@@ -80,23 +80,6 @@ theorem coordinate_graph_volume_constant_eq (a m M : ℕ) {R b : ℝ} (hR : 0 �
   rw [hfour, ENNReal.ofReal_mul hb, ENNReal.ofReal_pow (by norm_num), euclidean_closedBall_volume m hR]
   norm_num only [ENNReal.ofReal_ofNat]
   ac_rfl
-
-theorem semialgebraic_image_volume_le
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    {a m : ℕ} {C : Set (RealEuclidean a)} (hC : Semialgebraic C)
-    (hd : coordinateInteriorDimension C ≤ m) {R : ℝ} (hR : 0 ≤ R)
-    (hCball : C ⊆ closedBall 0 R) (M : ℕ)
-    (hfib : ∀ I : Fin m → Fin a, Function.Injective I →
-      ∀ᵐ y, (semialgebraicMapFiber C (coordinateProjection I) y).Finite ∧
-        Nat.card (semialgebraicMapFiber C (coordinateProjection I) y) ≤ M)
-    (p : RealEuclidean a → RealEuclidean m) {U : Set (RealEuclidean a)}
-    (hU : IsOpen U) (hCU : C ⊆ U) (hp : ContDiffOn ℝ 1 p U)
-    {b : ℝ} (hb : 0 ≤ b) (hJ : ∀ x ∈ C, topRealJacobian (fderiv ℝ p x) ≤ b) :
-    volume (p '' C) ≤ ENNReal.ofReal ((4 : ℝ) ^ a) * (M : ℝ≥0∞) *
-      euclideanUnitBallVolume m * ENNReal.ofReal (R ^ m) * ENNReal.ofReal b := by
-  obtain ⟨P⟩ := hC.exists_smoothCubeDecomposition hStratification
-  exact (P.volume_image_le_coordinateFibers (fun i => (P.dimension_le i).trans hd)
-    hCball M hfib p hU hCU hp hb hJ).trans_eq (coordinate_graph_volume_constant_eq a m M hR hb)
 
 end NLQCLean
 end

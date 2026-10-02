@@ -82,7 +82,7 @@ theorem ae_general_target_unitary_gap :
           MixedDiamondGap.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈}
             (U : Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ) K e := by
   intro d hd
-  filter_upwards [ae_not_mem_reachable_zero_unconditional d hd] with U hU
+  filter_upwards [ae_not_mem_reachable_zero d hd] with U hU
   exact fun K => exists_general_target_unitary_gap_of_not_mem_zero hd U
     (fun B => (hU B).1) K
 
@@ -100,7 +100,7 @@ theorem ae_general_target_pvm_gap :
           MixedPVMTVGap.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈}
             (M : Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ) K e := by
   intro d hd
-  filter_upwards [ae_not_mem_reachable_zero_unconditional d hd] with M hM
+  filter_upwards [ae_not_mem_reachable_zero d hd] with M hM
   exact fun K => exists_general_target_pvm_gap_of_not_mem_zero hd M
     (fun B => (hM B).2.2.1) K
 

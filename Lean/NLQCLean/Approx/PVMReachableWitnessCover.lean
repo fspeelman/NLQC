@@ -25,8 +25,8 @@ theorem mem_inverseWitnessTargets_of_adjoint {d K : ℕ} (s : PVMReverseShape d 
     (hd : 0 < d) (hfloor : d ^ 2 ≤ 4 * K) {δ ρ : ℝ}
     {U : Matrix.unitaryGroup (Fin d × Fin d) ℂ}
     {y : RealEuclidean (pvmWitnessCoordinateBudget d K)}
-    (hy : y ∈ (witnessFormat s hd hfloor δ).source)
-    (hdist : ‖(coordinateOverlapPolynomial s hd hfloor).eval y -
+    (hy : y ∈ (witnessFormat s hd hfloor (PVMReverseShape.admissibleBudget_full s hd hfloor) δ).source)
+    (hdist : ‖(coordinateOverlapPolynomial s hd hfloor (PVMReverseShape.admissibleBudget_full s hd hfloor)).eval y -
       overlapOutputCoordinates d (U : Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ)ᴴ‖ ≤ ρ) :
     U ∈ inverseWitnessTargets hd hfloor δ ρ := by
   refine Set.mem_preimage.mpr (Set.mem_iUnion.mpr ⟨s, y, hy, ?_⟩)

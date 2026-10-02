@@ -241,8 +241,9 @@ theorem ae_precompositionTraceWeight_smul_normalizedDensity [Nonempty ι] [Nonem
   by_cases hz : q = 0
   · have hF : F = 0 := operationPrecomposition_eq_zero_of_trace_eq_zero
       E (Φ x) hx.1 (hq.symm.trans hz)
-    rw [hF]
-    simp
+    have hzero (r : ℝ) : r • (0 : MatrixOperation τ κ) = 0 :=
+      (instrument_precomposition_instance_5 (ι := τ) (κ := κ)).toModule.toDistribMulAction.smul_zero r
+    rw [hF, hzero, hzero]
   · rw [smul_smul, mul_inv_cancel₀ hz, one_smul]
 
 /-- Actual input precomposition has a literal measurable normalized density

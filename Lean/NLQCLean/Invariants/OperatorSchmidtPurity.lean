@@ -48,7 +48,7 @@ theorem realign_kroneckerLeft_mul (X : Matrix ι ι ℂ) (H : Matrix (ι × ι) 
   ext p q
   simp only [Matrix.mul_apply, Matrix.kroneckerMap_apply,
     Matrix.one_apply, Fintype.sum_prod_type, mul_ite, ite_mul, zero_mul, mul_zero,
-    Finset.sum_ite_eq, Finset.mem_univ, if_true, realign]
+    Finset.sum_ite_eq, Finset.mem_univ, ite_true, realign]
   rfl
 
 /-- Realignment turns a left action on the second output leg into a right
@@ -302,7 +302,7 @@ theorem basisProj_mul_self : basisProj d * basisProj d = basisProj d := by
   · rw [basisProj_apply, basisProj_apply, basisProj_apply]
     split_ifs <;> simp_all
   · intro k _ hk
-    rw [basisProj_apply, basisProj_apply, if_neg hk]
+    rw [basisProj_apply, basisProj_apply, ite_eq_right hk]
     simp
 
 /-- The rank-one projector `Q = P ⊗ P` on `C^d ⊗ C^d`. -/
@@ -382,14 +382,14 @@ theorem realign_phaseFamily_apply (t : ℝ) (p q : Fin d × Fin d) :
     cornerProj, Matrix.kroneckerMap_apply, basisProj_apply, basisProj_apply,
     Matrix.one_apply, diagBlock, smul_eq_mul]
   by_cases h : p.1 = p.2 ∧ q.1 = q.2
-  · rw [if_pos h, if_pos (by simp [h.1, h.2] : ((p.1, q.1) : Fin d × Fin d) = (p.2, q.2))]
+  · rw [ite_eq_left h, ite_eq_left (by simp [h.1, h.2] : ((p.1, q.1) : Fin d × Fin d) = (p.2, q.2))]
     have hP : (if p.1 = 0 then (if p.2 = 0 then (1 : ℂ) else 0) else 0)
         = if p.1 = 0 then 1 else 0 := by rw [← h.1]; simp
     have hQ : (if q.1 = 0 then (if q.2 = 0 then (1 : ℂ) else 0) else 0)
         = if q.1 = 0 then 1 else 0 := by rw [← h.2]; simp
     rw [hP, hQ]
     by_cases hp : p.1 = 0 <;> by_cases hq : q.1 = 0 <;> simp [hp, hq]
-  · rw [if_neg h, if_neg (by simpa [Prod.ext_iff] using h)]
+  · rw [ite_eq_right h, ite_eq_right (by simpa [Prod.ext_iff] using h)]
     have hz : (if p.1 = 0 then (if p.2 = 0 then (1 : ℂ) else 0) else 0)
         * (if q.1 = 0 then (if q.2 = 0 then (1 : ℂ) else 0) else 0) = 0 := by
       by_cases hp1 : p.1 = 0
@@ -434,10 +434,10 @@ theorem realign_gram_apply (t : ℝ) (p p' : Fin d × Fin d) :
       by_cases h3 : q.1 = q.2 <;> simp_all
   rw [Finset.sum_congr rfl fun q _ => hterm q]
   by_cases h : p.1 = p.2 ∧ p'.1 = p'.2
-  · simp only [if_pos h]
+  · simp only [ite_eq_left h]
     rw [sum_prod_diag (fun c => diagBlock d t p.1 c * star (diagBlock d t p'.1 c)),
       gramBlock]
-  · simp only [if_neg h, Finset.sum_const_zero]
+  · simp only [ite_eq_right h, Finset.sum_const_zero]
 
 /-- **`Tr(S²)` collapses to a sum over the `d × d` block.** -/
 theorem trace_gram_sq (t : ℝ) :
@@ -462,9 +462,9 @@ theorem trace_gram_sq (t : ℝ) :
       by_cases h1 : p.1 = p.2 <;> by_cases h2 : p'.1 = p'.2 <;> simp_all
     rw [Finset.sum_congr rfl fun p' _ => hterm p']
     by_cases h1 : p.1 = p.2
-    · simp only [if_pos h1]
+    · simp only [ite_eq_left h1]
       exact sum_prod_diag (fun b => gramBlock d t p.1 b * gramBlock d t b p.1)
-    · simp only [if_neg h1, Finset.sum_const_zero]
+    · simp only [ite_eq_right h1, Finset.sum_const_zero]
   rw [Matrix.trace]
   simp only [Matrix.diag_apply]
   rw [Finset.sum_congr rfl fun p _ => hstep p]
@@ -490,10 +490,10 @@ noncomputable def cornerVal (d : ℕ) [NeZero d] (t : ℝ) (a : Fin d) : ℂ :=
   if a = 0 then phaseZ t else 1
 
 @[simp] theorem cornerVal_zero (t : ℝ) : cornerVal d t 0 = phaseZ t := by
-  rw [cornerVal, if_pos rfl]
+  rw [cornerVal, ite_eq_left rfl]
 
 theorem cornerVal_of_ne (t : ℝ) {a : Fin d} (ha : a ≠ 0) : cornerVal d t a = 1 := by
-  rw [cornerVal, if_neg ha]
+  rw [cornerVal, ite_eq_right ha]
 
 /-- **`B B†` in closed form**: `G a b = e_a · conj(e_b) + (d-1)`. -/
 theorem gramBlock_eq (t : ℝ) (a b : Fin d) :
@@ -508,7 +508,7 @@ theorem gramBlock_eq (t : ℝ) (a b : Fin d) :
       diagBlock d t a c * star (diagBlock d t b c) = 1 := by
     intro c hc
     have hc0 : c ≠ 0 := by simpa using hc
-    rw [diagBlock, diagBlock, if_neg (fun h => hc0 h.2), if_neg (fun h => hc0 h.2)]
+    rw [diagBlock, diagBlock, ite_eq_right (fun h => hc0 h.2), ite_eq_right (fun h => hc0 h.2)]
     simp
   rw [h0, Finset.sum_congr rfl hrest, Finset.sum_const, nsmul_eq_mul,
     cast_card_compl_zero]

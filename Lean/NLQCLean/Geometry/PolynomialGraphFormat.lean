@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 import NLQCLean.Semialgebraic.BasicClosedFormat
 import NLQCLean.Semialgebraic.Dimension
 import NLQCLean.Semialgebraic.ParametricFormat
+import Mathlib.Algebra.MvPolynomial.CommRing
 
 /-!
 # The polynomial graph has the fixed LRT format
@@ -41,7 +42,7 @@ theorem BoundedPolynomialMap.volume_image_eq_zero_of_dimension_lt {a m : ℕ}
     (p : BoundedPolynomialMap a m) (S : Set (RealEuclidean a)) (ham : a < m) :
     volume (p.eval '' S) = 0 := by
   apply volume_eq_zero_of_dimH_lt
-  have h := (dimH_mono (image_subset_range p.eval S)).trans p.contDiff_eval.dimH_range_le
+  have h := (dimH_mono (image_subset_range p.eval S)).trans (p.contDiff_eval.differentiable one_ne_zero).dimH_range_le
   exact h.trans_lt (by simpa using (show (a : ℝ≥0∞) < m by exact_mod_cast ham))
 
 noncomputable def polynomialGraphEquation {a m : ℕ} (p : BoundedPolynomialMap a m) :

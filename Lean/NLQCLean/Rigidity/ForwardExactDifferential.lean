@@ -119,11 +119,11 @@ theorem insertResource_gram (η θ : ρA × ρB → ℂ) :
     Matrix.one_apply]
   rcases Decidable.em (q = q') with h | h
   · subst h
-    rw [if_pos rfl, mul_one, vecInner, Fintype.sum_prod_type]
+    rw [ite_eq_left rfl, mul_one, vecInner, Fintype.sum_prod_type]
     refine Finset.sum_congr rfl fun r _ => Finset.sum_congr rfl fun s _ => ?_
     rw [insertResource_apply]
     simp
-  · rw [if_neg h, mul_zero]
+  · rw [ite_eq_right h, mul_zero]
     refine Finset.sum_eq_zero fun r _ => Finset.sum_eq_zero fun s _ => ?_
     rw [insertResource_apply]
     rcases Decidable.em (q.1 = q'.1) with h1 | h1
@@ -244,7 +244,7 @@ theorem insertVector_gram {κ ε : Type*} [Fintype κ] [Fintype ε] [DecidableEq
     Fintype.sum_prod_type]
   rcases Decidable.em (k = k') with hk | hk
   · subst hk
-    rw [if_pos rfl, mul_one, vecInner]
+    rw [ite_eq_left rfl, mul_one, vecInner]
     rw [Finset.sum_eq_single_of_mem k (Finset.mem_univ _)]
     · refine Finset.sum_congr rfl fun e _ => ?_
       rw [Matrix.conjTranspose_apply, insertVector_apply, insertVector_apply]
@@ -253,7 +253,7 @@ theorem insertVector_gram {κ ε : Type*} [Fintype κ] [Fintype ε] [DecidableEq
       refine Finset.sum_eq_zero fun e _ => ?_
       rw [Matrix.conjTranspose_apply, insertVector_apply]
       simp [hk'']
-  · rw [if_neg hk, mul_zero]
+  · rw [ite_eq_right hk, mul_zero]
     refine Finset.sum_eq_zero fun k'' _ => Finset.sum_eq_zero fun e _ => ?_
     rw [Matrix.conjTranspose_apply, insertVector_apply, insertVector_apply]
     rcases Decidable.em (k'' = k) with h1 | h1

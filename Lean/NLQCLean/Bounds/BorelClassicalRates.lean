@@ -1,3 +1,4 @@
+import NLQCLean.Geometry.DirectVolume.Assembly
 import NLQCLean.Approx.BorelClassicalSpectralFloors
 import NLQCLean.Bounds.FiniteClassicalStrongUniversal
 import NLQCLean.Bounds.ArbitraryFiniteClassicalAlmostEvery
@@ -77,7 +78,7 @@ theorem mem_borelScoreReachable_of_quantumFootprint
     (T : unitaryGroup (Fin d × Fin d) ℂ) {ε : ℝ} (hd : 0 < d)
     (hK : P.HasQuantumFootprint K) (hscore : 1 - ε ≤ scoreU (T : Matrix _ _ ℂ) (P.operationalChannel.toLinearMap)) :
     T ∈ borelScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} d K ε := by
-  rw [borelScoreReachable, dif_pos hd]
+  rw [borelScoreReachable, dite_eq_left hd]
   exact ⟨s, P, Or.inl ⟨hK, hscore⟩⟩
 
 /-- Original operational error gives score accuracy before branch, component or outcome selection. -/
@@ -98,7 +99,7 @@ theorem mem_borelScoreReachable_of_mixedQuantumFootprint
     (T : unitaryGroup (Fin d × Fin d) ℂ) {ε : ℝ} (hd : 0 < d)
     (hK : P.HasMixedQuantumFootprint m K) (hscore : 1 - ε ≤ scoreU (T : Matrix _ _ ℂ) (P.mixedOperationalChannel m)) :
     T ∈ borelScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} d K ε := by
-  rw [borelScoreReachable, dif_pos hd]
+  rw [borelScoreReachable, dite_eq_left hd]
   exact ⟨s, P, Or.inr ⟨n, m, hK, hscore⟩⟩
 
 /-- Original operational error gives score accuracy before branch, component or outcome selection. -/
@@ -119,7 +120,7 @@ theorem mem_borelPVMScoreReachable_of_quantumFootprint
     (T : unitaryGroup (Fin d × Fin d) ℂ) {ε : ℝ} (hd : 0 < d)
     (hK : P.HasQuantumFootprint K) (hscore : 1 - ε ≤ scorePVM (T : Matrix _ _ ℂ) (P.operationalChannel.toLinearMap)) :
     T ∈ borelPVMScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} d K ε := by
-  rw [borelPVMScoreReachable, dif_pos hd]
+  rw [borelPVMScoreReachable, dite_eq_left hd]
   exact ⟨s, P, Or.inl ⟨hK, hscore⟩⟩
 
 /-- Original operational error gives score accuracy before branch, component or outcome selection. -/
@@ -140,7 +141,7 @@ theorem mem_borelPVMScoreReachable_of_mixedQuantumFootprint
     (T : unitaryGroup (Fin d × Fin d) ℂ) {ε : ℝ} (hd : 0 < d)
     (hK : P.HasMixedQuantumFootprint m K) (hscore : 1 - ε ≤ scorePVM (T : Matrix _ _ ℂ) (P.mixedOperationalChannel m)) :
     T ∈ borelPVMScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} d K ε := by
-  rw [borelPVMScoreReachable, dif_pos hd]
+  rw [borelPVMScoreReachable, dite_eq_left hd]
   exact ⟨s, P, Or.inr ⟨n, m, hK, hscore⟩⟩
 
 /-- Original operational error gives score accuracy before branch, component or outcome selection. -/
@@ -164,7 +165,7 @@ theorem mem_borelSharedRandomScoreReachable_of_sharedRandom
     (T : unitaryGroup (Fin d × Fin d) ℂ) {ε : ℝ} (hd : 0 < d)
     (hK : ∀ᵐ a ∂s.μ, (P a).HasQuantumFootprint K) (hscore : 1 - ε ≤ scoreU (T : Matrix _ _ ℂ) ((sharedRandomOperationalChannel s.μ P).toLinearMap)) :
     T ∈ borelSharedRandomScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε := by
-  rw [borelSharedRandomScoreReachable, dif_pos hd]
+  rw [borelSharedRandomScoreReachable, dite_eq_left hd]
   exact ⟨s, P, Or.inl ⟨hP, hK, hscore⟩⟩
 
 /-- Original operational error gives score accuracy before branch, component or outcome selection. -/
@@ -187,7 +188,7 @@ theorem mem_borelSharedRandomScoreReachable_of_mixedSharedRandom
     (T : unitaryGroup (Fin d × Fin d) ℂ) {ε : ℝ} (hd : 0 < d)
     (hK : ∀ᵐ a ∂s.μ, (P a).HasMixedQuantumFootprint (m a) K) (hscore : 1 - ε ≤ scoreU (T : Matrix _ _ ℂ) ((mixedSharedRandomOperationalChannel s.μ P m).toLinearMap)) :
     T ∈ borelSharedRandomScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε := by
-  rw [borelSharedRandomScoreReachable, dif_pos hd]
+  rw [borelSharedRandomScoreReachable, dite_eq_left hd]
   exact ⟨s, P, Or.inr ⟨n, m, hP, hK, hscore⟩⟩
 
 /-- Original operational error gives score accuracy before branch, component or outcome selection. -/
@@ -210,7 +211,7 @@ theorem mem_borelSharedRandomPVMScoreReachable_of_sharedRandom
     (T : unitaryGroup (Fin d × Fin d) ℂ) {ε : ℝ} (hd : 0 < d)
     (hK : ∀ᵐ a ∂s.μ, (P a).HasQuantumFootprint K) (hscore : 1 - ε ≤ scorePVM (T : Matrix _ _ ℂ) ((sharedRandomOperationalChannel s.μ P).toLinearMap)) :
     T ∈ borelSharedRandomPVMScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε := by
-  rw [borelSharedRandomPVMScoreReachable, dif_pos hd]
+  rw [borelSharedRandomPVMScoreReachable, dite_eq_left hd]
   exact ⟨s, P, Or.inl ⟨hP, hK, hscore⟩⟩
 
 /-- Original operational error gives score accuracy before branch, component or outcome selection. -/
@@ -233,7 +234,7 @@ theorem mem_borelSharedRandomPVMScoreReachable_of_mixedSharedRandom
     (T : unitaryGroup (Fin d × Fin d) ℂ) {ε : ℝ} (hd : 0 < d)
     (hK : ∀ᵐ a ∂s.μ, (P a).HasMixedQuantumFootprint (m a) K) (hscore : 1 - ε ≤ scorePVM (T : Matrix _ _ ℂ) ((mixedSharedRandomOperationalChannel s.μ P m).toLinearMap)) :
     T ∈ borelSharedRandomPVMScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε := by
-  rw [borelSharedRandomPVMScoreReachable, dif_pos hd]
+  rw [borelSharedRandomPVMScoreReachable, dite_eq_left hd]
   exact ⟨s, P, Or.inr ⟨n, m, hP, hK, hscore⟩⟩
 
 /-- Original operational error gives score accuracy before branch, component or outcome selection. -/
@@ -252,13 +253,13 @@ theorem mem_borelSharedRandomPVMScoreReachable_of_mixedSharedRandom_pvmTVError
 end
 
 /-- Full-group outer Haar bound for all actual Borel and averaged score witnesses. -/
-theorem exists_borel_classical_unitary_haar_constant (hGeom : PolynomialImageVolumeBound) :
+theorem exists_borel_classical_unitary_haar_constant_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ C : ℝ, 1 ≤ C ∧ ∀ (d K : ℕ), 2 ≤ d → 1 ≤ K →
       ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 →
         (unitaryHaar (Fin d × Fin d)).toOuterMeasure (borelAllScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε) ≤
           min 1 (ENNReal.ofReal (Real.exp (C * (d : ℝ) ^ 10 * (K : ℝ) ^ 10) *
             ε ^ ((unitaryCodimension d : ℝ) / 2))) := by
-  obtain ⟨C, hC, hbound⟩ := exists_haar_fraction_constant hGeom
+  obtain ⟨C, hC, hbound⟩ := exists_haar_fraction_constant_of_imageVolumeBound hGeom
   refine ⟨16 * C, by linarith, ?_⟩
   intro d K hd hK ε hε hhalf
   obtain ⟨hone, hquarter⟩ := finiteClassical_charged_budget_admissible hd hK
@@ -266,26 +267,23 @@ theorem exists_borel_classical_unitary_haar_constant (hGeom : PolynomialImageVol
   rw [finiteClassical_haar_exponent_eq] at h
   exact (measure_mono (borelAllScoreReachable_subset_pureReachable (by omega : 0 < d) ε)).trans h
 
-/-- This applied outer-measure theorem retains exactly the three geometry arguments. -/
-theorem exists_borel_classical_unitary_haar_constant_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+/-- This applied outer-measure theorem. -/
+theorem exists_borel_classical_unitary_haar_constant :
     ∃ C : ℝ, 1 ≤ C ∧ ∀ (d K : ℕ), 2 ≤ d → 1 ≤ K →
       ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 →
         (unitaryHaar (Fin d × Fin d)).toOuterMeasure (borelAllScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε) ≤
           min 1 (ENNReal.ofReal (Real.exp (C * (d : ℝ) ^ 10 * (K : ℝ) ^ 10) *
             ε ^ ((unitaryCodimension d : ℝ) / 2))) :=
-  exists_borel_classical_unitary_haar_constant (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_borel_classical_unitary_haar_constant_of_imageVolumeBound (DirectVolume.polynomialImageVolumeBound)
 
 /-- Full-group outer Haar bound for all actual Borel and averaged score witnesses. -/
-theorem exists_borel_classical_pvm_haar_constant (hGeom : PolynomialImageVolumeBound) :
+theorem exists_borel_classical_pvm_haar_constant_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ C : ℝ, 1 ≤ C ∧ ∀ (d K : ℕ), 2 ≤ d → 1 ≤ K →
       ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 →
         (unitaryHaar (Fin d × Fin d)).toOuterMeasure (borelAllPVMScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε) ≤
           min 1 (ENNReal.ofReal (Real.exp (C * (d : ℝ) ^ 10 * (K : ℝ) ^ 10) *
             ε ^ ((pvmCodimension d : ℝ) / 2))) := by
-  obtain ⟨C, hC, hbound⟩ := exists_pvm_haar_fraction_constant hGeom
+  obtain ⟨C, hC, hbound⟩ := exists_pvm_haar_fraction_constant_of_imageVolumeBound hGeom
   refine ⟨16 * C, by linarith, ?_⟩
   intro d K hd hK ε hε hhalf
   obtain ⟨hone, hquarter⟩ := finiteClassical_charged_budget_admissible hd hK
@@ -293,24 +291,21 @@ theorem exists_borel_classical_pvm_haar_constant (hGeom : PolynomialImageVolumeB
   rw [finiteClassical_haar_exponent_eq] at h
   exact (measure_mono (borelAllPVMScoreReachable_subset_purePVMReachable (by omega : 0 < d) ε)).trans h
 
-/-- This applied outer-measure theorem retains exactly the three geometry arguments. -/
-theorem exists_borel_classical_pvm_haar_constant_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+/-- This applied outer-measure theorem. -/
+theorem exists_borel_classical_pvm_haar_constant :
     ∃ C : ℝ, 1 ≤ C ∧ ∀ (d K : ℕ), 2 ≤ d → 1 ≤ K →
       ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 →
         (unitaryHaar (Fin d × Fin d)).toOuterMeasure (borelAllPVMScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε) ≤
           min 1 (ENNReal.ofReal (Real.exp (C * (d : ℝ) ^ 10 * (K : ℝ) ^ 10) *
             ε ^ ((pvmCodimension d : ℝ) / 2))) :=
-  exists_borel_classical_pvm_haar_constant (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_borel_classical_pvm_haar_constant_of_imageVolumeBound (DirectVolume.polynomialImageVolumeBound)
 
 /-- Target-dependent actual protocols transfer to the existing charged universal bound. -/
-theorem exists_borel_classical_unitary_universal_log_constant (hGeom : PolynomialImageVolumeBound) :
+theorem exists_borel_classical_unitary_universal_log_constant_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ C : ℝ, 0 < C ∧ ∀ (d K : ℕ), 2 ≤ d → 1 ≤ K →
       ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 → (∀ T, T ∈ borelAllScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε) →
         Real.log (1 / ε) ≤ C * (d : ℝ) ^ 6 * (K : ℝ) ^ 10 := by
-  obtain ⟨c, hc, hbound⟩ := exists_universal_resource_constant hGeom
+  obtain ⟨c, hc, hbound⟩ := exists_universal_resource_constant_of_imageVolumeBound hGeom
   refine ⟨16 / c ^ 2, by positivity, ?_⟩
   intro d K hd hK ε hε hhalf hreach
   have hd0 : 0 < d := by omega
@@ -320,22 +315,19 @@ theorem exists_borel_classical_unitary_universal_log_constant (hGeom : Polynomia
   have h := (hbound d (4 * d ^ 4 * K ^ 5) hd (finiteClassical_charged_budget_admissible hd hK).1 ε hε hhalf).1 (fun T => borelAllScoreReachable_subset_pureReachable hd0 ε (hreach T))
   simpa only [Nat.cast_mul, Nat.cast_pow, Nat.cast_ofNat] using h
 
-/-- The universal conclusion retains exactly the unchanged three geometry arguments. -/
-theorem exists_borel_classical_unitary_universal_log_constant_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+/-- The universal conclusion. -/
+theorem exists_borel_classical_unitary_universal_log_constant :
     ∃ C : ℝ, 0 < C ∧ ∀ (d K : ℕ), 2 ≤ d → 1 ≤ K →
       ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 → (∀ T, T ∈ borelAllScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε) →
         Real.log (1 / ε) ≤ C * (d : ℝ) ^ 6 * (K : ℝ) ^ 10 :=
-  exists_borel_classical_unitary_universal_log_constant (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_borel_classical_unitary_universal_log_constant_of_imageVolumeBound (DirectVolume.polynomialImageVolumeBound)
 
 /-- Target-dependent actual protocols transfer to the existing charged universal bound. -/
-theorem exists_borel_classical_pvm_universal_log_constant (hGeom : PolynomialImageVolumeBound) :
+theorem exists_borel_classical_pvm_universal_log_constant_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ C : ℝ, 0 < C ∧ ∀ (d K : ℕ), 2 ≤ d → 1 ≤ K →
       ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 → (∀ T, T ∈ borelAllPVMScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε) →
         Real.log (1 / ε) ≤ C * (d : ℝ) ^ 6 * (K : ℝ) ^ 10 := by
-  obtain ⟨c, hc, hbound⟩ := exists_pvm_universal_resource_constant.{0, 0, 0, 0, 0, 0, 0, 0} hGeom
+  obtain ⟨c, hc, hbound⟩ := exists_pvm_universal_resource_constant_of_imageVolumeBound.{0, 0, 0, 0, 0, 0, 0, 0} hGeom
   refine ⟨16 / c ^ 2, by positivity, ?_⟩
   intro d K hd _hK ε hε hhalf hreach
   have hd0 : 0 < d := by omega
@@ -345,22 +337,19 @@ theorem exists_borel_classical_pvm_universal_log_constant (hGeom : PolynomialIma
   have h := (hbound d (4 * d ^ 4 * K ^ 5) hd ε hε hhalf).1 (fun T => borelAllPVMScoreReachable_subset_purePVMReachable hd0 ε (hreach T))
   simpa only [Nat.cast_mul, Nat.cast_pow, Nat.cast_ofNat] using h
 
-/-- The universal conclusion retains exactly the unchanged three geometry arguments. -/
-theorem exists_borel_classical_pvm_universal_log_constant_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+/-- The universal conclusion. -/
+theorem exists_borel_classical_pvm_universal_log_constant :
     ∃ C : ℝ, 0 < C ∧ ∀ (d K : ℕ), 2 ≤ d → 1 ≤ K →
       ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 → (∀ T, T ∈ borelAllPVMScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε) →
         Real.log (1 / ε) ≤ C * (d : ℝ) ^ 6 * (K : ℝ) ^ 10 :=
-  exists_borel_classical_pvm_universal_log_constant (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_borel_classical_pvm_universal_log_constant_of_imageVolumeBound (DirectVolume.polynomialImageVolumeBound)
 
 /-- Target-dependent actual protocols transfer to the existing charged universal bound. -/
-theorem exists_borel_classical_strong_unitary_universal_log_constant (hGeom : PolynomialImageVolumeBound) :
+theorem exists_borel_classical_strong_unitary_universal_log_constant_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ C : ℝ, 0 < C ∧ ∀ (d K : ℕ), 2 ≤ d → 1 ≤ K →
       ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 → (∀ T, T ∈ borelAllScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε) →
         Real.log (1 / ε) ≤ C * (d : ℝ) ^ 4 * (K : ℝ) ^ 10 := by
-  obtain ⟨c, hc, hbound⟩ := exists_strongUniversalResourceBound hGeom
+  obtain ⟨c, hc, hbound⟩ := exists_strongUniversalResourceBound_of_imageVolumeBound hGeom
   refine ⟨16 / c ^ 2, by positivity, ?_⟩
   intro d K hd _hK ε hε hhalf hreach
   have hd0 : 0 < d := by omega
@@ -370,19 +359,16 @@ theorem exists_borel_classical_strong_unitary_universal_log_constant (hGeom : Po
   have h := (hbound d (4 * d ^ 4 * K ^ 5) hd ε hε hhalf).1 (fun T => borelAllScoreReachable_subset_pureReachable hd0 ε (hreach T))
   simpa only [Nat.cast_mul, Nat.cast_pow, Nat.cast_ofNat] using h
 
-/-- The universal conclusion retains exactly the unchanged three geometry arguments. -/
-theorem exists_borel_classical_strong_unitary_universal_log_constant_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+/-- The universal conclusion. -/
+theorem exists_borel_classical_strong_unitary_universal_log_constant :
     ∃ C : ℝ, 0 < C ∧ ∀ (d K : ℕ), 2 ≤ d → 1 ≤ K →
       ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 → (∀ T, T ∈ borelAllScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε) →
         Real.log (1 / ε) ≤ C * (d : ℝ) ^ 4 * (K : ℝ) ^ 10 :=
-  exists_borel_classical_strong_unitary_universal_log_constant (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_borel_classical_strong_unitary_universal_log_constant_of_imageVolumeBound (DirectVolume.polynomialImageVolumeBound)
 
 /-- One fixed-target threshold precedes budget, error, all original systems
 and every actual measured average. Budget zero is included. -/
-theorem exists_ae_borel_classical_log_constant (hGeom : PolynomialImageVolumeBound) :
+theorem exists_ae_borel_classical_log_constant_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ C : ℝ, 0 < C ∧ ∀ d : ℕ, 2 ≤ d →
       ∀ᵐ (T : unitaryGroup (Fin d × Fin d) ℂ) ∂unitaryHaar (Fin d × Fin d),
       ∃ ε₀ : ℝ, 0 < ε₀ ∧ ε₀ ≤ 1 / 2 ∧ ∀ (K : ℕ) (ε : ℝ), 0 < ε → ε ≤ ε₀ →
@@ -390,7 +376,7 @@ theorem exists_ae_borel_classical_log_constant (hGeom : PolynomialImageVolumeBou
           Real.log (1 / ε) ≤ C * (d : ℝ) ^ 6 * (K : ℝ) ^ 10) ∧
         (T ∈ borelAllPVMScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε →
           Real.log (1 / ε) ≤ C * (d : ℝ) ^ 6 * (K : ℝ) ^ 10) := by
-  obtain ⟨c, hc, hae⟩ := exists_ae_resource_constant.{0, 0, 0, 0, 0, 0, 0, 0} hGeom
+  obtain ⟨c, hc, hae⟩ := exists_ae_resource_constant_of_imageVolumeBound.{0, 0, 0, 0, 0, 0, 0, 0} hGeom
   refine ⟨16 / c ^ 2, by positivity, fun d hd => ?_⟩
   have hd0 : 0 < d := by omega
   filter_upwards [hae d hd] with T hT
@@ -410,11 +396,8 @@ theorem exists_ae_borel_classical_log_constant (hGeom : PolynomialImageVolumeBou
     simpa only [Nat.cast_mul, Nat.cast_pow, Nat.cast_ofNat] using
       hbound.2.2.1 (borelAllPVMScoreReachable_subset_purePVMReachable hd0 ε hreach)
 
-/-- Applied fixed-target rates retain exactly the existing three geometry arguments. -/
-theorem exists_ae_borel_classical_log_constant_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+/-- Applied fixed-target rates. -/
+theorem exists_ae_borel_classical_log_constant :
     ∃ C : ℝ, 0 < C ∧ ∀ d : ℕ, 2 ≤ d →
       ∀ᵐ (T : unitaryGroup (Fin d × Fin d) ℂ) ∂unitaryHaar (Fin d × Fin d),
       ∃ ε₀ : ℝ, 0 < ε₀ ∧ ε₀ ≤ 1 / 2 ∧ ∀ (K : ℕ) (ε : ℝ), 0 < ε → ε ≤ ε₀ →
@@ -422,6 +405,6 @@ theorem exists_ae_borel_classical_log_constant_of_external
           Real.log (1 / ε) ≤ C * (d : ℝ) ^ 6 * (K : ℝ) ^ 10) ∧
         (T ∈ borelAllPVMScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε →
           Real.log (1 / ε) ≤ C * (d : ℝ) ^ 6 * (K : ℝ) ^ 10) :=
-  exists_ae_borel_classical_log_constant (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_ae_borel_classical_log_constant_of_imageVolumeBound (DirectVolume.polynomialImageVolumeBound)
 
 end NLQCLean.ClassicalCommunication

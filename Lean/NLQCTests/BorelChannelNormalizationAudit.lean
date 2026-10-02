@@ -35,6 +35,13 @@ set_option pp.universes true in
 #print axioms NLQCLean.ClassicalCommunication.completelyPositive_integral
 
 set_option pp.universes true in
+#check @NLQCLean.ClassicalCommunication.integrable_tensorContinuousChannels_prod
+
+/-- info: 'NLQCLean.ClassicalCommunication.integrable_tensorContinuousChannels_prod' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms NLQCLean.ClassicalCommunication.integrable_tensorContinuousChannels_prod
+
+set_option pp.universes true in
 #check @NLQCLean.ClassicalCommunication.integral_tensorContinuousChannels_prod
 
 /-- info: 'NLQCLean.ClassicalCommunication.integral_tensorContinuousChannels_prod' depends on axioms: [propext, Classical.choice, Quot.sound] -/

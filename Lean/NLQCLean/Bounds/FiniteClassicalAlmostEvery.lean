@@ -1,3 +1,4 @@
+import NLQCLean.Geometry.DirectVolume.Assembly
 import NLQCLean.Bounds.FiniteClassicalHaar
 
 /-!
@@ -18,7 +19,7 @@ open Matrix MeasureTheory
 /-- One universal constant precedes the dimension and fixed target. Almost
 every target has one threshold serving every quantum budget, including zero,
 and all four finite-shape unitary and joint-label PVM score classes. -/
-theorem exists_ae_finite_classical_log_constant
+theorem exists_ae_finite_classical_log_constant_of_imageVolumeBound
     (hGeom : PolynomialImageVolumeBound) :
     ∃ C : ℝ, 0 < C ∧ ∀ d : ℕ, 2 ≤ d →
       ∀ᵐ (T : unitaryGroup (Fin d × Fin d) ℂ) ∂unitaryHaar (Fin d × Fin d),
@@ -33,7 +34,7 @@ theorem exists_ae_finite_classical_log_constant
           (T ∈ finiteMixedPVMScoreReachable d K ε →
             Real.log (1 / ε) ≤ C * (d : ℝ) ^ 6 * (K : ℝ) ^ 10) := by
   obtain ⟨c, hc, hae⟩ :=
-    exists_ae_resource_constant.{0, 0, 0, 0, 0, 0, 0, 0} hGeom
+    exists_ae_resource_constant_of_imageVolumeBound.{0, 0, 0, 0, 0, 0, 0, 0} hGeom
   refine ⟨16 / c ^ 2, by positivity, fun d hd => ?_⟩
   have hd0 : 0 < d := by omega
   filter_upwards [hae d hd] with T hT
@@ -58,10 +59,7 @@ theorem exists_ae_finite_classical_log_constant
 /-- The finite-shape almost-every applied bound retains exactly the three
 original geometry arguments. The target-dependent threshold is unchanged by
 compression and still precedes all budgets, errors and finite protocols. -/
-theorem exists_ae_finite_classical_log_constant_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+theorem exists_ae_finite_classical_log_constant :
     ∃ C : ℝ, 0 < C ∧ ∀ d : ℕ, 2 ≤ d →
       ∀ᵐ (T : unitaryGroup (Fin d × Fin d) ℂ) ∂unitaryHaar (Fin d × Fin d),
       ∃ ε₀ : ℝ, 0 < ε₀ ∧ ε₀ ≤ 1 / 2 ∧
@@ -74,7 +72,7 @@ theorem exists_ae_finite_classical_log_constant_of_external
             Real.log (1 / ε) ≤ C * (d : ℝ) ^ 6 * (K : ℝ) ^ 10) ∧
           (T ∈ finiteMixedPVMScoreReachable d K ε →
             Real.log (1 / ε) ≤ C * (d : ℝ) ^ 6 * (K : ℝ) ^ 10) :=
-  exists_ae_finite_classical_log_constant
-    (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_ae_finite_classical_log_constant_of_imageVolumeBound
+    (DirectVolume.polynomialImageVolumeBound)
 
 end NLQCLean.ClassicalCommunication

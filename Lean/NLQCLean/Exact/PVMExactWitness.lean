@@ -73,22 +73,22 @@ variable {d K : ℕ} (s : PVMReverseShape d K) (hd : 0 < d) (hfloor : d ^ 2 ≤ 
 
 /-- The evaluated extended cubic PVM witness polynomial is globally smooth. -/
 theorem contDiff_coordinateOverlapPolynomial_eval :
-    ContDiff ℝ ∞ (coordinateOverlapPolynomial s hd hfloor).eval := by
-  have he : (coordinateOverlapPolynomial s hd hfloor).eval = coordinateOverlap s hd hfloor :=
-    funext (coordinateOverlapPolynomial_eval s hd hfloor)
+    ContDiff ℝ ∞ (coordinateOverlapPolynomial s hd hfloor (PVMReverseShape.admissibleBudget_full s hd hfloor)).eval := by
+  have he : (coordinateOverlapPolynomial s hd hfloor (PVMReverseShape.admissibleBudget_full s hd hfloor)).eval = coordinateOverlap s hd hfloor (PVMReverseShape.admissibleBudget_full s hd hfloor) :=
+    funext (coordinateOverlapPolynomial_eval s hd hfloor (PVMReverseShape.admissibleBudget_full s hd hfloor))
   rw [he]
-  exact contDiff_coordinateOverlap s hd hfloor
+  exact contDiff_coordinateOverlap s hd hfloor (PVMReverseShape.admissibleBudget_full s hd hfloor)
 
 /-- On the zero-leakage source the error term of the ambient rank-plus-error
 decomposition vanishes, so the full ambient derivative itself has real rank at
 most `3d² - 2`. -/
 theorem finrank_range_fderiv_coordinateOverlapPolynomial_le (hd2 : 2 ≤ d)
     {x : RealEuclidean (pvmWitnessCoordinateBudget d K)}
-    (hx : x ∈ (witnessFormat s hd hfloor 0).source) :
+    (hx : x ∈ (witnessFormat s hd hfloor (PVMReverseShape.admissibleBudget_full s hd hfloor) 0).source) :
     Module.finrank ℝ
-        (LinearMap.range (fderiv ℝ (coordinateOverlapPolynomial s hd hfloor).eval x).toLinearMap) ≤
+        (LinearMap.range (fderiv ℝ (coordinateOverlapPolynomial s hd hfloor (PVMReverseShape.admissibleBudget_full s hd hfloor)).eval x).toLinearMap) ≤
       3 * d ^ 2 - 2 := by
-  obtain ⟨T, R, he, hT, _, hR⟩ := witnessFormat_ambient_rank_error s hd hfloor hd2 le_rfl hx
+  obtain ⟨T, R, he, hT, _, hR⟩ := witnessFormat_ambient_rank_error s hd hfloor (PVMReverseShape.admissibleBudget_full s hd hfloor) hd2 le_rfl hx
   have hR0 : R = 0 := norm_le_zero_iff.mp (by simpa using hR)
   rw [he, hR0, add_zero]
   exact hT
@@ -121,8 +121,8 @@ witness source. -/
 theorem exists_exact_pvm_witness_of_mem_purePVMReachable_zero {d K : ℕ} (hd : 0 < d)
     (hfloor : d ^ 2 ≤ 4 * K) :
     ∀ M ∈ purePVMReachable d K 0, ∃ s : PVMReverseShape d K,
-      ∃ y ∈ (PVMReverseBlocks.witnessFormat s hd hfloor 0).source,
-        pvmOutputDecoding d ((PVMReverseBlocks.coordinateOverlapPolynomial s hd hfloor).eval y) =
+      ∃ y ∈ (PVMReverseBlocks.witnessFormat s hd hfloor (PVMReverseShape.admissibleBudget_full s hd hfloor) 0).source,
+        pvmOutputDecoding d ((PVMReverseBlocks.coordinateOverlapPolynomial s hd hfloor (PVMReverseShape.admissibleBudget_full s hd hfloor)).eval y) =
           (M : Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ) := by
   rintro M ⟨t, P, hP, hscore⟩
   -- The floor proof returned by coverage is identified with `hfloor` by proof irrelevance.
@@ -136,8 +136,8 @@ theorem exists_exact_pvm_witness_of_mem_purePVMReachable_zero {d K : ℕ} (hd : 
 theorem exists_exact_pvm_witness_of_mem_mixedPVMReachable_zero {d K : ℕ} (hd : 0 < d)
     (hfloor : d ^ 2 ≤ 4 * K) :
     ∀ M ∈ mixedPVMReachable d K 0, ∃ s : PVMReverseShape d K,
-      ∃ y ∈ (PVMReverseBlocks.witnessFormat s hd hfloor 0).source,
-        pvmOutputDecoding d ((PVMReverseBlocks.coordinateOverlapPolynomial s hd hfloor).eval y) =
+      ∃ y ∈ (PVMReverseBlocks.witnessFormat s hd hfloor (PVMReverseShape.admissibleBudget_full s hd hfloor) 0).source,
+        pvmOutputDecoding d ((PVMReverseBlocks.coordinateOverlapPolynomial s hd hfloor (PVMReverseShape.admissibleBudget_full s hd hfloor)).eval y) =
           (M : Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ) := by
   rw [mixedPVMReachable_eq_purePVMReachable]
   exact exists_exact_pvm_witness_of_mem_purePVMReachable_zero hd hfloor
@@ -150,8 +150,8 @@ theorem coe_purePVMReachable_zero_subset_iUnion_witnessImage {d K : ℕ} (hd : 0
         purePVMReachable d K 0 ⊆
       ⋃ s : PVMReverseShape d K,
         (fun y => pvmOutputDecoding d
-            ((PVMReverseBlocks.coordinateOverlapPolynomial s hd hfloor).eval y)) ''
-          (PVMReverseBlocks.witnessFormat s hd hfloor 0).source := by
+            ((PVMReverseBlocks.coordinateOverlapPolynomial s hd hfloor (PVMReverseShape.admissibleBudget_full s hd hfloor)).eval y)) ''
+          (PVMReverseBlocks.witnessFormat s hd hfloor (PVMReverseShape.admissibleBudget_full s hd hfloor) 0).source := by
   rintro _ ⟨M, hM, rfl⟩
   obtain ⟨s, y, hy, he⟩ := exists_exact_pvm_witness_of_mem_purePVMReachable_zero hd hfloor M hM
   exact Set.mem_iUnion.mpr ⟨s, y, hy, he⟩

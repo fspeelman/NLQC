@@ -1,3 +1,4 @@
+import NLQCLean.Geometry.DirectVolume.Assembly
 import NLQCLean.Bounds.StrongHaarConditional
 import NLQCLean.Bounds.AlmostEveryTargets
 import NLQCLean.Semialgebraic.ProjectionTheorem
@@ -64,7 +65,7 @@ theorem exists_ae_swapNeighborhood_forbidden_error_constant
         ∃ K₀ : ℕ, 1 ≤ K₀ ∧ ∀ K : ℕ, K₀ ≤ K →
           T ∉ pureReachable d K (Real.exp (-(A * (K : ℝ) ^ 2 / (d : ℝ) ^ 4))) ∧
           T ∉ mixedReachable d K (Real.exp (-(A * (K : ℝ) ^ 2 / (d : ℝ) ^ 4))) := by
-  obtain ⟨C, hC, hbound⟩ := exists_strongRestrictedHaarBound hGeom
+  obtain ⟨C, hC, hbound⟩ := exists_strongRestrictedHaarBound_of_imageVolumeBound hGeom
   let A : ℝ := 16 * (C + 1)
   have hA : 1 ≤ A := by dsimp [A]; linarith
   refine ⟨A, hA, fun d hd => ?_⟩
@@ -90,7 +91,7 @@ theorem exists_ae_swapNeighborhood_forbidden_error_constant
 
 /-- One universal constant and one target-dependent threshold serve every budget
 and all four score/normalized-diamond pure/common-map mixed reachable sets. -/
-theorem exists_ae_swapNeighborhood_resource_constant (hGeom : PolynomialImageVolumeBound) :
+theorem exists_ae_swapNeighborhood_resource_constant_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ c : ℝ, 0 < c ∧ ∀ d : ℕ, 2 ≤ d →
       ∀ᵐ (T : unitaryGroup (Fin d × Fin d) ℂ) ∂unitaryHaar (Fin d × Fin d),
         T ∈ swapNeighborhood d →
@@ -144,7 +145,7 @@ theorem exists_ae_swapNeighborhood_resource_constant (hGeom : PolynomialImageVol
 /-- Regional rates on arbitrary finite original registers. The mixed resource
 uses a component Schmidt-number bound and common local maps; both complete
 message dimensions remain charged. -/
-theorem exists_ae_swapNeighborhood_physical_resource_constant
+theorem exists_ae_swapNeighborhood_physical_resource_constant_of_imageVolumeBound
     (hGeom : PolynomialImageVolumeBound) :
     ∃ c : ℝ, 0 < c ∧ ∀ d : ℕ, 2 ≤ d →
       ∀ᵐ (T : unitaryGroup (Fin d × Fin d) ℂ) ∂unitaryHaar (Fin d × Fin d),
@@ -171,7 +172,7 @@ theorem exists_ae_swapNeighborhood_physical_resource_constant
               (1 - e ≤ scoreU (T : Matrix _ _ ℂ) (m.mixedChannel VA VB DA DB) ∨
                 diamondError (m.mixedChannel VA VB DA DB) (adConj (T : Matrix _ _ ℂ)) ≤ e) →
               c * (d : ℝ) ^ 2 * Real.sqrt (Real.log (1 / e)) ≤ K) := by
-  obtain ⟨c, hc, h⟩ := exists_ae_swapNeighborhood_resource_constant.{0, 0, 0, 0, 0, 0, 0, 0} hGeom
+  obtain ⟨c, hc, h⟩ := exists_ae_swapNeighborhood_resource_constant_of_imageVolumeBound.{0, 0, 0, 0, 0, 0, 0, 0} hGeom
   refine ⟨c, hc, fun d hd => (h d hd).mono fun T hT hswap => ?_⟩
   obtain ⟨e₀, he₀, he₀half, hT⟩ := hT hswap
   have : NeZero d := ⟨by omega⟩
@@ -186,12 +187,8 @@ theorem exists_ae_swapNeighborhood_physical_resource_constant
       (m.mem_mixedReachable VA VB DA DB hVA hVB hDA hDB hR hK
         (hs.elim id (m.scoreU_ge_of_diamondError_le hVA hVB hDA hDB hU)))
 
-/-- Regional rate with exactly three geometry inputs. Projection is supplied by
-the checked semialgebraic projection theorem. -/
-theorem exists_ae_swapNeighborhood_resource_constant_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+/-- Regional rate. -/
+theorem exists_ae_swapNeighborhood_resource_constant :
     ∃ c : ℝ, 0 < c ∧ ∀ d : ℕ, 2 ≤ d →
       ∀ᵐ (T : unitaryGroup (Fin d × Fin d) ℂ) ∂unitaryHaar (Fin d × Fin d),
         T ∈ swapNeighborhood d →
@@ -204,16 +201,12 @@ theorem exists_ae_swapNeighborhood_resource_constant_of_external
             c * (d : ℝ) ^ 2 * Real.sqrt (Real.log (1 / e)) ≤ K) ∧
           (T ∈ mixedDiamondReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} d K e →
             c * (d : ℝ) ^ 2 * Real.sqrt (Real.log (1 / e)) ≤ K) :=
-  exists_ae_swapNeighborhood_resource_constant.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈}
-    (polynomialImageVolumeBound_of_external hLRT semialgebraicProjectionTheorem
-      hStratification hComponents)
+  exists_ae_swapNeighborhood_resource_constant_of_imageVolumeBound.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈}
+    (DirectVolume.polynomialImageVolumeBound)
 
 /-- Regional physical rate with a single threshold before all budgets and
-arbitrary finite original registers, under exactly three geometry premises. -/
-theorem exists_ae_swapNeighborhood_physical_resource_constant_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+arbitrary finite original registers. -/
+theorem exists_ae_swapNeighborhood_physical_resource_constant :
     ∃ c : ℝ, 0 < c ∧ ∀ d : ℕ, 2 ≤ d →
       ∀ᵐ (T : unitaryGroup (Fin d × Fin d) ℂ) ∂unitaryHaar (Fin d × Fin d),
         T ∈ swapNeighborhood d →
@@ -239,8 +232,7 @@ theorem exists_ae_swapNeighborhood_physical_resource_constant_of_external
               (1 - e ≤ scoreU (T : Matrix _ _ ℂ) (m.mixedChannel VA VB DA DB) ∨
                 diamondError (m.mixedChannel VA VB DA DB) (adConj (T : Matrix _ _ ℂ)) ≤ e) →
               c * (d : ℝ) ^ 2 * Real.sqrt (Real.log (1 / e)) ≤ K) :=
-  exists_ae_swapNeighborhood_physical_resource_constant.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈}
-    (polynomialImageVolumeBound_of_external hLRT semialgebraicProjectionTheorem
-      hStratification hComponents)
+  exists_ae_swapNeighborhood_physical_resource_constant_of_imageVolumeBound.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈}
+    (DirectVolume.polynomialImageVolumeBound)
 
 end NLQCLean

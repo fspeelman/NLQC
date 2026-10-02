@@ -35,7 +35,7 @@ private theorem zero_mem_convexHull_image_of_submodule
   let g : α → W := fun a => if ha : a ∈ G then ⟨f a, hW a ha⟩ else 0
   have hg : ∀ a ∈ G, (g a : E) = f a := by
     intro a ha
-    simp only [g, dif_pos ha]
+    simp only [g, dite_eq_left ha]
   have hgf : (fun a => (g a : E)) =ᵐ[μ] f := hG.mono fun a ha => hg a ha
   have hcomp : Integrable (W.subtypeₗᵢ ∘ g) μ := hf.congr hgf.symm
   have hgi : Integrable g μ :=

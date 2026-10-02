@@ -9,6 +9,7 @@ import NLQCLean.Semialgebraic.Objects
 
 Sources and side conditions are listed per clause below and
 audited in `docs/LRT44_API_AUDIT.md`. No proposition is assumed globally.
+The projection proposition is proved (`semialgebraicProjectionTheorem`).
 Application-specific chart estimates, fiber counts and nullity are absent.
 -/
 
@@ -21,19 +22,6 @@ first n coordinates preserves existence of a finite polynomial description. -/
 def SemialgebraicProjectionTheorem : Prop :=
   ∀ n : ℕ, ∀ A : Set (RealEuclidean (n + 1)), Semialgebraic A →
     Semialgebraic (coordinateProjection (Fin.castAdd 1) '' A)
-
-/-- Coste Corollary 3.8, printed p.48 / PDF p.49, weakened from
-Nash to C1 embedded cubes. Compatibility is with finitely many subsets.
-The frontier equality is relative to S, not to the ambient space. -/
-def SemialgebraicSmoothStratificationTheorem : Prop :=
-  ∀ n : ℕ, ∀ S : Set (RealEuclidean n), Semialgebraic S →
-    ∀ q : ℕ, ∀ T : Fin q → Set (RealEuclidean n),
-      (∀ j, Semialgebraic (T j) ∧ T j ⊆ S) →
-      ∃ P : SmoothCubeDecomposition S,
-        (∀ i j, P.piece i ⊆ T j ∨ Disjoint (P.piece i) (T j)) ∧
-        (∀ i, ∃ J : Finset (Fin P.count),
-          (∀ j ∈ J, P.dimension j < P.dimension i) ∧
-          closure (P.piece i) ∩ S = P.piece i ∪ ⋃ j ∈ J, P.piece j)
 
 /-- Coste Proposition 3.15, printed pp.55--56 / PDF pp.56--57.
 The coordinate/chart dictionary is proved by
@@ -78,16 +66,6 @@ def SemialgebraicDimensionFiberTheorem : Prop :=
 def SemialgebraicDimensionTheorems : Prop :=
   SemialgebraicDimensionStrataTheorem ∧ SemialgebraicDimensionImageTheorem ∧
     SemialgebraicDimensionFiberTheorem
-
-/-- Coste Proposition 4.13, printed p.70 / PDF p.71. Positive
-ambient dimension and atom count; arbitrary real coefficients; degrees at
-most D with D>=2. Both finiteness and the count of components occur. -/
-def SemialgebraicComponentBoundTheorem : Prop :=
-  ∀ n D : ℕ, 1 ≤ n → 2 ≤ D → ∀ L : List (PolynomialSystemAtom n),
-    1 ≤ L.length → (∀ A ∈ L, A.polynomial.totalDegree ≤ D) →
-      Finite (ConnectedComponents (polynomialSystemSource L)) ∧
-        Nat.card (ConnectedComponents (polynomialSystemSource L)) ≤
-          D * (2 * D - 1) ^ (n + L.length - 1)
 
 end NLQCLean
 end

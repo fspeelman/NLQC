@@ -35,7 +35,7 @@ theorem pow_le_abs_det_of_expansion
       _ = e.symm.toLinearMap.normDet := e.symm.toLinearMap.normDet_eq_abs_det.symm
       _ ≤ ∏ i, ‖e.symm (b i)‖ := normDet_le_prod_norm _ b
       _ ≤ ∏ _ : Fin (finrank ℝ E), c⁻¹ := by
-        apply Finset.prod_le_prod (fun _ _ => norm_nonneg _)
+        apply Finset.prod_le_prod₀ (fun _ _ => norm_nonneg _)
         intro i _
         simpa only [b.orthonormal.1 i, mul_one] using hi (b i)
       _ = _ := by simp

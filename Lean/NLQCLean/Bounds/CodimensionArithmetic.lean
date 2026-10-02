@@ -1,5 +1,5 @@
 import Lean.Elab.Tactic.Omega
-import Mathlib.Data.Real.Basic
+import Mathlib.Basic.Real.Basic
 import Mathlib.Tactic.Linarith
 import Mathlib.Tactic.Ring
 

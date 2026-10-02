@@ -86,15 +86,15 @@ theorem reference_pvm_output_decoding (d : ℕ) (v : RealEuclidean (2 * d ^ 4)) 
 
 theorem reference_pvm_exact_witness {d K : ℕ} (hd : 0 < d) (hfloor : d ^ 2 ≤ 4 * K) :
     ∀ M ∈ purePVMReachable d K 0, ∃ s : PVMReverseShape d K,
-      ∃ y ∈ (PVMReverseBlocks.witnessFormat s hd hfloor 0).source,
-        pvmOutputDecoding d ((PVMReverseBlocks.coordinateOverlapPolynomial s hd hfloor).eval y) =
+      ∃ y ∈ (PVMReverseBlocks.witnessFormat s hd hfloor (PVMReverseShape.admissibleBudget_full s hd hfloor) 0).source,
+        pvmOutputDecoding d ((PVMReverseBlocks.coordinateOverlapPolynomial s hd hfloor (PVMReverseShape.admissibleBudget_full s hd hfloor)).eval y) =
           (M : Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ) :=
   exists_exact_pvm_witness_of_mem_purePVMReachable_zero hd hfloor
 
 theorem reference_pvm_exact_witness_mixed {d K : ℕ} (hd : 0 < d) (hfloor : d ^ 2 ≤ 4 * K) :
     ∀ M ∈ mixedPVMReachable d K 0, ∃ s : PVMReverseShape d K,
-      ∃ y ∈ (PVMReverseBlocks.witnessFormat s hd hfloor 0).source,
-        pvmOutputDecoding d ((PVMReverseBlocks.coordinateOverlapPolynomial s hd hfloor).eval y) =
+      ∃ y ∈ (PVMReverseBlocks.witnessFormat s hd hfloor (PVMReverseShape.admissibleBudget_full s hd hfloor) 0).source,
+        pvmOutputDecoding d ((PVMReverseBlocks.coordinateOverlapPolynomial s hd hfloor (PVMReverseShape.admissibleBudget_full s hd hfloor)).eval y) =
           (M : Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ) :=
   exists_exact_pvm_witness_of_mem_mixedPVMReachable_zero hd hfloor
 
@@ -110,16 +110,16 @@ example {d : ℕ} (hd : 0 < d) : purePVMReachable d 0 0 = ∅ :=
 
 theorem reference_pvm_exact_rank {d K : ℕ} (hd : 0 < d) (hfloor : d ^ 2 ≤ 4 * K) (hd2 : 2 ≤ d)
     (s : PVMReverseShape d K) :
-    ∀ y ∈ (PVMReverseBlocks.witnessFormat s hd hfloor 0).source,
+    ∀ y ∈ (PVMReverseBlocks.witnessFormat s hd hfloor (PVMReverseShape.admissibleBudget_full s hd hfloor) 0).source,
       Module.finrank ℝ
           (LinearMap.range
-            (fderiv ℝ (PVMReverseBlocks.coordinateOverlapPolynomial s hd hfloor).eval y).toLinearMap) ≤
+            (fderiv ℝ (PVMReverseBlocks.coordinateOverlapPolynomial s hd hfloor (PVMReverseShape.admissibleBudget_full s hd hfloor)).eval y).toLinearMap) ≤
         3 * d ^ 2 - 2 :=
   fun _ hy => PVMReverseBlocks.finrank_range_fderiv_coordinateOverlapPolynomial_le s hd hfloor hd2 hy
 
 theorem reference_pvm_contDiff {d K : ℕ} (s : PVMReverseShape d K) (hd : 0 < d)
     (hfloor : d ^ 2 ≤ 4 * K) :
-    ContDiff ℝ ∞ (PVMReverseBlocks.coordinateOverlapPolynomial s hd hfloor).eval :=
+    ContDiff ℝ ∞ (PVMReverseBlocks.coordinateOverlapPolynomial s hd hfloor (PVMReverseShape.admissibleBudget_full s hd hfloor)).eval :=
   PVMReverseBlocks.contDiff_coordinateOverlapPolynomial_eval s hd hfloor
 
 theorem reference_pvm_rank_count {d : ℕ} (hd : 2 ≤ d) :

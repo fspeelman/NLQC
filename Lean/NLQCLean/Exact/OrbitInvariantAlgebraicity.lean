@@ -1,6 +1,7 @@
 import NLQCLean.Exact.ExactPurityAlgebraicity
 import NLQCLean.Exact.InvariantCriticalValues
 import NLQCLean.Exact.RationalInvariantPolynomial
+import NLQCLean.Invariants.LocalUnitaryPurity
 
 /-!
 # Orbit invariants take algebraic values
@@ -233,5 +234,53 @@ theorem MixedResource.isAlgebraic_orbitInvariant_of_mixedChannel_eq
     (rationalMatrixInvariant_invariant_of_eq_on_unitaries f p hpoly hinv) hVA hVB hDA hDB hU hm
 
 end PhysicalProtocols
+
+/-! ### `lem:purity`: the operator purity is a rational orbit invariant -/
+
+section PurityInvariant
+
+open PhysicalPolynomial
+
+variable (d : ℕ)
+
+/-- The normalized operator purity as a rational polynomial in the real and imaginary
+parts of the target entries: `d⁻⁴` times the integer realignment-purity numerator. -/
+def purityRationalPolynomial : MvPolynomial (RationalMatrixEntryIndex d) ℚ :=
+  MvPolynomial.C (((d : ℚ) ^ 4)⁻¹) *
+    MvPolynomial.map (Int.castRingHom ℚ)
+      (ComplexPair.purityNumerator (ComplexPair.matrixVariable
+        (id : RationalMatrixEntryIndex d → RationalMatrixEntryIndex d)))
+
+theorem rationalMatrixInvariant_purityRationalPolynomial
+    (U : Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ) :
+    rationalMatrixInvariant (purityRationalPolynomial d) U = purity ((d : ℝ) ^ 4)⁻¹ U := by
+  have hcast : (algebraMap ℚ ℝ).comp (Int.castRingHom ℚ) = Int.castRingHom ℝ := by
+    ext n
+    simp
+  have hc : algebraMap ℚ ℝ (((d : ℚ) ^ 4)⁻¹) = ((d : ℝ) ^ 4)⁻¹ := by simp
+  have hU : ComplexPair.evaluateMatrix (rationalMatrixCoordinates U)
+      (ComplexPair.matrixVariable
+        (id : RationalMatrixEntryIndex d → RationalMatrixEntryIndex d)) = U := by
+    rw [ComplexPair.evaluateMatrix_matrixVariable]
+    ext i j
+    simp [coordinateMatrix, coordinateVector, rationalMatrixCoordinates]
+  rw [rationalMatrixInvariant, purityRationalPolynomial, MvPolynomial.eval₂_mul,
+    MvPolynomial.eval₂_C, MvPolynomial.eval₂_map, hcast, hc]
+  conv_rhs => rw [← hU, ComplexPair.purity_evaluateMatrix]
+  rfl
+
+/-- **`lem:purity`, hypotheses of `lem:algebraic-values`.** The normalized operator purity
+is a polynomial with rational coefficients in the real and imaginary parts of the matrix
+entries, and it is constant on every local-unitary double orbit. -/
+theorem purity_isRationalOrbitInvariant :
+    ∃ p : MvPolynomial (RationalMatrixEntryIndex d) ℚ,
+      (∀ U, purity ((d : ℝ) ^ 4)⁻¹ U = rationalMatrixInvariant p U) ∧
+      ∀ U, ∀ V ∈ unitaryDoubleOrbit (Fin d) (Fin d) U,
+        purity ((d : ℝ) ^ 4)⁻¹ V = purity ((d : ℝ) ^ 4)⁻¹ U :=
+  ⟨purityRationalPolynomial d,
+    fun U => (rationalMatrixInvariant_purityRationalPolynomial d U).symm,
+    fun _ _ hV => purity_eq_of_mem_unitaryDoubleOrbit _ hV⟩
+
+end PurityInvariant
 
 end NLQCLean

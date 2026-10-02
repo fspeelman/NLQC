@@ -35,7 +35,7 @@ theorem exists_ae_qubit_constant (hGeom : PolynomialImageVolumeBound) :
           (n : ℝ) + (1 / 2 : ℝ) * Real.logb 2 (Real.log (1 / e)) - b ≤ Real.logb 2 (K : ℝ)) ∧
         (T ∈ mixedPVMTVReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} (2 ^ n) K e →
           (n : ℝ) + (1 / 2 : ℝ) * Real.logb 2 (Real.log (1 / e)) - b ≤ Real.logb 2 (K : ℝ)) := by
-  obtain ⟨c, hc, h⟩ := exists_ae_resource_constant.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} hGeom
+  obtain ⟨c, hc, h⟩ := exists_ae_resource_constant_of_imageVolumeBound.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} hGeom
   refine ⟨max 0 (-Real.logb 2 c), le_max_left _ _, fun n hn => ?_⟩
   have hd : 2 ≤ 2 ^ n := by
     simpa only [pow_one] using Nat.pow_le_pow_right (by decide : 0 < 2) hn
@@ -54,7 +54,7 @@ theorem exists_ae_qubit_constant (hGeom : PolynomialImageVolumeBound) :
   exact ⟨hq h₁, hq h₂, hq h₃, hq h₄, hq h₅, hq h₆, hq h₇, hq h₈⟩
 
 /-- Unitary score qubit rate: pure and finite mixed unitary score reachability at `d = 2ⁿ`. -/
-theorem exists_ae_unitary_qubit_constant (hGeom : PolynomialImageVolumeBound) :
+theorem exists_ae_unitary_qubit_constant_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ b : ℝ, 0 ≤ b ∧ ∀ n : ℕ, 1 ≤ n → ∀ᵐ (T : unitaryGroup (Fin (2 ^ n) × Fin (2 ^ n)) ℂ)
       ∂unitaryHaar (Fin (2 ^ n) × Fin (2 ^ n)),
       ∃ e₀ : ℝ, 0 < e₀ ∧ e₀ ≤ 1 / 2 ∧ ∀ K : ℕ, 1 ≤ K → ∀ e : ℝ, 0 < e → e ≤ e₀ →
@@ -68,7 +68,7 @@ theorem exists_ae_unitary_qubit_constant (hGeom : PolynomialImageVolumeBound) :
   exact ⟨e₀, h0, h1, fun K hK e he he' => ⟨(hT K hK e he he').1, (hT K hK e he he').2.1⟩⟩
 
 /-- Unitary diamond qubit rate: pure and finite mixed normalized diamond reachability at `d = 2ⁿ`. -/
-theorem exists_ae_diamond_qubit_constant (hGeom : PolynomialImageVolumeBound) :
+theorem exists_ae_diamond_qubit_constant_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ b : ℝ, 0 ≤ b ∧ ∀ n : ℕ, 1 ≤ n → ∀ᵐ (T : unitaryGroup (Fin (2 ^ n) × Fin (2 ^ n)) ℂ)
       ∂unitaryHaar (Fin (2 ^ n) × Fin (2 ^ n)),
       ∃ e₀ : ℝ, 0 < e₀ ∧ e₀ ≤ 1 / 2 ∧ ∀ K : ℕ, 1 ≤ K → ∀ e : ℝ, 0 < e → e ≤ e₀ →
@@ -83,7 +83,7 @@ theorem exists_ae_diamond_qubit_constant (hGeom : PolynomialImageVolumeBound) :
     ⟨(hT K hK e he he').2.2.2.2.1, (hT K hK e he he').2.2.2.2.2.1⟩⟩
 
 /-- PVM score qubit rate: pure and finite mixed PVM score reachability at `d = 2ⁿ`. -/
-theorem exists_ae_pvm_qubit_constant (hGeom : PolynomialImageVolumeBound) :
+theorem exists_ae_pvm_qubit_constant_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ b : ℝ, 0 ≤ b ∧ ∀ n : ℕ, 1 ≤ n → ∀ᵐ (M : unitaryGroup (Fin (2 ^ n) × Fin (2 ^ n)) ℂ)
       ∂unitaryHaar (Fin (2 ^ n) × Fin (2 ^ n)),
       ∃ e₀ : ℝ, 0 < e₀ ∧ e₀ ≤ 1 / 2 ∧ ∀ K : ℕ, 1 ≤ K → ∀ e : ℝ, 0 < e → e ≤ e₀ →
@@ -97,7 +97,7 @@ theorem exists_ae_pvm_qubit_constant (hGeom : PolynomialImageVolumeBound) :
   exact ⟨e₀, h0, h1, fun K hK e he he' => ⟨(hT K hK e he he').2.2.1, (hT K hK e he he').2.2.2.1⟩⟩
 
 /-- PVM joint-TV qubit rate: pure and finite mixed worst-case joint-TV reachability at `d = 2ⁿ`. -/
-theorem exists_ae_pvm_tv_qubit_constant (hGeom : PolynomialImageVolumeBound) :
+theorem exists_ae_pvm_tv_qubit_constant_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ b : ℝ, 0 ≤ b ∧ ∀ n : ℕ, 1 ≤ n → ∀ᵐ (M : unitaryGroup (Fin (2 ^ n) × Fin (2 ^ n)) ℂ)
       ∂unitaryHaar (Fin (2 ^ n) × Fin (2 ^ n)),
       ∃ e₀ : ℝ, 0 < e₀ ∧ e₀ ≤ 1 / 2 ∧ ∀ K : ℕ, 1 ≤ K → ∀ e : ℝ, 0 < e → e ≤ e₀ →

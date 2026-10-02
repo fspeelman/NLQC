@@ -10,11 +10,11 @@ import NLQCLean.Approx.PVMRankFloor
 /-!
 # Reference result inventory
 
-These checks freeze the public mathematical coverage at tag
-`certified-ae-strong-unitary-2026-09-15`. The explicit reference theorems below
+These checks freeze the public mathematical coverage. The explicit reference
+theorems below
 record quantifier order and conclusions independently of the production theorem
-names. The printed definitions expose the protocol, footprint, error, Haar and
-external-premise contracts in audit output.
+names. The printed definitions expose the protocol, footprint, error and Haar
+definitions in audit output.
 -/
 
 set_option pp.deepTerms true
@@ -56,55 +56,45 @@ theorem reference_pvm_qualitative_gap (d : ℕ) (hd : 2 ≤ d) :
         MixedPVMTVGap.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} M K e :=
   Results.PVM.exists_qualitative_gap d hd
 
-/-! ## Frozen four-premise boundary and strong conclusions -/
+/-! ## Image-volume bound and strong near-SWAP conclusions -/
 
-section External
-
-variable (hLRT : LRTTheorem44)
-  (hProjection : SemialgebraicProjectionTheorem)
-  (hStratification : SemialgebraicSmoothStratificationTheorem)
-  (hComponents : SemialgebraicComponentBoundTheorem)
-
-include hLRT hProjection hStratification hComponents
+section ImageVolume
 
 theorem reference_polynomial_image_volume : PolynomialImageVolumeBound :=
-  polynomialImageVolumeBound_of_external
-    hLRT hProjection hStratification hComponents
+  DirectVolume.polynomialImageVolumeBound
+
+theorem reference_polynomial_image_volume_constant :
+    PolynomialImageVolumeBoundWith (804 * 560) :=
+  DirectVolume.polynomialImageVolumeBoundWith
 
 theorem reference_strong_restricted_haar :
     ∃ C : ℝ, 21 ≤ C ∧ StrongRestrictedHaarBound C :=
-  NLQCLean.exists_strongRestrictedHaarBound_of_external
-    hLRT hProjection hStratification hComponents
+  NLQCLean.exists_strongRestrictedHaarBound
 
 theorem reference_strong_restricted_diamond_haar :
     ∃ C : ℝ, 21 ≤ C ∧
       StrongRestrictedDiamondHaarBound.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} C :=
-  NLQCLean.exists_strongRestrictedDiamondHaarBound_of_external
-    hLRT hProjection hStratification hComponents
+  NLQCLean.exists_strongRestrictedDiamondHaarBound
 
 theorem reference_strong_universal_resource :
     ∃ c : ℝ, 0 < c ∧ StrongUniversalResourceBound c :=
-  NLQCLean.exists_strongUniversalResourceBound_of_external
-    hLRT hProjection hStratification hComponents
+  NLQCLean.exists_strongUniversalResourceBound
 
 theorem reference_strong_universal_diamond_resource :
     ∃ c : ℝ, 0 < c ∧
       StrongUniversalDiamondResourceBound.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} c :=
-  NLQCLean.exists_strongUniversalDiamondResourceBound_of_external
-    hLRT hProjection hStratification hComponents
+  NLQCLean.exists_strongUniversalDiamondResourceBound
 
 theorem reference_strong_universal_qubits :
     ∃ b : ℝ, 0 ≤ b ∧ StrongUniversalQubitBound b :=
-  NLQCLean.exists_strongUniversalQubitBound_of_external
-    hLRT hProjection hStratification hComponents
+  NLQCLean.exists_strongUniversalQubitBound
 
 theorem reference_strong_universal_diamond_qubits :
     ∃ b : ℝ, 0 ≤ b ∧
       StrongUniversalDiamondQubitBound.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} b :=
-  NLQCLean.exists_strongUniversalDiamondQubitBound_of_external
-    hLRT hProjection hStratification hComponents
+  NLQCLean.exists_strongUniversalDiamondQubitBound
 
-end External
+end ImageVolume
 
 /-! ## Full-group and almost-every families -/
 
@@ -121,8 +111,8 @@ end External
 
 #check @Results.Unitary.exists_ae_forbidden_error_threshold
 #check @Results.PVM.exists_ae_forbidden_error_threshold
-#check @exists_ae_forbidden_error_constant_of_external
-#check @exists_ae_resource_constant_of_external
+#check @exists_ae_forbidden_error_constant
+#check @exists_ae_resource_constant
 #check @Results.Unitary.exists_ae_resource_bound
 #check @Results.Unitary.exists_ae_diamond_resource_bound
 #check @Results.PVM.exists_ae_resource_bound
@@ -136,7 +126,7 @@ end External
 #check @Results.Unitary.ae_no_finite_exact_implementation
 #check @Results.PVM.ae_no_finite_exact_implementation
 
-/-! ## Unconditional floors and internal dimension/fiber replacements -/
+/-! ## Unconditional floors -/
 
 section Floors
 
@@ -192,11 +182,6 @@ theorem reference_mixed_pvm_footprint_floor {n : ℕ} (m : MixedResource ρA ρB
 
 end Floors
 
-#check @coordinateInteriorDimension_image_coordinateProjection_le
-#check @Semialgebraic.finite_of_countable
-#check @countable_inter_preimage_singleton_of_det_ne_zero
-#check @ae_finite_coordinateFiber_of_stratification
-#check @HasSemialgebraicFormat.ae_card_projected_coordinateFiber_le_of_stratification
 
 /-! ## Expanded semantic and external contracts -/
 
@@ -217,10 +202,7 @@ end Floors
 #print mixedPVMReachable
 #print purePVMTVReachable
 #print mixedPVMTVReachable
-#print LRTTheorem44
 #print SemialgebraicProjectionTheorem
-#print SemialgebraicSmoothStratificationTheorem
-#print SemialgebraicComponentBoundTheorem
 #print PolynomialImageVolumeBound
 #print StrongRestrictedHaarBound
 
@@ -239,7 +221,7 @@ end Floors
 #print axioms reference_mixed_pvm_footprint_floor
 #print axioms Results.Unitary.exists_full_group_score_haar_bound
 #print axioms Results.PVM.exists_full_group_score_haar_bound
-#print axioms exists_ae_resource_constant_of_external
+#print axioms exists_ae_resource_constant
 #print axioms Results.Unitary.ae_no_finite_exact_implementation
 
 end NLQCTests

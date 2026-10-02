@@ -79,9 +79,11 @@ otherwise need.
 ## Pins and configuration
 
 Upstream uses Lean `v4.30.0` and Mathlib `v4.30.0` (upstream `lake-manifest.json` revision
-`c5ea00351c28e24afc9f0f84379aa41082b1188f`). This port targets the unchanged project Lean
+`c5ea00351c28e24afc9f0f84379aa41082b1188f`). This port initially targeted project Lean
 `v4.33.1` and Mathlib `0df444a360eaa60ab8c11dca51a86af692955474` (`v4.33.1`). No package
-dependency is added, and `lakefile.toml`, `lake-manifest.json` and `lean-toolchain` are unchanged.
+dependency was added by that port. The project now uses Lean `v4.34.1` and
+Mathlib `d13f23b723b8a846827a245b89c10fc7d3f11612`; the Sundog source
+adaptations and upstream pin are unchanged.
 
 The upstream `lakefile.toml` sets `relaxedAutoImplicit = false`, `maxSynthPendingDepth = 3`,
 `pp.unicode.fun = true`, `weak.linter.mathlibStandardSet = true` and
@@ -107,7 +109,7 @@ The complete list of changes relative to the unmodified upstream bytes follows.
    the unchanged upstream text.
 2. **Imports.** Every `import Sundogcert.X` is rewritten to `import NLQCLean.Vendor.Sundog.X`
    in 23 of the 25 modules (26 import lines). `CircuitNet` and `PieceCover` import only
-   Mathlib, and their imports are unchanged.
+   Mathlib; their imports are unchanged except for the v4.34.1 module rename in item 3.
 3. **Compatibility edits in the 25 modules.** These edits appear only in proof bodies:
 
 | File | Declaration | Old → new | Reason |
@@ -126,6 +128,16 @@ The complete list of changes relative to the unmodified upstream bytes follows.
 | `DiagramNormalize.lean` | `Sundog.TarskiQE.paddingFree_cons` | `simp only [PaddingFreeAux]` → `simp only [List.length_cons, PaddingFreeAux]` | under Lean v4.33.1, `simp only [PaddingFreeAux]` made no progress on the goal with fuel `(c :: cpt :: rest).length` (a build error); rewriting the length with `List.length_cons` first lets the equation lemmas of `PaddingFreeAux` apply |
 | `DiagramAugment.lean` | `Sundog.TarskiQE.spec_eq_zero_of_gap_roots` | `Polynomial.finite_setOf_isRoot` → `Polynomial.finite_setOfPred_isRoot` | deprecated |
 | `DiagramBranches.lean` | `Sundog.TarskiQE.sadef_resolve_fiber` | `Set.mem_setOf_eq` → `Set.mem_ofPred_eq` (in `simp only`) | deprecated |
+
+   **Lean/Mathlib v4.34.1 (2 October 2026).** Proof bodies only, by a mechanical
+   word-boundary rename of core lemmas deprecated in Lean v4.34.1, each to the
+   replacement named by its deprecation (identical statement): `if_pos` → `ite_eq_left`,
+   `if_neg` → `ite_eq_right`, `dif_pos` → `dite_eq_left`, `dif_neg` → `dite_eq_right`,
+   `if_true` → `ite_true`, `if_false` → `ite_false`. Affected files: `CircuitNet`,
+   `DiagramAnnotate`, `DiagramBranches`, `DiagramMaster`, `DiagramNormalize`,
+   `DiagramReads`, `ExactRepr`, `PolyBranchTrees`, `PseudoRemainder` and `RegionPoly`.
+   In `CircuitNet` and `PieceCover` the import `Mathlib.Data.Real.Basic` (deprecated
+   module) is replaced by `Mathlib.Basic.Real.Basic`.
 
 4. **Extract `SemialgebraicProjection.lean`.**
    - The imports `Sundogcert.DiagramAssembly` and `Sundogcert.OMinimalCellDecomp` are replaced

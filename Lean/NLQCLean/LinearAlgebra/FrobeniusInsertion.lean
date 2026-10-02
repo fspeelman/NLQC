@@ -55,7 +55,7 @@ theorem kronecker_one_mul_insertResource (X : Matrix l (a × rA) ℂ) (η : rA �
     simp only [Matrix.one_apply_eq, mul_one, resourceMatrix_apply, Matrix.one_apply]
     by_cases h1 : u.1 = i <;> by_cases h2 : j' = j <;> simp [h1, h2]
   · intro t2 _ ht2
-    rw [Matrix.kroneckerMap_apply, Matrix.one_apply, if_neg (Ne.symm ht2), mul_zero, zero_mul]
+    rw [Matrix.kroneckerMap_apply, Matrix.one_apply, ite_eq_right (Ne.symm ht2), mul_zero, zero_mul]
   · simp
 
 omit [DecidableEq a] [DecidableEq rB] [DecidableEq l] in
@@ -109,7 +109,7 @@ theorem one_kronecker_mul_insertResource {lB : Type*} [Fintype lB] [DecidableEq 
     by_cases h1 : i' = i <;> by_cases h2 : t2.1 = j <;> simp [h1, h2, mul_comm, mul_left_comm]
   · intro u _ hu
     refine Finset.sum_eq_zero fun t2 _ => ?_
-    rw [Matrix.kroneckerMap_apply, Matrix.one_apply, if_neg (Ne.symm hu), zero_mul, zero_mul]
+    rw [Matrix.kroneckerMap_apply, Matrix.one_apply, ite_eq_right (Ne.symm hu), zero_mul, zero_mul]
   · simp
 
 omit [DecidableEq b] [DecidableEq rA] in

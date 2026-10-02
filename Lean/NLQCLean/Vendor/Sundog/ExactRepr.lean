@@ -196,12 +196,12 @@ theorem reluRepr_aux (S : Finset ℝ) :
       have ha_max : ∀ s ∈ T, s ≤ a := by
         intro s hs
         have hT' : T.Nonempty := ⟨s, hs⟩
-        have hae : a = T.max' hT' := by rw [hadef]; exact dif_pos hT'
+        have hae : a = T.max' hT' := by rw [hadef]; exact dite_eq_left hT'
         rw [hae]; exact T.le_max' s hs
       have ha_lt : a < b := by
         rcases T.eq_empty_or_nonempty with hTe | hT'
-        · rw [hadef, dif_neg (by rw [hTe]; exact Finset.not_nonempty_empty)]; linarith
-        · have hae : a = T.max' hT' := by rw [hadef]; exact dif_pos hT'
+        · rw [hadef, dite_eq_right (by rw [hTe]; exact Finset.not_nonempty_empty)]; linarith
+        · have hae : a = T.max' hT' := by rw [hadef]; exact dite_eq_left hT'
           rw [hae]
           exact lt_of_le_of_ne (hble _ (Finset.mem_of_mem_erase (T.max'_mem hT')))
             (Finset.ne_of_mem_erase (T.max'_mem hT'))
@@ -254,7 +254,7 @@ theorem reluRepr_aux (S : Finset ℝ) :
                   rw [min_eq_left hcon] at hmin_lt_a; exact lt_irrefl a hmin_lt_a
                 have hTne : T.Nonempty := ⟨s, hsT⟩
                 have haT : a ∈ T := by
-                  have hae : a = T.max' hTne := by rw [hadef]; exact dif_pos hTne
+                  have hae : a = T.max' hTne := by rw [hadef]; exact dite_eq_left hTne
                   rw [hae]; exact T.max'_mem hTne
                 exact hmissT a haT ⟨hua, lt_trans ha_lt hvb⟩
               have hright_clean : ∀ s ∈ S, s ∉ Set.Ioo b (max v (b + 1)) := by
@@ -371,14 +371,14 @@ theorem hasPieceCover_relu {f : ℝ → ℝ} {k : ℕ} (hf : HasPieceCover f k) 
     have hlt : ∀ a, a < nextCut a := by
       intro a; simp only [hnc]
       by_cases h : (S.filter (a < ·)).Nonempty
-      · rw [dif_pos h]; exact (Finset.mem_filter.mp ((S.filter (a < ·)).min'_mem h)).2
-      · rw [dif_neg h]; linarith
+      · rw [dite_eq_left h]; exact (Finset.mem_filter.mp ((S.filter (a < ·)).min'_mem h)).2
+      · rw [dite_eq_right h]; linarith
     have hmissAt : ∀ a, ∀ s ∈ S, s ∉ Set.Ioo a (nextCut a) := by
       intro a s hs hsin; simp only [hnc] at hsin
       by_cases h : (S.filter (a < ·)).Nonempty
-      · rw [dif_pos h] at hsin
+      · rw [dite_eq_left h] at hsin
         exact absurd (Finset.min'_le _ s (Finset.mem_filter.mpr ⟨hs, hsin.1⟩)) (not_le.mpr hsin.2)
-      · rw [dif_neg h] at hsin
+      · rw [dite_eq_right h] at hsin
         exact h ⟨s, Finset.mem_filter.mpr ⟨hs, hsin.1⟩⟩
     have hpiece : ∀ a, ∀ y ∈ Set.Icc a (nextCut a),
         f y = (lineOf a).1 * y + (lineOf a).2 := by
@@ -396,7 +396,7 @@ theorem hasPieceCover_relu {f : ℝ → ℝ} {k : ℕ} (hf : HasPieceCover f k) 
       simp only [hnc]
       have hne2 : (S.filter (S.min' hSne - 1 < ·)).Nonempty :=
         ⟨S.min' hSne, Finset.mem_filter.mpr ⟨S.min'_mem hSne, by linarith⟩⟩
-      rw [dif_pos hne2]
+      rw [dite_eq_left hne2]
       apply le_antisymm
       · exact Finset.min'_le _ _ (Finset.mem_filter.mpr ⟨S.min'_mem hSne, by linarith⟩)
       · exact Finset.le_min' _ _ _ fun y hy => Finset.min'_le S y (Finset.mem_of_mem_filter y hy)
@@ -417,7 +417,7 @@ theorem hasPieceCover_relu {f : ℝ → ℝ} {k : ℕ} (hf : HasPieceCover f k) 
       simp only [div_one]; ring
     have hncM : nextCut (S.max' hSne) = S.max' hSne + 1 := by
       simp only [hnc]
-      rw [dif_neg]
+      rw [dite_eq_right]
       rintro ⟨s, hs⟩
       rw [Finset.mem_filter] at hs
       linarith [Finset.le_max' S s hs.1, hs.2]
@@ -473,7 +473,7 @@ theorem hasPieceCover_relu {f : ℝ → ℝ} {k : ℕ} (hf : HasPieceCover f k) 
               have hxnc : v ≤ nextCut a := by
                 simp only [hnc]
                 by_cases h : (S.filter (a < ·)).Nonempty
-                · rw [dif_pos h]
+                · rw [dite_eq_left h]
                   have hmem := Finset.min'_mem (S.filter (a < ·)) h
                   rw [Finset.mem_filter] at hmem
                   by_contra hlt2; rw [not_le] at hlt2
@@ -482,7 +482,7 @@ theorem hasPieceCover_relu {f : ℝ → ℝ} {k : ℕ} (hf : HasPieceCover f k) 
                     exact absurd (Finset.le_max' _ _ (Finset.mem_filter.mpr ⟨hmem.1, hcu'⟩))
                       (not_le.mpr hmem.2)
                   exact hSclean _ hmem.1 ⟨hcu, hlt2⟩
-                · rw [dif_neg h]
+                · rw [dite_eq_right h]
                   have hMa : S.max' hSne ≤ a := by
                     by_contra hc; rw [not_le] at hc
                     exact h ⟨S.max' hSne, Finset.mem_filter.mpr ⟨S.max'_mem hSne, hc⟩⟩

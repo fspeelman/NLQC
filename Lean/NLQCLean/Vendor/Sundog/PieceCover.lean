@@ -37,7 +37,7 @@ piece lemmas over `Trop`; the composition/iteration core is here.
 -/
 import Mathlib.Order.Iterate
 import Mathlib.Order.ConditionallyCompleteLattice.Basic
-import Mathlib.Data.Real.Basic
+import Mathlib.Basic.Real.Basic
 import Mathlib.Tactic
 
 namespace Sundog.PieceCover

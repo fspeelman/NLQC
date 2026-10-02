@@ -1,32 +1,35 @@
 # Mathematical assumptions
 
-The exact impossibility, compact score optima, qualitative gaps, spectral
-floors and generic rank conclusions are unconditional. The quantitative
-Haar and precision estimates take three separate proposition arguments:
+All results are unconditional except the effective controlled-phase bound
+in Appendix C. This covers the exact impossibility and finite-orbit results,
+compact score optima, qualitative gaps, spectral floors, generic rank
+conclusions, and all quantitative Haar and precision estimates (Theorems A–C, the diagonal-gate theorem and their corollaries in
+the robust companion). The kernel audits show only the
+standard logical axioms `propext`, `Classical.choice` and `Quot.sound`.
+
+The effective bound takes two explicit proposition arguments:
 
 | Lean proposition | Mathematical content | Source |
 |---|---|---|
-| `LRTTheorem44` | Approximate low-dimensional definable selection for a bounded closed semialgebraic set under a coordinate projection; the constant is selected before ambient dimensions and degree | Lerario–Rizzi–Tiberio, *Quantitative approximate definable choices*, arXiv:2409.14869v2, Theorem 44 |
-| `SemialgebraicSmoothStratificationTheorem` | A finite compatible semialgebraic C¹ stratification with embedded pieces diffeomorphic to open cubes and a frontier condition relative to the original set | Coste, *An Introduction to Semialgebraic Geometry* (2002), Corollary 3.8; Bochnak–Coste–Roy, *Real Algebraic Geometry*, §9.1 |
-| `SemialgebraicComponentBoundTheorem` | Finitely many connected components for a conjunction of s polynomial conditions in k variables, bounded by Δ(2Δ−1)^(k+s−1), for degree Δ≥2 | Coste, Proposition 4.13 |
+| `BasuPollackRoyExistentialElimination` | One-block real quantifier elimination for two free variables with degree `d^{O(k)}` and bit size `τ d^{O(k)}` | Basu–Pollack–Roy, *Algorithms in Real Algebraic Geometry*, 2nd ed., Theorem 14.16 |
+| `PolynomialTypeTranscendenceMeasureExpAngle` | A transcendence measure `exp(-C (N + log H)^c)` for `e^{iθ}`, `θ ≠ 0` real algebraic (the form cited in Appendix C) | Implied by Cijsouw, Compositio Math. 28 (1974), Theorem 1 (`CijsouwTranscendenceMeasureExp.polynomialType`) |
 
-The precise propositions and their supporting definitions are in
-[LRT44.lean](../NLQCLean/External/LRT44.lean) and
-[SemialgebraicTextbook.lean](../NLQCLean/External/SemialgebraicTextbook.lean).
+The precise propositions are in
+[EffectiveArithmetic.lean](../NLQCLean/External/EffectiveArithmetic.lean).
 They are explicit hypotheses, rather than axioms or typeclass instances.
 The kernel verifies the consequences of these hypotheses; it does not
 verify the cited published proofs.
 
-Semialgebraic projection closure is proved by
+The quantitative estimates rest on the polynomial image-volume bound, proved
+by `NLQCLean.DirectVolume.polynomialImageVolumeBound`
+([Assembly.lean](../NLQCLean/Geometry/DirectVolume/Assembly.lean)) with an
+explicit base 450240 for the fixed polynomial format used by the library. Semialgebraic projection closure is proved by
 `NLQCLean.semialgebraicProjectionTheorem` in
 [ProjectionTheorem.lean](../NLQCLean/Semialgebraic/ProjectionTheorem.lean),
-using the vendored Sundog real quantifier-elimination development. Older
-four-input compatibility theorems still accept projection explicitly.
-The narrower coordinate-dimension and finite-fiber results used in the
-volume argument do not establish the general textbook dimension theorems.
+using the vendored Sundog real quantifier-elimination development. The
+almost-every exact-impossibility results use vector Sard.
 
-The two almost-every exact-impossibility results use vector Sard and need
-none of the three geometry hypotheses. Standard logical axioms
-`propext`, `Classical.choice`, and `Quot.sound` may occur in kernel axiom
-prints. The maintained audits print full theorem types as well as axioms,
-so explicit external hypotheses remain visible.
+The maintained audits print full theorem types as well as axioms, so explicit
+hypotheses remain visible.
+
+The formal effective bound proves existence of its constants; their effective computability is not formalized. The source-to-theorem map describes other scope differences.

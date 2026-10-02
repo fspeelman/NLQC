@@ -98,21 +98,21 @@ private theorem resolve_cases (g : Fin n → ℝ)
       rw [← Polynomial.support_eq_empty, ← Finset.card_eq_zero]
       omega
     subst h0
-    rw [resolve_unfold, dif_pos rfl]
+    rw [resolve_unfold, dite_eq_left rfl]
     exact hzero
   | succ N ih =>
     intro P hP
     by_cases h0 : P = 0
     · subst h0
-      rw [resolve_unfold, dif_pos rfl]
+      rw [resolve_unfold, dite_eq_left rfl]
       exact hzero
-    · rw [resolve_unfold, dif_neg h0]
+    · rw [resolve_unfold, dite_eq_right h0]
       by_cases hl : MvPolynomial.eval g P.leadingCoeff = 0
-      · rw [if_pos hl]
+      · rw [ite_eq_left hl]
         refine hdrop P h0 hl (ih P.eraseLead ?_)
         have := Polynomial.eraseLead_support_card_lt h0
         omega
-      · rw [if_neg hl]
+      · rw [ite_eq_right hl]
         exact hkeep P h0 hl
 
 /-- Truncation does not change the specialization. -/
@@ -206,13 +206,13 @@ private theorem truncChain_unfold (P : Polynomial (MvPolynomial (Fin n) ℝ)) :
 theorem resolve_mem_truncChain (g : Fin n → ℝ)
     (P : Polynomial (MvPolynomial (Fin n) ℝ)) : resolve g P ∈ truncChain P := by
   refine resolve_cases g (fun P R => R ∈ truncChain P) ?_ ?_ ?_ P
-  · rw [truncChain_unfold, dif_pos rfl]
+  · rw [truncChain_unfold, dite_eq_left rfl]
     exact List.mem_singleton.mpr rfl
   · intro P hP _
-    rw [truncChain_unfold, dif_neg hP]
+    rw [truncChain_unfold, dite_eq_right hP]
     exact List.mem_cons_self
   · intro P hP _ ih
-    rw [truncChain_unfold, dif_neg hP]
+    rw [truncChain_unfold, dite_eq_right hP]
     exact List.mem_cons_of_mem _ ih
 
 /-- Chain members do not exceed the head degree. -/
@@ -229,17 +229,17 @@ theorem truncChain_natDegree_le (P : Polynomial (MvPolynomial (Fin n) ℝ)) :
       rw [← Polynomial.support_eq_empty, ← Finset.card_eq_zero]
       omega
     subst h0
-    rw [truncChain_unfold, dif_pos rfl, List.mem_singleton] at hQ
+    rw [truncChain_unfold, dite_eq_left rfl, List.mem_singleton] at hQ
     subst hQ
     exact le_rfl
   | succ N ih =>
     intro P hP Q hQ
     by_cases h0 : P = 0
     · subst h0
-      rw [truncChain_unfold, dif_pos rfl, List.mem_singleton] at hQ
+      rw [truncChain_unfold, dite_eq_left rfl, List.mem_singleton] at hQ
       subst hQ
       exact le_rfl
-    · rw [truncChain_unfold, dif_neg h0, List.mem_cons] at hQ
+    · rw [truncChain_unfold, dite_eq_right h0, List.mem_cons] at hQ
       rcases hQ with rfl | hQ
       · exact le_rfl
       · have hcard := Polynomial.eraseLead_support_card_lt h0
@@ -256,17 +256,17 @@ theorem resolve_eq_self_iff (g : Fin n → ℝ) (P : Polynomial (MvPolynomial (F
     · exact Or.inl (h ▸ h0)
     · exact Or.inr (by rw [← h]; exact hl)
   · rintro (rfl | hl)
-    · rw [resolve_unfold, dif_pos rfl]
+    · rw [resolve_unfold, dite_eq_left rfl]
     · rw [resolve_unfold]
       by_cases h0 : P = 0
-      · rw [dif_pos h0, h0]
-      · rw [dif_neg h0, if_neg hl]
+      · rw [dite_eq_left h0, h0]
+      · rw [dite_eq_right h0, ite_eq_right hl]
 
 /-- Branch condition, step form: a vanishing leading coefficient descends the chain. -/
 theorem resolve_of_lead_vanish (g : Fin n → ℝ) {P : Polynomial (MvPolynomial (Fin n) ℝ)}
     (h0 : P ≠ 0) (hl : MvPolynomial.eval g P.leadingCoeff = 0) :
     resolve g P = resolve g P.eraseLead := by
-  rw [resolve_unfold, dif_neg h0, if_pos hl]
+  rw [resolve_unfold, dite_eq_right h0, ite_eq_left hl]
 
 /-! ### The elimination measure -/
 

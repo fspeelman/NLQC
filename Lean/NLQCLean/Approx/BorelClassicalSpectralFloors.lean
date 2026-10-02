@@ -975,7 +975,7 @@ theorem borelScoreReachable_subset_pureReachable {d K : ℕ} (hd : 0 < d) (ε : 
     borelScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} d K ε ⊆ pureReachable d (4 * d ^ 4 * K ^ 5) ε := by
   let : NeZero d := ⟨Nat.ne_of_gt hd⟩
   intro T hT
-  rw [borelScoreReachable, dif_pos hd] at hT
+  rw [borelScoreReachable, dite_eq_left hd] at hT
   rcases hT with ⟨s, P, hacc⟩
   rcases hacc with ⟨hK, hs⟩ | ⟨n, m, hK, hs⟩
   · exact P.mem_pureReachable_of_quantumFootprint T hd hK hs
@@ -997,7 +997,7 @@ theorem borelPVMScoreReachable_subset_purePVMReachable {d K : ℕ} (hd : 0 < d) 
     borelPVMScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} d K ε ⊆ purePVMReachable d (4 * d ^ 4 * K ^ 5) ε := by
   let : NeZero d := ⟨Nat.ne_of_gt hd⟩
   intro T hT
-  rw [borelPVMScoreReachable, dif_pos hd] at hT
+  rw [borelPVMScoreReachable, dite_eq_left hd] at hT
   rcases hT with ⟨s, P, hacc⟩
   rcases hacc with ⟨hK, hs⟩ | ⟨n, m, hK, hs⟩
   · exact P.mem_purePVMReachable_of_quantumFootprint T hd hK hs
@@ -1023,7 +1023,7 @@ theorem borelSharedRandomScoreReachable_subset_pureReachable {d K : ℕ} (hd : 0
     borelSharedRandomScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε ⊆ pureReachable d (4 * d ^ 4 * K ^ 5) ε := by
   let : NeZero d := ⟨Nat.ne_of_gt hd⟩
   intro T hT
-  rw [borelSharedRandomScoreReachable, dif_pos hd] at hT
+  rw [borelSharedRandomScoreReachable, dite_eq_left hd] at hT
   rcases hT with ⟨s, P, hacc⟩
   rcases hacc with ⟨hP, hK, hs⟩ | ⟨n, m, hP, hK, hs⟩
   · exact mem_pureReachable_of_sharedRandom_quantumFootprint s.μ P hP T hd hK hs
@@ -1049,7 +1049,7 @@ theorem borelSharedRandomPVMScoreReachable_subset_purePVMReachable {d K : ℕ} (
     borelSharedRandomPVMScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε ⊆ purePVMReachable d (4 * d ^ 4 * K ^ 5) ε := by
   let : NeZero d := ⟨Nat.ne_of_gt hd⟩
   intro T hT
-  rw [borelSharedRandomPVMScoreReachable, dif_pos hd] at hT
+  rw [borelSharedRandomPVMScoreReachable, dite_eq_left hd] at hT
   rcases hT with ⟨s, P, hacc⟩
   rcases hacc with ⟨hP, hK, hs⟩ | ⟨n, m, hP, hK, hs⟩
   · exact mem_purePVMReachable_of_sharedRandom_quantumFootprint s.μ P hP T hd hK hs
@@ -1096,28 +1096,28 @@ theorem ae_borel_classical_full_spectral_threshold (d : ℕ) [NeZero d] :
   constructor
   · intro hreach
     rcases hreach with hreach | hreach
-    · rw [borelScoreReachable, dif_pos hd] at hreach
+    · rw [borelScoreReachable, dite_eq_left hd] at hreach
       rcases hreach with ⟨s, P, hacc⟩
       rcases hacc with ⟨hK, hs⟩ | ⟨n, m, hK, hs⟩
       · simpa only [Fintype.card_prod, Fintype.card_fin, pow_two] using
           P.unitary_full_spectral_floor (T : Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ) hT hK hwU hεU hs
       · simpa only [Fintype.card_prod, Fintype.card_fin, pow_two] using
           P.mixed_unitary_full_spectral_floor m (T : Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ) hT hK hwU hεU hs
-    · rw [borelSharedRandomScoreReachable, dif_pos hd] at hreach
+    · rw [borelSharedRandomScoreReachable, dite_eq_left hd] at hreach
       rcases hreach with ⟨s, P, hacc⟩
       rcases hacc with ⟨hP, hK, hs⟩ | ⟨n, m, hP, hK, hs⟩
       · exact sharedRandom_unitary_full_spectral_floor s.μ P hP (T : Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ) hT hK hwU hεU hs
       · exact mixedSharedRandom_unitary_full_spectral_floor s.μ P m hP (T : Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ) hT hK hwU hεU hs
   · intro hreach
     rcases hreach with hreach | hreach
-    · rw [borelPVMScoreReachable, dif_pos hd] at hreach
+    · rw [borelPVMScoreReachable, dite_eq_left hd] at hreach
       rcases hreach with ⟨s, P, hacc⟩
       rcases hacc with ⟨hK, hs⟩ | ⟨n, m, hK, hs⟩
       · simpa only [Fintype.card_fin] using
           P.pvm_full_spectral_floor (T : Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ) hT hK hwM hεM hs
       · simpa only [Fintype.card_fin] using
           P.mixed_pvm_full_spectral_floor m (T : Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ) hT hK hwM hεM hs
-    · rw [borelSharedRandomPVMScoreReachable, dif_pos hd] at hreach
+    · rw [borelSharedRandomPVMScoreReachable, dite_eq_left hd] at hreach
       rcases hreach with ⟨s, P, hacc⟩
       rcases hacc with ⟨hP, hK, hs⟩ | ⟨n, m, hP, hK, hs⟩
       · exact sharedRandom_pvm_full_spectral_floor s.μ P hP (T : Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ) hT hK hwM hεM hs

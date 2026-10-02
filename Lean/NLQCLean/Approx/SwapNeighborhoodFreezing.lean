@@ -12,7 +12,7 @@ For every pure protocol on arbitrary finite registers with
 footprint `K`, every target `U ∈ S_d`, and score at least `1 − e` with `0 ≤ e ≤ 1/16`, there
 is a unit environment vector `g` of Schmidt rank at most `s = frozenSupport d K` with
 
-  `‖F − (I ⊗ g) U‖_F / d ≤ √(18 e)`.
+  `‖F − (I ⊗ g) U‖_F / d ≤ √(21 e / 2)`.
 
 The tail loss is proportional to `e`; no fixed additive truncation error occurs, and all
 original environment dimensions are arbitrary. The phase of the projection is preserved.
@@ -85,7 +85,8 @@ theorem schmidtMass_kronecker_eq_topWeightMass {m n p q : Type*}
       (schmidtWeights_nonneg N _)) hgram K
 
 /-- Abstract step: a flat logical factor lets the projection be truncated to rank `s`
-with squared loss at most `18 ε`. -/
+with squared loss at most `21 ε / 2`: the overlap is `√(p t)` with `p ≥ 1 - ε` and
+`t ≥ 1 - 8ε`, and `(1 - ε)(1 - 8ε) ≥ (1 - 21ε/4)²` for `ε ≤ 1/16`. -/
 theorem exists_small_support_frozen_tensor {a b e f : Type*}
     [Fintype a] [Fintype b] [Fintype e] [Fintype f] [DecidableEq a] [DecidableEq e]
     [DecidableEq b] [DecidableEq f]
@@ -95,7 +96,7 @@ theorem exists_small_support_frozen_tensor {a b e f : Type*}
     (hZ : 1 - ε ≤ ‖Z‖ ^ 2) (hZ1 : ‖Z‖ ≤ 1)
     (hproj : ∀ G : Matrix e f ℂ, frobInner (U ⊗ₖ G) M = frobInner G Z)
     (S : Finset a) (hS : S.card = q) (hflat : ∀ i ∈ S, c ≤ schmidtWeights U i) :
-    ∃ G : Matrix e f ℂ, ‖G‖ = 1 ∧ G.rank ≤ s ∧ ‖M - U ⊗ₖ G‖ ^ 2 ≤ 18 * ε := by
+    ∃ G : Matrix e f ℂ, ‖G‖ = 1 ∧ G.rank ≤ s ∧ ‖M - U ⊗ₖ G‖ ^ 2 ≤ 21 / 2 * ε := by
   have hZpos : 0 < ‖Z‖ := by nlinarith [norm_nonneg Z]
   obtain ⟨Γ, hΓ, hZΓ, hΓZ⟩ := exists_normalized_matrix Z hZpos
   have hinner : frobInner (U ⊗ₖ Γ) M = (‖Z‖ : ℂ) := (hproj Γ).trans hΓZ
@@ -128,11 +129,15 @@ theorem exists_small_support_frozen_tensor {a b e f : Type*}
   have hsq : Real.sqrt t ^ 2 = t := Real.sq_sqrt htpos.le
   have hs0 := Real.sqrt_nonneg t
   have hs1 : Real.sqrt t ≤ 1 := by nlinarith
-  have hs2 : t ≤ Real.sqrt t := by nlinarith
-  have hz2 : ‖Z‖ ^ 2 ≤ ‖Z‖ := by nlinarith [norm_nonneg Z]
+  have hε0 : 0 ≤ ε := by nlinarith [norm_nonneg Z]
   have hprod : (1 - ε) * (1 - 8 * ε) ≤ ‖Z‖ ^ 2 * t :=
     mul_le_mul hZ ht8 (by linarith) (by positivity)
-  have hmono : ‖Z‖ ^ 2 * t ≤ ‖Z‖ * Real.sqrt t := mul_le_mul hz2 hs2 htpos.le (norm_nonneg _)
+  have hy0 : 0 ≤ ‖Z‖ * Real.sqrt t := mul_nonneg (norm_nonneg _) hs0
+  have hlow : (1 - 21 / 4 * ε) ^ 2 ≤ (‖Z‖ * Real.sqrt t) ^ 2 := by
+    rw [mul_pow, hsq]
+    nlinarith [mul_nonneg hε0 (by linarith : (0 : ℝ) ≤ 1 / 16 - ε)]
+  have hy : 1 - 21 / 4 * ε ≤ ‖Z‖ * Real.sqrt t :=
+    (pow_le_pow_iff_left₀ (by linarith) hy0 (by norm_num)).mp hlow
   nlinarith
 
 section Protocol
@@ -144,7 +149,7 @@ variable [DecidableEq ρA] [DecidableEq ρB] [DecidableEq κA] [DecidableEq κB]
 variable [DecidableEq μA] [DecidableEq μB] [DecidableEq εA] [DecidableEq εB]
 
 /-- Freezing: near SWAP, a rank-`⌈K/⌈D/2⌉⌉` frozen environment approximates the protocol with
-normalized Frobenius residual at most `√(18 e)`. -/
+normalized Frobenius residual at most `√(21 e / 2)`. -/
 theorem PureProtocol.exists_small_support_approx_frozen
     (P : PureProtocol (Fin d) (Fin d) ρA ρB κA κB μA μB (Fin d) (Fin d) εA εB) (hd : 2 ≤ d)
     {U : Matrix.unitaryGroup (Fin d × Fin d) ℂ} (hU : U ∈ swapNeighborhood d)
@@ -152,7 +157,7 @@ theorem PureProtocol.exists_small_support_approx_frozen
     (hscore : 1 - e ≤ scoreU (U : Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ) P.operationalChannel) :
     ∃ g : εA × εB → ℂ, IsUnitVector g ∧ schmidtRank g ≤ frozenSupport d K ∧
       ‖P.globalIsometry - insertResource (Fin d) (Fin d) g *
-          (U : Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ)‖ / d ≤ Real.sqrt (18 * e) := by
+          (U : Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ)‖ / d ≤ Real.sqrt (21 / 2 * e) := by
   have hd0 : 0 < d := by omega
   have : NeZero d := ⟨hd0.ne'⟩
   have hdR : (0 : ℝ) < d := by exact_mod_cast hd0

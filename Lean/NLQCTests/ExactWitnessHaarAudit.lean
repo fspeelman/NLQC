@@ -62,14 +62,14 @@ theorem reference_ae_not_mem_reachable_zero :
     ∀ d : ℕ, 2 ≤ d → ∀ᵐ (T : unitaryGroup (Fin d × Fin d) ℂ) ∂unitaryHaar (Fin d × Fin d), ∀ K : ℕ,
       T ∉ pureReachable d K 0 ∧ T ∉ mixedReachable d K 0 ∧
       T ∉ purePVMReachable d K 0 ∧ T ∉ mixedPVMReachable d K 0 :=
-  ae_not_mem_reachable_zero_unconditional
+  ae_not_mem_reachable_zero
 
 /-- The exceptional set is the countable union over all budgets, and it is null. -/
 example (d : ℕ) (hd : 2 ≤ d) :
     unitaryHaar (Fin d × Fin d) (⋃ K : ℕ, pureReachable d K 0 ∪ mixedReachable d K 0 ∪
       purePVMReachable d K 0 ∪ mixedPVMReachable d K 0) = 0 := by
   refine measure_eq_zero_iff_ae_notMem.mpr ?_
-  filter_upwards [ae_not_mem_reachable_zero_unconditional d hd] with T hT
+  filter_upwards [ae_not_mem_reachable_zero d hd] with T hT
   simp only [Set.mem_iUnion, Set.mem_union, not_exists]
   intro K h
   rcases h with ((h | h) | h) | h
@@ -105,14 +105,14 @@ info: @unitaryHaar_mixedPVMReachable_zero : ∀ {d : ℕ},
 #check @unitaryHaar_mixedPVMReachable_zero
 
 /--
-info: ae_not_mem_reachable_zero_unconditional : ∀ (d : ℕ),
+info: ae_not_mem_reachable_zero : ∀ (d : ℕ),
   2 ≤ d →
     ∀ᵐ (T : ↥(unitaryGroup (Fin d × Fin d) ℂ)) ∂unitaryHaar (Fin d × Fin d),
       ∀ (K : ℕ),
         T ∉ pureReachable d K 0 ∧ T ∉ mixedReachable d K 0 ∧ T ∉ purePVMReachable d K 0 ∧ T ∉ mixedPVMReachable d K 0
 -/
 #guard_msgs (whitespace := lax) in
-#check @ae_not_mem_reachable_zero_unconditional
+#check @ae_not_mem_reachable_zero
 
 /--
 info: @volume_image_normalThickening_eq_zero : ∀ {n : Type u_1} [inst : Fintype n] [inst_1 : DecidableEq n] {E : Type u_2}
@@ -229,9 +229,9 @@ info: ae_pvm_no_finite_exact_implementation_of_ae_not_mem_reachable : (∀ (d : 
 #guard_msgs (whitespace := lax) in
 #print axioms unitaryHaar_mixedPVMReachable_zero
 
-/-- info: 'NLQCLean.ae_not_mem_reachable_zero_unconditional' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+/-- info: 'NLQCLean.ae_not_mem_reachable_zero' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
-#print axioms ae_not_mem_reachable_zero_unconditional
+#print axioms ae_not_mem_reachable_zero
 
 /-- info: 'NLQCLean.volume_image_normalThickening_eq_zero' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
@@ -249,12 +249,12 @@ info: ae_pvm_no_finite_exact_implementation_of_ae_not_mem_reachable : (∀ (d : 
 #guard_msgs (whitespace := lax) in
 #print axioms ae_pvm_no_finite_exact_implementation_of_ae_not_mem_reachable
 
-/-- info: 'NLQCLean.ae_unitary_no_finite_exact_implementation_unconditional' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+/-- info: 'NLQCLean.ae_unitary_no_finite_exact_implementation' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
-#print axioms ae_unitary_no_finite_exact_implementation_unconditional
+#print axioms ae_unitary_no_finite_exact_implementation
 
-/-- info: 'NLQCLean.ae_pvm_no_finite_exact_implementation_unconditional' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+/-- info: 'NLQCLean.ae_pvm_no_finite_exact_implementation' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
-#print axioms ae_pvm_no_finite_exact_implementation_unconditional
+#print axioms ae_pvm_no_finite_exact_implementation
 
 end NLQCTests.ExactWitnessHaarAudit

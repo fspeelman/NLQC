@@ -249,7 +249,7 @@ theorem transcendental_pi : Transcendental ℤ Real.pi := by
     · have isAlgebraic_pi := h.extendScalars (algebraMap ℤ ℚ).injective_int
       have isIntegral_pi : IsIntegral ℚ (Real.pi : ℂ) := by
         simpa only [coe_algebraMap] using isAlgebraic_pi.isIntegral.algebraMap (B := ℂ)
-      exact isIntegral_pi.mul (Complex.isIntegral_rat_I)
+      exact isIntegral_pi.mul (Complex.isIntegral_I ℚ)
     · exact isIntegral_zero
   · intro i j; fin_cases i, j <;> simp [Real.pi_ne_zero]
   · intro i; fin_cases i <;> exact isIntegral_one

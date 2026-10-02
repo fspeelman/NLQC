@@ -4,6 +4,6 @@ This repository contains files to accompany the recent preprint [Perfect non-loc
 
 The [companion notes](companion-notes.pdf) file presents robust extensions to the (exact) results of the paper. The extensions were the result of human questions and human selection, but the proofs and presentation are (currently still) AI generated.
 
-A formalization of many of the results can be found in the [Lean folder](Lean/), we intend to update this formalization in the coming days to cover more of the paper's (and companion notes') results.
+The [Lean folder](Lean/) contains formal proofs of the exact impossibility and finite-orbit results, the main robust resource bounds, and the diagonal-gate application. It includes build instructions and uses Lean and Mathlib v4.34.1.
 
-The [coverage guide](docs/robust-companion-lean.md) describes the proved statements and remaining assumptions. The supplied formalization includes the exact controlled-phase example with identity spectators, algebraicity of local-unitary invariants, and robust bounds for standard-Borel outcomes and shared randomness. Quantitative bounds retain three explicit geometry hypotheses.
+The [coverage guide](docs/robust-companion-lean.md) describes the proved statements, models and constants. The main bounds include standard-Borel classical outcomes and measurable shared randomness, and their geometric input is proved in the library. Only the effective bound for the named controlled-phase gate in Appendix C retains two explicit arithmetic hypotheses.

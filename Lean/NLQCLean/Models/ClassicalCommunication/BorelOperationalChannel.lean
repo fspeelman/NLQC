@@ -225,9 +225,9 @@ theorem operationalChannel_eq_of_reconstructed_densities
   have hB := P.instrumentB.reconstructed_density_ae_eq P.densityB Ψ
     P.densityB_spec.2.1 hΨ P.densityB_spec.2.2.1 hrepB
   have hAprod := (Measure.quasiMeasurePreserving_fst (μ := P.probabilityA)
-    (ν := P.probabilityB)).ae_eq hA
+    (ν := P.probabilityB)).ae_eq_comp hA
   have hBprod := (Measure.quasiMeasurePreserving_snd (μ := P.probabilityA)
-    (ν := P.probabilityB)).ae_eq hB
+    (ν := P.probabilityB)).ae_eq_comp hB
   apply integral_congr_ae
   filter_upwards [hAprod, hBprod] with z hzA hzB
   change P.densityA z.1 = Φ z.1 at hzA

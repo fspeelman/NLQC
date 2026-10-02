@@ -1,3 +1,4 @@
+import NLQCLean.Geometry.DirectVolume.Assembly
 import NLQCLean.Bounds.ControlledPhaseLength
 import NLQCLean.Models.ClassicalCommunication.FiniteReachability
 
@@ -77,7 +78,7 @@ theorem finiteControlledPhase_charged_exponent_eq (C : ℝ) (Kq : ℕ) :
 
 /-- One universal coefficient precedes the interval. The interval prefactor
 then bounds both honest finite angle sets and their union, in outer measure. -/
-theorem exists_finiteControlledPhase_length_constant
+theorem exists_finiteControlledPhase_length_constant_of_imageVolumeBound
     (hGeom : PolynomialImageVolumeBound) :
     ∃ C : ℝ, 1 ≤ C ∧ ∀ (a b : ℝ), a ≤ b →
       ((0 < a ∧ b < Real.pi) ∨ (Real.pi < a ∧ b < 2 * Real.pi)) →
@@ -89,7 +90,7 @@ theorem exists_finiteControlledPhase_length_constant
           ENNReal.ofReal (C_J * Real.exp (C * (Kq : ℝ) ^ 10) * Real.sqrt ε) ∧
         volume (finiteMixedControlledPhaseAngles Kq ε (Set.Icc a b)) ≤
           ENNReal.ofReal (C_J * Real.exp (C * (Kq : ℝ) ^ 10) * Real.sqrt ε) := by
-  obtain ⟨C, hC, hlength⟩ := exists_chargedControlledPhase_length_constant hGeom
+  obtain ⟨C, hC, hlength⟩ := exists_chargedControlledPhase_length_constant_of_imageVolumeBound hGeom
   refine ⟨4096 * C, by linarith, ?_⟩
   intro a b hab hsemicircle
   obtain ⟨C_J, hCJ, hbound⟩ := hlength a b hab hsemicircle
@@ -142,7 +143,7 @@ theorem exists_phase_notMem_of_outer_length_lt {S : Set ℝ} {a b : ℝ}
 /-- Every nondegenerate compact semicircle interval contains a worst-case
 phase at each error below its explicit exponential budget threshold. The same
 phase defeats both pure and common-map finite-mixed score reachability. -/
-theorem exists_finiteControlledPhase_worst_case_constant
+theorem exists_finiteControlledPhase_worst_case_constant_of_imageVolumeBound
     (hGeom : PolynomialImageVolumeBound) :
     ∃ C : ℝ, 1 ≤ C ∧ ∀ (a b : ℝ), a < b →
       ((0 < a ∧ b < Real.pi) ∨ (Real.pi < a ∧ b < 2 * Real.pi)) →
@@ -151,7 +152,7 @@ theorem exists_finiteControlledPhase_worst_case_constant
         ∃ θ : ℝ, θ ∈ Set.Icc a b ∧
           controlledPhaseTarget θ ∉ finitePureScoreReachable 2 Kq ε ∧
           controlledPhaseTarget θ ∉ finiteMixedScoreReachable 2 Kq ε := by
-  obtain ⟨C, hC, hlength⟩ := exists_finiteControlledPhase_length_constant hGeom
+  obtain ⟨C, hC, hlength⟩ := exists_finiteControlledPhase_length_constant_of_imageVolumeBound hGeom
   refine ⟨C, hC, ?_⟩
   intro a b hab hsemicircle
   obtain ⟨C_J, hCJ, hbound⟩ := hlength a b hab.le hsemicircle
@@ -173,11 +174,8 @@ theorem exists_finiteControlledPhase_worst_case_constant
   · intro hm
     exact hn (Or.inr ⟨hθ, hm⟩)
 
-/-- The finite outer-length bound retains exactly the three geometry inputs. -/
-theorem exists_finiteControlledPhase_length_constant_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+/-- The finite outer-length bound. -/
+theorem exists_finiteControlledPhase_length_constant :
     ∃ C : ℝ, 1 ≤ C ∧ ∀ (a b : ℝ), a ≤ b →
       ((0 < a ∧ b < Real.pi) ∨ (Real.pi < a ∧ b < 2 * Real.pi)) →
       ∃ C_J : ℝ, 0 < C_J ∧ ∀ (Kq : ℕ), 1 ≤ Kq → ∀ (ε : ℝ), 0 < ε →
@@ -188,15 +186,12 @@ theorem exists_finiteControlledPhase_length_constant_of_external
           ENNReal.ofReal (C_J * Real.exp (C * (Kq : ℝ) ^ 10) * Real.sqrt ε) ∧
         volume (finiteMixedControlledPhaseAngles Kq ε (Set.Icc a b)) ≤
           ENNReal.ofReal (C_J * Real.exp (C * (Kq : ℝ) ^ 10) * Real.sqrt ε) :=
-  exists_finiteControlledPhase_length_constant
-    (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_finiteControlledPhase_length_constant_of_imageVolumeBound
+    (DirectVolume.polynomialImageVolumeBound)
 
 /-- The simultaneous finite pure/mixed worst-case phase needs no additional
 arithmetic, compression or measurability contract. -/
-theorem exists_finiteControlledPhase_worst_case_constant_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+theorem exists_finiteControlledPhase_worst_case_constant :
     ∃ C : ℝ, 1 ≤ C ∧ ∀ (a b : ℝ), a < b →
       ((0 < a ∧ b < Real.pi) ∨ (Real.pi < a ∧ b < 2 * Real.pi)) →
       ∃ ε_J : ℝ, 0 < ε_J ∧ ∀ (Kq : ℕ), 1 ≤ Kq → ∀ (ε : ℝ), 0 < ε →
@@ -204,7 +199,7 @@ theorem exists_finiteControlledPhase_worst_case_constant_of_external
         ∃ θ : ℝ, θ ∈ Set.Icc a b ∧
           controlledPhaseTarget θ ∉ finitePureScoreReachable 2 Kq ε ∧
           controlledPhaseTarget θ ∉ finiteMixedScoreReachable 2 Kq ε :=
-  exists_finiteControlledPhase_worst_case_constant
-    (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_finiteControlledPhase_worst_case_constant_of_imageVolumeBound
+    (DirectVolume.polynomialImageVolumeBound)
 
 end NLQCLean

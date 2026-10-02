@@ -21,15 +21,15 @@ set_option pp.universes true in
 #print axioms NLQCLean.qubit_lower_of_tenth_power_and_squared_footprint
 
 set_option pp.universes true in
+#check @NLQCLean.exists_ae_finiteLOSCCControlledPhase_qubit_bound_of_imageVolumeBound
+
+/-- info: 'NLQCLean.exists_ae_finiteLOSCCControlledPhase_qubit_bound_of_imageVolumeBound' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms NLQCLean.exists_ae_finiteLOSCCControlledPhase_qubit_bound_of_imageVolumeBound
+
+set_option pp.universes true in
 #check @NLQCLean.exists_ae_finiteLOSCCControlledPhase_qubit_bound
 
 /-- info: 'NLQCLean.exists_ae_finiteLOSCCControlledPhase_qubit_bound' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
 #print axioms NLQCLean.exists_ae_finiteLOSCCControlledPhase_qubit_bound
-
-set_option pp.universes true in
-#check @NLQCLean.exists_ae_finiteLOSCCControlledPhase_qubit_bound_of_external
-
-/-- info: 'NLQCLean.exists_ae_finiteLOSCCControlledPhase_qubit_bound_of_external' depends on axioms: [propext, Classical.choice, Quot.sound] -/
-#guard_msgs (whitespace := lax) in
-#print axioms NLQCLean.exists_ae_finiteLOSCCControlledPhase_qubit_bound_of_external

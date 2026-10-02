@@ -1,3 +1,4 @@
+import NLQCLean.Geometry.DirectVolume.Assembly
 import NLQCLean.Models.ClassicalCommunication.FiniteLocalization
 import NLQCLean.Bounds.AlmostEveryExact
 import NLQCLean.Bounds.ArbitraryFiniteClassicalAlmostEvery
@@ -9,8 +10,7 @@ import NLQCLean.Approx.FiniteClassicalSpectralFloors
 Actual finite local POVMs and their joint reporting function induce the
 two-sided classical protocol constructed in the model leaf. Quantum messages
 are one-dimensional, so its quantum budget is the resource Schmidt rank.
-Exact Haar nullity is unconditional. Quantitative conclusions use the same
-three explicit geometry premises as the finite classical rate theorems.
+Exact Haar nullity and the quantitative conclusions are unconditional.
 -/
 
 namespace NLQCLean.ClassicalCommunication
@@ -41,7 +41,7 @@ theorem ae_no_finite_exact_localization (d : ℕ) (hd : 2 ≤ d) :
       NoFiniteExactLocalization.{u₁, u₂, u₃, u₄} T := by
   let : NeZero d := ⟨by omega⟩
   have hd0 : 0 < d := by omega
-  filter_upwards [ae_not_mem_reachable_zero_unconditional d hd] with T hT
+  filter_upwards [ae_not_mem_reachable_zero d hd] with T hT
   have hM : IsIsometry (T : Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ) :=
     Matrix.mem_unitaryGroup_iff'.mp T.property
   intro ρA ρB σA σB _ _ _ _ _ _ _ _ L
@@ -148,7 +148,7 @@ theorem finiteLocalizationReachable_subset_purePVMReachable
 /-- The full-group outer-measure bound for finite localization. The class
 need not be measurable; the PVM codimension and error normalization remain
 those of the ordered joint-label score. -/
-theorem exists_finite_localization_haar_constant
+theorem exists_finite_localization_haar_constant_of_imageVolumeBound
     (hGeom : PolynomialImageVolumeBound) :
     ∃ C : ℝ, 1 ≤ C ∧ ∀ (d r : ℕ), 2 ≤ d → 1 ≤ r →
       ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 →
@@ -156,7 +156,7 @@ theorem exists_finite_localization_haar_constant
             (finiteLocalizationReachable.{u₁, u₂, u₃, u₄} d r ε) ≤
           min 1 (ENNReal.ofReal (Real.exp (C * (d : ℝ) ^ 10 * (r : ℝ) ^ 10) *
             ε ^ ((pvmCodimension d : ℝ) / 2))) := by
-  obtain ⟨C, hC, hbound⟩ := exists_pvm_haar_fraction_constant hGeom
+  obtain ⟨C, hC, hbound⟩ := exists_pvm_haar_fraction_constant_of_imageVolumeBound hGeom
   refine ⟨16 * C, by linarith, ?_⟩
   intro d r hd hr ε hε hεhalf
   obtain ⟨hone, hquarter⟩ := finiteClassical_charged_budget_admissible hd hr
@@ -165,20 +165,16 @@ theorem exists_finite_localization_haar_constant
   exact (measure_mono (finiteLocalizationReachable_subset_purePVMReachable
     (by omega : 0 < d) r ε)).trans h
 
-/-- The outer-measure localization theorem with precisely the three
-unchanged external geometry arguments. -/
-theorem exists_finite_localization_haar_constant_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+/-- The outer-measure localization theorem. -/
+theorem exists_finite_localization_haar_constant :
     ∃ C : ℝ, 1 ≤ C ∧ ∀ (d r : ℕ), 2 ≤ d → 1 ≤ r →
       ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 →
         (unitaryHaar (Fin d × Fin d)).toOuterMeasure
             (finiteLocalizationReachable.{u₁, u₂, u₃, u₄} d r ε) ≤
           min 1 (ENNReal.ofReal (Real.exp (C * (d : ℝ) ^ 10 * (r : ℝ) ^ 10) *
             ε ^ ((pvmCodimension d : ℝ) / 2))) :=
-  exists_finite_localization_haar_constant
-    (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_finite_localization_haar_constant_of_imageVolumeBound
+    (DirectVolume.polynomialImageVolumeBound)
 
 /-- The literal tenth-root form of the finite classical logarithm rate. -/
 theorem localization_rank_rate_of_log_bound {C L : ℝ} {d r : ℕ}
@@ -236,13 +232,13 @@ def AllFiniteLocalizationRankBounds (T : unitaryGroup (Fin d × Fin d) ℂ)
 /-- The finite-outcome restriction of `cor:localization`, with one universal
 constant and a fixed-target threshold preceding every resource rank and
 original outcome/register architecture. -/
-theorem exists_ae_finite_localization_rank_constant (hGeom : PolynomialImageVolumeBound) :
+theorem exists_ae_finite_localization_rank_constant_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ c : ℝ, 0 < c ∧ ∀ d : ℕ, 2 ≤ d →
       ∀ᵐ (T : unitaryGroup (Fin d × Fin d) ℂ) ∂unitaryHaar (Fin d × Fin d),
       ∃ ε₀ : ℝ, 0 < ε₀ ∧ ε₀ ≤ 1 / 2 ∧ ∀ ε : ℝ, 0 < ε → ε ≤ ε₀ →
         AllFiniteLocalizationRankBounds.{u₁, u₂, u₃, u₄} T ε c := by
   obtain ⟨C, hC, hrate⟩ :=
-    exists_ae_arbitrary_finite_classical_log_constant.{u₁, u₂, u₁, u₂, 0, 0, u₃, u₄, 0, 0, u₁, u₂}
+    exists_ae_arbitrary_finite_classical_log_constant_of_imageVolumeBound.{u₁, u₂, u₁, u₂, 0, 0, u₃, u₄, 0, 0, u₁, u₂}
       hGeom
   refine ⟨C ^ (-(1 / 10 : ℝ)), by positivity, ?_⟩
   intro d hd
@@ -315,15 +311,12 @@ theorem exists_ae_finite_localization_rank_constant (hGeom : PolynomialImageVolu
 
 /-- The finite localization maximum bound retains exactly the three
 existing explicit external geometric arguments. -/
-theorem exists_ae_finite_localization_rank_constant_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+theorem exists_ae_finite_localization_rank_constant :
     ∃ c : ℝ, 0 < c ∧ ∀ d : ℕ, 2 ≤ d →
       ∀ᵐ (T : unitaryGroup (Fin d × Fin d) ℂ) ∂unitaryHaar (Fin d × Fin d),
       ∃ ε₀ : ℝ, 0 < ε₀ ∧ ε₀ ≤ 1 / 2 ∧ ∀ ε : ℝ, 0 < ε → ε ≤ ε₀ →
         AllFiniteLocalizationRankBounds.{u₁, u₂, u₃, u₄} T ε c :=
-  exists_ae_finite_localization_rank_constant
-    (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_ae_finite_localization_rank_constant_of_imageVolumeBound
+    (DirectVolume.polynomialImageVolumeBound)
 
 end NLQCLean.ClassicalCommunication

@@ -117,7 +117,7 @@ theorem diagonal_gram_smul {m n : Type*} [Fintype m] [Fintype n]
   ext a b
   by_cases hab : a = b
   · subst b
-    simp only [Matrix.smul_apply, Matrix.diagonal_apply, if_pos, Complex.star_def,
+    simp only [Matrix.smul_apply, Matrix.diagonal_apply, ite_eq_left, Complex.star_def,
       Complex.mul_conj', Complex.ofReal_mul, Complex.ofReal_pow, smul_eq_mul]
   · simp [hab]
 

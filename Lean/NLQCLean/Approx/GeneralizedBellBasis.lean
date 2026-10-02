@@ -75,9 +75,9 @@ theorem isIsometry_generalizedBellMatrix (d : ℕ) [NeZero d] :
           generalizedBellMatrix d (x, y) (q, s)) =
         (d : ℂ)⁻¹ * ZMod.stdAddChar (x * (q - p)) := by
       rw [Finset.sum_eq_single (x + s)]
-      · simpa only [generalizedBellMatrix, if_pos rfl, if_true] using bell_phase_inner x p q
+      · simpa only [generalizedBellMatrix, ite_eq_left rfl, ite_true] using bell_phase_inner x p q
       · intro y _ hy
-        simp only [generalizedBellMatrix, if_neg hy, star_zero, zero_mul]
+        simp only [generalizedBellMatrix, ite_eq_right hy, star_zero, zero_mul]
       · simp
     simp_rw [hrow]
     rw [← Finset.mul_sum, AddChar.sum_mulShift (q - p) (ZMod.isPrimitive_stdAddChar d)]
@@ -95,10 +95,10 @@ theorem isIsometry_generalizedBellMatrix (d : ℕ) [NeZero d] :
       · have ht : y ≠ x + t := by
           intro ht
           exact hst (add_left_cancel (hs.symm.trans ht))
-        simp only [generalizedBellMatrix, if_pos hs, if_neg ht, mul_zero]
-      · simp only [generalizedBellMatrix, if_neg hs, star_zero, zero_mul]
+        simp only [generalizedBellMatrix, ite_eq_left hs, ite_eq_right ht, mul_zero]
+      · simp only [generalizedBellMatrix, ite_eq_right hs, star_zero, zero_mul]
     have hpair : (p, s) ≠ (q, t) := fun h ↦ hst (congrArg Prod.snd h)
-    rw [if_neg hpair]
+    rw [ite_eq_right hpair]
     simp_rw [hrow]
     exact Finset.sum_const_zero
 
@@ -117,10 +117,10 @@ theorem pvmConjugateColumnMatrix_generalizedBellMatrix_gram (d : ℕ) [NeZero d]
     have hterm : (∑ y : ZMod d, star (generalizedBellMatrix d (x, y) i) *
         generalizedBellMatrix d (x, y) i) = (d : ℂ)⁻¹ := by
       rw [Finset.sum_eq_single (x + i.2)]
-      · simpa only [generalizedBellMatrix, if_pos rfl, if_true, sub_self, mul_zero,
+      · simpa only [generalizedBellMatrix, ite_eq_left rfl, ite_true, sub_self, mul_zero,
           AddChar.map_zero_eq_one, mul_one] using bell_phase_inner x i.1 i.1
       · intro y _ hy
-        simp only [generalizedBellMatrix, if_neg hy, star_zero, zero_mul]
+        simp only [generalizedBellMatrix, ite_eq_right hy, star_zero, zero_mul]
       · simp
     simpa using hterm
   · have hterm (y : ZMod d) : star (generalizedBellMatrix d (x, y) i) *
@@ -129,9 +129,9 @@ theorem pvmConjugateColumnMatrix_generalizedBellMatrix_gram (d : ℕ) [NeZero d]
       · have hz : y ≠ z + i.2 := by
           intro hz
           exact hxz (add_right_cancel (hx.symm.trans hz))
-        simp only [generalizedBellMatrix, if_pos hx, if_neg hz, mul_zero]
-      · simp only [generalizedBellMatrix, if_neg hx, star_zero, zero_mul]
-    rw [if_neg hxz]
+        simp only [generalizedBellMatrix, ite_eq_left hx, ite_eq_right hz, mul_zero]
+      · simp only [generalizedBellMatrix, ite_eq_right hx, star_zero, zero_mul]
+    rw [ite_eq_right hxz]
     simp_rw [hterm]
     exact Finset.sum_const_zero
 
@@ -161,10 +161,10 @@ theorem pvmConjugateColumnMatrix_generalizedBellFinMatrix_gram (d : ℕ) [NeZero
   ext x y
   by_cases hxy : x = y
   · subst y
-    simp only [Matrix.submatrix_apply, Matrix.diagonal_apply, if_pos, Fintype.card_fin,
+    simp only [Matrix.submatrix_apply, Matrix.diagonal_apply, ite_eq_left, Fintype.card_fin,
       ZMod.card]
   · have hexy : e x ≠ e y := fun h ↦ hxy (e.injective h)
-    simp only [Matrix.submatrix_apply, Matrix.diagonal_apply, if_neg hxy, if_neg hexy]
+    simp only [Matrix.submatrix_apply, Matrix.diagonal_apply, ite_eq_right hxy, ite_eq_right hexy]
 
 section Protocol
 

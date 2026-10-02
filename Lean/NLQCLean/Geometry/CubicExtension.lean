@@ -216,9 +216,8 @@ theorem hasDerivAt_cubicSphere {z : ε → ℂ} (hz : IsUnitVector z) (w : ε �
       = fun t : ℝ => ((3 - sqNorm (z + t • w)) / 2 : ℝ) • (z + t • w) e := rfl
   rw [this]
   convert hprod using 1
-  · rfl
-  · have hd : dCubicSphere z w e = w e - ((vecInner z w).re) • z e := rfl
-    rw [hd, zero_smul, add_zero, one_smul, neg_smul, sub_eq_add_neg]
+  have hd : dCubicSphere z w e = w e - ((vecInner z w).re) • z e := rfl
+  rw [hd, zero_smul, add_zero, one_smul, neg_smul, sub_eq_add_neg]
 
 /-- **The linearized sphere constraint holds for every ambient velocity.** -/
 theorem dCubicSphere_linearized {z : ε → ℂ} (hz : IsUnitVector z) (w : ε → ℂ) :

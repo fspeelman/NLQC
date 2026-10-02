@@ -41,7 +41,7 @@ theorem nearBellLocalReferencePair_isUnitVector {d : ℕ} (hd : 0 < d) :
   change (∑ p : Fin d × Fin d, Complex.normSq (nearBellLocalReferencePair d p)) = 1
   rw [Fintype.sum_prod_type]
   simp only [nearBellLocalReferencePair, apply_ite, Complex.normSq_zero, hnorm,
-    Finset.sum_ite_eq, Finset.mem_univ, if_true, Finset.sum_const,
+    Finset.sum_ite_eq, Finset.mem_univ, ite_true, Finset.sum_const,
     Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]
   exact mul_inv_cancel₀ hdR.ne'
 
@@ -162,7 +162,7 @@ theorem nearBellReference_crossedPhi
   simp only [crossedPhi, Fintype.sum_prod_type, nearBellReferenceEncoder_apply,
     nearBellReferenceResource, nearBellLocalReferencePair,
     mul_ite, ite_mul, zero_mul, mul_zero,
-    Finset.sum_ite_eq, Finset.mem_univ, if_true]
+    Finset.sum_ite_eq, Finset.mem_univ, ite_true]
   rw [Finset.mul_sum]
   apply Finset.sum_congr rfl
   intro pB _

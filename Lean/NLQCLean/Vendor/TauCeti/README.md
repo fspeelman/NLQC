@@ -39,9 +39,12 @@ dependencies are Mathlib. No full Tau Ceti package dependency is introduced.
 ## Pins and local adaptations
 
 Upstream uses Lean `v4.34.0-rc2` and Mathlib
-`369aeb92f434826041d430d3b015d6ab0006bf72`. This port targets the unchanged
+`369aeb92f434826041d430d3b015d6ab0006bf72`. This port initially targeted
 project Lean `v4.33.1` and Mathlib
 `0df444a360eaa60ab8c11dca51a86af692955474`.
+The project now uses Lean `v4.34.1` and Mathlib
+`d13f23b723b8a846827a245b89c10fc7d3f11612`; the Tau Ceti source adaptations
+and upstream pin are unchanged.
 
 Local modules and declaration namespaces replace the prefix `TauCeti` with
 `NLQCLean.Vendor.TauCeti`; source headers identify the modification.

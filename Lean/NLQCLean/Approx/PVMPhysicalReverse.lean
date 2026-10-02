@@ -28,6 +28,7 @@ theorem PureProtocol.exists_pvm_reverse_blocks_of_frozen
     (hu : ∀ i, IsUnitVector (u i))
     (hurank : ∑ i, schmidtRank (u i) ≤ K + Fintype.card (Fin d × Fin d)) :
     ∃ allocation : PositiveRankAllocation (Fin d × Fin d) K,
+      (∀ i, allocation.rank i = schmidtRank (u i)) ∧
       ∃ x : PVMReverseBlocks (arch, allocation), PVMReverseBlocks.IsValid x ∧
         PVMReverseBlocks.overlap x = (flagIsometry u)ᴴ * P.globalIsometry := by
   classical
@@ -70,7 +71,7 @@ theorem PureProtocol.exists_pvm_reverse_blocks_of_frozen
   have hx : PVMReverseBlocks.IsValid x :=
     ⟨P.resource_unit, hg, (hPA.kronecker isIsometry_one).mul P.encA_isometry,
       (hPB.kronecker isIsometry_one).mul P.encB_isometry, hTA, hTB⟩
-  refine ⟨allocation, x, hx, ?_⟩
+  refine ⟨allocation, fun i => rfl, x, hx, ?_⟩
   let EA := s.rowEmbeddingA * QA
   let EB := s.rowEmbeddingB * QB
   have hea : EAᴴ * TA = P.decAᴴ * LA := by

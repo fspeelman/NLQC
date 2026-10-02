@@ -55,12 +55,12 @@ theorem spectralCutoff_card_le {d S : ℕ} {δ R : ℝ} (hδ : 0 ≤ δ)
     (h1 : (S : ℝ) * (if 0 < δ then 8 * δ else 1) ^ 2 ≤ R) (h2 : R ≤ (d : ℝ) ^ 2 * δ ^ 2) :
     64 * S ≤ d ^ 2 := by
   rcases hδ.lt_or_eq with hpos | h0
-  · rw [if_pos hpos] at h1
+  · rw [ite_eq_left hpos] at h1
     have hδ2 : 0 < δ ^ 2 := by positivity
     have h3 : (64 * S : ℝ) * δ ^ 2 ≤ (d : ℝ) ^ 2 * δ ^ 2 := by nlinarith
     exact_mod_cast le_of_mul_le_mul_right h3 hδ2
   · subst h0
-    rw [if_neg (lt_irrefl 0), one_pow, mul_one] at h1
+    rw [ite_eq_right (lt_irrefl 0), one_pow, mul_one] at h1
     have h2' : R ≤ 0 := by simpa using h2
     have hS0 : (S : ℝ) ≤ 0 := h1.trans h2'
     have : S = 0 := by exact_mod_cast le_antisymm hS0 (Nat.cast_nonneg S)
@@ -71,7 +71,7 @@ theorem spectralCutoff_good_le {m n : Type*} [Fintype m] [Fintype n] [DecidableE
     (h1 : opNorm (R * (1 - P)) ≤ if 0 < δ then 8 * δ else 1)
     (h2 : ‖R‖ ^ 2 ≤ (d : ℝ) ^ 2 * δ ^ 2) : opNorm (R * (1 - P)) ≤ 8 * δ := by
   rcases hδ.lt_or_eq with hpos | h0
-  · rwa [if_pos hpos] at h1
+  · rwa [ite_eq_left hpos] at h1
   · subst h0
     have h2' : ‖R‖ ^ 2 ≤ 0 := by simpa using h2
     have hR : R = 0 := norm_eq_zero.mp (le_antisymm (by nlinarith [norm_nonneg R]) (norm_nonneg R))

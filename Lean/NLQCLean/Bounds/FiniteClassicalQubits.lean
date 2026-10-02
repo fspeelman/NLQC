@@ -1,3 +1,4 @@
+import NLQCLean.Geometry.DirectVolume.Assembly
 import NLQCLean.Bounds.FiniteClassicalAlmostEvery
 import NLQCLean.Bounds.FiniteClassicalStrongUniversal
 
@@ -34,7 +35,7 @@ theorem quantumFootprint_log_of_tenth_power_bound
 
 /-- Baseline universal unitary score bounds for pure and common-map
 mixed finite-shape protocols. The logarithm is that of quantum footprint. -/
-theorem exists_finite_classical_unitary_universal_qubit_constant
+theorem exists_finite_classical_unitary_universal_qubit_constant_of_imageVolumeBound
     (hGeom : PolynomialImageVolumeBound) :
     ∃ B : ℝ, 0 ≤ B ∧ ∀ (n K : ℕ), 1 ≤ n → 1 ≤ K →
       ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 →
@@ -44,7 +45,7 @@ theorem exists_finite_classical_unitary_universal_qubit_constant
         ((∀ U, U ∈ finiteMixedScoreReachable (2 ^ n) K ε) →
           (1 / 10 : ℝ) * Real.logb 2 (Real.log (1 / ε)) - (3 / 5 : ℝ) * (n : ℝ) - B ≤
             Real.logb 2 (K : ℝ)) := by
-  obtain ⟨C, hC, hbound⟩ := exists_finite_classical_unitary_universal_log_constant hGeom
+  obtain ⟨C, hC, hbound⟩ := exists_finite_classical_unitary_universal_log_constant_of_imageVolumeBound hGeom
   refine ⟨max 0 (Real.logb 2 C / 10), le_max_left _ _, ?_⟩
   intro n K hn hK ε hε hεhalf
   have hd : 2 ≤ 2 ^ n := by
@@ -61,7 +62,7 @@ theorem exists_finite_classical_unitary_universal_qubit_constant
 
 /-- PVM universality keeps the baseline dimension coefficient and the full
 joint-label score. No stronger unitary coefficient is imported here. -/
-theorem exists_finite_classical_pvm_universal_qubit_constant
+theorem exists_finite_classical_pvm_universal_qubit_constant_of_imageVolumeBound
     (hGeom : PolynomialImageVolumeBound) :
     ∃ B : ℝ, 0 ≤ B ∧ ∀ (n K : ℕ), 1 ≤ n → 1 ≤ K →
       ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 →
@@ -71,7 +72,7 @@ theorem exists_finite_classical_pvm_universal_qubit_constant
         ((∀ M, M ∈ finiteMixedPVMScoreReachable (2 ^ n) K ε) →
           (1 / 10 : ℝ) * Real.logb 2 (Real.log (1 / ε)) - (3 / 5 : ℝ) * (n : ℝ) - B ≤
             Real.logb 2 (K : ℝ)) := by
-  obtain ⟨C, hC, hbound⟩ := exists_finite_classical_pvm_universal_log_constant hGeom
+  obtain ⟨C, hC, hbound⟩ := exists_finite_classical_pvm_universal_log_constant_of_imageVolumeBound hGeom
   refine ⟨max 0 (Real.logb 2 C / 10), le_max_left _ _, ?_⟩
   intro n K hn hK ε hε hεhalf
   have hd : 2 ≤ 2 ^ n := by
@@ -88,7 +89,7 @@ theorem exists_finite_classical_pvm_universal_qubit_constant
 
 /-- Only universal unitary score implementation has the improved `-2n/5`
 coefficient, inherited from the charged near-SWAP universal argument. -/
-theorem exists_finite_classical_strong_unitary_universal_qubit_constant
+theorem exists_finite_classical_strong_unitary_universal_qubit_constant_of_imageVolumeBound
     (hGeom : PolynomialImageVolumeBound) :
     ∃ B : ℝ, 0 ≤ B ∧ ∀ (n K : ℕ), 1 ≤ n → 1 ≤ K →
       ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 →
@@ -98,7 +99,7 @@ theorem exists_finite_classical_strong_unitary_universal_qubit_constant
         ((∀ U, U ∈ finiteMixedScoreReachable (2 ^ n) K ε) →
           (1 / 10 : ℝ) * Real.logb 2 (Real.log (1 / ε)) - (2 / 5 : ℝ) * (n : ℝ) - B ≤
             Real.logb 2 (K : ℝ)) := by
-  obtain ⟨C, hC, hbound⟩ := exists_finite_classical_strong_unitary_universal_log_constant hGeom
+  obtain ⟨C, hC, hbound⟩ := exists_finite_classical_strong_unitary_universal_log_constant_of_imageVolumeBound hGeom
   refine ⟨max 0 (Real.logb 2 C / 10), le_max_left _ _, ?_⟩
   intro n K hn hK ε hε hεhalf
   have hd : 2 ≤ 2 ^ n := by
@@ -116,7 +117,7 @@ theorem exists_finite_classical_strong_unitary_universal_qubit_constant
 /-- One additive constant precedes the logical dimension and almost-every
 target. The same fixed-target threshold serves every positive quantum budget
 and all four finite pure/common-map mixed unitary/PVM score classes. -/
-theorem exists_ae_finite_classical_qubit_constant
+theorem exists_ae_finite_classical_qubit_constant_of_imageVolumeBound
     (hGeom : PolynomialImageVolumeBound) :
     ∃ B : ℝ, 0 ≤ B ∧ ∀ n : ℕ, 1 ≤ n →
       ∀ᵐ (T : unitaryGroup (Fin (2 ^ n) × Fin (2 ^ n)) ℂ)
@@ -135,7 +136,7 @@ theorem exists_ae_finite_classical_qubit_constant
           (T ∈ finiteMixedPVMScoreReachable (2 ^ n) K ε →
             (1 / 10 : ℝ) * Real.logb 2 (Real.log (1 / ε)) - (3 / 5 : ℝ) * (n : ℝ) - B ≤
               Real.logb 2 (K : ℝ)) := by
-  obtain ⟨C, hC, hae⟩ := exists_ae_finite_classical_log_constant hGeom
+  obtain ⟨C, hC, hae⟩ := exists_ae_finite_classical_log_constant_of_imageVolumeBound hGeom
   refine ⟨max 0 (Real.logb 2 C / 10), le_max_left _ _, fun n hn => ?_⟩
   have hd : 2 ≤ 2 ^ n := by
     simpa only [pow_one] using Nat.pow_le_pow_right (by decide : 0 < 2) hn
@@ -152,12 +153,8 @@ theorem exists_ae_finite_classical_qubit_constant
   obtain ⟨hpU, hmU, hpM, hmM⟩ := hT K ε hε hsmall
   exact ⟨hq hpU, hq hmU, hq hpM, hq hmM⟩
 
-/-- Baseline unitary quantum-footprint logarithms from exactly the three
-unchanged external geometry arguments. -/
-theorem exists_finite_classical_unitary_universal_qubit_constant_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+/-- Baseline unitary quantum-footprint logarithms. -/
+theorem exists_finite_classical_unitary_universal_qubit_constant :
     ∃ B : ℝ, 0 ≤ B ∧ ∀ (n K : ℕ), 1 ≤ n → 1 ≤ K →
       ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 →
         ((∀ U, U ∈ finitePureScoreReachable (2 ^ n) K ε) →
@@ -166,15 +163,12 @@ theorem exists_finite_classical_unitary_universal_qubit_constant_of_external
         ((∀ U, U ∈ finiteMixedScoreReachable (2 ^ n) K ε) →
           (1 / 10 : ℝ) * Real.logb 2 (Real.log (1 / ε)) - (3 / 5 : ℝ) * (n : ℝ) - B ≤
             Real.logb 2 (K : ℝ)) :=
-  exists_finite_classical_unitary_universal_qubit_constant
-    (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_finite_classical_unitary_universal_qubit_constant_of_imageVolumeBound
+    (DirectVolume.polynomialImageVolumeBound)
 
 /-- Baseline joint-label PVM quantum-footprint logarithms from those same
 three arguments, without importing the stronger unitary rate. -/
-theorem exists_finite_classical_pvm_universal_qubit_constant_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+theorem exists_finite_classical_pvm_universal_qubit_constant :
     ∃ B : ℝ, 0 ≤ B ∧ ∀ (n K : ℕ), 1 ≤ n → 1 ≤ K →
       ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 →
         ((∀ M, M ∈ finitePurePVMScoreReachable (2 ^ n) K ε) →
@@ -183,15 +177,12 @@ theorem exists_finite_classical_pvm_universal_qubit_constant_of_external
         ((∀ M, M ∈ finiteMixedPVMScoreReachable (2 ^ n) K ε) →
           (1 / 10 : ℝ) * Real.logb 2 (Real.log (1 / ε)) - (3 / 5 : ℝ) * (n : ℝ) - B ≤
             Real.logb 2 (K : ℝ)) :=
-  exists_finite_classical_pvm_universal_qubit_constant
-    (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_finite_classical_pvm_universal_qubit_constant_of_imageVolumeBound
+    (DirectVolume.polynomialImageVolumeBound)
 
 /-- The stronger unitary-only universal logarithm keeps the original three
 external arguments and the finite-score universality hypothesis. -/
-theorem exists_finite_classical_strong_unitary_universal_qubit_constant_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+theorem exists_finite_classical_strong_unitary_universal_qubit_constant :
     ∃ B : ℝ, 0 ≤ B ∧ ∀ (n K : ℕ), 1 ≤ n → 1 ≤ K →
       ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 →
         ((∀ U, U ∈ finitePureScoreReachable (2 ^ n) K ε) →
@@ -200,15 +191,12 @@ theorem exists_finite_classical_strong_unitary_universal_qubit_constant_of_exter
         ((∀ U, U ∈ finiteMixedScoreReachable (2 ^ n) K ε) →
           (1 / 10 : ℝ) * Real.logb 2 (Real.log (1 / ε)) - (2 / 5 : ℝ) * (n : ℝ) - B ≤
             Real.logb 2 (K : ℝ)) :=
-  exists_finite_classical_strong_unitary_universal_qubit_constant
-    (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_finite_classical_strong_unitary_universal_qubit_constant_of_imageVolumeBound
+    (DirectVolume.polynomialImageVolumeBound)
 
 /-- The joint almost-every quantum-footprint logarithm retains the same
-fixed-target threshold and exactly the three original geometry arguments. -/
-theorem exists_ae_finite_classical_qubit_constant_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+fixed-target threshold. -/
+theorem exists_ae_finite_classical_qubit_constant :
     ∃ B : ℝ, 0 ≤ B ∧ ∀ n : ℕ, 1 ≤ n →
       ∀ᵐ (T : unitaryGroup (Fin (2 ^ n) × Fin (2 ^ n)) ℂ)
         ∂unitaryHaar (Fin (2 ^ n) × Fin (2 ^ n)),
@@ -226,7 +214,7 @@ theorem exists_ae_finite_classical_qubit_constant_of_external
           (T ∈ finiteMixedPVMScoreReachable (2 ^ n) K ε →
             (1 / 10 : ℝ) * Real.logb 2 (Real.log (1 / ε)) - (3 / 5 : ℝ) * (n : ℝ) - B ≤
               Real.logb 2 (K : ℝ)) :=
-  exists_ae_finite_classical_qubit_constant
-    (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_ae_finite_classical_qubit_constant_of_imageVolumeBound
+    (DirectVolume.polynomialImageVolumeBound)
 
 end NLQCLean.ClassicalCommunication

@@ -127,7 +127,7 @@ theorem exists_spectral_cutoff {m n : Type*} [Fintype m] [Fintype n] [DecidableE
       intro i
       by_cases hi : i ∈ S
       · simp [hi]; positivity
-      · simp only [hi, if_false, Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg (hev0 i)]
+      · simp only [hi, ite_false, Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg (hev0 i)]
         simpa [S] using hi
     rw [opNorm_adjoint_mul_self] at hbound
     exact (pow_le_pow_iff_left₀ (opNorm_nonneg _) hc.le (by decide : 2 ≠ 0)).mp hbound

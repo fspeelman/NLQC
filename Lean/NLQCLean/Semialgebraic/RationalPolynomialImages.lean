@@ -173,7 +173,7 @@ theorem polynomial_graph {n m : ℕ} {S : Set (RealEuclidean n)}
   convert h using 1
   ext z
   simp only [Set.mem_inter_iff, Set.mem_preimage, Set.mem_iInter, Set.mem_ofPred_eq,
-    MvPolynomial.eval_sub, MvPolynomial.eval_rename, MvPolynomial.eval_X, sub_eq_zero]
+    map_sub, MvPolynomial.eval_rename, MvPolynomial.eval_X, sub_eq_zero]
   constructor
   · rintro ⟨x, hx, rfl⟩
     refine ⟨by simpa using hx, ?_⟩

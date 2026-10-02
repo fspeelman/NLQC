@@ -22,7 +22,7 @@ open scoped BigOperators
 
 /-- Pointwise comparison with a nonnegative-coefficient polynomial. -/
 def NaturalMajorizes {σ : Type*} (p : MvPolynomial σ ℤ) (q : MvPolynomial σ ℕ) : Prop :=
-  ∀ m, (coeff m p).natAbs ≤ coeff m q
+  ∀ m, (p.coeff m).natAbs ≤ q.coeff m
 
 namespace NaturalMajorizes
 
@@ -51,7 +51,7 @@ theorem variablePolynomial (i : σ) : NaturalMajorizes (X i : MvPolynomial σ �
 theorem add (hp : NaturalMajorizes p q) (hr : NaturalMajorizes r t) :
     NaturalMajorizes (p + r) (q + t) := by
   intro m
-  rw [coeff_add, coeff_add]
+  simp only [AddMonoidAlgebra.coeff_add, Finsupp.add_apply]
   exact (Int.natAbs_add_le _ _).trans (Nat.add_le_add (hp m) (hr m))
 
 theorem neg (hp : NaturalMajorizes p q) : NaturalMajorizes (-p) q := by
@@ -105,11 +105,11 @@ def naturalCoefficientMass {σ : Type*} : MvPolynomial σ ℕ →+* ℕ :=
   MvPolynomial.eval (fun _ => 1)
 
 theorem naturalCoefficientMass_eq_sum {σ : Type*} (q : MvPolynomial σ ℕ) :
-    naturalCoefficientMass q = ∑ m ∈ q.support, coeff m q := by
+    naturalCoefficientMass q = ∑ m ∈ q.support, q.coeff m := by
   simp [naturalCoefficientMass, MvPolynomial.eval_eq]
 
 theorem coefficient_le_naturalCoefficientMass {σ : Type*}
-    (q : MvPolynomial σ ℕ) (m : σ →₀ ℕ) : coeff m q ≤ naturalCoefficientMass q := by
+    (q : MvPolynomial σ ℕ) (m : σ →₀ ℕ) : q.coeff m ≤ naturalCoefficientMass q := by
   classical
   rw [naturalCoefficientMass_eq_sum]
   by_cases hm : m ∈ q.support
@@ -126,7 +126,7 @@ namespace CoefficientMassLE
 variable {σ : Type*} {p r : MvPolynomial σ ℤ} {H G : ℕ}
 
 theorem coefficient_natAbs_le (hp : CoefficientMassLE p H) (m : σ →₀ ℕ) :
-    (coeff m p).natAbs ≤ H := by
+    (p.coeff m).natAbs ≤ H := by
   rcases hp with ⟨q, hq, hmass⟩
   exact (hq m).trans ((coefficient_le_naturalCoefficientMass q m).trans hmass)
 
@@ -197,7 +197,7 @@ theorem NaturalMajorizes.support_subset {σ : Type*}
   intro m hm
   rw [mem_support_iff] at hm ⊢
   intro hq
-  have hzero : (coeff m p).natAbs = 0 := Nat.eq_zero_of_le_zero (by simpa [hq] using hp m)
+  have hzero : (p.coeff m).natAbs = 0 := Nat.eq_zero_of_le_zero (by simpa [hq] using hp m)
   exact hm (Int.natAbs_eq_zero.mp hzero)
 
 /-- Nonnegative polynomial substitution preserves coefficient
@@ -208,17 +208,17 @@ theorem NaturalMajorizes.bind₁ {σ τ : Type*}
     (hfg : ∀ i, NaturalMajorizes (f i) (g i)) :
     NaturalMajorizes (MvPolynomial.bind₁ f p) (MvPolynomial.bind₁ g q) := by
   classical
-  have hpexp : p = ∑ m ∈ q.support, monomial m (coeff m p) := by
+  have hpexp : p = ∑ m ∈ q.support, monomial m (p.coeff m) := by
     calc
-      p = ∑ m ∈ p.support, monomial m (coeff m p) := p.as_sum
-      _ = ∑ m ∈ q.support, monomial m (coeff m p) :=
+      p = ∑ m ∈ p.support, monomial m (p.coeff m) := p.as_sum
+      _ = ∑ m ∈ q.support, monomial m (p.coeff m) :=
         Finset.sum_subset hp.support_subset (fun m _ hm => by simp [notMem_support_iff.mp hm])
   have hpb : MvPolynomial.bind₁ f p =
-      ∑ m ∈ q.support, MvPolynomial.bind₁ f (monomial m (coeff m p)) := by
+      ∑ m ∈ q.support, MvPolynomial.bind₁ f (monomial m (p.coeff m)) := by
     conv_lhs => rw [hpexp]
     rw [map_sum]
   have hqb : MvPolynomial.bind₁ g q =
-      ∑ m ∈ q.support, MvPolynomial.bind₁ g (monomial m (coeff m q)) := by
+      ∑ m ∈ q.support, MvPolynomial.bind₁ g (monomial m (q.coeff m)) := by
     conv_lhs => rw [q.as_sum]
     rw [map_sum]
   rw [hpb, hqb]
@@ -245,10 +245,10 @@ theorem naturalCoefficientMass_bind₁_le {σ τ : Type*}
   have hprod : (∏ i ∈ m.support, naturalCoefficientMass (g i) ^ m i) ≤ 1 := by
     calc
       _ ≤ ∏ _i ∈ m.support, (1 : ℕ) :=
-        Finset.prod_le_prod (fun _ _ => Nat.zero_le _)
+        Finset.prod_le_prod₀ (fun _ _ => Nat.zero_le _)
           (fun i _ => by simpa using Nat.pow_le_pow_left (hg i) (m i))
       _ = 1 := by simp
-  simpa using Nat.mul_le_mul_left (coeff m q) hprod
+  simpa using Nat.mul_le_mul_left (q.coeff m) hprod
 
 theorem CoefficientMassLE.bind₁ {σ τ : Type*} {p : MvPolynomial σ ℤ} {H : ℕ}
     (hp : CoefficientMassLE p H) (f : σ → MvPolynomial τ ℤ)
@@ -262,8 +262,8 @@ theorem CoefficientMassLE.bind₁ {σ τ : Type*} {p : MvPolynomial σ ℤ} {H :
 
 theorem CoefficientMassLE.coefficient_realAbs_le {σ : Type*}
     {p : MvPolynomial σ ℤ} {H : ℕ} (hp : CoefficientMassLE p H) (m : σ →₀ ℕ) :
-    |((coeff m p : ℤ) : ℝ)| ≤ (H : ℝ) := by
-  have h : ((coeff m p).natAbs : ℝ) ≤ (H : ℝ) :=
+    |((p.coeff m : ℤ) : ℝ)| ≤ (H : ℝ) := by
+  have h : ((p.coeff m).natAbs : ℝ) ≤ (H : ℝ) :=
     Nat.cast_le.mpr (hp.coefficient_natAbs_le m)
   simpa only [Nat.cast_natAbs, Int.cast_abs] using h
 
@@ -388,23 +388,23 @@ theorem physicalConstraintSumSquares_massLE {K : ℕ} (hK : 1 ≤ K)
 theorem physicalConstraintPolynomial_coefficient_natAbs_le {K : ℕ} (hK : 1 ≤ K)
     (s : Fin 8 → ℕ) (hs : ∀ i, s i ≤ K) (q : PhysicalConstraintIndex 2 s)
     (m : PhysicalCoordinateIndex 2 s →₀ ℕ) :
-    (coeff m (physicalConstraintPolynomial 2 s q)).natAbs ≤ 5 * K ^ 2 :=
+    ((physicalConstraintPolynomial 2 s q).coeff m).natAbs ≤ 5 * K ^ 2 :=
   (physicalConstraintPolynomial_massLE hK s hs q).coefficient_natAbs_le m
 
 theorem physicalConstraintSumSquares_coefficient_natAbs_le {K : ℕ} (hK : 1 ≤ K)
     (s : Fin 8 → ℕ) (hs : ∀ i, s i ≤ K) (m : PhysicalCoordinateIndex 2 s →₀ ℕ) :
-    (coeff m (physicalConstraintSumSquares 2 s)).natAbs ≤ 525 * K ^ 8 :=
+    ((physicalConstraintSumSquares 2 s).coeff m).natAbs ≤ 525 * K ^ 8 :=
   (physicalConstraintSumSquares_massLE hK s hs).coefficient_natAbs_le m
 
 theorem physicalConstraintPolynomial_coefficient_realAbs_le {K : ℕ} (hK : 1 ≤ K)
     (s : Fin 8 → ℕ) (hs : ∀ i, s i ≤ K) (q : PhysicalConstraintIndex 2 s)
     (m : PhysicalCoordinateIndex 2 s →₀ ℕ) :
-    |((coeff m (physicalConstraintPolynomial 2 s q) : ℤ) : ℝ)| ≤ (5 * K ^ 2 : ℕ) :=
+    |(((physicalConstraintPolynomial 2 s q).coeff m : ℤ) : ℝ)| ≤ (5 * K ^ 2 : ℕ) :=
   (physicalConstraintPolynomial_massLE hK s hs q).coefficient_realAbs_le m
 
 theorem physicalConstraintSumSquares_coefficient_realAbs_le {K : ℕ} (hK : 1 ≤ K)
     (s : Fin 8 → ℕ) (hs : ∀ i, s i ≤ K) (m : PhysicalCoordinateIndex 2 s →₀ ℕ) :
-    |((coeff m (physicalConstraintSumSquares 2 s) : ℤ) : ℝ)| ≤ (525 * K ^ 8 : ℕ) :=
+    |(((physicalConstraintSumSquares 2 s).coeff m : ℤ) : ℝ)| ≤ (525 * K ^ 8 : ℕ) :=
   (physicalConstraintSumSquares_massLE hK s hs).coefficient_realAbs_le m
 
 namespace ComplexPair
@@ -571,12 +571,12 @@ theorem controlledPhaseScoreNumeratorPolynomial_massLE {K : ℕ}
 
 theorem controlledPhaseScoreNumeratorPolynomial_coefficient_natAbs_le {K : ℕ}
     (s : Fin 8 → ℕ) (hs : ∀ i, s i ≤ K) (m : PhaseScoreCoordinateIndex s →₀ ℕ) :
-    (coeff m (controlledPhaseScoreNumeratorPolynomial s)).natAbs ≤ 2 ^ 23 * K ^ 14 :=
+    ((controlledPhaseScoreNumeratorPolynomial s).coeff m).natAbs ≤ 2 ^ 23 * K ^ 14 :=
   (controlledPhaseScoreNumeratorPolynomial_massLE s hs).coefficient_natAbs_le m
 
 theorem controlledPhaseScoreNumeratorPolynomial_coefficient_realAbs_le {K : ℕ}
     (s : Fin 8 → ℕ) (hs : ∀ i, s i ≤ K) (m : PhaseScoreCoordinateIndex s →₀ ℕ) :
-    |((coeff m (controlledPhaseScoreNumeratorPolynomial s) : ℤ) : ℝ)| ≤
+    |(((controlledPhaseScoreNumeratorPolynomial s).coeff m : ℤ) : ℝ)| ≤
       (2 ^ 23 * K ^ 14 : ℕ) :=
   (controlledPhaseScoreNumeratorPolynomial_massLE s hs).coefficient_realAbs_le m
 
@@ -632,7 +632,7 @@ theorem controlledPhaseScoreNumeratorPolynomial_massLE_of_four_mul_box {K : ℕ}
 theorem controlledPhaseScoreNumeratorPolynomial_coefficient_natAbs_le_of_four_mul_box
     {K : ℕ} (s : Fin 8 → ℕ) (hs : ∀ i, s i ≤ 4 * K)
     (m : PhaseScoreCoordinateIndex s →₀ ℕ) :
-    (coeff m (controlledPhaseScoreNumeratorPolynomial s)).natAbs ≤ 2 ^ 51 * K ^ 14 :=
+    ((controlledPhaseScoreNumeratorPolynomial s).coeff m).natAbs ≤ 2 ^ 51 * K ^ 14 :=
   (controlledPhaseScoreNumeratorPolynomial_massLE_of_four_mul_box s hs).coefficient_natAbs_le m
 
 end NLQCLean.PhysicalPolynomial

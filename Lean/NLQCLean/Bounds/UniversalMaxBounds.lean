@@ -1,4 +1,5 @@
-import NLQCLean.Bounds.ProvedProjection
+import NLQCLean.Geometry.DirectVolume.Assembly
+import NLQCLean.Bounds.Quantitative
 
 /-! # Universal unitary bounds combining the SWAP floor and precision -/
 
@@ -14,13 +15,13 @@ private theorem scaled_max_le {c x y z : ℝ}
 
 /-- The SWAP floor supplies the constant term in the precision maximum,
 with one constant for pure and common-map finite-mixed resources. -/
-theorem exists_strongUniversalMaxResourceBound (hGeom : PolynomialImageVolumeBound) :
+theorem exists_strongUniversalMaxResourceBound_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ c : ℝ, 0 < c ∧ ∀ (d K : ℕ), 2 ≤ d → ∀ e : ℝ, 0 < e → e ≤ 1 / 2 →
       (PureUniversalScore d K e →
         c * (d : ℝ) ^ 2 * max 1 (Real.sqrt (Real.log (1 / e))) ≤ K) ∧
       (MixedUniversalScore d K e →
         c * (d : ℝ) ^ 2 * max 1 (Real.sqrt (Real.log (1 / e))) ≤ K) := by
-  obtain ⟨c, hc, hprecision⟩ := exists_strongUniversalResourceBound hGeom
+  obtain ⟨c, hc, hprecision⟩ := exists_strongUniversalResourceBound_of_imageVolumeBound hGeom
   refine ⟨min c (1 / 2), lt_min hc (by norm_num), ?_⟩
   intro d K hd e he he2
   have hpure (h : PureUniversalScore d K e) :
@@ -41,31 +42,24 @@ theorem exists_strongUniversalMaxResourceBound (hGeom : PolynomialImageVolumeBou
     exact scaled_max_le hfloor hrate
   exact ⟨hpure, fun h => hpure ((mixedUniversalScore_iff_pure d K e).mp h)⟩
 
-/-- The unitary maximum bound with the three explicit geometry premises. -/
-theorem exists_strongUniversalMaxResourceBound_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+/-- The unitary maximum bound. -/
+theorem exists_strongUniversalMaxResourceBound :
     ∃ c : ℝ, 0 < c ∧ ∀ (d K : ℕ), 2 ≤ d → ∀ e : ℝ, 0 < e → e ≤ 1 / 2 →
       (PureUniversalScore d K e →
         c * (d : ℝ) ^ 2 * max 1 (Real.sqrt (Real.log (1 / e))) ≤ K) ∧
       (MixedUniversalScore d K e →
         c * (d : ℝ) ^ 2 * max 1 (Real.sqrt (Real.log (1 / e))) ≤ K) :=
-  exists_strongUniversalMaxResourceBound
-    (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_strongUniversalMaxResourceBound_of_imageVolumeBound
+    (DirectVolume.polynomialImageVolumeBound)
 
 /-- The same maximum bound for normalized diamond universality. -/
-theorem exists_strongUniversalMaxDiamondResourceBound_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+theorem exists_strongUniversalMaxDiamondResourceBound :
     ∃ c : ℝ, 0 < c ∧ ∀ (d K : ℕ), 2 ≤ d → ∀ e : ℝ, 0 < e → e ≤ 1 / 2 →
       (PureUniversalDiamond.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} d K e →
         c * (d : ℝ) ^ 2 * max 1 (Real.sqrt (Real.log (1 / e))) ≤ K) ∧
       (MixedUniversalDiamond.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} d K e →
         c * (d : ℝ) ^ 2 * max 1 (Real.sqrt (Real.log (1 / e))) ≤ K) := by
-  obtain ⟨c, hc, h⟩ := exists_strongUniversalMaxResourceBound_of_external
-    hLRT hStratification hComponents
+  obtain ⟨c, hc, h⟩ := exists_strongUniversalMaxResourceBound
   refine ⟨c, hc, ?_⟩
   intro d K hd e he he2
   let : NeZero d := ⟨by omega⟩

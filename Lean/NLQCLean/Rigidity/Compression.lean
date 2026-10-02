@@ -168,7 +168,7 @@ theorem compress_resource_ampLeft (η : ρA × ρB → ℂ)
     Prod.mk.injEq]
   by_cases hb : q.2 = q'.2
   · simp only [hb, true_and, mul_ite, ite_mul, zero_mul, mul_zero,
-      Finset.sum_ite_eq, Finset.mem_univ, if_true, mul_one]
+      Finset.sum_ite_eq, Finset.mem_univ, ite_true, mul_one]
     rw [show (∑ r, ∑ s, star (η (r, s)) * ∑ r', X (q.1, r) (q'.1, r') * η (r', s))
         = ∑ b, ∑ c, ∑ a, star (η (b, c)) * (X (q.1, b) (q'.1, a) * η (a, c)) from
       Finset.sum_congr rfl fun b _ => Finset.sum_congr rfl fun c _ =>

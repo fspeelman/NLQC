@@ -19,7 +19,7 @@ theorem exists_pvm_forbidden_error_threshold (hGeom : PolynomialImageVolumeBound
     ∃ C : ℝ, 1 ≤ C ∧ ∀ A : ℝ, 32 / 3 * (C + 1) ≤ A → ∀ d : ℕ, 2 ≤ d →
       ∀ᵐ M ∂unitaryHaar (Fin d × Fin d), ∃ K₀ : ℕ, 1 ≤ K₀ ∧ ∀ K : ℕ, K₀ ≤ K →
         M ∉ purePVMReachable d K (Real.exp (-(A * (K : ℝ) ^ 2 / (d : ℝ) ^ 2))) := by
-  obtain ⟨C, hC, hHaar⟩ := exists_pvm_haar_fraction_constant hGeom
+  obtain ⟨C, hC, hHaar⟩ := exists_pvm_haar_fraction_constant_of_imageVolumeBound hGeom
   refine ⟨C, hC, fun A hA d hd => ?_⟩
   exact ae_forbiddenError_of_haar_bound (s := fun K e => purePVMReachable d K e)
     (by linarith) hA hd (pvmCodimension_half_lower hd)
@@ -27,7 +27,7 @@ theorem exists_pvm_forbidden_error_threshold (hGeom : PolynomialImageVolumeBound
 
 /-- PVM forbidden-error sequence: one universal `A`, and for almost every fixed basis lift a budget `K₀`
 beyond which no pure or finite mixed PVM protocol reaches score error `exp (-A K²/d²)`. -/
-theorem exists_ae_pvm_forbidden_error_constant (hGeom : PolynomialImageVolumeBound) :
+theorem exists_ae_pvm_forbidden_error_constant_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ A : ℝ, 0 < A ∧ ∀ d : ℕ, 2 ≤ d →
       ∀ᵐ M ∂unitaryHaar (Fin d × Fin d), ∃ K₀ : ℕ, 1 ≤ K₀ ∧ ∀ K : ℕ, K₀ ≤ K →
         M ∉ purePVMReachable d K (Real.exp (-(A * (K : ℝ) ^ 2 / (d : ℝ) ^ 2))) ∧
@@ -41,7 +41,7 @@ theorem exists_ae_pvm_forbidden_error_constant (hGeom : PolynomialImageVolumeBou
 
 /-- AF1 common form: one `A ≥ 1`, and for almost every matrix one `K₀`, serving the
 unitary and PVM score sets, pure and finite mixed, simultaneously. -/
-theorem exists_ae_forbidden_error_constant (hGeom : PolynomialImageVolumeBound) :
+theorem exists_ae_forbidden_error_constant_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ A : ℝ, 1 ≤ A ∧ ∀ d : ℕ, 2 ≤ d →
       ∀ᵐ T ∂unitaryHaar (Fin d × Fin d), ∃ K₀ : ℕ, 1 ≤ K₀ ∧ ∀ K : ℕ, K₀ ≤ K →
         T ∉ pureReachable d K (Real.exp (-(A * (K : ℝ) ^ 2 / (d : ℝ) ^ 2))) ∧

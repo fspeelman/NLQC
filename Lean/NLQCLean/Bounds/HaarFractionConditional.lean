@@ -69,7 +69,7 @@ theorem exists_small_radius_reachable_haar_constant (hGeom : PolynomialImageVolu
 
 /-- Haar bound: one constant covers both error regimes and pure and finite mixed resources.
 The exponent uses real division by two. The sole geometric property remains explicit. -/
-theorem exists_haar_fraction_constant (hGeom : PolynomialImageVolumeBound) :
+theorem exists_haar_fraction_constant_of_imageVolumeBound (hGeom : PolynomialImageVolumeBound) :
     ∃ C : ℝ, 1 ≤ C ∧ ∀ (d K : ℕ), 2 ≤ d → 1 ≤ K → (d : ℝ) ^ 2 / 4 ≤ K →
       ∀ e : ℝ, 0 < e → e ≤ 1 / 2 →
         MeasurableSet (pureReachable d K e) ∧ MeasurableSet (mixedReachable d K e) ∧

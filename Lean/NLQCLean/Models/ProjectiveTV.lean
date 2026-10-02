@@ -45,7 +45,7 @@ theorem pvmIdealDist_nonneg (M : Matrix δ δ ℂ)
   rcases ab with ⟨a, b⟩
   by_cases hab : a = b
   · subst b
-    rw [pvmIdealDist, if_pos rfl, trace_pvmProj_mul_eq_diag]
+    rw [pvmIdealDist, ite_eq_left rfl, trace_pvmProj_mul_eq_diag]
     exact (Complex.nonneg_iff.mp (hρ.1.conjTranspose_mul_mul_same M).diag_nonneg).1
   · simp [pvmIdealDist, hab]
 
@@ -204,16 +204,16 @@ theorem pvmIdealDist_pvmProj {M : Matrix δ δ ℂ} (hM : IsIsometry M)
   · subst b
     by_cases hai : a = i
     · subst a
-      rw [pvmIdealDist, if_pos rfl, if_pos rfl]
+      rw [pvmIdealDist, ite_eq_left rfl, ite_eq_left rfl]
       change (pvmProj M i * pureState (pvmColumn M i)).trace.re = 1
       rw [trace_pvmProj_pureState, pvmColumn_inner_self hM]
       simp
     · have hia : i ≠ a := Ne.symm hai
-      rw [pvmIdealDist, if_pos rfl, if_neg (by simp [hai])]
+      rw [pvmIdealDist, ite_eq_left rfl, ite_eq_right (by simp [hai])]
       change (pvmProj M a * pureState (pvmColumn M i)).trace.re = 0
       rw [trace_pvmProj_pureState, pvmColumn_inner_eq_zero hM hia]
       simp
-  · rw [pvmIdealDist, if_neg hab, if_neg]
+  · rw [pvmIdealDist, ite_eq_right hab, ite_eq_right]
     intro heq
     exact hab ((congrArg Prod.fst heq).trans (congrArg Prod.snd heq).symm)
 

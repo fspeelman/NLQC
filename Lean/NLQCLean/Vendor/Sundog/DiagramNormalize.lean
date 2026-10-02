@@ -80,8 +80,8 @@ private theorem dropPaddingAux_congr :
         simp only [dropPaddingAux]
         simp only [List.length_cons] at hN h1 h2
         by_cases hz : SignType.zero ∈ cpt
-        · rw [if_pos hz, if_pos hz, ih rest g₁ g₂ (by omega) (by omega) (by omega)]
-        · rw [if_neg hz, if_neg hz]
+        · rw [ite_eq_left hz, ite_eq_left hz, ih rest g₁ g₂ (by omega) (by omega) (by omega)]
+        · rw [ite_eq_right hz, ite_eq_right hz]
           match rest with
           | [] => rfl
           | c' :: rest' =>
@@ -107,9 +107,9 @@ theorem dropPadding_cons (c cpt : List SignType) (rest : List (List SignType)) :
   unfold dropPadding
   simp only [List.length_cons, dropPaddingAux]
   by_cases hz : SignType.zero ∈ cpt
-  · rw [if_pos hz, if_pos hz,
+  · rw [ite_eq_left hz, ite_eq_left hz,
       dropPaddingAux_congr rest (rest.length + 1) rest.length (by omega) le_rfl]
-  · rw [if_neg hz, if_neg hz]
+  · rw [ite_eq_right hz, ite_eq_right hz]
     match rest with
     | [] => rfl
     | c' :: rest' =>
@@ -164,9 +164,9 @@ theorem dropPadding_paddingFree :
       rw [dropPadding_cons]
       simp only [List.length_cons] at hD
       by_cases hz : SignType.zero ∈ cpt
-      · rw [if_pos hz, paddingFree_cons]
+      · rw [ite_eq_left hz, paddingFree_cons]
         exact ⟨hz, ih rest (by omega)⟩
-      · rw [if_neg hz]
+      · rw [ite_eq_right hz]
         match rest with
         | [] => exact paddingFree_single c
         | c' :: rest' =>
@@ -266,7 +266,7 @@ private theorem colsFrom_dropPadding (g : Fin n → ℝ)
           · have hzx : x < z := hhead z hmem
             exact List.mem_cons_of_mem _
               (hroots'' P hP h0 z (by simpa using hzx) hzroot)
-        · rw [dropPadding_cons, if_pos hz]
+        · rw [dropPadding_cons, ite_eq_left hz]
           exact ⟨hlox, hgap, hpt, hcols''⟩
       · -- drop the sample
         have hnorootx : ∀ P ∈ F, ¬ (spec g P).eval x = 0 := by
@@ -312,7 +312,7 @@ private theorem colsFrom_dropPadding (g : Fin n → ℝ)
             rcases hmem with rfl | hmem
             · exact absurd hzroot (hnorootx P hP)
             · exact absurd hmem List.not_mem_nil
-          · rw [dropPadding_cons, if_neg hz]
+          · rw [dropPadding_cons, ite_eq_right hz]
             change ∀ y : ℝ, (∀ l ∈ lo, l < y) → signVec F g y = c
             intro y hy
             rcases lt_trichotomy y x with hyx | rfl | hxy
@@ -364,7 +364,7 @@ private theorem colsFrom_dropPadding (g : Fin n → ℝ)
               · exact hmem)
             hmerged
           refine ⟨ξ', hpair', hlo', hroots', ?_⟩
-          rw [dropPadding_cons, if_neg hz]
+          rw [dropPadding_cons, ite_eq_right hz]
           exact hcols'
 
 /-- **Padding removal preserves realization.** -/

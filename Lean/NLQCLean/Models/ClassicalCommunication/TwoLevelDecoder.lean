@@ -31,20 +31,20 @@ theorem twoLevelDecoderBasisMap_injective {d : ℕ} (hd : 2 ≤ d) :
   intro j k h
   by_cases hj : j.val < 2 <;> by_cases hk : k.val < 2
   · have hfst := congrArg (fun p : Fin 2 × Fin d => p.1.val) h
-    simp only [twoLevelDecoderBasisMap, dif_pos hj, dif_pos hk] at hfst
+    simp only [twoLevelDecoderBasisMap, dite_eq_left hj, dite_eq_left hk] at hfst
     exact Fin.ext hfst
   · have hsnd := congrArg (fun p : Fin 2 × Fin d => p.2.val) h
-    simp only [twoLevelDecoderBasisMap, dif_pos hj, dif_neg hk] at hsnd
+    simp only [twoLevelDecoderBasisMap, dite_eq_left hj, dite_eq_right hk] at hsnd
     have hzero : (twoLevelEmbedding hd (0 : Fin 2)).val = 0 := rfl
     rw [hzero] at hsnd
     omega
   · have hsnd := congrArg (fun p : Fin 2 × Fin d => p.2.val) h
-    simp only [twoLevelDecoderBasisMap, dif_neg hj, dif_pos hk] at hsnd
+    simp only [twoLevelDecoderBasisMap, dite_eq_right hj, dite_eq_left hk] at hsnd
     have hzero : (twoLevelEmbedding hd (0 : Fin 2)).val = 0 := rfl
     rw [hzero] at hsnd
     omega
   · have hsnd := congrArg Prod.snd h
-    simpa only [twoLevelDecoderBasisMap, dif_neg hj, dif_neg hk] using hsnd
+    simpa only [twoLevelDecoderBasisMap, dite_eq_right hj, dite_eq_right hk] using hsnd
 
 def twoLevelDecoderEmbedding {d : ℕ} (hd : 2 ≤ d) : Fin d ↪ Fin 2 × Fin d :=
   ⟨twoLevelDecoderBasisMap hd, twoLevelDecoderBasisMap_injective hd⟩
@@ -52,7 +52,7 @@ def twoLevelDecoderEmbedding {d : ℕ} (hd : 2 ≤ d) : Fin d ↪ Fin 2 × Fin d
 @[simp] theorem twoLevelDecoderBasisMap_twoLevel {d : ℕ} (hd : 2 ≤ d) (i : Fin 2) :
     twoLevelDecoderBasisMap hd (twoLevelEmbedding hd i) = (i, twoLevelEmbedding hd 0) := by
   unfold twoLevelDecoderBasisMap
-  rw [dif_pos (show (twoLevelEmbedding hd i).val < 2 from i.isLt)]
+  rw [dite_eq_left (show (twoLevelEmbedding hd i).val < 2 from i.isLt)]
   rfl
 
 /-- The actual finite local Stinespring decoder, of the same output/environment

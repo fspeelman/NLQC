@@ -54,11 +54,11 @@ theorem bitstringControlledPhase_source_apply (k : ℕ) (θ : ℝ)
         (((θ : ℂ) * (p.1 0).val * (p.2 0).val) * Complex.I) else 0 := by
   rw [bitstringControlledPhase_apply]
   by_cases hpq : p = q
-  · simp only [hpq, if_true]
+  · simp only [hpq, ite_true]
     generalize ha : p.1 0 = a
     generalize hb : p.2 0 = b
     fin_cases a <;> fin_cases b <;> simp_all
-  · simp only [hpq, if_false]
+  · simp only [hpq, ite_false]
 
 /-- The source bitstring gate is unitary at every real angle. -/
 theorem bitstringControlledPhase_unitary (k : ℕ) (θ : ℝ) :

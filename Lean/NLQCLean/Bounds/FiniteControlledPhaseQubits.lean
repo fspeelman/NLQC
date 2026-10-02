@@ -1,3 +1,4 @@
+import NLQCLean.Geometry.DirectVolume.Assembly
 import NLQCLean.Bounds.FiniteControlledPhaseAlmostEvery
 import Mathlib.Analysis.SpecialFunctions.Log.Base
 
@@ -77,7 +78,7 @@ theorem qubit_lower_of_tenth_power_and_squared_footprint {C L : ℝ} {Kq q : ℕ
 /-- For finite LOSCC, the original resource dimensions supply the quantum
 footprint cap. One additive constant precedes the fixed phase, whose threshold
 precedes all errors, qubit caps, original finite architectures and protocols. -/
-theorem exists_ae_finiteLOSCCControlledPhase_qubit_bound
+theorem exists_ae_finiteLOSCCControlledPhase_qubit_bound_of_imageVolumeBound
     (hGeom : PolynomialImageVolumeBound) :
     ∃ B : ℝ, 0 ≤ B ∧ ∀ᵐ θ ∂volume.restrict (Set.Icc 0 (2 * Real.pi)),
       ∃ ε₀ : ℝ, 0 < ε₀ ∧ ε₀ ≤ 1 / 2 ∧ ∀ (q : ℕ) (ε : ℝ), 0 < ε → ε ≤ ε₀ →
@@ -103,7 +104,7 @@ theorem exists_ae_finiteLOSCCControlledPhase_qubit_bound
             (1 / 5 : ℝ) * Real.logb 2 (Real.log (1 / ε)) - B ≤ (q : ℝ)) ∧
           (diamondError (P.mixedOperationalChannel m) (adConj (controlledPhase θ)) ≤ ε →
             (1 / 5 : ℝ) * Real.logb 2 (Real.log (1 / ε)) - B ≤ (q : ℝ))) := by
-  obtain ⟨C, hC, hae⟩ := exists_ae_finiteControlledPhase_log_bound hGeom
+  obtain ⟨C, hC, hae⟩ := exists_ae_finiteControlledPhase_log_bound_of_imageVolumeBound hGeom
   refine ⟨max 0 ((1 / 5 : ℝ) * Real.logb 2 C), le_max_left _ _, ?_⟩
   filter_upwards [hae] with θ hθ
   obtain ⟨ε₀, hε₀pos, hε₀half, hphase⟩ := hθ
@@ -136,10 +137,7 @@ theorem exists_ae_finiteLOSCCControlledPhase_qubit_bound
 
 /-- The finite LOSCC qubit corollary retains exactly the three unchanged
 geometry arguments. Resource and message accounting are proved internally. -/
-theorem exists_ae_finiteLOSCCControlledPhase_qubit_bound_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+theorem exists_ae_finiteLOSCCControlledPhase_qubit_bound :
     ∃ B : ℝ, 0 ≤ B ∧ ∀ᵐ θ ∂volume.restrict (Set.Icc 0 (2 * Real.pi)),
       ∃ ε₀ : ℝ, 0 < ε₀ ∧ ε₀ ≤ 1 / 2 ∧ ∀ (q : ℕ) (ε : ℝ), 0 < ε → ε ≤ ε₀ →
         ∀ (ρA : Type u₁) (ρB : Type u₂) (κA : Type u₃) (κB : Type u₄)
@@ -164,7 +162,7 @@ theorem exists_ae_finiteLOSCCControlledPhase_qubit_bound_of_external
             (1 / 5 : ℝ) * Real.logb 2 (Real.log (1 / ε)) - B ≤ (q : ℝ)) ∧
           (diamondError (P.mixedOperationalChannel m) (adConj (controlledPhase θ)) ≤ ε →
             (1 / 5 : ℝ) * Real.logb 2 (Real.log (1 / ε)) - B ≤ (q : ℝ))) :=
-  exists_ae_finiteLOSCCControlledPhase_qubit_bound
-    (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_ae_finiteLOSCCControlledPhase_qubit_bound_of_imageVolumeBound
+    (DirectVolume.polynomialImageVolumeBound)
 
 end NLQCLean

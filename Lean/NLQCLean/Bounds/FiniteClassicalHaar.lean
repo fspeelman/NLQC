@@ -1,5 +1,6 @@
+import NLQCLean.Geometry.DirectVolume.Assembly
 import NLQCLean.Models.ClassicalCommunication.FiniteReachability
-import NLQCLean.Bounds.ProvedProjection
+import NLQCLean.Bounds.Quantitative
 
 /-!
 # Haar and universal bounds for finite-shape classical protocols
@@ -48,7 +49,7 @@ theorem finiteClassical_haar_exponent_eq (C : ℝ) (d K : ℕ) :
 
 /-- Full-group unitary score bounds for pure and common-map mixed
 finite-shape protocols. The constant is sixteen times the old Haar constant. -/
-theorem exists_finite_classical_unitary_haar_constant
+theorem exists_finite_classical_unitary_haar_constant_of_imageVolumeBound
     (hGeom : PolynomialImageVolumeBound) :
     ∃ C : ℝ, 1 ≤ C ∧ ∀ (d K : ℕ), 2 ≤ d → 1 ≤ K →
       ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 →
@@ -58,7 +59,7 @@ theorem exists_finite_classical_unitary_haar_constant
         (unitaryHaar (Fin d × Fin d)).toOuterMeasure (finiteMixedScoreReachable d K ε) ≤
           min 1 (ENNReal.ofReal (Real.exp (C * (d : ℝ) ^ 10 * (K : ℝ) ^ 10) *
             ε ^ ((unitaryCodimension d : ℝ) / 2))) := by
-  obtain ⟨C, hC, hbound⟩ := exists_haar_fraction_constant hGeom
+  obtain ⟨C, hC, hbound⟩ := exists_haar_fraction_constant_of_imageVolumeBound hGeom
   refine ⟨16 * C, by linarith, ?_⟩
   intro d K hd hK ε hε hεhalf
   obtain ⟨hone, hquarter⟩ := finiteClassical_charged_budget_admissible hd hK
@@ -71,7 +72,7 @@ theorem exists_finite_classical_unitary_haar_constant
 
 /-- Full-group joint-correct-label PVM score bounds for the same finite
 classes. This is the PVM score, not a substituted unitary or marginal score. -/
-theorem exists_finite_classical_pvm_haar_constant
+theorem exists_finite_classical_pvm_haar_constant_of_imageVolumeBound
     (hGeom : PolynomialImageVolumeBound) :
     ∃ C : ℝ, 1 ≤ C ∧ ∀ (d K : ℕ), 2 ≤ d → 1 ≤ K →
       ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 →
@@ -81,7 +82,7 @@ theorem exists_finite_classical_pvm_haar_constant
         (unitaryHaar (Fin d × Fin d)).toOuterMeasure (finiteMixedPVMScoreReachable d K ε) ≤
           min 1 (ENNReal.ofReal (Real.exp (C * (d : ℝ) ^ 10 * (K : ℝ) ^ 10) *
             ε ^ ((pvmCodimension d : ℝ) / 2))) := by
-  obtain ⟨C, hC, hbound⟩ := exists_pvm_haar_fraction_constant hGeom
+  obtain ⟨C, hC, hbound⟩ := exists_pvm_haar_fraction_constant_of_imageVolumeBound hGeom
   refine ⟨16 * C, by linarith, ?_⟩
   intro d K hd hK ε hε hεhalf
   obtain ⟨hone, hquarter⟩ := finiteClassical_charged_budget_admissible hd hK
@@ -92,12 +93,8 @@ theorem exists_finite_classical_pvm_haar_constant
     (measure_mono (finiteMixedPVMScoreReachable_subset_purePVMReachable
       (by omega : 0 < d) ε)).trans h⟩
 
-/-- The finite-shape unitary outer-measure conclusion retains exactly the
-three unchanged external geometry arguments. -/
-theorem exists_finite_classical_unitary_haar_constant_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+/-- The finite-shape unitary outer-measure conclusion. -/
+theorem exists_finite_classical_unitary_haar_constant :
     ∃ C : ℝ, 1 ≤ C ∧ ∀ (d K : ℕ), 2 ≤ d → 1 ≤ K →
       ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 →
         (unitaryHaar (Fin d × Fin d)).toOuterMeasure (finitePureScoreReachable d K ε) ≤
@@ -106,15 +103,12 @@ theorem exists_finite_classical_unitary_haar_constant_of_external
         (unitaryHaar (Fin d × Fin d)).toOuterMeasure (finiteMixedScoreReachable d K ε) ≤
           min 1 (ENNReal.ofReal (Real.exp (C * (d : ℝ) ^ 10 * (K : ℝ) ^ 10) *
             ε ^ ((unitaryCodimension d : ℝ) / 2))) :=
-  exists_finite_classical_unitary_haar_constant
-    (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_finite_classical_unitary_haar_constant_of_imageVolumeBound
+    (DirectVolume.polynomialImageVolumeBound)
 
 /-- The PVM outer-measure conclusion has the same three arguments and its
 original PVM codimension. No measurability of the finite class is assumed. -/
-theorem exists_finite_classical_pvm_haar_constant_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+theorem exists_finite_classical_pvm_haar_constant :
     ∃ C : ℝ, 1 ≤ C ∧ ∀ (d K : ℕ), 2 ≤ d → 1 ≤ K →
       ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 →
         (unitaryHaar (Fin d × Fin d)).toOuterMeasure (finitePurePVMScoreReachable d K ε) ≤
@@ -123,8 +117,8 @@ theorem exists_finite_classical_pvm_haar_constant_of_external
         (unitaryHaar (Fin d × Fin d)).toOuterMeasure (finiteMixedPVMScoreReachable d K ε) ≤
           min 1 (ENNReal.ofReal (Real.exp (C * (d : ℝ) ^ 10 * (K : ℝ) ^ 10) *
             ε ^ ((pvmCodimension d : ℝ) / 2))) :=
-  exists_finite_classical_pvm_haar_constant
-    (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_finite_classical_pvm_haar_constant_of_imageVolumeBound
+    (DirectVolume.polynomialImageVolumeBound)
 
 /-- An existing charged universal lower bound at the fifth-power
 budget gives the finite-classical tenth-power logarithm estimate. -/
@@ -149,7 +143,7 @@ theorem log_le_sixth_tenth_power_of_finite_charged_lower_bound
 
 /-- Universality is quantified over finite-shape target-dependent
 protocols. Both pure and common-map mixed scores satisfy the logarithm bound. -/
-theorem exists_finite_classical_unitary_universal_log_constant
+theorem exists_finite_classical_unitary_universal_log_constant_of_imageVolumeBound
     (hGeom : PolynomialImageVolumeBound) :
     ∃ C : ℝ, 0 < C ∧ ∀ (d K : ℕ), 2 ≤ d → 1 ≤ K →
       ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 →
@@ -157,7 +151,7 @@ theorem exists_finite_classical_unitary_universal_log_constant
           Real.log (1 / ε) ≤ C * (d : ℝ) ^ 6 * (K : ℝ) ^ 10) ∧
         ((∀ U, U ∈ finiteMixedScoreReachable d K ε) →
           Real.log (1 / ε) ≤ C * (d : ℝ) ^ 6 * (K : ℝ) ^ 10) := by
-  obtain ⟨c, hc, hbound⟩ := exists_universal_resource_constant hGeom
+  obtain ⟨c, hc, hbound⟩ := exists_universal_resource_constant_of_imageVolumeBound hGeom
   refine ⟨16 / c ^ 2, by positivity, ?_⟩
   intro d K hd hK ε hε hεhalf
   have hd0 : 0 < d := by omega
@@ -177,7 +171,7 @@ theorem exists_finite_classical_unitary_universal_log_constant
 
 /-- The PVM universal conclusion uses full joint-label scores and
 the same baseline dimension factor; it is not the stronger unitary rate. -/
-theorem exists_finite_classical_pvm_universal_log_constant
+theorem exists_finite_classical_pvm_universal_log_constant_of_imageVolumeBound
     (hGeom : PolynomialImageVolumeBound) :
     ∃ C : ℝ, 0 < C ∧ ∀ (d K : ℕ), 2 ≤ d → 1 ≤ K →
       ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 →
@@ -186,7 +180,7 @@ theorem exists_finite_classical_pvm_universal_log_constant
         ((∀ M, M ∈ finiteMixedPVMScoreReachable d K ε) →
           Real.log (1 / ε) ≤ C * (d : ℝ) ^ 6 * (K : ℝ) ^ 10) := by
   obtain ⟨c, hc, hbound⟩ :=
-    exists_pvm_universal_resource_constant.{0, 0, 0, 0, 0, 0, 0, 0} hGeom
+    exists_pvm_universal_resource_constant_of_imageVolumeBound.{0, 0, 0, 0, 0, 0, 0, 0} hGeom
   refine ⟨16 / c ^ 2, by positivity, ?_⟩
   intro d K hd hK ε hε hεhalf
   have hd0 : 0 < d := by omega
@@ -203,34 +197,27 @@ theorem exists_finite_classical_pvm_universal_log_constant
     fun hu => htransfer (fun M =>
       finiteMixedPVMScoreReachable_subset_purePVMReachable hd0 ε (hu M))⟩
 
-/-- The finite unitary universal logarithm bound has exactly the unchanged
-three external geometry arguments, without an external compression premise. -/
-theorem exists_finite_classical_unitary_universal_log_constant_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+/-- The finite unitary universal logarithm bound; compression is proved, not assumed. -/
+theorem exists_finite_classical_unitary_universal_log_constant :
     ∃ C : ℝ, 0 < C ∧ ∀ (d K : ℕ), 2 ≤ d → 1 ≤ K →
       ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 →
         ((∀ U, U ∈ finitePureScoreReachable d K ε) →
           Real.log (1 / ε) ≤ C * (d : ℝ) ^ 6 * (K : ℝ) ^ 10) ∧
         ((∀ U, U ∈ finiteMixedScoreReachable d K ε) →
           Real.log (1 / ε) ≤ C * (d : ℝ) ^ 6 * (K : ℝ) ^ 10) :=
-  exists_finite_classical_unitary_universal_log_constant
-    (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_finite_classical_unitary_universal_log_constant_of_imageVolumeBound
+    (DirectVolume.polynomialImageVolumeBound)
 
 /-- The finite PVM universal logarithm bound retains those same three
 arguments, the joint-label score and target-dependent protocols. -/
-theorem exists_finite_classical_pvm_universal_log_constant_of_external
-    (hLRT : LRTTheorem44)
-    (hStratification : SemialgebraicSmoothStratificationTheorem)
-    (hComponents : SemialgebraicComponentBoundTheorem) :
+theorem exists_finite_classical_pvm_universal_log_constant :
     ∃ C : ℝ, 0 < C ∧ ∀ (d K : ℕ), 2 ≤ d → 1 ≤ K →
       ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 →
         ((∀ M, M ∈ finitePurePVMScoreReachable d K ε) →
           Real.log (1 / ε) ≤ C * (d : ℝ) ^ 6 * (K : ℝ) ^ 10) ∧
         ((∀ M, M ∈ finiteMixedPVMScoreReachable d K ε) →
           Real.log (1 / ε) ≤ C * (d : ℝ) ^ 6 * (K : ℝ) ^ 10) :=
-  exists_finite_classical_pvm_universal_log_constant
-    (ProvedProjection.polynomialImageVolumeBound_of_external hLRT hStratification hComponents)
+  exists_finite_classical_pvm_universal_log_constant_of_imageVolumeBound
+    (DirectVolume.polynomialImageVolumeBound)
 
 end NLQCLean.ClassicalCommunication

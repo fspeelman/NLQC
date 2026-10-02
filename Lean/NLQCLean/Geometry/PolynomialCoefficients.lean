@@ -51,10 +51,10 @@ noncomputable def polynomial (c : PolynomialCoefficients n D) : MvPolynomial (Fi
 
 /-- Extract the degree-bounded coefficients of any polynomial. -/
 noncomputable def ofPolynomial (p : MvPolynomial (Fin n) ℝ) : PolynomialCoefficients n D :=
-  WithLp.toLp 2 (fun d => MvPolynomial.coeff d.val p)
+  WithLp.toLp 2 (fun d => p.coeff d.val)
 
 @[simp] theorem ofPolynomial_apply (p : MvPolynomial (Fin n) ℝ) (d : DegreeMonomial n D) :
-    ofPolynomial p d = MvPolynomial.coeff d.val p := rfl
+    ofPolynomial p d = p.coeff d.val := rfl
 
 theorem totalDegree_polynomial (c : PolynomialCoefficients n D) :
     c.polynomial.totalDegree ≤ D := by
@@ -63,13 +63,13 @@ theorem totalDegree_polynomial (c : PolynomialCoefficients n D) :
   exact (MvPolynomial.totalDegree_monomial_le _ _).trans d.property
 
 @[simp] theorem coeff_polynomial (c : PolynomialCoefficients n D) (d : DegreeMonomial n D) :
-    MvPolynomial.coeff d.val c.polynomial = c d := by
+    c.polynomial.coeff d.val = c d := by
   classical
   simp only [polynomial, MvPolynomial.coeff_sum, MvPolynomial.coeff_monomial]
   rw [Finset.sum_eq_single d]
   · simp
   · intro e _ he
-    exact if_neg (fun h => he (Subtype.ext h))
+    exact ite_eq_right (fun h => he (Subtype.ext h))
   · simp
 
 @[simp] theorem ofPolynomial_polynomial (c : PolynomialCoefficients n D) :
@@ -84,7 +84,7 @@ theorem polynomial_ofPolynomial (p : MvPolynomial (Fin n) ℝ) (hp : p.totalDegr
   by_cases hd : d.sum (fun _ e => e) ≤ D
   · exact coeff_polynomial (ofPolynomial p) ⟨d, hd⟩
   · have hz (q : MvPolynomial (Fin n) ℝ) (hq : q.totalDegree ≤ D) :
-        MvPolynomial.coeff d q = 0 := by
+        q.coeff d = 0 := by
       apply MvPolynomial.coeff_eq_zero_of_totalDegree_lt
       exact lt_of_le_of_lt hq (Nat.lt_of_not_ge hd)
     rw [hz _ (totalDegree_polynomial _), hz _ hp]

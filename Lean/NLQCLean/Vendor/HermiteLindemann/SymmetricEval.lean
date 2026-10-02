@@ -32,18 +32,6 @@ open scoped Polynomial
 
 variable {σ τ R S A : Type*}
 
-namespace Multiset
-
-@[simp] theorem esymm_zero {R : Type*} [CommSemiring R] (m : Multiset R) :
-    m.esymm 0 = 1 := by
-  simp [esymm, powersetCard_zero_left]
-
-theorem esymm_of_card_lt {R : Type*} [CommSemiring R] {m : Multiset R} {r : ℕ}
-    (h : m.card < r) : m.esymm r = 0 := by
-  simp [esymm, powersetCard_eq_empty r h]
-
-end Multiset
-
 namespace NLQCLean.HermiteLindemannCompatibility
 
 theorem scaleRoots_aeval_smul {R A : Type*} [CommRing R] [CommRing A] [Algebra R A]
