@@ -7,7 +7,7 @@ import NLQCLean.Bounds.ArbitraryFiniteClassicalAlmostEvery
 # Rates for actual standard-Borel classical protocols
 
 Actual original pure/common-map mixed channels and honest measured averages
-enter the charged score classes at `4 * d⁴ * K⁵`. Original diamond and joint-TV
+enter the charged score classes at `d⁴ * K⁵`. Original diamond and joint-TV
 errors imply score accuracy before any selection. Haar bounds use outer
 measure; the stronger universal rate remains restricted to unitary targets.
 -/
@@ -260,10 +260,10 @@ theorem exists_borel_classical_unitary_haar_constant_of_imageVolumeBound (hGeom 
           min 1 (ENNReal.ofReal (Real.exp (C * (d : ℝ) ^ 10 * (K : ℝ) ^ 10) *
             ε ^ ((unitaryCodimension d : ℝ) / 2))) := by
   obtain ⟨C, hC, hbound⟩ := exists_haar_fraction_constant_of_imageVolumeBound hGeom
-  refine ⟨16 * C, by linarith, ?_⟩
+  refine ⟨C, hC, ?_⟩
   intro d K hd hK ε hε hhalf
   obtain ⟨hone, hquarter⟩ := finiteClassical_charged_budget_admissible hd hK
-  have h := (hbound d (4 * d ^ 4 * K ^ 5) hd hone hquarter ε hε hhalf).2.2.1
+  have h := (hbound d (d ^ 4 * K ^ 5) hd hone hquarter ε hε hhalf).2.2.1
   rw [finiteClassical_haar_exponent_eq] at h
   exact (measure_mono (borelAllScoreReachable_subset_pureReachable (by omega : 0 < d) ε)).trans h
 
@@ -284,10 +284,10 @@ theorem exists_borel_classical_pvm_haar_constant_of_imageVolumeBound (hGeom : Po
           min 1 (ENNReal.ofReal (Real.exp (C * (d : ℝ) ^ 10 * (K : ℝ) ^ 10) *
             ε ^ ((pvmCodimension d : ℝ) / 2))) := by
   obtain ⟨C, hC, hbound⟩ := exists_pvm_haar_fraction_constant_of_imageVolumeBound hGeom
-  refine ⟨16 * C, by linarith, ?_⟩
+  refine ⟨C, hC, ?_⟩
   intro d K hd hK ε hε hhalf
   obtain ⟨hone, hquarter⟩ := finiteClassical_charged_budget_admissible hd hK
-  have h := (hbound d (4 * d ^ 4 * K ^ 5) hd hone hquarter ε hε hhalf).2.2.1
+  have h := (hbound d (d ^ 4 * K ^ 5) hd hone hquarter ε hε hhalf).2.2.1
   rw [finiteClassical_haar_exponent_eq] at h
   exact (measure_mono (borelAllPVMScoreReachable_subset_purePVMReachable (by omega : 0 < d) ε)).trans h
 
@@ -306,13 +306,13 @@ theorem exists_borel_classical_unitary_universal_log_constant_of_imageVolumeBoun
       ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 → (∀ T, T ∈ borelAllScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε) →
         Real.log (1 / ε) ≤ C * (d : ℝ) ^ 6 * (K : ℝ) ^ 10 := by
   obtain ⟨c, hc, hbound⟩ := exists_universal_resource_constant_of_imageVolumeBound hGeom
-  refine ⟨16 / c ^ 2, by positivity, ?_⟩
+  refine ⟨1 / c ^ 2, by positivity, ?_⟩
   intro d K hd hK ε hε hhalf hreach
   have hd0 : 0 < d := by omega
   have hL : 0 ≤ Real.log (1 / ε) :=
     Real.log_nonneg ((one_le_div₀ hε).mpr (by linarith))
   apply log_le_sixth_tenth_power_of_finite_charged_lower_bound hc hd0 hL
-  have h := (hbound d (4 * d ^ 4 * K ^ 5) hd (finiteClassical_charged_budget_admissible hd hK).1 ε hε hhalf).1 (fun T => borelAllScoreReachable_subset_pureReachable hd0 ε (hreach T))
+  have h := (hbound d (d ^ 4 * K ^ 5) hd (finiteClassical_charged_budget_admissible hd hK).1 ε hε hhalf).1 (fun T => borelAllScoreReachable_subset_pureReachable hd0 ε (hreach T))
   simpa only [Nat.cast_mul, Nat.cast_pow, Nat.cast_ofNat] using h
 
 /-- The universal conclusion. -/
@@ -328,13 +328,13 @@ theorem exists_borel_classical_pvm_universal_log_constant_of_imageVolumeBound (h
       ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 → (∀ T, T ∈ borelAllPVMScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε) →
         Real.log (1 / ε) ≤ C * (d : ℝ) ^ 6 * (K : ℝ) ^ 10 := by
   obtain ⟨c, hc, hbound⟩ := exists_pvm_universal_resource_constant_of_imageVolumeBound.{0, 0, 0, 0, 0, 0, 0, 0} hGeom
-  refine ⟨16 / c ^ 2, by positivity, ?_⟩
+  refine ⟨1 / c ^ 2, by positivity, ?_⟩
   intro d K hd _hK ε hε hhalf hreach
   have hd0 : 0 < d := by omega
   have hL : 0 ≤ Real.log (1 / ε) :=
     Real.log_nonneg ((one_le_div₀ hε).mpr (by linarith))
   apply log_le_sixth_tenth_power_of_finite_charged_lower_bound hc hd0 hL
-  have h := (hbound d (4 * d ^ 4 * K ^ 5) hd ε hε hhalf).1 (fun T => borelAllPVMScoreReachable_subset_purePVMReachable hd0 ε (hreach T))
+  have h := (hbound d (d ^ 4 * K ^ 5) hd ε hε hhalf).1 (fun T => borelAllPVMScoreReachable_subset_purePVMReachable hd0 ε (hreach T))
   simpa only [Nat.cast_mul, Nat.cast_pow, Nat.cast_ofNat] using h
 
 /-- The universal conclusion. -/
@@ -350,13 +350,13 @@ theorem exists_borel_classical_strong_unitary_universal_log_constant_of_imageVol
       ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 → (∀ T, T ∈ borelAllScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε) →
         Real.log (1 / ε) ≤ C * (d : ℝ) ^ 4 * (K : ℝ) ^ 10 := by
   obtain ⟨c, hc, hbound⟩ := exists_strongUniversalResourceBound_of_imageVolumeBound hGeom
-  refine ⟨16 / c ^ 2, by positivity, ?_⟩
+  refine ⟨1 / c ^ 2, by positivity, ?_⟩
   intro d K hd _hK ε hε hhalf hreach
   have hd0 : 0 < d := by omega
   have hL : 0 ≤ Real.log (1 / ε) :=
     Real.log_nonneg ((one_le_div₀ hε).mpr (by linarith))
   apply log_le_fourth_tenth_power_of_finite_strong_charged_lower_bound hc hd0 hL
-  have h := (hbound d (4 * d ^ 4 * K ^ 5) hd ε hε hhalf).1 (fun T => borelAllScoreReachable_subset_pureReachable hd0 ε (hreach T))
+  have h := (hbound d (d ^ 4 * K ^ 5) hd ε hε hhalf).1 (fun T => borelAllScoreReachable_subset_pureReachable hd0 ε (hreach T))
   simpa only [Nat.cast_mul, Nat.cast_pow, Nat.cast_ofNat] using h
 
 /-- The universal conclusion. -/
@@ -377,7 +377,7 @@ theorem exists_ae_borel_classical_log_constant_of_imageVolumeBound (hGeom : Poly
         (T ∈ borelAllPVMScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε →
           Real.log (1 / ε) ≤ C * (d : ℝ) ^ 6 * (K : ℝ) ^ 10) := by
   obtain ⟨c, hc, hae⟩ := exists_ae_resource_constant_of_imageVolumeBound.{0, 0, 0, 0, 0, 0, 0, 0} hGeom
-  refine ⟨16 / c ^ 2, by positivity, fun d hd => ?_⟩
+  refine ⟨1 / c ^ 2, by positivity, fun d hd => ?_⟩
   have hd0 : 0 < d := by omega
   filter_upwards [hae d hd] with T hT
   obtain ⟨ε₀, hpos, hhalf, hcharged⟩ := hT
@@ -385,7 +385,7 @@ theorem exists_ae_borel_classical_log_constant_of_imageVolumeBound (hGeom : Poly
   intro K ε hε hsmall
   have hL : 0 ≤ Real.log (1 / ε) :=
     Real.log_nonneg ((one_le_div₀ hε).mpr (by linarith))
-  have hbound := hcharged (4 * d ^ 4 * K ^ 5) ε hε hsmall
+  have hbound := hcharged (d ^ 4 * K ^ 5) ε hε hsmall
   constructor
   · intro hreach
     apply log_le_sixth_tenth_power_of_finite_charged_lower_bound hc hd0 hL

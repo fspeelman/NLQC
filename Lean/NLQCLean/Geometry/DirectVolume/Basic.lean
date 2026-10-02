@@ -34,6 +34,30 @@ theorem BoundedPolynomialMap.contDiff_eval_top {m : ℕ} (p : BoundedPolynomialM
     ContDiff ℝ ∞ p.eval :=
   (contDiff_piLp 2).2 fun j => contDiff_evalE (p.coordinates j)
 
+/-- A coordinatewise real polynomial map of total degree at most `D`. -/
+structure PolyMap (a m D : ℕ) where
+  coordinates : Fin m → MvPolynomial (Fin a) ℝ
+  degree_le : ∀ j, (coordinates j).totalDegree ≤ D
+
+/-- Evaluate the polynomial coordinates in the Euclidean source and target spaces. -/
+noncomputable def PolyMap.eval {m D : ℕ} (p : PolyMap a m D) (x : RealEuclidean a) :
+    RealEuclidean m :=
+  WithLp.toLp 2 (fun j ↦ MvPolynomial.eval (fun i ↦ x i) (p.coordinates j))
+
+theorem PolyMap.contDiff_eval_top {m D : ℕ} (p : PolyMap a m D) : ContDiff ℝ ∞ p.eval :=
+  (contDiff_piLp 2).2 fun j => contDiff_evalE (p.coordinates j)
+
+theorem PolyMap.contDiff_eval {m D : ℕ} (p : PolyMap a m D) : ContDiff ℝ 1 p.eval :=
+  contDiff_polynomialMap p.coordinates
+
+/-- The bounded maps of the image-volume contract have degree at most `100`. -/
+def _root_.NLQCLean.BoundedPolynomialMap.toPolyMap {m : ℕ} (p : BoundedPolynomialMap a m) :
+    PolyMap a m 100 :=
+  ⟨p.coordinates, p.degree_le⟩
+
+@[simp] theorem _root_.NLQCLean.BoundedPolynomialMap.toPolyMap_eval {m : ℕ}
+    (p : BoundedPolynomialMap a m) : p.toPolyMap.eval = p.eval := rfl
+
 /-- The derivative of `evalE P` at `x`. -/
 noncomputable def gradE (P : MvPolynomial (Fin a) ℝ) (x : RealEuclidean a) :
     RealEuclidean a →L[ℝ] ℝ :=

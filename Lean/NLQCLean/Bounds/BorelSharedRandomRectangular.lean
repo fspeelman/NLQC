@@ -127,7 +127,7 @@ theorem exists_ae_sharedRandomRectangularDiagonal_log_bound_of_imageVolumeBound
             (adConj (rectangularDiagonalPhase θ)) ≤ ε →
           Real.log (1 / ε) ≤ C * (Kq : ℝ) ^ 10 := by
   obtain ⟨c, hc, hae⟩ := exists_ae_chargedControlledPhase_resource_constant_of_imageVolumeBound hGeom
-  refine ⟨4096 / c ^ 2, by positivity, fun dA dB _ _ hA hB => ?_⟩
+  refine ⟨256 / c ^ 2, by positivity, fun dA dB _ _ hA hB => ?_⟩
   filter_upwards [ae_rectangularAlternatingAngleMod_of_ae hA hB hae] with θ hθ
   obtain ⟨ε₀, hε₀pos, hε₀half, hcharged⟩ := hθ
   refine ⟨ε₀, hε₀pos, hε₀half, ?_⟩
@@ -148,8 +148,8 @@ theorem exists_ae_sharedRandomRectangularDiagonal_log_bound_of_imageVolumeBound
   have hreach := StandardBorelClassicalProtocol.mem_pureReachable_of_sharedRandom_quantumFootprint_diamondError
     μ Q hQ _ (by decide) hKQ herr
   apply log_le_tenth_power_of_charged_sqrt_lower_bound hc hL
-  have h := (hcharged (4 * 2 ^ 4 * Kq ^ 5) ε hε hε₀).1 hreach
-  simpa only [show 4 * 2 ^ 4 = (64 : ℕ) by norm_num,
+  have h := (hcharged (2 ^ 4 * Kq ^ 5) ε hε hε₀).1 hreach
+  simpa only [show 2 ^ 4 = (16 : ℕ) by norm_num,
     Nat.cast_mul, Nat.cast_pow, Nat.cast_ofNat] using h
 
 /-- Shared-random rectangular rate. -/
@@ -235,7 +235,7 @@ theorem exists_ae_mixedSharedRandomRectangularDiagonal_log_bound_of_imageVolumeB
             (adConj (rectangularDiagonalPhase θ)) ≤ ε →
           Real.log (1 / ε) ≤ C * (Kq : ℝ) ^ 10 := by
   obtain ⟨c, hc, hae⟩ := exists_ae_chargedControlledPhase_resource_constant_of_imageVolumeBound hGeom
-  refine ⟨4096 / c ^ 2, by positivity, fun dA dB _ _ hA hB => ?_⟩
+  refine ⟨256 / c ^ 2, by positivity, fun dA dB _ _ hA hB => ?_⟩
   filter_upwards [ae_rectangularAlternatingAngleMod_of_ae hA hB hae] with θ hθ
   obtain ⟨ε₀, hε₀pos, hε₀half, hcharged⟩ := hθ
   refine ⟨ε₀, hε₀pos, hε₀half, ?_⟩
@@ -259,8 +259,8 @@ theorem exists_ae_mixedSharedRandomRectangularDiagonal_log_bound_of_imageVolumeB
     StandardBorelClassicalProtocol.mem_pureReachable_of_mixedSharedRandom_quantumFootprint_diamondError
       μ Q m hQ _ (by decide) hKQ herr
   apply log_le_tenth_power_of_charged_sqrt_lower_bound hc hL
-  have h := (hcharged (4 * 2 ^ 4 * Kq ^ 5) ε hε hε₀).1 hreach
-  simpa only [show 4 * 2 ^ 4 = (64 : ℕ) by norm_num,
+  have h := (hcharged (2 ^ 4 * Kq ^ 5) ε hε hε₀).1 hreach
+  simpa only [show 2 ^ 4 = (16 : ℕ) by norm_num,
     Nat.cast_mul, Nat.cast_pow, Nat.cast_ofNat] using h
 
 /-- Mixed-branch shared-random rectangular rate. -/

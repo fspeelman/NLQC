@@ -6,6 +6,7 @@ import NLQCLean.Bounds.StrongHaarConditional
 import NLQCLean.Bounds.StrongUniversalResources
 import NLQCLean.Bounds.SwapFloor
 import NLQCLean.Approx.PVMRankFloor
+import NLQCLean.ImageVolume.PolynomialImageVolume
 
 /-!
 # Reference result inventory
@@ -66,6 +67,10 @@ theorem reference_polynomial_image_volume : PolynomialImageVolumeBound :=
 theorem reference_polynomial_image_volume_constant :
     PolynomialImageVolumeBoundWith (804 * 560) :=
   DirectVolume.polynomialImageVolumeBoundWith
+
+theorem reference_polynomial_image_volume_barrier_constant :
+    PolynomialImageVolumeBoundWith 35248 :=
+  polynomialImageVolumeBoundWith_imageVolumeConstant
 
 theorem reference_strong_restricted_haar :
     ∃ C : ℝ, 21 ≤ C ∧ StrongRestrictedHaarBound C :=

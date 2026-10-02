@@ -6,7 +6,7 @@ import NLQCLean.Models.ClassicalCommunication.FiniteMixedCompression
 # Almost-every controlled-phase rates for finite classical instruments
 
 The pure and common-map finite-mixed compression theorems transfer
-the original target score to a charged protocol of footprint `64 Kq⁵`.
+the original target score to a charged protocol of footprint `16 Kq⁵`.
 Diamond accuracy is used only to obtain that score; no operational-error
 preservation is asserted for outcome or component selection. All classical
 alphabets and original resource/private/environment registers remain finite
@@ -23,16 +23,16 @@ open Matrix MeasureTheory ClassicalCommunication
 transfer gives the tenth-power logarithm estimate, with its exact coefficient. -/
 theorem log_le_tenth_power_of_charged_sqrt_lower_bound {c L : ℝ} {Kq : ℕ}
     (hc : 0 < c) (hL : 0 ≤ L)
-    (hbound : c * Real.sqrt L ≤ 64 * (Kq : ℝ) ^ 5) :
-    L ≤ (4096 / c ^ 2) * (Kq : ℝ) ^ 10 := by
+    (hbound : c * Real.sqrt L ≤ 16 * (Kq : ℝ) ^ 5) :
+    L ≤ (256 / c ^ 2) * (Kq : ℝ) ^ 10 := by
   have hsquare := pow_le_pow_left₀ (by positivity) hbound 2
   rw [mul_pow, Real.sq_sqrt hL] at hsquare
   rw [div_mul_eq_mul_div]
   apply (le_div_iff₀ (by positivity : 0 < c ^ 2)).mpr
   calc
     L * c ^ 2 = c ^ 2 * L := by ring
-    _ ≤ (64 * (Kq : ℝ) ^ 5) ^ 2 := hsquare
-    _ = 4096 * (Kq : ℝ) ^ 10 := by ring
+    _ ≤ (16 * (Kq : ℝ) ^ 5) ^ 2 := hsquare
+    _ = 256 * (Kq : ℝ) ^ 10 := by ring
 
 /-- One constant precedes the fixed phase; its small-error threshold precedes
 all quantum budgets, errors, finite architectures and protocols.
@@ -63,7 +63,7 @@ theorem exists_ae_finiteControlledPhase_log_bound_of_imageVolumeBound
           (diamondError (P.mixedOperationalChannel m) (adConj (controlledPhase θ)) ≤ ε →
             Real.log (1 / ε) ≤ C * (Kq : ℝ) ^ 10)) := by
   obtain ⟨c, hc, hae⟩ := exists_ae_chargedControlledPhase_resource_constant_of_imageVolumeBound hGeom
-  refine ⟨4096 / c ^ 2, by positivity, ?_⟩
+  refine ⟨256 / c ^ 2, by positivity, ?_⟩
   filter_upwards [hae] with θ hθ
   obtain ⟨ε₀, hε₀pos, hε₀half, hcharged⟩ := hθ
   refine ⟨ε₀, hε₀pos, hε₀half, ?_⟩
@@ -71,11 +71,11 @@ theorem exists_ae_finiteControlledPhase_log_bound_of_imageVolumeBound
     _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ P
   have hε1 : ε ≤ 1 := by linarith
   have hL : 0 ≤ Real.log (1 / ε) := Real.log_nonneg ((one_le_div₀ hε).mpr hε1)
-  have htransfer (hreach : controlledPhaseTarget θ ∈ pureReachable 2 (4 * 2 ^ 4 * Kq ^ 5) ε) :
-      Real.log (1 / ε) ≤ (4096 / c ^ 2) * (Kq : ℝ) ^ 10 := by
+  have htransfer (hreach : controlledPhaseTarget θ ∈ pureReachable 2 (2 ^ 4 * Kq ^ 5) ε) :
+      Real.log (1 / ε) ≤ (256 / c ^ 2) * (Kq : ℝ) ^ 10 := by
     apply log_le_tenth_power_of_charged_sqrt_lower_bound hc hL
-    have h := (hcharged (4 * 2 ^ 4 * Kq ^ 5) ε hε hε₀).1 hreach
-    simpa only [show 4 * 2 ^ 4 = (64 : ℕ) by norm_num,
+    have h := (hcharged (2 ^ 4 * Kq ^ 5) ε hε hε₀).1 hreach
+    simpa only [show 2 ^ 4 = (16 : ℕ) by norm_num,
       Nat.cast_mul, Nat.cast_pow, Nat.cast_ofNat] using h
   refine ⟨?_, ?_⟩
   · intro hK

@@ -205,7 +205,7 @@ theorem mem_pureReachable_of_sharedRandom_quantumFootprint
     (U : Matrix.unitaryGroup (Fin d × Fin d) ℂ) {ε : ℝ}
     (hd : 0 < d) (hK : ∀ᵐ a ∂μ, (P a).HasQuantumFootprint K)
     (hscore : 1 - ε ≤ scoreU (U : Matrix _ _ ℂ) (sharedRandomOperationalChannel μ P).toLinearMap) :
-    U ∈ pureReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    U ∈ pureReachable d (d ^ 4 * K ^ 5) ε := by
   obtain ⟨a, hcap, hs⟩ := exists_sharedRandom_branch_linearScore_ge_hasQuantumFootprint
     μ P hP (unitaryScoreRealLinear (U : Matrix _ _ ℂ)) hK
   apply (P a).mem_pureReachable_of_quantumFootprint U hd hcap
@@ -219,7 +219,7 @@ theorem mem_pureReachable_of_sharedRandom_quantumFootprint_diamondError
     (U : Matrix.unitaryGroup (Fin d × Fin d) ℂ) {ε : ℝ}
     (hd : 0 < d) (hK : ∀ᵐ a ∂μ, (P a).HasQuantumFootprint K)
     (herror : diamondError (sharedRandomOperationalChannel μ P).toLinearMap (adConj (U : Matrix _ _ ℂ)) ≤ ε) :
-    U ∈ pureReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    U ∈ pureReachable d (d ^ 4 * K ^ 5) ε := by
   have htrace := trace_choiMatrix_eq_one_of_completelyPositive_tracePreserving _
     (sharedRandomOperationalChannel_completelyPositive μ P hP) (sharedRandomOperationalChannel_tracePreserving μ P hP)
   have hs := NLQCLean.one_sub_scoreU_le_diamondError
@@ -235,7 +235,7 @@ theorem mem_purePVMReachable_of_sharedRandom_quantumFootprint
     (M : Matrix.unitaryGroup (Fin d × Fin d) ℂ) {ε : ℝ}
     (hd : 0 < d) (hK : ∀ᵐ a ∂μ, (P a).HasQuantumFootprint K)
     (hscore : 1 - ε ≤ scorePVM (M : Matrix _ _ ℂ) (sharedRandomOperationalChannel μ P).toLinearMap) :
-    M ∈ purePVMReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    M ∈ purePVMReachable d (d ^ 4 * K ^ 5) ε := by
   obtain ⟨a, hcap, hs⟩ := exists_sharedRandom_branch_linearScore_ge_hasQuantumFootprint
     μ P hP (pvmScoreRealLinear (M : Matrix _ _ ℂ)) hK
   apply (P a).mem_purePVMReachable_of_quantumFootprint M hd hcap
@@ -249,7 +249,7 @@ theorem mem_purePVMReachable_of_sharedRandom_quantumFootprint_pvmTVError
     (M : Matrix.unitaryGroup (Fin d × Fin d) ℂ) {ε : ℝ}
     (hd : 0 < d) (hK : ∀ᵐ a ∂μ, (P a).HasQuantumFootprint K)
     (herror : pvmTVError (M : Matrix _ _ ℂ) (sharedRandomOperationalChannel μ P).toLinearMap ≤ ε) :
-    M ∈ purePVMReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    M ∈ purePVMReachable d (d ^ 4 * K ^ 5) ε := by
   have hout := isPVMOutcomeChannel_of_completelyPositive_tracePreserving _
     (sharedRandomOperationalChannel_completelyPositive μ P hP) (sharedRandomOperationalChannel_tracePreserving μ P hP)
   have hs := NLQCLean.one_sub_scorePVM_le_pvmTVError
@@ -266,7 +266,7 @@ theorem mem_pureReachable_of_mixedSharedRandom_quantumFootprint
     (U : Matrix.unitaryGroup (Fin d × Fin d) ℂ) {ε : ℝ}
     (hd : 0 < d) (hK : ∀ᵐ a ∂μ, (P a).HasMixedQuantumFootprint (m a) K)
     (hscore : 1 - ε ≤ scoreU (U : Matrix _ _ ℂ) (mixedSharedRandomOperationalChannel μ P m).toLinearMap) :
-    U ∈ pureReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    U ∈ pureReachable d (d ^ 4 * K ^ 5) ε := by
   obtain ⟨a, k, hcap, hs⟩ := exists_mixedSharedRandom_branch_component_linearScore_ge_hasQuantumFootprint
     μ P m hP (unitaryScoreRealLinear (U : Matrix _ _ ℂ)) hK
   apply ((P a).componentProtocol (m a) k).mem_pureReachable_of_quantumFootprint U hd hcap
@@ -281,7 +281,7 @@ theorem mem_pureReachable_of_mixedSharedRandom_quantumFootprint_diamondError
     (U : Matrix.unitaryGroup (Fin d × Fin d) ℂ) {ε : ℝ}
     (hd : 0 < d) (hK : ∀ᵐ a ∂μ, (P a).HasMixedQuantumFootprint (m a) K)
     (herror : diamondError (mixedSharedRandomOperationalChannel μ P m).toLinearMap (adConj (U : Matrix _ _ ℂ)) ≤ ε) :
-    U ∈ pureReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    U ∈ pureReachable d (d ^ 4 * K ^ 5) ε := by
   have htrace := trace_choiMatrix_eq_one_of_completelyPositive_tracePreserving _
     (mixedSharedRandomOperationalChannel_completelyPositive μ P m hP) (mixedSharedRandomOperationalChannel_tracePreserving μ P m hP)
   have hs := NLQCLean.one_sub_scoreU_le_diamondError
@@ -298,7 +298,7 @@ theorem mem_purePVMReachable_of_mixedSharedRandom_quantumFootprint
     (M : Matrix.unitaryGroup (Fin d × Fin d) ℂ) {ε : ℝ}
     (hd : 0 < d) (hK : ∀ᵐ a ∂μ, (P a).HasMixedQuantumFootprint (m a) K)
     (hscore : 1 - ε ≤ scorePVM (M : Matrix _ _ ℂ) (mixedSharedRandomOperationalChannel μ P m).toLinearMap) :
-    M ∈ purePVMReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    M ∈ purePVMReachable d (d ^ 4 * K ^ 5) ε := by
   obtain ⟨a, k, hcap, hs⟩ := exists_mixedSharedRandom_branch_component_linearScore_ge_hasQuantumFootprint
     μ P m hP (pvmScoreRealLinear (M : Matrix _ _ ℂ)) hK
   apply ((P a).componentProtocol (m a) k).mem_purePVMReachable_of_quantumFootprint M hd hcap
@@ -313,7 +313,7 @@ theorem mem_purePVMReachable_of_mixedSharedRandom_quantumFootprint_pvmTVError
     (M : Matrix.unitaryGroup (Fin d × Fin d) ℂ) {ε : ℝ}
     (hd : 0 < d) (hK : ∀ᵐ a ∂μ, (P a).HasMixedQuantumFootprint (m a) K)
     (herror : pvmTVError (M : Matrix _ _ ℂ) (mixedSharedRandomOperationalChannel μ P m).toLinearMap ≤ ε) :
-    M ∈ purePVMReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    M ∈ purePVMReachable d (d ^ 4 * K ^ 5) ε := by
   have hout := isPVMOutcomeChannel_of_completelyPositive_tracePreserving _
     (mixedSharedRandomOperationalChannel_completelyPositive μ P m hP) (mixedSharedRandomOperationalChannel_tracePreserving μ P m hP)
   have hs := NLQCLean.one_sub_scorePVM_le_pvmTVError

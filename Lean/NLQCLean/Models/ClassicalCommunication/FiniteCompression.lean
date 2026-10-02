@@ -12,7 +12,8 @@ import NLQCLean.Models.ProjectiveTV
 # Finite classical compression into an actual charged protocol
 
 Rank-sized resource supports are established before selecting outcomes.
-Alice and then Bob preserve the actual prescribed real-linear channel score.
+Alice and then Bob select at most `(d r)²` outcomes each without decreasing the actual
+prescribed real-linear channel score, giving the charged footprint `d⁴ K⁵`.
 The coherent conversion alone preserves the compressed channel. No equality
 with the original channel, diamond error or joint-TV error is inferred from
 score compression.
@@ -41,15 +42,15 @@ theorem exists_bounded_outcomes_charged_linearScore
     (S : (Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ →ₗ[ℂ]
       Matrix (ιA' × ιB') (ιA' × ιB') ℂ) →ₗ[ℝ] ℝ)
     (hd : 0 < d) (hK : P.HasQuantumFootprint K) :
-    ∃ nA : ℕ, nA ≤ (d * schmidtRank P.resource) ^ 2 + 1 ∧
-      ∃ nB : ℕ, nB ≤ (d * schmidtRank P.resource) ^ 2 + 1 ∧
+    ∃ nA : ℕ, nA ≤ (d * schmidtRank P.resource) ^ 2 ∧
+      ∃ nB : ℕ, nB ≤ (d * schmidtRank P.resource) ^ 2 ∧
         ∃ Q : FiniteClassicalProtocol (Fin d) (Fin d)
           (Fin (schmidtRank P.resource)) (Fin (schmidtRank P.resource))
           κA κB μA μB (Fin nA) (Fin nB) ηA ηB ιA' ιB' εA εB,
           schmidtRank Q.resource ≤ schmidtRank P.resource ∧
-          S Q.operationalChannel = S P.operationalChannel ∧
-          Q.coherentProtocol.HasFootprint (4 * d ^ 4 * K ^ 5) ∧
-          S Q.coherentProtocol.operationalChannel = S P.operationalChannel := by
+          S P.operationalChannel ≤ S Q.operationalChannel ∧
+          Q.coherentProtocol.HasFootprint (d ^ 4 * K ^ 5) ∧
+          S P.operationalChannel ≤ S Q.coherentProtocol.operationalChannel := by
   classical
   let : NeZero d := ⟨Nat.ne_of_gt hd⟩
   have hρ := P.resource_unit.card_pos
@@ -68,25 +69,25 @@ theorem exists_bounded_outcomes_charged_linearScore
     Nat.pos_of_mul_pos_left (Nat.pos_of_mul_pos_right ((Nat.mul_pos hd hρB).trans_le hencB))
   obtain ⟨R, hchannel, hrankR, hfootR⟩ := P.exists_resource_support_protocol
   obtain ⟨nA, hnA, nB, hnB, Q, hresource, _, hscore⟩ :=
-    R.exists_finiteOutcome_compression_preserving_linearScore S
-  have ha : nA ≤ (d * schmidtRank P.resource) ^ 2 + 1 := by
+    R.exists_finiteOutcome_compression_nondecreasing_linearScore S
+  have ha : nA ≤ (d * schmidtRank P.resource) ^ 2 := by
     simpa only [Fintype.card_prod, Fintype.card_fin] using hnA
-  have hb : nB ≤ (d * schmidtRank P.resource) ^ 2 + 1 := by
+  have hb : nB ≤ (d * schmidtRank P.resource) ^ 2 := by
     simpa only [Fintype.card_prod, Fintype.card_fin] using hnB
   have hrank : schmidtRank Q.resource ≤ schmidtRank P.resource := by
     rw [hresource]
     exact hrankR
-  have hscoreP : S Q.operationalChannel = S P.operationalChannel := by
-    rw [hscore, hchannel]
-  have hcharged : Q.coherentProtocol.HasFootprint (4 * d ^ 4 * K ^ 5) := by
+  have hscoreP : S P.operationalChannel ≤ S Q.operationalChannel := by
+    rw [hchannel]
+    exact hscore
+  have hcharged : Q.coherentProtocol.HasFootprint (d ^ 4 * K ^ 5) := by
     rw [Q.coherentProtocol_hasFootprint_iff]
     simp only [Fintype.card_fin]
     apply (Nat.mul_le_mul_right (Fintype.card μB * nB)
       (Nat.mul_le_mul_right (Fintype.card μA * nA) hrank)).trans
     exact charged_message_footprint_le d _ _ _ _ _ K hmA hmB
       ((hasFootprint_iff K P.resource).mp hK)
-      (alphabet_le_of_moment_support_bound d _ nA hd P.resource_unit.schmidtRank_pos ha)
-      (alphabet_le_of_moment_support_bound d _ nB hd P.resource_unit.schmidtRank_pos hb)
+      (ha.trans_eq (mul_pow _ _ _)) (hb.trans_eq (mul_pow _ _ _))
   refine ⟨nA, ha, nB, hb, Q, hrank, hscoreP, hcharged, ?_⟩
   rw [Q.coherentProtocol_operationalChannel]
   exact hscoreP
@@ -99,16 +100,15 @@ theorem mem_pureReachable_of_quantumFootprint
     (U : Matrix.unitaryGroup (Fin d × Fin d) ℂ) {ε : ℝ}
     (hd : 0 < d) (hK : P.HasQuantumFootprint K)
     (hscore : 1 - ε ≤ scoreU (U : Matrix _ _ ℂ) P.operationalChannel) :
-    U ∈ pureReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    U ∈ pureReachable d (d ^ 4 * K ^ 5) ε := by
   classical
   obtain ⟨nA, _, nB, _, Q, _, _, hfoot, hsame⟩ :=
     P.exists_bounded_outcomes_charged_linearScore (unitaryScoreRealLinear
       (U : Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ)) hd hK
   apply Q.coherentProtocol.mem_pureReachable hfoot
-  change scoreU (U : Matrix _ _ ℂ) Q.coherentProtocol.operationalChannel =
-    scoreU (U : Matrix _ _ ℂ) P.operationalChannel at hsame
-  rw [hsame]
-  exact hscore
+  change scoreU (U : Matrix _ _ ℂ) P.operationalChannel ≤
+    scoreU (U : Matrix _ _ ℂ) Q.coherentProtocol.operationalChannel at hsame
+  exact hscore.trans hsame
 
 /-- The PVM bridge preserves the existing two-sided correct-label score. -/
 theorem mem_purePVMReachable_of_quantumFootprint
@@ -117,16 +117,15 @@ theorem mem_purePVMReachable_of_quantumFootprint
     (M : Matrix.unitaryGroup (Fin d × Fin d) ℂ) {ε : ℝ}
     (hd : 0 < d) (hK : P.HasQuantumFootprint K)
     (hscore : 1 - ε ≤ scorePVM (M : Matrix _ _ ℂ) P.operationalChannel) :
-    M ∈ purePVMReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    M ∈ purePVMReachable d (d ^ 4 * K ^ 5) ε := by
   classical
   obtain ⟨nA, _, nB, _, Q, _, _, hfoot, hsame⟩ :=
     P.exists_bounded_outcomes_charged_linearScore (pvmScoreRealLinear
       (M : Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ)) hd hK
   apply Q.coherentProtocol.mem_purePVMReachable hfoot
-  change scorePVM (M : Matrix _ _ ℂ) Q.coherentProtocol.operationalChannel =
-    scorePVM (M : Matrix _ _ ℂ) P.operationalChannel at hsame
-  rw [hsame]
-  exact hscore
+  change scorePVM (M : Matrix _ _ ℂ) P.operationalChannel ≤
+    scorePVM (M : Matrix _ _ ℂ) Q.coherentProtocol.operationalChannel at hsame
+  exact hscore.trans hsame
 
 /-- Diamond accuracy is used only to obtain the original target score.
 The compressed protocol is not asserted to preserve the diamond error. -/
@@ -136,7 +135,7 @@ theorem mem_pureReachable_of_quantumFootprint_diamondError
     (U : Matrix.unitaryGroup (Fin d × Fin d) ℂ) {ε : ℝ}
     (hd : 0 < d) (hK : P.HasQuantumFootprint K)
     (herror : diamondError P.operationalChannel (adConj (U : Matrix _ _ ℂ)) ≤ ε) :
-    U ∈ pureReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    U ∈ pureReachable d (d ^ 4 * K ^ 5) ε := by
   classical
   let : NeZero d := ⟨Nat.ne_of_gt hd⟩
   have hs := P.coherentProtocol.scoreU_ge_of_diamondError_le
@@ -153,7 +152,7 @@ theorem mem_purePVMReachable_of_quantumFootprint_pvmTVError
     (M : Matrix.unitaryGroup (Fin d × Fin d) ℂ) {ε : ℝ}
     (hd : 0 < d) (hK : P.HasQuantumFootprint K)
     (herror : pvmTVError (M : Matrix _ _ ℂ) P.operationalChannel ≤ ε) :
-    M ∈ purePVMReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    M ∈ purePVMReachable d (d ^ 4 * K ^ 5) ε := by
   classical
   let : NeZero d := ⟨Nat.ne_of_gt hd⟩
   have hs := P.coherentProtocol.one_sub_scorePVM_le_pvmTVError

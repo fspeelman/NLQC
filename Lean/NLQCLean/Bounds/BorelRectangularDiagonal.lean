@@ -49,18 +49,18 @@ theorem exists_ae_borelControlledPhase_log_bound (hGeom : PolynomialImageVolumeB
           diamondError (P.mixedOperationalChannel m) (adConj (controlledPhase θ)) ≤ ε →
             Real.log (1 / ε) ≤ C * (Kq : ℝ) ^ 10) := by
   obtain ⟨c, hc, hae⟩ := exists_ae_chargedControlledPhase_resource_constant_of_imageVolumeBound hGeom
-  refine ⟨4096 / c ^ 2, by positivity, ?_⟩
+  refine ⟨256 / c ^ 2, by positivity, ?_⟩
   filter_upwards [hae] with θ hθ
   obtain ⟨ε₀, hε₀pos, hε₀half, hcharged⟩ := hθ
   refine ⟨ε₀, hε₀pos, hε₀half, ?_⟩
   intro Kq ε hε hε₀ ρA ρB κA κB μA μB σA σB _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ P
   have hL : 0 ≤ Real.log (1 / ε) :=
     Real.log_nonneg ((one_le_div₀ hε).mpr (by linarith))
-  have htransfer (hreach : controlledPhaseTarget θ ∈ pureReachable 2 (4 * 2 ^ 4 * Kq ^ 5) ε) :
-      Real.log (1 / ε) ≤ (4096 / c ^ 2) * (Kq : ℝ) ^ 10 := by
+  have htransfer (hreach : controlledPhaseTarget θ ∈ pureReachable 2 (2 ^ 4 * Kq ^ 5) ε) :
+      Real.log (1 / ε) ≤ (256 / c ^ 2) * (Kq : ℝ) ^ 10 := by
     apply log_le_tenth_power_of_charged_sqrt_lower_bound hc hL
-    have h := (hcharged (4 * 2 ^ 4 * Kq ^ 5) ε hε hε₀).1 hreach
-    simpa only [show 4 * 2 ^ 4 = (64 : ℕ) by norm_num,
+    have h := (hcharged (2 ^ 4 * Kq ^ 5) ε hε hε₀).1 hreach
+    simpa only [show 2 ^ 4 = (16 : ℕ) by norm_num,
       Nat.cast_mul, Nat.cast_pow, Nat.cast_ofNat] using h
   exact ⟨fun hK he => htransfer
       (P.mem_pureReachable_of_quantumFootprint_diamondError

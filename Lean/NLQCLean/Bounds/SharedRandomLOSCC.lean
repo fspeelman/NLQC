@@ -161,16 +161,16 @@ theorem exists_ae_sharedRandomLOSCCRectangularDiagonal_qubit_bound :
     linarith [le_max_right (max 0 ((1 / 5 : ℝ) * Real.logb 2 C₁))
       (max 0 ((1 / 5 : ℝ) * Real.logb 2 C₂))]
 
-/-- From a charged `c' √ln(1/ε) ≤ 64 Kq⁵` bound at `Kq = ⌊√(2^q)⌋` to the qubit count. -/
+/-- From a charged `c' √ln(1/ε) ≤ 16 Kq⁵` bound at `Kq = ⌊√(2^q)⌋` to the qubit count. -/
 theorem loscc_qubit_lower_of_charged {c ε : ℝ} {q : ℕ} (hc : 0 < c) (hε : 0 < ε)
     (hε1 : ε < 1)
-    (h : c * Real.sqrt (Real.log (1 / ε)) ≤ ((4 * 2 ^ 4 * Nat.sqrt (2 ^ q) ^ 5 : ℕ) : ℝ)) :
+    (h : c * Real.sqrt (Real.log (1 / ε)) ≤ ((2 ^ 4 * Nat.sqrt (2 ^ q) ^ 5 : ℕ) : ℝ)) :
     (1 / 5 : ℝ) * Real.logb 2 (Real.log (1 / ε)) -
-      max 0 ((1 / 5 : ℝ) * Real.logb 2 (4096 / c ^ 2)) ≤ (q : ℝ) := by
+      max 0 ((1 / 5 : ℝ) * Real.logb 2 (256 / c ^ 2)) ≤ (q : ℝ) := by
   have hL : 0 < Real.log (1 / ε) := Real.log_pos ((one_lt_div₀ hε).mpr hε1)
   apply loscc_qubit_lower (by positivity) hL
   apply log_le_tenth_power_of_charged_sqrt_lower_bound hc hL.le
-  simpa only [show 4 * 2 ^ 4 = (64 : ℕ) by norm_num, Nat.cast_mul, Nat.cast_pow,
+  simpa only [show 2 ^ 4 = (16 : ℕ) by norm_num, Nat.cast_mul, Nat.cast_pow,
     Nat.cast_ofNat] using h
 
 /-- **`thm:diagonal`, two qubits, `n_res` with Choi infidelity and free shared
@@ -206,7 +206,7 @@ theorem exists_ae_sharedRandomLOSCCTwoQubitDiagonal_qubit_bound :
               (StandardBorelClassicalProtocol.mixedSharedRandomOperationalChannel μ P m).toLinearMap →
             (1 / 5 : ℝ) * Real.logb 2 (Real.log (1 / ε)) - B ≤ (q : ℝ)) := by
   obtain ⟨c, hc, hae⟩ := exists_ae_twoQubitDiagonal_resource_constant
-  refine ⟨max 0 ((1 / 5 : ℝ) * Real.logb 2 (4096 / c ^ 2)), le_max_left _ _, ?_⟩
+  refine ⟨max 0 ((1 / 5 : ℝ) * Real.logb 2 (256 / c ^ 2)), le_max_left _ _, ?_⟩
   filter_upwards [hae] with φ hφ
   obtain ⟨ε₀, hε₀, hε₀half, hcharged⟩ := hφ
   refine ⟨ε₀, hε₀, hε₀half, ?_⟩
@@ -258,15 +258,15 @@ theorem exists_ae_sharedRandomLOSCCTwoQubit_qubit_bound :
             (1 / 5 : ℝ) * Real.logb 2 (Real.log (1 / ε)) - B ≤ (q : ℝ)) := by
   obtain ⟨c, hc, hae⟩ := exists_ae_resource_constant_of_imageVolumeBound.{0, 0, 0, 0, 0, 0, 0, 0}
     (DirectVolume.polynomialImageVolumeBound)
-  refine ⟨max 0 ((1 / 5 : ℝ) * Real.logb 2 (4096 / (2 * c) ^ 2)), le_max_left _ _, ?_⟩
+  refine ⟨max 0 ((1 / 5 : ℝ) * Real.logb 2 (256 / (2 * c) ^ 2)), le_max_left _ _, ?_⟩
   filter_upwards [hae 2 le_rfl] with T hT
   obtain ⟨ε₀, hε₀, hε₀half, hcharged⟩ := hT
   refine ⟨ε₀, hε₀, hε₀half, ?_⟩
   intro q ε hε hsmall α _ μ _ ρA ρB κA κB μA μB σA σB _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ P hcap
   have hε1 : ε < 1 := by linarith
   have hconv (h : c * ((2 : ℕ) : ℝ) * Real.sqrt (Real.log (1 / ε)) ≤
-      ((4 * 2 ^ 4 * Nat.sqrt (2 ^ q) ^ 5 : ℕ) : ℝ)) :
-      (2 * c) * Real.sqrt (Real.log (1 / ε)) ≤ ((4 * 2 ^ 4 * Nat.sqrt (2 ^ q) ^ 5 : ℕ) : ℝ) := by
+      ((2 ^ 4 * Nat.sqrt (2 ^ q) ^ 5 : ℕ) : ℝ)) :
+      (2 * c) * Real.sqrt (Real.log (1 / ε)) ≤ ((2 ^ 4 * Nat.sqrt (2 ^ q) ^ 5 : ℕ) : ℝ) := by
     have : c * ((2 : ℕ) : ℝ) * Real.sqrt (Real.log (1 / ε)) =
         (2 * c) * Real.sqrt (Real.log (1 / ε)) := by push_cast; ring
     rw [← this]; exact h

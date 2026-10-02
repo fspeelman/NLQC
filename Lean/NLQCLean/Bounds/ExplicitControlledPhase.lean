@@ -16,13 +16,15 @@ is `C_E > 0` with
 so every pure or common-map mixed protocol of footprint at most `K` has Choi
 infidelity (score deficit) at least `exp(-exp(C_E K²))`; with free
 standard-Borel classical messages and quantum footprint `Kq ≥ 1` the bound is
-`exp(-exp(4096 C_E Kq¹⁰))`. Consequently `log₂ K ≥ ½ log₂ ln ln(1/ε) - O(1)`
+`exp(-exp(256 C_E Kq¹⁰))`. Consequently `log₂ K ≥ ½ log₂ ln ln(1/ε) - O(1)`
 and `log₂ Kq ≥ (1/10) log₂ ln ln(1/ε) - O(1)`.
 
 The proof uses exactly two external inputs, `BasuPollackRoyExistentialElimination`
 (E-QE) and the polynomial-type transcendence measure
 `PolynomialTypeTranscendenceMeasureExpAngle` (weak E-TM), which Cijsouw's
-theorem implies (`CijsouwTranscendenceMeasureExp.polynomialType`); positivity of
+theorem implies (`CijsouwTranscendenceMeasureExp.polynomialType`) and which is proved in
+`Arithmetic/GelfondAngleMeasure` (`Bounds/ExplicitControlledPhaseAngle` gives the E-QE-only
+forms); positivity of
 `g_K(θ)` is the proved exact exclusion. The sources state that the constants are
 effectively computable; here only their existence is proved.
 -/
@@ -369,7 +371,7 @@ theorem exists_explicit_controlledPhase_one_lower_bound
 implementing the controlled phase with Choi infidelity (score deficit) at most `ε`,
 and every common-map mixed protocol, has `ε ≥ exp(-exp(C_E K²))`; with free
 standard-Borel classical messages and quantum footprint `Kq ≥ 1`,
-`ε ≥ exp(-exp(4096 C_E Kq¹⁰))`. -/
+`ε ≥ exp(-exp(256 C_E Kq¹⁰))`. -/
 theorem exists_explicit_controlledPhase_protocol_bound
     (hQE : BasuPollackRoyExistentialElimination)
     (hTM : PolynomialTypeTranscendenceMeasureExpAngle)
@@ -393,18 +395,18 @@ theorem exists_explicit_controlledPhase_protocol_bound
           (Fin 2) (Fin 2)) {Kq : ℕ} {ε : ℝ}, 1 ≤ Kq →
         ((P.HasQuantumFootprint Kq →
           1 - ε ≤ scoreU (controlledPhase θ) P.operationalChannel.toLinearMap →
-            Real.exp (-Real.exp (4096 * CE * (Kq : ℝ) ^ 10)) ≤ ε) ∧
+            Real.exp (-Real.exp (256 * CE * (Kq : ℝ) ^ 10)) ≤ ε) ∧
         (∀ (n : ℕ) (m : MixedResource ρA ρB n), P.HasMixedQuantumFootprint m Kq →
           1 - ε ≤ scoreU (controlledPhase θ) (P.mixedOperationalChannel m) →
-            Real.exp (-Real.exp (4096 * CE * (Kq : ℝ) ^ 10)) ≤ ε))) := by
+            Real.exp (-Real.exp (256 * CE * (Kq : ℝ) ^ 10)) ≤ ε))) := by
   obtain ⟨CE, hCE, hbound⟩ := exists_explicit_controlledPhaseLeastDeficit_lower_bound hQE hTM hθ0 hθ
   refine ⟨CE, hCE, fun P K ε hK hP hs => (hbound K hK).trans
     (P.controlledPhaseLeastDeficit_le hK hP hs), fun P Kq ε hKq => ?_⟩
-  have h64 : 1 ≤ 64 * Kq ^ 5 := by
+  have h64 : 1 ≤ 16 * Kq ^ 5 := by
     have := Nat.one_le_pow 5 Kq hKq
     omega
-  have hexp : Real.exp (-Real.exp (4096 * CE * (Kq : ℝ) ^ 10)) =
-      Real.exp (-Real.exp (CE * ((64 * Kq ^ 5 : ℕ) : ℝ) ^ 2)) := by
+  have hexp : Real.exp (-Real.exp (256 * CE * (Kq : ℝ) ^ 10)) =
+      Real.exp (-Real.exp (CE * ((16 * Kq ^ 5 : ℕ) : ℝ) ^ 2)) := by
     push_cast; ring_nf
   obtain ⟨hpure, hmixed⟩ :=
     NLQCLean.StandardBorelClassicalProtocol.controlledPhaseLeastDeficit_le P (θ := θ) (ε := ε) hKq
@@ -501,24 +503,24 @@ theorem exists_explicit_controlledPhase_quantum_iterated_log_bound
           1 - ε ≤ scoreU (controlledPhase θ) (P.mixedOperationalChannel m) →
             (1 / 10 : ℝ) * Real.logb 2 (Real.log (Real.log (1 / ε))) - b ≤ Real.logb 2 Kq)) := by
   obtain ⟨CE, hCE, hbound⟩ := exists_explicit_controlledPhaseLeastDeficit_lower_bound hQE hTM hθ0 hθ
-  refine ⟨max 0 ((1 / 10 : ℝ) * Real.logb 2 (4096 * CE)), le_max_left _ _, ?_⟩
+  refine ⟨max 0 ((1 / 10 : ℝ) * Real.logb 2 (256 * CE)), le_max_left _ _, ?_⟩
   intro ρA ρB κA κB μA μB σA σB _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ P Kq ε hKq hε hεe
   have hKr : (0 : ℝ) < Kq := by exact_mod_cast hKq
-  have h64 : 1 ≤ 64 * Kq ^ 5 := by
+  have h64 : 1 ≤ 16 * Kq ^ 5 := by
     have := Nat.one_le_pow 5 Kq hKq
     omega
-  have hexp : Real.exp (-Real.exp (CE * ((64 * Kq ^ 5 : ℕ) : ℝ) ^ 2)) =
-      Real.exp (-Real.exp (4096 * CE * (Kq : ℝ) ^ 10)) := by
+  have hexp : Real.exp (-Real.exp (CE * ((16 * Kq ^ 5 : ℕ) : ℝ) ^ 2)) =
+      Real.exp (-Real.exp (256 * CE * (Kq : ℝ) ^ 10)) := by
     push_cast; ring_nf
-  have key (hd : controlledPhaseLeastDeficit (64 * Kq ^ 5) θ ≤ ε) :
+  have key (hd : controlledPhaseLeastDeficit (16 * Kq ^ 5) θ ≤ ε) :
       (1 / 10 : ℝ) * Real.logb 2 (Real.log (Real.log (1 / ε))) -
-        max 0 ((1 / 10 : ℝ) * Real.logb 2 (4096 * CE)) ≤ Real.logb 2 Kq := by
+        max 0 ((1 / 10 : ℝ) * Real.logb 2 (256 * CE)) ≤ Real.logb 2 Kq := by
     have h := (hbound _ h64).trans hd
     rw [hexp] at h
     have := logb_iterated_log_le_of_double_exp (p := 10) (by positivity) hKr (by norm_num)
       hε hεe h
     push_cast at this
-    linarith [le_max_right 0 ((1 / 10 : ℝ) * Real.logb 2 (4096 * CE))]
+    linarith [le_max_right 0 ((1 / 10 : ℝ) * Real.logb 2 (256 * CE))]
   obtain ⟨hpure, hmixed⟩ :=
     NLQCLean.StandardBorelClassicalProtocol.controlledPhaseLeastDeficit_le P (θ := θ) (ε := ε) hKq
   exact ⟨fun hK hs => key (hpure hK hs), fun n m hK hs => key (hmixed n m hK hs)⟩

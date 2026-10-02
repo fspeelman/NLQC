@@ -97,5 +97,30 @@ theorem exists_extendedOverlap_rank_error_decomposition {x : PVMReverseBlocks s}
     finrank_extendedLocalTerm_le hx (by omega), norm_fderiv_extendedOverlap_le_budget hx hd hfloor hP,
     norm_extendedResidual_le_budget hx hd hfloor hP hδ hdef⟩
 
+/-- **`prop:overlap-derivative` for measurements.** Along every tangent direction of a valid
+PVM witness, the overlap velocity is `-b T + T a + Ξ` with a local input generator `a`, a
+diagonal skew-Hermitian output generator `b` and the leakage term `Ξ`, whose Frobenius norm
+is at most `√h (‖Ė‖_op + ‖Ḋ‖_op)`, with `h ≤ d² δ²`. -/
+theorem IsValid.local_velocity_decomposition {x v : PVMReverseBlocks s}
+    (hx : IsValid x) (hv : IsTangent x v) {δ : ℝ} (hδ : 0 ≤ δ)
+    (hdef : (d : ℝ) ^ 2 - ‖overlap x‖ ^ 2 ≤ (d : ℝ) ^ 2 * δ ^ 2) :
+    ∃ a b : Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ,
+      a ∈ localSkew (Fin d) (Fin d) ∧ b ∈ diagSkew (Fin d × Fin d) ∧
+      overlapVelocity x v = -b * overlap x + overlap x * a +
+        crossGramResidual (forward x) (reverse x) (forwardVelocity x v) (reverseVelocity x v) ∧
+      ‖crossGramResidual (forward x) (reverse x) (forwardVelocity x v) (reverseVelocity x v)‖ ≤
+        ((d : ℝ) * δ) * (opNorm (forwardVelocity x v) + opNorm (reverseVelocity x v)) := by
+  have ha := hx.forward_generator_mem_localSkew hv
+  have hb := hx.reverse_generator_mem_diagSkew hv
+  refine ⟨(forward x)ᴴ * forwardVelocity x v, (reverse x)ᴴ * reverseVelocity x v, ha, hb, ?_, ?_⟩
+  · apply crossGramVelocity_decomposition
+    have h := (mem_diagSkew_iff.mp hb).2
+    rw [Matrix.conjTranspose_mul, Matrix.conjTranspose_conjTranspose] at h
+    rw [h, add_neg_cancel]
+  · apply norm_crossGramResidual_le_of_defect_sq _ _ _ _
+      hx.isIsometry_forward hx.isIsometry_reverse (mul_nonneg (Nat.cast_nonneg _) hδ)
+    have hD : (Fintype.card (Fin d × Fin d) : ℝ) = (d : ℝ) ^ 2 := by simp [pow_two]
+    simpa only [hD, mul_pow, overlap] using hdef
+
 end PVMReverseBlocks
 end NLQCLean

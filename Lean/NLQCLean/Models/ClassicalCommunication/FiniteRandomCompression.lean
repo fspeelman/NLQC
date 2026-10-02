@@ -41,7 +41,7 @@ theorem mem_pureReachable_of_integrated_finite_mixed_score
     (hK : ∀ a, (P a).HasMixedQuantumFootprint (m a) K)
     (hmean : 1 - ε ≤ ∫ a,
       scoreU (U : Matrix _ _ ℂ) ((P a).mixedOperationalChannel (m a)) ∂μ) :
-    U ∈ pureReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    U ∈ pureReachable d (d ^ 4 * K ^ 5) ε := by
   classical
   obtain ⟨a, k, hcap, hge⟩ := exists_finite_protocol_branch_component_linearScore_ge μ
     P (unitaryScoreRealLinear (U : Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ))
@@ -64,7 +64,7 @@ theorem mem_purePVMReachable_of_integrated_finite_mixed_score
     (hK : ∀ a, (P a).HasMixedQuantumFootprint (m a) K)
     (hmean : 1 - ε ≤ ∫ a,
       scorePVM (M : Matrix _ _ ℂ) ((P a).mixedOperationalChannel (m a)) ∂μ) :
-    M ∈ purePVMReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    M ∈ purePVMReachable d (d ^ 4 * K ^ 5) ε := by
   classical
   obtain ⟨a, k, hcap, hge⟩ := exists_finite_protocol_branch_component_linearScore_ge μ
     P (pvmScoreRealLinear (M : Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ))

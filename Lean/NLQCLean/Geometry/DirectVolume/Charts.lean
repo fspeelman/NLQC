@@ -17,7 +17,7 @@ namespace NLQCLean.DirectVolume
 
 open MvPolynomial Set Function Filter Topology Metric
 
-variable {a m : ℕ}
+variable {a m L D : ℕ}
 
 /-- The center of the open unit cube. -/
 noncomputable def cubeCenter (m : ℕ) : RealEuclidean m := WithLp.toLp 2 fun _ => 1 / 2
@@ -40,12 +40,12 @@ theorem norm_sub_cubeCenter_lt {u : RealEuclidean m} (hu : u ∈ openUnitCube m)
   exact lt_of_pow_lt_pow_left₀ 2 (by positivity) hsq
 
 /-- **L10 (chart at a point).** -/
-theorem exists_lagrangeChart_at (p : BoundedPolynomialMap a m)
-    (g : Fin 41 → MvPolynomial (Fin a) ℝ) (J : Finset (Fin 41)) (b : Fin 41 → ℝ)
+theorem exists_lagrangeChart_at (p : PolyMap a m D)
+    (g : Fin L → MvPolynomial (Fin a) ℝ) (J : Finset (Fin L)) (b : Fin L → ℝ)
     (v : Fin a → ℝ)
     (hreg : ∀ q, lagrangeMap p g J q = (b, v) → Surjective (fderiv ℝ (lagrangeMap p g J) q))
-    {q₀ : Fin (a + m + 41) → ℝ} (hq₀ : q₀ ∈ lagrangeLevel p g J b v) :
-    ∃ (A : Set (Fin (a + m + 41) → ℝ)) (φ : RealEuclidean m → RealEuclidean a),
+    {q₀ : Fin (a + m + L) → ℝ} (hq₀ : q₀ ∈ lagrangeLevel p g J b v) :
+    ∃ (A : Set (Fin (a + m + L) → ℝ)) (φ : RealEuclidean m → RealEuclidean a),
       IsOpen A ∧ q₀ ∈ A ∧ ContDiffOn ℝ 1 φ (openUnitCube m) ∧ InjOn φ (openUnitCube m) ∧
       (∀ u ∈ openUnitCube m, Injective (fderiv ℝ φ u)) ∧
       φ '' openUnitCube m ⊆ lagrangeSet p g J b v ∧
@@ -58,37 +58,37 @@ theorem exists_lagrangeChart_at (p : BoundedPolynomialMap a m)
   set DH := fderiv ℝ H q₀ with hDH
   have hsurj : Surjective DH := hreg q₀ hHq₀
   -- The kernel of `DH` has dimension `m`.
-  set P₀ : Submodule ℝ (Fin (a + m + 41) → ℝ) := LinearMap.ker DH.toLinearMap with hP₀
+  set P₀ : Submodule ℝ (Fin (a + m + L) → ℝ) := LinearMap.ker DH.toLinearMap with hP₀
   have hrank : Module.finrank ℝ P₀ = m := by
     have h := LinearMap.finrank_range_add_finrank_ker DH.toLinearMap
     rw [LinearMap.range_eq_top.mpr hsurj, finrank_top, Module.finrank_prod,
       Module.finrank_fin_fun, Module.finrank_fin_fun, Module.finrank_fin_fun] at h
-    change 41 + a + Module.finrank ℝ P₀ = a + m + 41 at h
+    change L + a + Module.finrank ℝ P₀ = a + m + L at h
     omega
   let e : RealEuclidean m ≃L[ℝ] P₀ :=
     ContinuousLinearEquiv.ofFinrankEq (by rw [finrank_euclideanSpace_fin, hrank])
-  let L : RealEuclidean m →L[ℝ] RealEuclidean a :=
+  let Lx : RealEuclidean m →L[ℝ] RealEuclidean a :=
     (liftXL a m).comp ((P₀.subtypeL).comp (e : RealEuclidean m →L[ℝ] P₀))
   have hkerzero : ∀ w ∈ P₀, liftX w = 0 → w = 0 := by
     intro w hw hlx
     refine eq_zero_of_fderiv_lagrangeMap_vertical p g J hq₀.2 (fun k => ?_) hw
     have := congrArg (fun x : RealEuclidean a => x k) hlx
     simpa [liftX] using this
-  have hL : Injective L := by
+  have hL : Injective Lx := by
     rw [injective_iff_map_eq_zero]
     intro u hu
-    have hw := hkerzero (e u) (e u).2 (by simpa [L] using hu)
+    have hw := hkerzero (e u) (e u).2 (by simpa [Lx] using hu)
     have : e u = 0 := Subtype.ext hw
     simpa using this
-  obtain ⟨I, -, hbij⟩ := exists_bijective_coordinateProjection_comp L hL
+  obtain ⟨I, -, hbij⟩ := exists_bijective_coordinateProjection_comp Lx hL
   -- The equal-dimensional map `K` has an invertible derivative.
   set K := lagrangeCoordMap p g J I with hKdef
-  set DK : (Fin (a + m + 41) → ℝ) →L[ℝ] ((Fin 41 → ℝ) × (Fin a → ℝ)) × RealEuclidean m :=
+  set DK : (Fin (a + m + L) → ℝ) →L[ℝ] ((Fin L → ℝ) × (Fin a → ℝ)) × RealEuclidean m :=
     DH.prod ((coordinateProjectionL I).comp (liftXL a m)) with hDK
   have hKd : HasFDerivAt K DK q₀ := by
     refine (hHdiff q₀).hasFDerivAt.prodMk ?_
     have : (fun q => coordinateProjection I (liftX q)) =
-        ((coordinateProjectionL I).comp (liftXL a m) : (Fin (a + m + 41) → ℝ) →L[ℝ] _) := by
+        ((coordinateProjectionL I).comp (liftXL a m) : (Fin (a + m + L) → ℝ) →L[ℝ] _) := by
       funext q; simp [coordinateProjectionL]
     rw [this]
     exact ContinuousLinearMap.hasFDerivAt _
@@ -98,8 +98,8 @@ theorem exists_lagrangeChart_at (p : BoundedPolynomialMap a m)
     simp only [hDK, ContinuousLinearMap.prod_apply, Prod.mk_eq_zero] at hw
     have hwP : w ∈ P₀ := hw.1
     set u := e.symm ⟨w, hwP⟩ with hu
-    have hLu : L u = liftX w := by simp [L, hu]
-    have hπ : (coordinateProjectionL I).comp L u = 0 := by
+    have hLu : Lx u = liftX w := by simp [Lx, hu]
+    have hπ : (coordinateProjectionL I).comp Lx u = 0 := by
       simp only [ContinuousLinearMap.coe_comp, comp_apply, hLu]
       simpa using hw.2
     have hu0 : u = 0 := hbij.1 (by rw [hπ, map_zero])
@@ -112,9 +112,9 @@ theorem exists_lagrangeChart_at (p : BoundedPolynomialMap a m)
       (by rw [finrank_lagrangeCoordMap_target, Module.finrank_fin_fun])
       (f := DK.toLinearMap)).mp hDKinj
   let K' := (LinearEquiv.ofBijective DK.toLinearMap hDKbij).toContinuousLinearEquiv
-  have hK'eq : (K' : (Fin (a + m + 41) → ℝ) →L[ℝ] _) = DK :=
+  have hK'eq : (K' : (Fin (a + m + L) → ℝ) →L[ℝ] _) = DK :=
     ContinuousLinearMap.ext fun _ => rfl
-  have hKd' : HasFDerivAt K (K' : (Fin (a + m + 41) → ℝ) →L[ℝ] _) q₀ := by
+  have hKd' : HasFDerivAt K (K' : (Fin (a + m + L) → ℝ) →L[ℝ] _) q₀ := by
     rw [hK'eq]; exact hKd
   have hKAt : ContDiffAt ℝ 1 K q₀ :=
     ((contDiff_lagrangeCoordMap p g J I).of_le (by simp)).contDiffAt
@@ -130,9 +130,9 @@ theorem exists_lagrangeChart_at (p : BoundedPolynomialMap a m)
     · simpa only [hleft, hE] using hKd'
     · simpa only [hleft, hE] using hKAt
   have hG : ContDiffAt ℝ 1 (liftX ∘ E.symm) (K q₀) := by
-    have hlx : ContDiffAt ℝ 1 (liftX : (Fin (a + m + 41) → ℝ) → RealEuclidean a)
+    have hlx : ContDiffAt ℝ 1 (liftX : (Fin (a + m + L) → ℝ) → RealEuclidean a)
         (E.symm (K q₀)) := by
-      have : (liftX : (Fin (a + m + 41) → ℝ) → RealEuclidean a) = liftXL a m := by
+      have : (liftX : (Fin (a + m + L) → ℝ) → RealEuclidean a) = liftXL a m := by
         funext q; simp
       rw [this]; exact (liftXL a m).contDiff.contDiffAt
     exact hlx.comp _ hInv
@@ -144,7 +144,7 @@ theorem exists_lagrangeChart_at (p : BoundedPolynomialMap a m)
   have hW'n : W' ∈ 𝓝 (K q₀) := inter_mem hu₀ (inter_mem (E.open_target.mem_nhds hw₀T) hpre)
   -- A small box around the slice value.
   set z₀ := coordinateProjection I (liftX q₀) with hz₀
-  let ι : RealEuclidean m → ((Fin 41 → ℝ) × (Fin a → ℝ)) × RealEuclidean m := fun z => ((b, v), z)
+  let ι : RealEuclidean m → ((Fin L → ℝ) × (Fin a → ℝ)) × RealEuclidean m := fun z => ((b, v), z)
   have hιc : Continuous ι := continuous_const.prodMk continuous_id
   have hKq₀ : K q₀ = ι z₀ := by
     change (H q₀, coordinateProjection I (liftX q₀)) = ((b, v), z₀)
@@ -187,9 +187,9 @@ theorem exists_lagrangeChart_at (p : BoundedPolynomialMap a m)
   refine ⟨E.source ∩ {q | ψinv (coordinateProjection I (liftX q)) ∈ openUnitCube m}, φ,
     ?_, ?_, hφC, ?_, ?_, ?_, ?_⟩
   · refine E.open_source.inter ((isOpen_openUnitCube m).preimage ?_)
-    have : Continuous fun q : Fin (a + m + 41) → ℝ => coordinateProjection I (liftX q) := by
-      have h : (fun q : Fin (a + m + 41) → ℝ => coordinateProjection I (liftX q)) =
-          ((coordinateProjectionL I).comp (liftXL a m) : (Fin (a + m + 41) → ℝ) →L[ℝ] _) := by
+    have : Continuous fun q : Fin (a + m + L) → ℝ => coordinateProjection I (liftX q) := by
+      have h : (fun q : Fin (a + m + L) → ℝ => coordinateProjection I (liftX q)) =
+          ((coordinateProjectionL I).comp (liftXL a m) : (Fin (a + m + L) → ℝ) →L[ℝ] _) := by
         funext q; simp [coordinateProjectionL]
       rw [h]; exact ContinuousLinearMap.continuous _
     exact continuous_const.add ((this.sub (continuous_const (y := z₀))).const_smul s⁻¹)
@@ -239,8 +239,8 @@ theorem exists_lagrangeChart_at (p : BoundedPolynomialMap a m)
 /-- **L11 (countable disjoint charts).** A nonempty Lagrange set at a regular
 level is the disjoint union of countably many C¹ pieces `φₙ '' Dₙ` with
 measurable domains in the open unit cube. -/
-theorem exists_lagrangeCharts (p : BoundedPolynomialMap a m)
-    (g : Fin 41 → MvPolynomial (Fin a) ℝ) (J : Finset (Fin 41)) (b : Fin 41 → ℝ)
+theorem exists_lagrangeCharts (p : PolyMap a m D)
+    (g : Fin L → MvPolynomial (Fin a) ℝ) (J : Finset (Fin L)) (b : Fin L → ℝ)
     (v : Fin a → ℝ)
     (hreg : ∀ q, lagrangeMap p g J q = (b, v) → Surjective (fderiv ℝ (lagrangeMap p g J) q))
     (hne : (lagrangeLevel p g J b v).Nonempty) :
@@ -253,8 +253,8 @@ theorem exists_lagrangeCharts (p : BoundedPolynomialMap a m)
       (⋃ n, φ n '' D n) = lagrangeSet p g J b v := by
   classical
   set W := lagrangeLevel p g J b v with hW
-  have hex : ∀ q : W, ∃ (A : Set (Fin (a + m + 41) → ℝ)) (φ : RealEuclidean m → RealEuclidean a),
-      IsOpen A ∧ (q : Fin (a + m + 41) → ℝ) ∈ A ∧ ContDiffOn ℝ 1 φ (openUnitCube m) ∧
+  have hex : ∀ q : W, ∃ (A : Set (Fin (a + m + L) → ℝ)) (φ : RealEuclidean m → RealEuclidean a),
+      IsOpen A ∧ (q : Fin (a + m + L) → ℝ) ∈ A ∧ ContDiffOn ℝ 1 φ (openUnitCube m) ∧
       InjOn φ (openUnitCube m) ∧ (∀ u ∈ openUnitCube m, Injective (fderiv ℝ φ u)) ∧
       φ '' openUnitCube m ⊆ lagrangeSet p g J b v ∧ liftX '' (W ∩ A) ⊆ φ '' openUnitCube m :=
     fun q => exists_lagrangeChart_at p g J b v hreg q.2
@@ -262,7 +262,7 @@ theorem exists_lagrangeCharts (p : BoundedPolynomialMap a m)
   obtain ⟨T, hTc, hTU⟩ := TopologicalSpace.isOpen_iUnion_countable A hAo
   obtain ⟨q₀, hq₀⟩ := hne
   have hTne : T.Nonempty := by
-    have h : (q₀ : Fin (a + m + 41) → ℝ) ∈ ⋃ i ∈ T, A i := by
+    have h : (q₀ : Fin (a + m + L) → ℝ) ∈ ⋃ i ∈ T, A i := by
       rw [hTU]; exact mem_iUnion.mpr ⟨⟨q₀, hq₀⟩, hqA ⟨q₀, hq₀⟩⟩
     obtain ⟨i, hi⟩ := mem_iUnion.mp h
     obtain ⟨hiT, -⟩ := mem_iUnion.mp hi

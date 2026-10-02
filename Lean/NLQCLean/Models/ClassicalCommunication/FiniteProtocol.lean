@@ -188,9 +188,9 @@ has the fifth-power charged footprint. This does not assume alphabet compression
 theorem coherentProtocol_hasFootprint (d K : ℕ)
     (hmA : 1 ≤ Fintype.card μA) (hmB : 1 ≤ Fintype.card μB)
     (hK : P.HasQuantumFootprint K)
-    (haA : Fintype.card σA ≤ 2 * d ^ 2 * (schmidtRank P.resource) ^ 2)
-    (haB : Fintype.card σB ≤ 2 * d ^ 2 * (schmidtRank P.resource) ^ 2) :
-    P.coherentProtocol.HasFootprint (4 * d ^ 4 * K ^ 5) := by
+    (haA : Fintype.card σA ≤ d ^ 2 * (schmidtRank P.resource) ^ 2)
+    (haB : Fintype.card σB ≤ d ^ 2 * (schmidtRank P.resource) ^ 2) :
+    P.coherentProtocol.HasFootprint (d ^ 4 * K ^ 5) := by
   rw [coherentProtocol_hasFootprint_iff]
   apply charged_message_footprint_le d _ _ _ _ _ K hmA hmB
   · exact (hasFootprint_iff _ _).mp hK

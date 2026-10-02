@@ -7,7 +7,7 @@ import NLQCLean.Models.ClassicalCommunication.FiniteReachability
 
 The angle sets use twelve-entry finite shapes, pure resources or
 common-map finite mixtures, and the original normalized unitary score.
-Proved compression transfers that score at charged footprint `64 Kq⁵`;
+Proved compression transfers that score at charged footprint `16 Kq⁵`;
 it does not assert preservation of operational error. Outer measure needs
 no measurability certificate. No arbitrary-register reindexing,
 standard-Borel or shared-randomness extension is asserted.
@@ -29,27 +29,27 @@ def finiteMixedControlledPhaseAngles (Kq : ℕ) (ε : ℝ) (J : Set ℝ) : Set �
 only the output charged budget is enlarged. -/
 theorem finitePureControlledPhaseAngles_subset_charged (Kq : ℕ) (ε : ℝ) (J : Set ℝ) :
     finitePureControlledPhaseAngles Kq ε J ⊆
-      chargedControlledPhaseAngles (64 * Kq ^ 5) ε J := by
+      chargedControlledPhaseAngles (16 * Kq ^ 5) ε J := by
   rintro θ ⟨hθ, hreach⟩
   refine ⟨hθ, ?_⟩
-  simpa only [show 4 * 2 ^ 4 = (64 : ℕ) by norm_num] using
+  simpa only [show 2 ^ 4 = (16 : ℕ) by norm_num] using
     finitePureScoreReachable_subset_pureReachable (by decide : 0 < 2) ε hreach
 
 /-- Mixed transfer chooses a rank-capped component and transfers its
 score, without changing the error in the score inequality. -/
 theorem finiteMixedControlledPhaseAngles_subset_charged (Kq : ℕ) (ε : ℝ) (J : Set ℝ) :
     finiteMixedControlledPhaseAngles Kq ε J ⊆
-      chargedControlledPhaseAngles (64 * Kq ^ 5) ε J := by
+      chargedControlledPhaseAngles (16 * Kq ^ 5) ε J := by
   rintro θ ⟨hθ, hreach⟩
   refine ⟨hθ, ?_⟩
-  simpa only [show 4 * 2 ^ 4 = (64 : ℕ) by norm_num] using
+  simpa only [show 2 ^ 4 = (16 : ℕ) by norm_num] using
     finiteMixedScoreReachable_subset_pureReachable (by decide : 0 < 2) ε hreach
 
 /-- Both classes lie in the same charged set, so their union needs no
 additional factor in the outer-length estimate. -/
 theorem finiteControlledPhaseAngles_union_subset_charged (Kq : ℕ) (ε : ℝ) (J : Set ℝ) :
     finitePureControlledPhaseAngles Kq ε J ∪ finiteMixedControlledPhaseAngles Kq ε J ⊆
-      chargedControlledPhaseAngles (64 * Kq ^ 5) ε J := by
+      chargedControlledPhaseAngles (16 * Kq ^ 5) ε J := by
   intro θ hθ
   rcases hθ with hp | hm
   · exact finitePureControlledPhaseAngles_subset_charged Kq ε J hp
@@ -70,9 +70,9 @@ theorem finiteMixedControlledPhaseAngles_zero_budget (ε : ℝ) (J : Set ℝ) :
   exact hreach
 
 /-- Substituting the two-qubit charged budget multiplies the universal
-exponential coefficient by `4096`. -/
+exponential coefficient by `256`. -/
 theorem finiteControlledPhase_charged_exponent_eq (C : ℝ) (Kq : ℕ) :
-    C * ((64 * Kq ^ 5 : ℕ) : ℝ) ^ 2 = (4096 * C) * (Kq : ℝ) ^ 10 := by
+    C * ((16 * Kq ^ 5 : ℕ) : ℝ) ^ 2 = (256 * C) * (Kq : ℝ) ^ 10 := by
   push_cast
   ring
 
@@ -91,16 +91,16 @@ theorem exists_finiteControlledPhase_length_constant_of_imageVolumeBound
         volume (finiteMixedControlledPhaseAngles Kq ε (Set.Icc a b)) ≤
           ENNReal.ofReal (C_J * Real.exp (C * (Kq : ℝ) ^ 10) * Real.sqrt ε) := by
   obtain ⟨C, hC, hlength⟩ := exists_chargedControlledPhase_length_constant_of_imageVolumeBound hGeom
-  refine ⟨4096 * C, by linarith, ?_⟩
+  refine ⟨256 * C, by linarith, ?_⟩
   intro a b hab hsemicircle
   obtain ⟨C_J, hCJ, hbound⟩ := hlength a b hab hsemicircle
   refine ⟨C_J, hCJ, ?_⟩
   intro Kq hKq ε hε
-  have hKbar : 1 ≤ 64 * Kq ^ 5 := by
+  have hKbar : 1 ≤ 16 * Kq ^ 5 := by
     have hKq0 : 0 < Kq := by omega
-    have hpos : 0 < 64 * Kq ^ 5 := by positivity
+    have hpos : 0 < 16 * Kq ^ 5 := by positivity
     omega
-  have hcharged := hbound (64 * Kq ^ 5) hKbar ε hε
+  have hcharged := hbound (16 * Kq ^ 5) hKbar ε hε
   rw [finiteControlledPhase_charged_exponent_eq] at hcharged
   have hunion := (measure_mono
     (finiteControlledPhaseAngles_union_subset_charged Kq ε (Set.Icc a b))).trans hcharged

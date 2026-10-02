@@ -14,7 +14,7 @@ for two qubits and charged footprint `K ≥ 1`:
   it lies in `[0, 1]`, is nonincreasing in `K`, and bounds the score deficit
   (Choi infidelity) of every pure or common-map mixed protocol of footprint at
   most `K`, and through Borel compression every free-classical protocol of
-  quantum footprint `Kq` at footprint `64 Kq⁵`;
+  quantum footprint `Kq` at footprint `16 Kq⁵`;
 * for `θ = 1`, and every nonzero real algebraic angle, `g_K(θ) > 0`, by the
   exact exclusion of the named gate;
 * one attaining architecture has all eight dimensions at most `4K` and at most
@@ -154,7 +154,7 @@ theorem controlledPhaseLeastDeficit_one_pos {K : ℕ} (hK : 1 ≤ K) :
 
 /-- Free standard-Borel classical messages: a pure or common-map mixed Borel
 protocol of quantum footprint `Kq` and score deficit `ε` has
-`g_{64 Kq⁵}(θ) ≤ ε`. -/
+`g_{16 Kq⁵}(θ) ≤ ε`. -/
 theorem StandardBorelClassicalProtocol.controlledPhaseLeastDeficit_le
     {ρA ρB κA κB μA μB σA σB : Type*}
     [Fintype ρA] [Fintype ρB] [Fintype κA] [Fintype κB] [Fintype μA] [Fintype μB]
@@ -165,14 +165,14 @@ theorem StandardBorelClassicalProtocol.controlledPhaseLeastDeficit_le
       (Fin 2) (Fin 2)) {Kq : ℕ} (hKq : 1 ≤ Kq) {θ ε : ℝ} :
     (P.HasQuantumFootprint Kq →
       1 - ε ≤ scoreU (controlledPhase θ) P.operationalChannel.toLinearMap →
-        controlledPhaseLeastDeficit (64 * Kq ^ 5) θ ≤ ε) ∧
+        controlledPhaseLeastDeficit (16 * Kq ^ 5) θ ≤ ε) ∧
     (∀ (n : ℕ) (m : MixedResource ρA ρB n), P.HasMixedQuantumFootprint m Kq →
       1 - ε ≤ scoreU (controlledPhase θ) (P.mixedOperationalChannel m) →
-        controlledPhaseLeastDeficit (64 * Kq ^ 5) θ ≤ ε) := by
-  have h64 : 1 ≤ 64 * Kq ^ 5 := by
+        controlledPhaseLeastDeficit (16 * Kq ^ 5) θ ≤ ε) := by
+  have h64 : 1 ≤ 16 * Kq ^ 5 := by
     have := Nat.one_le_pow 5 Kq hKq
     omega
-  have hcast : 4 * 2 ^ 4 * Kq ^ 5 = 64 * Kq ^ 5 := by norm_num
+  have hcast : 2 ^ 4 * Kq ^ 5 = 16 * Kq ^ 5 := by norm_num
   refine ⟨fun hK hs => ?_, fun n m hK hs => ?_⟩
   · rw [controlledPhaseLeastDeficit_le_iff h64, ← hcast]
     exact P.mem_pureReachable_of_quantumFootprint (controlledPhaseTarget θ) (by decide) hK hs

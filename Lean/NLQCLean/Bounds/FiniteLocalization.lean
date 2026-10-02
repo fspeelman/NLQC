@@ -113,7 +113,7 @@ proved finite classical compression, retaining all classical charges there. -/
 theorem finiteLocalizationReachable_subset_purePVMReachable
     {d : ℕ} (hd : 0 < d) (r : ℕ) (ε : ℝ) :
     finiteLocalizationReachable.{u₁, u₂, u₃, u₄} d r ε ⊆
-      purePVMReachable d (4 * d ^ 4 * r ^ 5) ε := by
+      purePVMReachable d (d ^ 4 * r ^ 5) ε := by
   intro T hT
   by_contra hnot
   apply hT
@@ -157,10 +157,10 @@ theorem exists_finite_localization_haar_constant_of_imageVolumeBound
           min 1 (ENNReal.ofReal (Real.exp (C * (d : ℝ) ^ 10 * (r : ℝ) ^ 10) *
             ε ^ ((pvmCodimension d : ℝ) / 2))) := by
   obtain ⟨C, hC, hbound⟩ := exists_pvm_haar_fraction_constant_of_imageVolumeBound hGeom
-  refine ⟨16 * C, by linarith, ?_⟩
+  refine ⟨C, hC, ?_⟩
   intro d r hd hr ε hε hεhalf
   obtain ⟨hone, hquarter⟩ := finiteClassical_charged_budget_admissible hd hr
-  have h := (hbound d (4 * d ^ 4 * r ^ 5) hd hone hquarter ε hε hεhalf).2.2.1
+  have h := (hbound d (d ^ 4 * r ^ 5) hd hone hquarter ε hε hεhalf).2.2.1
   rw [finiteClassical_haar_exponent_eq] at h
   exact (measure_mono (finiteLocalizationReachable_subset_purePVMReachable
     (by omega : 0 < d) r ε)).trans h

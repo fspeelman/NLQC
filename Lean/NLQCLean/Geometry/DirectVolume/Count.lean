@@ -6,10 +6,10 @@ import NLQCLean.Semialgebraic.FinitePointCount
 
 Over a regular value `((b, v), z)` of the equal-dimensional map `K`, the fiber
 `K⁻¹((b, v), z)` is the zero set of one nonnegative polynomial `Φ` of degree at
-most 200, and each of its points is isolated. On this fiber the inactive
+most `2D`, and each of its points is isolated. On this fiber the inactive
 multipliers `μ_t`, `t ∉ J`, are frozen at the levels `b_t`, so substituting them
 leaves a polynomial in the `a + m + |J|` free coordinates with isolated zeros.
-The point count for isolated zeros (P5) bounds it by `201^(a+m+|J|)`, and every
+The point count for isolated zeros (P5) bounds it by `(2D+1)^(a+m+|J|)`, and every
 point of a coordinate fiber of a Lagrange set lifts into it (L12–L15). Roadmap
 step D6 (`D0-PROOF.md` §10).
 -/
@@ -18,7 +18,7 @@ namespace NLQCLean.DirectVolume
 
 open MvPolynomial Set Function Filter Topology
 
-variable {a m : ℕ}
+variable {a m L D : ℕ}
 
 /-- `pderiv` lowers the total degree by one (repair R2 of the D0 review). -/
 theorem totalDegree_pderiv_le_pred {σ : Type*} [DecidableEq σ] (P : MvPolynomial σ ℝ)
@@ -28,34 +28,34 @@ theorem totalDegree_pderiv_le_pred {σ : Type*} [DecidableEq σ] (P : MvPolynomi
   · have := totalDegree_pderiv_lt h
     omega
 
-theorem totalDegree_X_mul_pderiv_le {N : ℕ} (P : MvPolynomial (Fin a) ℝ)
-    (hP : P.totalDegree ≤ 100) (r : Fin N) (f : Fin a → Fin N) (k : Fin a) :
-    (X r * rename f (pderiv k P)).totalDegree ≤ 100 := by
+theorem totalDegree_X_mul_pderiv_le {N : ℕ} (hD : 1 ≤ D) (P : MvPolynomial (Fin a) ℝ)
+    (hP : P.totalDegree ≤ D) (r : Fin N) (f : Fin a → Fin N) (k : Fin a) :
+    (X r * rename f (pderiv k P)).totalDegree ≤ D := by
   refine (totalDegree_mul _ _).trans ?_
   have h1 : (X r : MvPolynomial (Fin N) ℝ).totalDegree ≤ 1 := by rw [totalDegree_X]
   have h2 := (totalDegree_rename_le f (pderiv k P)).trans (totalDegree_pderiv_le_pred P k)
   omega
 
 /-- The lifted nonnegative polynomial `Φ`. -/
-noncomputable def lagrangePhi (p : BoundedPolynomialMap a m)
-    (g : Fin 41 → MvPolynomial (Fin a) ℝ) (J : Finset (Fin 41)) (I : Fin m → Fin a)
-    (b : Fin 41 → ℝ) (v : Fin a → ℝ) (z : RealEuclidean m) :
-    MvPolynomial (Fin (a + m + 41)) ℝ :=
+noncomputable def lagrangePhi (p : PolyMap a m D)
+    (g : Fin L → MvPolynomial (Fin a) ℝ) (J : Finset (Fin L)) (I : Fin m → Fin a)
+    (b : Fin L → ℝ) (v : Fin a → ℝ) (z : RealEuclidean m) :
+    MvPolynomial (Fin (a + m + L)) ℝ :=
   ∑ t, (lagrangeValuePoly g J t - C (b t)) ^ 2 +
     ∑ k, (lagrangeGradPoly p g J k - C (v k)) ^ 2 +
     ∑ j, (X (ixL a m (I j)) - C (z j)) ^ 2
 
-theorem eval_lagrangePhi_nonneg (p : BoundedPolynomialMap a m)
-    (g : Fin 41 → MvPolynomial (Fin a) ℝ) (J : Finset (Fin 41)) (I : Fin m → Fin a)
-    (b : Fin 41 → ℝ) (v : Fin a → ℝ) (z : RealEuclidean m) (q : Fin (a + m + 41) → ℝ) :
+theorem eval_lagrangePhi_nonneg (p : PolyMap a m D)
+    (g : Fin L → MvPolynomial (Fin a) ℝ) (J : Finset (Fin L)) (I : Fin m → Fin a)
+    (b : Fin L → ℝ) (v : Fin a → ℝ) (z : RealEuclidean m) (q : Fin (a + m + L) → ℝ) :
     0 ≤ eval q (lagrangePhi p g J I b v z) := by
   simp only [lagrangePhi, map_add, map_sum, map_pow]
   positivity
 
 /-- **L12 (b).** The zero set of `Φ` is the fiber of `K`. -/
-theorem eval_lagrangePhi_eq_zero_iff (p : BoundedPolynomialMap a m)
-    (g : Fin 41 → MvPolynomial (Fin a) ℝ) (J : Finset (Fin 41)) (I : Fin m → Fin a)
-    (b : Fin 41 → ℝ) (v : Fin a → ℝ) (z : RealEuclidean m) (q : Fin (a + m + 41) → ℝ) :
+theorem eval_lagrangePhi_eq_zero_iff (p : PolyMap a m D)
+    (g : Fin L → MvPolynomial (Fin a) ℝ) (J : Finset (Fin L)) (I : Fin m → Fin a)
+    (b : Fin L → ℝ) (v : Fin a → ℝ) (z : RealEuclidean m) (q : Fin (a + m + L) → ℝ) :
     eval q (lagrangePhi p g J I b v z) = 0 ↔ lagrangeCoordMap p g J I q = ((b, v), z) := by
   simp only [lagrangePhi, map_add, map_sum, map_pow, map_sub, eval_C, eval_X]
   have h1 : 0 ≤ ∑ t, (eval q (lagrangeValuePoly g J t) - b t) ^ 2 := by positivity
@@ -77,35 +77,35 @@ theorem eval_lagrangePhi_eq_zero_iff (p : BoundedPolynomialMap a m)
     have := congrArg (fun w : RealEuclidean m => w j) h3
     simpa [coordinateProjection, liftX] using this
 
-/-- **L12 (c).** `Φ` has total degree at most `2 · 100`. -/
-theorem totalDegree_lagrangePhi_le (p : BoundedPolynomialMap a m)
-    (g : Fin 41 → MvPolynomial (Fin a) ℝ) (hg : ∀ t, (g t).totalDegree ≤ 100)
-    (J : Finset (Fin 41)) (I : Fin m → Fin a) (b : Fin 41 → ℝ) (v : Fin a → ℝ)
-    (z : RealEuclidean m) : (lagrangePhi p g J I b v z).totalDegree ≤ 2 * 100 := by
-  have hsq : ∀ P : MvPolynomial (Fin (a + m + 41)) ℝ, P.totalDegree ≤ 100 →
-      ∀ c : ℝ, ((P - C c) ^ 2).totalDegree ≤ 2 * 100 := fun P hP c =>
+/-- **L12 (c).** `Φ` has total degree at most `2D`. -/
+theorem totalDegree_lagrangePhi_le (hD : 1 ≤ D) (p : PolyMap a m D)
+    (g : Fin L → MvPolynomial (Fin a) ℝ) (hg : ∀ t, (g t).totalDegree ≤ D)
+    (J : Finset (Fin L)) (I : Fin m → Fin a) (b : Fin L → ℝ) (v : Fin a → ℝ)
+    (z : RealEuclidean m) : (lagrangePhi p g J I b v z).totalDegree ≤ 2 * D := by
+  have hsq : ∀ P : MvPolynomial (Fin (a + m + L)) ℝ, P.totalDegree ≤ D →
+      ∀ c : ℝ, ((P - C c) ^ 2).totalDegree ≤ 2 * D := fun P hP c =>
     (totalDegree_pow _ 2).trans (Nat.mul_le_mul_left 2
       ((totalDegree_sub _ _).trans (max_le hP (by rw [totalDegree_C]; omega))))
-  have hval : ∀ t, (lagrangeValuePoly (m := m) g J t).totalDegree ≤ 100 := by
+  have hval : ∀ t, (lagrangeValuePoly (m := m) g J t).totalDegree ≤ D := by
     intro t
     unfold lagrangeValuePoly
     split_ifs
     · exact (totalDegree_rename_le _ _).trans (hg t)
     · rw [totalDegree_X]; omega
-  have hgrad : ∀ k, (lagrangeGradPoly p g J k).totalDegree ≤ 100 := by
+  have hgrad : ∀ k, (lagrangeGradPoly p g J k).totalDegree ≤ D := by
     intro k
     refine (totalDegree_add _ _).trans (max_le ?_ ?_)
     · exact totalDegree_finsetSum_le fun i _ =>
-        totalDegree_X_mul_pderiv_le _ (p.degree_le i) _ _ k
+        totalDegree_X_mul_pderiv_le hD _ (p.degree_le i) _ _ k
     · exact totalDegree_finsetSum_le fun t _ =>
-        totalDegree_X_mul_pderiv_le _ (hg t) _ _ k
+        totalDegree_X_mul_pderiv_le hD _ (hg t) _ _ k
   refine (totalDegree_add _ _).trans (max_le ((totalDegree_add _ _).trans (max_le ?_ ?_)) ?_)
   · exact totalDegree_finsetSum_le fun t _ => hsq _ (hval t) _
   · exact totalDegree_finsetSum_le fun k _ => hsq _ (hgrad k) _
   · exact totalDegree_finsetSum_le fun j _ => hsq _ (by rw [totalDegree_X]; omega) _
 
 theorem finrank_lagrangeCoordMap_target :
-    Module.finrank ℝ (((Fin 41 → ℝ) × (Fin a → ℝ)) × RealEuclidean m) = a + m + 41 := by
+    Module.finrank ℝ (((Fin L → ℝ) × (Fin a → ℝ)) × RealEuclidean m) = a + m + L := by
   simp only [Module.finrank_prod, Module.finrank_fin_fun, finrank_euclideanSpace_fin]
   ring
 
@@ -156,32 +156,32 @@ theorem totalDegree_bind₁_le {σ τ : Type*} (f : σ → MvPolynomial τ ℝ)
 
 /-- The lifted point whose inactive multipliers are frozen at their levels; the free
 coordinates are `x`, `λ` and the active multipliers `μ_J`. -/
-noncomputable def freezePoint (J : Finset (Fin 41)) (b : Fin 41 → ℝ)
-    (w : Fin (a + m + J.card) → ℝ) : Fin (a + m + 41) → ℝ :=
+noncomputable def freezePoint (J : Finset (Fin L)) (b : Fin L → ℝ)
+    (w : Fin (a + m + J.card) → ℝ) : Fin (a + m + L) → ℝ :=
   Fin.append (fun i => w (Fin.castAdd J.card i))
     (fun t => if h : t ∈ J then w (Fin.natAdd (a + m) (J.equivFin ⟨t, h⟩)) else b t)
 
 /-- The free coordinates of a lifted point. -/
-noncomputable def freeCoords (J : Finset (Fin 41)) (q : Fin (a + m + 41) → ℝ) :
+noncomputable def freeCoords (J : Finset (Fin L)) (q : Fin (a + m + L) → ℝ) :
     Fin (a + m + J.card) → ℝ :=
-  Fin.append (fun i => q (Fin.castAdd 41 i))
-    (fun j => q (Fin.natAdd (a + m) (J.equivFin.symm j : Fin 41)))
+  Fin.append (fun i => q (Fin.castAdd L i))
+    (fun j => q (Fin.natAdd (a + m) (J.equivFin.symm j : Fin L)))
 
 /-- The polynomial substitution realizing `freezePoint`. -/
-noncomputable def freezeSubst (J : Finset (Fin 41)) (b : Fin 41 → ℝ) :
-    Fin (a + m + 41) → MvPolynomial (Fin (a + m + J.card)) ℝ :=
+noncomputable def freezeSubst (J : Finset (Fin L)) (b : Fin L → ℝ) :
+    Fin (a + m + L) → MvPolynomial (Fin (a + m + J.card)) ℝ :=
   Fin.append (fun i => X (Fin.castAdd J.card i))
     (fun t => if h : t ∈ J then X (Fin.natAdd (a + m) (J.equivFin ⟨t, h⟩)) else C (b t))
 
-theorem eval_freezeSubst (J : Finset (Fin 41)) (b : Fin 41 → ℝ)
-    (w : Fin (a + m + J.card) → ℝ) (i : Fin (a + m + 41)) :
+theorem eval_freezeSubst (J : Finset (Fin L)) (b : Fin L → ℝ)
+    (w : Fin (a + m + J.card) → ℝ) (i : Fin (a + m + L)) :
     eval w (freezeSubst J b i) = freezePoint J b w i := by
   refine Fin.addCases (fun i => ?_) (fun t => ?_) i
   · simp [freezeSubst, freezePoint]
   · by_cases h : t ∈ J <;> simp [freezeSubst, freezePoint, h]
 
-theorem eval_bind₁_freezeSubst (J : Finset (Fin 41)) (b : Fin 41 → ℝ)
-    (φ : MvPolynomial (Fin (a + m + 41)) ℝ) (w : Fin (a + m + J.card) → ℝ) :
+theorem eval_bind₁_freezeSubst (J : Finset (Fin L)) (b : Fin L → ℝ)
+    (φ : MvPolynomial (Fin (a + m + L)) ℝ) (w : Fin (a + m + J.card) → ℝ) :
     eval w (bind₁ (freezeSubst J b) φ) = eval (freezePoint J b w) φ := by
   have := eval₂Hom_bind₁ (RingHom.id ℝ) w (freezeSubst J b) φ
   simp only [coe_eval₂Hom] at this
@@ -190,27 +190,27 @@ theorem eval_bind₁_freezeSubst (J : Finset (Fin 41)) (b : Fin 41 → ℝ)
     funext fun i => eval_freezeSubst J b w i] at this
   exact this
 
-theorem totalDegree_freezeSubst_le (J : Finset (Fin 41)) (b : Fin 41 → ℝ)
-    (i : Fin (a + m + 41)) : (freezeSubst (a := a) (m := m) J b i).totalDegree ≤ 1 := by
+theorem totalDegree_freezeSubst_le (J : Finset (Fin L)) (b : Fin L → ℝ)
+    (i : Fin (a + m + L)) : (freezeSubst (a := a) (m := m) J b i).totalDegree ≤ 1 := by
   refine Fin.addCases (fun i => ?_) (fun t => ?_) i
   · simp [freezeSubst]
   · by_cases h : t ∈ J <;> simp [freezeSubst, h]
 
-theorem continuous_freezePoint (J : Finset (Fin 41)) (b : Fin 41 → ℝ) :
+theorem continuous_freezePoint (J : Finset (Fin L)) (b : Fin L → ℝ) :
     Continuous (freezePoint (a := a) (m := m) J b) := by
   refine continuous_pi fun i => ?_
   simp_rw [← eval_freezeSubst J b _ i]
   exact MvPolynomial.continuous_eval _
 
-theorem freeCoords_freezePoint (J : Finset (Fin 41)) (b : Fin 41 → ℝ)
+theorem freeCoords_freezePoint (J : Finset (Fin L)) (b : Fin L → ℝ)
     (w : Fin (a + m + J.card) → ℝ) : freeCoords J (freezePoint J b w) = w := by
   funext j
   refine Fin.addCases (fun i => ?_) (fun j => ?_) j
   · simp [freeCoords, freezePoint]
   · simp [freeCoords, freezePoint]
 
-theorem freezePoint_freeCoords (J : Finset (Fin 41)) (b : Fin 41 → ℝ)
-    (q : Fin (a + m + 41) → ℝ) (hq : ∀ t ∉ J, q (imL a m t) = b t) :
+theorem freezePoint_freeCoords (J : Finset (Fin L)) (b : Fin L → ℝ)
+    (q : Fin (a + m + L) → ℝ) (hq : ∀ t ∉ J, q (imL a m t) = b t) :
     freezePoint J b (freeCoords J q) = q := by
   funext i
   refine Fin.addCases (fun i => ?_) (fun t => ?_) i
@@ -221,25 +221,25 @@ theorem freezePoint_freeCoords (J : Finset (Fin 41)) (b : Fin 41 → ℝ)
 
 /-- On the fiber of the Lagrange map over `(b, v)` the inactive multipliers equal
 their levels. -/
-theorem lagrangeMap_inactive (p : BoundedPolynomialMap a m)
-    (g : Fin 41 → MvPolynomial (Fin a) ℝ) (J : Finset (Fin 41)) {b : Fin 41 → ℝ}
-    {v : Fin a → ℝ} {q : Fin (a + m + 41) → ℝ} (hq : lagrangeMap p g J q = (b, v)) :
+theorem lagrangeMap_inactive (p : PolyMap a m D)
+    (g : Fin L → MvPolynomial (Fin a) ℝ) (J : Finset (Fin L)) {b : Fin L → ℝ}
+    {v : Fin a → ℝ} {q : Fin (a + m + L) → ℝ} (hq : lagrangeMap p g J q = (b, v)) :
     ∀ t ∉ J, q (imL a m t) = b t := by
   intro t ht
   have := congrFun (congrArg Prod.fst hq) t
   simpa [lagrangeMap, lagrangeValuePoly, ht] using this
 
 /-- **L15 (fiber count).** Over a slice value at which `K` is regular, a
-coordinate fiber of a Lagrange set has at most `201^(a+m+|J|)` points. -/
-theorem lagrangeSet_coordinateFiber_finite_card_le (p : BoundedPolynomialMap a m)
-    (g : Fin 41 → MvPolynomial (Fin a) ℝ) (hg : ∀ t, (g t).totalDegree ≤ 100)
-    (J : Finset (Fin 41)) (I : Fin m → Fin a) (b : Fin 41 → ℝ) (v : Fin a → ℝ)
+coordinate fiber of a Lagrange set has at most `(2D+1)^(a+m+|J|)` points. -/
+theorem lagrangeSet_coordinateFiber_finite_card_le (hD : 1 ≤ D) (p : PolyMap a m D)
+    (g : Fin L → MvPolynomial (Fin a) ℝ) (hg : ∀ t, (g t).totalDegree ≤ D)
+    (J : Finset (Fin L)) (I : Fin m → Fin a) (b : Fin L → ℝ) (v : Fin a → ℝ)
     (z : RealEuclidean m)
     (hreg : ∀ q, lagrangeCoordMap p g J I q = ((b, v), z) →
       Surjective (fderiv ℝ (lagrangeCoordMap p g J I) q)) :
     (semialgebraicMapFiber (lagrangeSet p g J b v) (coordinateProjection I) z).Finite ∧
       Nat.card (semialgebraicMapFiber (lagrangeSet p g J b v) (coordinateProjection I) z) ≤
-        201 ^ (a + m + J.card) := by
+        (2 * D + 1) ^ (a + m + J.card) := by
   set Φ := lagrangePhi p g J I b v z with hΦ
   set Ψ := bind₁ (freezeSubst J b) Φ with hΨ
   set E := freezePoint (a := a) (m := m) J b with hE
@@ -263,10 +263,10 @@ theorem lagrangeSet_coordinateFiber_finite_card_le (p : BoundedPolynomialMap a m
         fun w' hw' => hEinj.ne hw'
     filter_upwards [hT.eventually (hiso (E w) ((hEΨ w) ▸ hw))] with w' hw'
     rwa [hEΨ]
-  have hdeg : Ψ.totalDegree ≤ 2 * 100 :=
+  have hdeg : Ψ.totalDegree ≤ 2 * D :=
     (totalDegree_bind₁_le _ (totalDegree_freezeSubst_le J b) Φ).trans
-      (totalDegree_lagrangePhi_le p g hg J I b v z)
-  obtain ⟨hZfin, hZcard⟩ := zeroSet_finite_ncard_le_of_isolated (D := 100) hdeg
+      (totalDegree_lagrangePhi_le hD p g hg J I b v z)
+  obtain ⟨hZfin, hZcard⟩ := zeroSet_finite_ncard_le_of_isolated (D := D) hdeg
     (fun w => (hEΨ w) ▸ eval_lagrangePhi_nonneg p g J I b v z (E w)) hisoΨ
   have hsub : semialgebraicMapFiber (lagrangeSet p g J b v) (coordinateProjection I) z ⊆
       (liftX ∘ E) '' {w | eval w Ψ = 0} := by
@@ -283,6 +283,6 @@ theorem lagrangeSet_coordinateFiber_finite_card_le (p : BoundedPolynomialMap a m
   rw [Nat.card_coe_set_eq]
   calc _ ≤ ((liftX ∘ E) '' {w | eval w Ψ = 0}).ncard := Set.ncard_le_ncard hsub himfin
     _ ≤ {w | eval w Ψ = 0}.ncard := Set.ncard_image_le hZfin
-    _ ≤ (2 * 100 + 1) ^ (a + m + J.card) := hZcard
+    _ ≤ (2 * D + 1) ^ (a + m + J.card) := hZcard
 
 end NLQCLean.DirectVolume

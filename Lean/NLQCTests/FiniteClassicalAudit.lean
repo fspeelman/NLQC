@@ -3,6 +3,7 @@ import NLQCLean.Models.ClassicalCommunication.KrausRepresentation
 import NLQCLean.Models.ClassicalCommunication.FiniteProtocol
 import NLQCLean.Models.ClassicalCommunication.CoherentConversion
 import NLQCLean.Models.ClassicalCommunication.TensorChannels
+import NLQCLean.Models.ClassicalCommunication.ProtocolCompression
 
 /-!
 # Finite instrument and charged conversion boundaries
@@ -98,3 +99,21 @@ set_option pp.universes true in
 /-- info: 'NLQCLean.ClassicalCommunication.tensorChannels_krausMap' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
 #print axioms NLQCLean.ClassicalCommunication.tensorChannels_krausMap
+
+#check @NLQCLean.ClassicalCommunication.exists_pruned_weights
+
+/-- info: 'NLQCLean.ClassicalCommunication.exists_pruned_weights' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms NLQCLean.ClassicalCommunication.exists_pruned_weights
+
+#check @NLQCLean.ClassicalCommunication.FiniteKrausInstrument.exists_score_nondecreasing_compression
+
+/-- info: 'NLQCLean.ClassicalCommunication.FiniteKrausInstrument.exists_score_nondecreasing_compression' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms NLQCLean.ClassicalCommunication.FiniteKrausInstrument.exists_score_nondecreasing_compression
+
+#check @NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.exists_finiteOutcome_compression_nondecreasing_linearScore
+
+/-- info: 'NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.exists_finiteOutcome_compression_nondecreasing_linearScore' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms NLQCLean.ClassicalCommunication.FiniteClassicalProtocol.exists_finiteOutcome_compression_nondecreasing_linearScore

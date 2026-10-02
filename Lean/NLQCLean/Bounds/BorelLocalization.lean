@@ -45,7 +45,7 @@ proved Borel classical compression. -/
 theorem borelLocalizationReachable_subset_purePVMReachable
     {d : ℕ} (hd : 0 < d) (r : ℕ) (ε : ℝ) :
     borelLocalizationReachable.{u₁, u₂, u₃, u₄, u₅} d r ε ⊆
-      purePVMReachable d (4 * d ^ 4 * r ^ 5) ε := by
+      purePVMReachable d (d ^ 4 * r ^ 5) ε := by
   let : NeZero d := ⟨Nat.ne_of_gt hd⟩
   intro T hT
   by_contra hnot
@@ -76,10 +76,10 @@ theorem exists_borel_localization_haar_constant_of_imageVolumeBound (hGeom : Pol
           min 1 (ENNReal.ofReal (Real.exp (C * (d : ℝ) ^ 10 * (r : ℝ) ^ 10) *
             ε ^ ((pvmCodimension d : ℝ) / 2))) := by
   obtain ⟨C, hC, hbound⟩ := exists_pvm_haar_fraction_constant_of_imageVolumeBound hGeom
-  refine ⟨16 * C, by linarith, ?_⟩
+  refine ⟨C, hC, ?_⟩
   intro d r hd hr ε hε hεhalf
   obtain ⟨hone, hquarter⟩ := finiteClassical_charged_budget_admissible hd hr
-  have h := (hbound d (4 * d ^ 4 * r ^ 5) hd hone hquarter ε hε hεhalf).2.2.1
+  have h := (hbound d (d ^ 4 * r ^ 5) hd hone hquarter ε hε hεhalf).2.2.1
   rw [finiteClassical_haar_exponent_eq] at h
   exact (measure_mono (borelLocalizationReachable_subset_purePVMReachable
     (by omega : 0 < d) r ε)).trans h
@@ -109,7 +109,7 @@ theorem exists_ae_borel_localization_rank_constant_of_imageVolumeBound (hGeom : 
       ∃ ε₀ : ℝ, 0 < ε₀ ∧ ε₀ ≤ 1 / 2 ∧ ∀ ε : ℝ, 0 < ε → ε ≤ ε₀ →
         AllBorelLocalizationRankBounds.{u₁, u₂, u₃, u₄, u₅} T ε c := by
   obtain ⟨c₀, hc₀, hrate⟩ := exists_ae_pvm_resource_constant_of_imageVolumeBound hGeom
-  let C : ℝ := 16 / c₀ ^ 2
+  let C : ℝ := 1 / c₀ ^ 2
   have hC : 0 < C := by positivity
   refine ⟨C ^ (-(1 / 10 : ℝ)), by positivity, ?_⟩
   intro d hd
@@ -129,14 +129,14 @@ theorem exists_ae_borel_localization_rank_constant_of_imageVolumeBound (hGeom : 
   have hM : IsIsometry (T : Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ) :=
     Matrix.mem_unitaryGroup_iff'.mp T.property
   have hcombine (r : ℕ) (hfloor : d ≤ r)
-      (hreach : T ∈ purePVMReachable d (4 * d ^ 4 * r ^ 5) ε) :
+      (hreach : T ∈ purePVMReachable d (d ^ 4 * r ^ 5) ε) :
       LocalizationRankLowerBound d r ε (C ^ (-(1 / 10 : ℝ))) := by
     apply max_le
     · exact_mod_cast hfloor
     · apply localization_rank_rate_of_log_bound hC hd0 hL
       apply log_le_sixth_tenth_power_of_finite_charged_lower_bound hc₀ hd0 hL
       simpa only [Nat.cast_mul, Nat.cast_pow, Nat.cast_ofNat] using
-        (hcharged (4 * d ^ 4 * r ^ 5) ε hε hεRate).1 hreach
+        (hcharged (d ^ 4 * r ^ 5) ε hε hεRate).1 hreach
   intro _ ρA ρB σA σB ω _ _ _ _ _ _ _ _ _ _ _ L
   refine ⟨fun γ hγ r hr hs => ?_, fun n m r hr hs => ?_⟩
   · let P := L.protocol γ hγ

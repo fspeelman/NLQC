@@ -201,7 +201,7 @@ theorem exists_ae_borelTwoQubitDiagonal_log_bound_of_imageVolumeBound (hGeom : P
           1 - ε ≤ scoreU (rectangularDiagonalPhase φ) (P.mixedOperationalChannel m) →
             Real.log (1 / ε) ≤ C * (Kq : ℝ) ^ 10) := by
   obtain ⟨c, hc, hae⟩ := exists_ae_twoQubitDiagonal_resource_constant_of_imageVolumeBound hGeom
-  refine ⟨4096 / c ^ 2, by positivity, ?_⟩
+  refine ⟨256 / c ^ 2, by positivity, ?_⟩
   filter_upwards [hae] with φ hφ
   obtain ⟨ε₀, hε₀pos, hε₀half, hcharged⟩ := hφ
   refine ⟨ε₀, hε₀pos, hε₀half, ?_⟩
@@ -209,11 +209,11 @@ theorem exists_ae_borelTwoQubitDiagonal_log_bound_of_imageVolumeBound (hGeom : P
   have hL : 0 ≤ Real.log (1 / ε) :=
     Real.log_nonneg ((one_le_div₀ hε).mpr (by linarith))
   have htransfer (hreach : rectangularDiagonalPhaseUnitary φ ∈
-      pureReachable 2 (4 * 2 ^ 4 * Kq ^ 5) ε) :
-      Real.log (1 / ε) ≤ (4096 / c ^ 2) * (Kq : ℝ) ^ 10 := by
+      pureReachable 2 (2 ^ 4 * Kq ^ 5) ε) :
+      Real.log (1 / ε) ≤ (256 / c ^ 2) * (Kq : ℝ) ^ 10 := by
     apply log_le_tenth_power_of_charged_sqrt_lower_bound hc hL
-    have h := (hcharged (4 * 2 ^ 4 * Kq ^ 5) ε hε hε₀).1 hreach
-    simpa only [show 4 * 2 ^ 4 = (64 : ℕ) by norm_num,
+    have h := (hcharged (2 ^ 4 * Kq ^ 5) ε hε hε₀).1 hreach
+    simpa only [show 2 ^ 4 = (16 : ℕ) by norm_num,
       Nat.cast_mul, Nat.cast_pow, Nat.cast_ofNat] using h
   exact ⟨fun hK hs => htransfer
       (P.mem_pureReachable_of_quantumFootprint (rectangularDiagonalPhaseUnitary φ)

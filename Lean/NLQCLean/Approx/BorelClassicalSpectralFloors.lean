@@ -972,7 +972,7 @@ def borelScoreReachable (d K : ℕ) (ε : ℝ) : Set (unitaryGroup (Fin d × Fin
 
 /-- Actual target membership embeds by score into the derived charged class. -/
 theorem borelScoreReachable_subset_pureReachable {d K : ℕ} (hd : 0 < d) (ε : ℝ) :
-    borelScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} d K ε ⊆ pureReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    borelScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} d K ε ⊆ pureReachable d (d ^ 4 * K ^ 5) ε := by
   let : NeZero d := ⟨Nat.ne_of_gt hd⟩
   intro T hT
   rw [borelScoreReachable, dite_eq_left hd] at hT
@@ -994,7 +994,7 @@ def borelPVMScoreReachable (d K : ℕ) (ε : ℝ) : Set (unitaryGroup (Fin d × 
 
 /-- Actual target membership embeds by score into the derived charged class. -/
 theorem borelPVMScoreReachable_subset_purePVMReachable {d K : ℕ} (hd : 0 < d) (ε : ℝ) :
-    borelPVMScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} d K ε ⊆ purePVMReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    borelPVMScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} d K ε ⊆ purePVMReachable d (d ^ 4 * K ^ 5) ε := by
   let : NeZero d := ⟨Nat.ne_of_gt hd⟩
   intro T hT
   rw [borelPVMScoreReachable, dite_eq_left hd] at hT
@@ -1020,7 +1020,7 @@ def borelSharedRandomScoreReachable (d K : ℕ) (ε : ℝ) : Set (unitaryGroup (
 
 /-- Actual target membership embeds by score into the derived charged class. -/
 theorem borelSharedRandomScoreReachable_subset_pureReachable {d K : ℕ} (hd : 0 < d) (ε : ℝ) :
-    borelSharedRandomScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε ⊆ pureReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    borelSharedRandomScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε ⊆ pureReachable d (d ^ 4 * K ^ 5) ε := by
   let : NeZero d := ⟨Nat.ne_of_gt hd⟩
   intro T hT
   rw [borelSharedRandomScoreReachable, dite_eq_left hd] at hT
@@ -1046,7 +1046,7 @@ def borelSharedRandomPVMScoreReachable (d K : ℕ) (ε : ℝ) : Set (unitaryGrou
 
 /-- Actual target membership embeds by score into the derived charged class. -/
 theorem borelSharedRandomPVMScoreReachable_subset_purePVMReachable {d K : ℕ} (hd : 0 < d) (ε : ℝ) :
-    borelSharedRandomPVMScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε ⊆ purePVMReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    borelSharedRandomPVMScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε ⊆ purePVMReachable d (d ^ 4 * K ^ 5) ε := by
   let : NeZero d := ⟨Nat.ne_of_gt hd⟩
   intro T hT
   rw [borelSharedRandomPVMScoreReachable, dite_eq_left hd] at hT
@@ -1060,7 +1060,7 @@ def borelAllScoreReachable (d K : ℕ) (ε : ℝ) : Set (unitaryGroup (Fin d × 
   borelScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} d K ε ∪ borelSharedRandomScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε
 
 theorem borelAllScoreReachable_subset_pureReachable {d K : ℕ} (hd : 0 < d) (ε : ℝ) :
-    borelAllScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε ⊆ pureReachable d (4 * d ^ 4 * K ^ 5) ε :=
+    borelAllScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε ⊆ pureReachable d (d ^ 4 * K ^ 5) ε :=
   Set.union_subset (borelScoreReachable_subset_pureReachable hd ε) (borelSharedRandomScoreReachable_subset_pureReachable hd ε)
 
 /-- The union includes original pure/mixed protocols and their honest averaged counterparts. -/
@@ -1068,7 +1068,7 @@ def borelAllPVMScoreReachable (d K : ℕ) (ε : ℝ) : Set (unitaryGroup (Fin d 
   borelPVMScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈} d K ε ∪ borelSharedRandomPVMScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε
 
 theorem borelAllPVMScoreReachable_subset_purePVMReachable {d K : ℕ} (hd : 0 < d) (ε : ℝ) :
-    borelAllPVMScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε ⊆ purePVMReachable d (4 * d ^ 4 * K ^ 5) ε :=
+    borelAllPVMScoreReachable.{u₁, u₂, u₃, u₄, u₅, u₆, u₇, u₈, u₉} d K ε ⊆ purePVMReachable d (d ^ 4 * K ^ 5) ε :=
   Set.union_subset (borelPVMScoreReachable_subset_purePVMReachable hd ε) (borelSharedRandomPVMScoreReachable_subset_purePVMReachable hd ε)
 
 set_option maxHeartbeats 600000 in

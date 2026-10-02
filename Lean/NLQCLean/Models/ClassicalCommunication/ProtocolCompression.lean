@@ -1,5 +1,6 @@
 import NLQCLean.Models.ClassicalCommunication.BranchChannels
 import NLQCLean.Models.ClassicalCommunication.InstrumentCompression
+import NLQCLean.Models.ClassicalCommunication.ScorePruning
 import NLQCLean.LinearAlgebra.SupportFactorization
 
 /-!
@@ -158,6 +159,111 @@ theorem exists_finiteOutcome_compression_preserving_linearScore
     A.exists_compressBob_preserving_linearScore S
   have hresource : Q.resource = P.resource := hresourceB.trans hresourceA
   refine ⟨nA, hnA, nB, hnB, Q, hresource, ?_, hscoreB.trans hscoreA⟩
+  intro K
+  change HasFootprint K Q.resource μA μB ↔ HasFootprint K P.resource μA μB
+  rw [hresource]
+
+/-- At most `s²` selected actual Alice outcomes do not decrease a prescribed real-linear
+score, with Bob's fixed outcomes and the actual final channels. -/
+theorem exists_compressAlice_nondecreasing_linearScore [Nonempty ιA] :
+    ∃ n : ℕ, n ≤ Fintype.card (ιA × ρA) ^ 2 ∧
+      ∃ (select : Fin n → σA) (scale : Fin n → ℝ)
+        (Q : FiniteClassicalProtocol ιA ιB ρA ρB κA κB μA μB
+          (Fin n) σB ηA ηB ιA' ιB' εA εB),
+        (∀ j, 0 ≤ scale j) ∧ Q.resource = P.resource ∧
+        Q.instrumentB = P.instrumentB ∧
+        (∀ j e, Q.instrumentA.operator j e =
+          (Real.sqrt (scale j) : ℂ) • P.instrumentA.operator (select j) e) ∧
+        (∀ j y, Q.decA j y = P.decA (select j) y) ∧
+        (∀ j y, Q.decB j y = P.decB (select j) y) ∧
+        S P.operationalChannel ≤ S Q.operationalChannel := by
+  classical
+  have hρ := Fintype.card_pos_iff.mp P.resource_unit.card_pos
+  let : Nonempty ρA := hρ.map Prod.fst
+  let L : σA → ((Matrix (ιA × ρA) (ιA × ρA) ℂ →ₗ[ℂ]
+      Matrix (κA × μA) (κA × μA) ℂ) →ₗ[ℝ] ℝ) := fun x =>
+    ∑ y, S.comp (branchChannelLeftRealLinear P.resource (P.decA x y)
+      (P.decB x y) (P.instrumentB.branch y))
+  obtain ⟨n, hn, select, scale, J, hscale, hops, _, hsum⟩ :=
+    P.instrumentA.exists_score_nondecreasing_compression L
+  let Q := P.replaceAliceInstrument J select
+  refine ⟨n, hn, select, scale, Q, hscale, rfl, rfl, hops,
+    (fun _ _ => rfl), (fun _ _ => rfl), ?_⟩
+  calc
+    S P.operationalChannel = ∑ x, L x (P.instrumentA.branch x) := by
+      rw [P.operationalChannel_eq_sum_outcomeChannel]
+      simp only [map_sum, L, LinearMap.sum_apply, LinearMap.comp_apply,
+        branchChannelLeftRealLinear_apply, outcomeChannel]
+    _ ≤ ∑ j, L (select j) (J.branch j) := hsum
+    _ = S Q.operationalChannel := by
+      rw [Q.operationalChannel_eq_sum_outcomeChannel]
+      simp only [map_sum, L, LinearMap.sum_apply, LinearMap.comp_apply,
+        branchChannelLeftRealLinear_apply, Q, replaceAliceInstrument, outcomeChannel]
+
+/-- At most `s²` selected actual Bob outcomes, with Alice's actual instrument fixed, do not
+decrease the score. -/
+theorem exists_compressBob_nondecreasing_linearScore [Nonempty ιB] :
+    ∃ n : ℕ, n ≤ Fintype.card (ιB × ρB) ^ 2 ∧
+      ∃ (select : Fin n → σB) (scale : Fin n → ℝ)
+        (Q : FiniteClassicalProtocol ιA ιB ρA ρB κA κB μA μB
+          σA (Fin n) ηA ηB ιA' ιB' εA εB),
+        (∀ j, 0 ≤ scale j) ∧ Q.resource = P.resource ∧
+        Q.instrumentA = P.instrumentA ∧
+        (∀ j e, Q.instrumentB.operator j e =
+          (Real.sqrt (scale j) : ℂ) • P.instrumentB.operator (select j) e) ∧
+        (∀ x j, Q.decA x j = P.decA x (select j)) ∧
+        (∀ x j, Q.decB x j = P.decB x (select j)) ∧
+        S P.operationalChannel ≤ S Q.operationalChannel := by
+  classical
+  have hρ := Fintype.card_pos_iff.mp P.resource_unit.card_pos
+  let : Nonempty ρB := hρ.map Prod.snd
+  let L : σB → ((Matrix (ιB × ρB) (ιB × ρB) ℂ →ₗ[ℂ]
+      Matrix (κB × μB) (κB × μB) ℂ) →ₗ[ℝ] ℝ) := fun y =>
+    ∑ x, S.comp (branchChannelRightRealLinear P.resource (P.decA x y)
+      (P.decB x y) (P.instrumentA.branch x))
+  obtain ⟨n, hn, select, scale, J, hscale, hops, _, hsum⟩ :=
+    P.instrumentB.exists_score_nondecreasing_compression L
+  let Q := P.replaceBobInstrument J select
+  refine ⟨n, hn, select, scale, Q, hscale, rfl, rfl, hops,
+    (fun _ _ => rfl), (fun _ _ => rfl), ?_⟩
+  calc
+    S P.operationalChannel = ∑ y, ∑ x,
+        S (P.outcomeChannel x y (P.instrumentA.branch x) (P.instrumentB.branch y)) := by
+      rw [P.operationalChannel_eq_sum_outcomeChannel]
+      simp only [map_sum]
+      exact Finset.sum_comm
+    _ = ∑ y, L y (P.instrumentB.branch y) := by
+      simp only [L, LinearMap.sum_apply, LinearMap.comp_apply,
+        branchChannelRightRealLinear_apply, outcomeChannel]
+    _ ≤ ∑ j, L (select j) (J.branch j) := hsum
+    _ = ∑ j, ∑ x,
+        S (Q.outcomeChannel x j (Q.instrumentA.branch x) (J.branch j)) := by
+      simp only [L, LinearMap.sum_apply, LinearMap.comp_apply,
+        branchChannelRightRealLinear_apply, Q, replaceBobInstrument, outcomeChannel]
+    _ = ∑ x, ∑ j,
+        S (Q.outcomeChannel x j (Q.instrumentA.branch x) (J.branch j)) := Finset.sum_comm
+    _ = S Q.operationalChannel := by
+      rw [Q.operationalChannel_eq_sum_outcomeChannel]
+      simp only [map_sum, Q, replaceBobInstrument]
+
+/-- Two-party finite outcome compression to at most `s²` outcomes per party does not decrease
+the prescribed score; the original resource and every quantum/private register are
+unchanged (`lem:free-classical-compression`). -/
+theorem exists_finiteOutcome_compression_nondecreasing_linearScore
+    [Nonempty ιA] [Nonempty ιB] :
+    ∃ nA : ℕ, nA ≤ Fintype.card (ιA × ρA) ^ 2 ∧
+      ∃ nB : ℕ, nB ≤ Fintype.card (ιB × ρB) ^ 2 ∧
+        ∃ Q : FiniteClassicalProtocol ιA ιB ρA ρB κA κB μA μB
+          (Fin nA) (Fin nB) ηA ηB ιA' ιB' εA εB,
+          Q.resource = P.resource ∧
+          (∀ K, Q.HasQuantumFootprint K ↔ P.HasQuantumFootprint K) ∧
+          S P.operationalChannel ≤ S Q.operationalChannel := by
+  obtain ⟨nA, hnA, selectA, scaleA, A, _, hresourceA, _, _, _, _, hscoreA⟩ :=
+    P.exists_compressAlice_nondecreasing_linearScore S
+  obtain ⟨nB, hnB, selectB, scaleB, Q, _, hresourceB, _, _, _, _, hscoreB⟩ :=
+    A.exists_compressBob_nondecreasing_linearScore S
+  have hresource : Q.resource = P.resource := hresourceB.trans hresourceA
+  refine ⟨nA, hnA, nB, hnB, Q, hresource, ?_, hscoreA.trans hscoreB⟩
   intro K
   change HasFootprint K Q.resource μA μB ↔ HasFootprint K P.resource μA μB
   rw [hresource]

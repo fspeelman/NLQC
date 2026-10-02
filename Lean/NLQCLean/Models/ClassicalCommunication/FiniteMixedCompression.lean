@@ -28,7 +28,7 @@ theorem mem_pureReachable_of_mixedQuantumFootprint
     (m : MixedResource ρA ρB n) (U : Matrix.unitaryGroup (Fin d × Fin d) ℂ) {ε : ℝ}
     (hd : 0 < d) (hK : P.HasMixedQuantumFootprint m K)
     (hscore : 1 - ε ≤ scoreU (U : Matrix _ _ ℂ) (P.mixedOperationalChannel m)) :
-    U ∈ pureReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    U ∈ pureReachable d (d ^ 4 * K ^ 5) ε := by
   obtain ⟨k, hcomponent, hfoot⟩ :=
     P.exists_component_linearScore_ge_hasQuantumFootprint
       (unitaryScoreRealLinear (U : Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ)) m hK
@@ -42,7 +42,7 @@ theorem mem_purePVMReachable_of_mixedQuantumFootprint
     (m : MixedResource ρA ρB n) (M : Matrix.unitaryGroup (Fin d × Fin d) ℂ) {ε : ℝ}
     (hd : 0 < d) (hK : P.HasMixedQuantumFootprint m K)
     (hscore : 1 - ε ≤ scorePVM (M : Matrix _ _ ℂ) (P.mixedOperationalChannel m)) :
-    M ∈ purePVMReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    M ∈ purePVMReachable d (d ^ 4 * K ^ 5) ε := by
   obtain ⟨k, hcomponent, hfoot⟩ :=
     P.exists_component_linearScore_ge_hasQuantumFootprint
       (pvmScoreRealLinear (M : Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ)) m hK
@@ -57,7 +57,7 @@ theorem mem_pureReachable_of_mixedQuantumFootprint_diamondError
     (m : MixedResource ρA ρB n) (U : Matrix.unitaryGroup (Fin d × Fin d) ℂ) {ε : ℝ}
     (hd : 0 < d) (hK : P.HasMixedQuantumFootprint m K)
     (herror : diamondError (P.mixedOperationalChannel m) (adConj (U : Matrix _ _ ℂ)) ≤ ε) :
-    U ∈ pureReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    U ∈ pureReachable d (d ^ 4 * K ^ 5) ε := by
   classical
   let : NeZero d := ⟨Nat.ne_of_gt hd⟩
   have hs := m.scoreU_ge_of_diamondError_le
@@ -76,7 +76,7 @@ theorem mem_purePVMReachable_of_mixedQuantumFootprint_pvmTVError
     (m : MixedResource ρA ρB n) (M : Matrix.unitaryGroup (Fin d × Fin d) ℂ) {ε : ℝ}
     (hd : 0 < d) (hK : P.HasMixedQuantumFootprint m K)
     (herror : pvmTVError (M : Matrix _ _ ℂ) (P.mixedOperationalChannel m) ≤ ε) :
-    M ∈ purePVMReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    M ∈ purePVMReachable d (d ^ 4 * K ^ 5) ε := by
   classical
   let : NeZero d := ⟨Nat.ne_of_gt hd⟩
   have hs := m.one_sub_scorePVM_le_pvmTVError

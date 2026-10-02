@@ -74,7 +74,7 @@ theorem exists_ae_arbitrary_finite_classical_log_constant_of_imageVolumeBound
             u₇, u₈, u₉, u₁₀, u₁₁, u₁₂} T K ε C := by
   obtain ⟨c, hc, hae⟩ :=
     exists_ae_resource_constant_of_imageVolumeBound.{0, 0, 0, 0, 0, 0, 0, 0} hGeom
-  refine ⟨16 / c ^ 2, by positivity, fun d hd => ?_⟩
+  refine ⟨1 / c ^ 2, by positivity, fun d hd => ?_⟩
   have hd0 : 0 < d := by omega
   filter_upwards [hae d hd] with T hT
   obtain ⟨ε₀, hε₀pos, hε₀half, hcharged⟩ := hT
@@ -82,13 +82,13 @@ theorem exists_ae_arbitrary_finite_classical_log_constant_of_imageVolumeBound
   intro K ε hε hsmall
   have hL : 0 ≤ Real.log (1 / ε) :=
     Real.log_nonneg ((one_le_div₀ hε).mpr (by linarith))
-  have hbound := hcharged (4 * d ^ 4 * K ^ 5) ε hε hsmall
-  have hunitary (hreach : T ∈ pureReachable d (4 * d ^ 4 * K ^ 5) ε) :
-      Real.log (1 / ε) ≤ (16 / c ^ 2) * (d : ℝ) ^ 6 * (K : ℝ) ^ 10 := by
+  have hbound := hcharged (d ^ 4 * K ^ 5) ε hε hsmall
+  have hunitary (hreach : T ∈ pureReachable d (d ^ 4 * K ^ 5) ε) :
+      Real.log (1 / ε) ≤ (1 / c ^ 2) * (d : ℝ) ^ 6 * (K : ℝ) ^ 10 := by
     apply log_le_sixth_tenth_power_of_finite_charged_lower_bound hc hd0 hL
     simpa only [Nat.cast_mul, Nat.cast_pow, Nat.cast_ofNat] using hbound.1 hreach
-  have hpvm (hreach : T ∈ purePVMReachable d (4 * d ^ 4 * K ^ 5) ε) :
-      Real.log (1 / ε) ≤ (16 / c ^ 2) * (d : ℝ) ^ 6 * (K : ℝ) ^ 10 := by
+  have hpvm (hreach : T ∈ purePVMReachable d (d ^ 4 * K ^ 5) ε) :
+      Real.log (1 / ε) ≤ (1 / c ^ 2) * (d : ℝ) ^ 6 * (K : ℝ) ^ 10 := by
     apply log_le_sixth_tenth_power_of_finite_charged_lower_bound hc hd0 hL
     simpa only [Nat.cast_mul, Nat.cast_pow, Nat.cast_ofNat] using hbound.2.2.1 hreach
   intro ρA ρB κA κB μA μB σA σB ηA ηB εA εB

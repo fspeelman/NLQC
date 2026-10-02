@@ -20,17 +20,17 @@ and their restrictions.
 | Universal unitary precision bound K≥c d²√ln(1/ε), and the corresponding 2n qubit term | Unconditional |
 | Strong unitary Haar estimate on a neighborhood of SWAP | Unconditional |
 | Finite classical score compression and finite pure/common-map mixed precision and phase bounds | Unconditional |
-| Pure/common-map mixed standard-Borel CP/TP and rank-sized score compression | Unconditional; charged score reachability at 4d⁴Kq⁵; measurable shared randomness and branch-dependent finite systems are covered |
+| Pure/common-map mixed standard-Borel CP/TP and rank-sized score compression | Unconditional; charged score reachability at d⁴Kq⁵; measurable shared randomness and branch-dependent finite systems are covered |
 | Direct finite classical spectral floors | Unconditional; SWAP d²(1−ε) and Bell PVM d(1−ε), quantum messages and resource rank only |
 | Universal unitary max and regional near-SWAP AE bounds | Unconditional; regional threshold precedes every budget and original register |
 | Universal measurement precision near Bell bases, including the 2n charged and −2n/5 free-classical dimension terms | Unconditional |
 | Finite-orbit structure for exact unitary and projective-measurement targets | Unconditional |
 | Rectangular diagonal-gate bounds, standard-Borel localization and shared-randomness extensions | Unconditional |
-| Effective bound for the named controlled-phase gate (Appendix C) | Two explicit premises: one-block quantifier elimination and a polynomial-type transcendence measure |
+| Effective bound for the named controlled-phase gate (Appendix C) | One explicit premise (one-block quantifier elimination) for the stated rate at every nonzero algebraic angle; the polynomial-type transcendence measure for `e^{iθ}` is proved by Gelfond's method. For `C₁`, quantifier elimination alone also gives the stated double-exponential rate and the free-classical `exp(-exp(C R⁴ Kq²))` / `Kq⁶` refinement, and no input gives `exp(-exp(exp(175 K²)))` |
 
 The quantitative bounds rest on the polynomial image-volume bound
 (`DirectVolume.polynomialImageVolumeBound`), proved by a Lagrange-maximum
-argument with Sard's theorem and an elementary point count. For the library's fixed format budget, the explicit image-volume base is 450240. The two premises of the effective controlled-phase bound are described with
+argument with Sard's theorem and an elementary point count. For the library's fixed format budget, the explicit image-volume base is 35248 (`polynomialImageVolumeBoundWith_imageVolumeConstant`, a barrier-function proof); the direct proof, which covers every format budget, gives 450240. The premise of the effective controlled-phase bound is described with
 source citations in [Mathematical assumptions](docs/ASSUMPTIONS.md).
 Semialgebraic projection closure is proved from the vendored Sundog
 quantifier-elimination slice.

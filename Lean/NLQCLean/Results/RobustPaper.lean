@@ -11,6 +11,19 @@ import NLQCLean.Bounds.BorelClassicalUniversalMax
 import NLQCLean.Bounds.BorelControlledPhaseLength
 import NLQCLean.Bounds.BorelLocalization
 import NLQCLean.Bounds.ExplicitControlledPhase
+import NLQCLean.Geometry.UnitaryFrobeniusVolume
+import NLQCLean.Approx.PVMWitnessCutoff
+import NLQCLean.Geometry.PolynomialTube
+import NLQCLean.Approx.WitnessFamilies
+import NLQCLean.Bounds.ExplicitControlledPhaseQE
+import NLQCLean.Bounds.ExplicitControlledPhaseFree
+import NLQCLean.Bounds.ExplicitControlledPhaseGelfond
+import NLQCLean.ImageVolume.PolynomialImageVolume
+import NLQCLean.Bounds.FixedBudgetStability
+import NLQCLean.Bounds.FixedBudgetStabilityPVM
+import NLQCLean.Bounds.ExplicitControlledPhaseTranscript
+import NLQCLean.Bounds.ExplicitControlledPhaseSharedRandom
+import NLQCLean.Bounds.ExplicitControlledPhaseAngle
 
 /-!
 # Robust companion: results by source label
@@ -27,7 +40,9 @@ total variation; footprints charge resource Schmidt rank times both message
 dimensions. Only the effective Appendix C bound (`thm:explicit`) takes
 hypotheses, the two inputs `BasuPollackRoyExistentialElimination` and the polynomial-type
 transcendence measure `PolynomialTypeTranscendenceMeasureExpAngle` (implied by
-`CijsouwTranscendenceMeasureExp`);
+`CijsouwTranscendenceMeasureExp`). The latter is proved
+(`thm_explicit_transcendence_measure_angle`), and the `thm_explicit*_of_QE` forms take
+`BasuPollackRoyExistentialElimination` only;
 its constants are proved to exist, not to be computable.
 -/
 
@@ -104,11 +119,20 @@ alias regional_bell_almost_every := NLQCLean.exists_ae_bellNeighborhood_resource
 /-! ### Theorem C -/
 
 /-- `lem:free-classical-compression`: actual Borel pure protocols with free
-classical messages enter the charged score class at footprint `4 d⁴ Kq⁵`. -/
+classical messages enter the charged score class at footprint `d⁴ Kq⁵`. -/
 alias lem_free_classical_compression :=
   NLQCLean.ClassicalCommunication.StandardBorelClassicalProtocol.mem_pureReachable_of_quantumFootprint
 alias lem_free_classical_compression_pvm :=
   NLQCLean.ClassicalCommunication.StandardBorelClassicalProtocol.mem_purePVMReachable_of_quantumFootprint
+/-- `lem:free-classical-compression` (iii)–(iv): at most `(d r')²` outcomes per party, a
+pure resource of the original Schmidt rank, the score not decreased, and the coherent charged
+footprint `d⁴ Kq⁵`. -/
+alias lem_free_classical_compression_outcomes :=
+  NLQCLean.ClassicalCommunication.StandardBorelClassicalProtocol.exists_bounded_outcomes_charged_linearScore
+/-- The pruning step of `lem:free-classical-compression`: at most `s²` outcomes of a finite
+instrument do not decrease a real-linear score. -/
+alias lem_free_classical_compression_pruning :=
+  NLQCLean.ClassicalCommunication.FiniteKrausInstrument.exists_score_nondecreasing_compression
 /-- `lem:free-classical-floors` (i) and (ii). -/
 alias lem_free_classical_floors_unitary :=
   NLQCLean.ClassicalCommunication.StandardBorelClassicalProtocol.unitary_spectral_floor
@@ -173,7 +197,7 @@ integer score polynomial with explicit degree and coefficient bounds. -/
 alias thm_explicit_polynomial_model :=
   NLQCLean.exists_controlledPhaseLeastDeficit_polynomial_certificate
 /-- `thm:explicit`, step 5: free standard-Borel classical messages enter at
-footprint `64 Kq⁵`. -/
+footprint `16 Kq⁵`. -/
 alias thm_explicit_free_classical_transfer :=
   NLQCLean.StandardBorelClassicalProtocol.controlledPhaseLeastDeficit_le
 
@@ -187,7 +211,7 @@ alias thm_explicit_cijsouw_polynomialType :=
 /-- `thm:explicit` for the named gate `C₁`. -/
 alias thm_explicit_one := NLQCLean.exists_explicit_controlledPhase_one_lower_bound
 /-- `thm:explicit`, protocol form: charged footprint `exp(-exp(C_E K²))` and free
-standard-Borel classical messages `exp(-exp(4096 C_E Kq¹⁰))`. -/
+standard-Borel classical messages `exp(-exp(256 C_E Kq¹⁰))`. -/
 alias thm_explicit_protocol := NLQCLean.exists_explicit_controlledPhase_protocol_bound
 /-- `thm:explicit`: `log₂ K ≥ ½ log₂ ln ln(1/ε) - O(1)` for `0 < ε < 1/e`. -/
 alias thm_explicit_iterated_log := NLQCLean.exists_explicit_controlledPhase_iterated_log_bound
@@ -195,7 +219,138 @@ alias thm_explicit_iterated_log := NLQCLean.exists_explicit_controlledPhase_iter
 alias thm_explicit_quantum_iterated_log :=
   NLQCLean.exists_explicit_controlledPhase_quantum_iterated_log_bound
 
+/-! ### Appendix C with quantifier elimination as the only input -/
+
+/-- Hypothesis-free transcendence measure for `e^i` (Hermite's method):
+`|P(e^i)|² ≥ Z^{-Z^{2N+9}}`, `Z = 6(N+1)²(H+1)²`, for every nonzero integer polynomial of
+degree at most `N ≥ 1` and height at most `H`. -/
+alias thm_explicit_transcendence_measure_exp_I :=
+  NLQCLean.ExpITranscendence.normSq_aeval_exp_I_ge
+/-- `thm:explicit` for `C₁`, assuming only E-QE: `g_K(1) ≥ exp(-exp(exp(C K²)))`. -/
+alias thm_explicit_one_of_QE := NLQCLean.exists_explicit_controlledPhase_one_lower_bound_of_QE
+/-- Protocol and free-classical forms: `ε ≥ exp(-exp(exp(C K²)))`, resp.
+`exp(-exp(exp(256 C Kq¹⁰)))`. -/
+alias thm_explicit_one_protocol_of_QE :=
+  NLQCLean.exists_explicit_controlledPhase_one_protocol_bound_of_QE
+/-- `log₂ K ≥ ½ log₂ ln ln ln(1/ε) - O(1)`. -/
+alias thm_explicit_one_triple_log_of_QE :=
+  NLQCLean.exists_explicit_controlledPhase_one_triple_log_bound_of_QE
+
+/-! ### Appendix C without external inputs -/
+
+/-- The least deficit and `cos 1` are a root of an explicit nonzero integer polynomial of
+degree at most `L = (835 K²)^(2^(2+164K²))` with coefficients at most `(2⁵⁵ K¹⁴)^(L³)`. -/
+alias thm_explicit_one_eliminant := NLQCLean.exists_controlledPhase_one_eliminant
+/-- `thm:explicit` for `C₁` with no hypothesis: `g_K(1) ≥ exp(-exp(exp(exp(171 K²))))`. -/
+alias thm_explicit_one_free := NLQCLean.controlledPhase_one_lower_bound_free
+/-- Protocol and free-classical forms: `ε ≥ exp(-exp(exp(exp(171 K²))))`, resp.
+`exp(-exp(exp(exp(43776 Kq¹⁰))))`. -/
+alias thm_explicit_one_protocol_free := NLQCLean.controlledPhase_one_protocol_bound_free
+/-- `log₂ K ≥ ½ log₂ ln ln ln ln(1/ε) - ½ log₂ 171` for `0 < ε < exp(-exp e)`. -/
+alias thm_explicit_one_quadruple_log_free := NLQCLean.controlledPhase_one_quadruple_log_bound_free
+
+/-! ### Appendix C: the direct transcript parametrization -/
+
+/-- `eq:explicit-quantum-variables` (transfer): a finite free-classical protocol on
+rank-sized resource registers has the same operational channel as a single-operator transcript
+protocol with retained dimensions `kA ≤ 2ra`, `kB ≤ 2rb` and decoder environments
+`eA ≤ 2 kA b`, `eB ≤ 2 kB a`. -/
+alias thm_explicit_transcript_representative :=
+  NLQCLean.ClassicalCommunication.exists_transcript_representative
+/-- `eq:explicit-quantum-variables` (count): at most `1090 r⁴ q²` real coordinates. -/
+alias thm_explicit_transcript_coordinates := NLQCLean.TranscriptPolynomial.card_tCoordIndex_le
+/-- `eq:explicit-quantum-tradeoff`, finite free-classical protocols, E-QE only:
+`ε ≥ exp(-exp(C R⁴ Kq²))`. -/
+alias thm_explicit_one_quantum_tradeoff :=
+  NLQCLean.exists_explicit_controlledPhase_one_quantum_tradeoff
+/-- `eq:explicit-quantum-tradeoff`, standard-Borel free-classical protocols, pure and
+common-map mixed resources, E-QE only. -/
+alias thm_explicit_one_borel_quantum_tradeoff :=
+  NLQCLean.exists_explicit_controlledPhase_one_borel_quantum_tradeoff
+/-- `eq:explicit-quantum-tradeoff` with measurable shared randomness under uniform budgets,
+pure and common-map mixed branches, E-QE only. -/
+alias thm_explicit_one_sharedRandom_quantum_tradeoff :=
+  NLQCLean.exists_explicit_controlledPhase_one_sharedRandom_quantum_tradeoff
+/-- `thm:explicit`: `ε ≥ exp(-exp(C Kq⁶))` for every protocol of quantum footprint `Kq`. -/
+alias thm_explicit_one_sixth_power := NLQCLean.exists_explicit_controlledPhase_one_sixth_power
+/-- `thm:explicit`: `log₂ K_{q,ε}(C₁) ≥ (1/6) log₂ ln ln(1/ε) - O(1)`. -/
+alias thm_explicit_one_sixth_log := NLQCLean.exists_explicit_controlledPhase_one_sixth_log_bound
+/-- `thm:explicit`: in LOSCC, at least `(1/3) log₂ ln ln(1/ε) - O(1)` resource qubits. -/
+alias thm_explicit_one_loscc_qubits :=
+  NLQCLean.exists_explicit_controlledPhase_one_loscc_qubit_bound
+
+/-! ### Appendix C with the Gelfond measure for `e^i` -/
+
+/-- Polynomial-type transcendence measure for `e^i` (Gelfond's method), for irreducible
+`G ∈ ℤ[i][X]` of degree at most `B` with coefficients at most `2^B`, `B ≥ 128`:
+`|G(e^i)| ≥ 2^{-B (200 B^{31} + 1)}`. -/
+alias thm_gelfond_measure_exp_I_irreducible :=
+  NLQCLean.Gelfond.norm_eval_exp_I_ge_of_irreducible
+/-- Polynomial-type transcendence measure for `e^i`: for nonzero `P ∈ ℤ[X]` of degree at most
+`N ≤ B` and height at most `H` with `2^N (N+1) H ≤ 2^B`, `B ≥ 128`,
+`|P(e^i)| ≥ 2^{-N B (200 B^{31} + 1)}`. -/
+alias thm_gelfond_measure_exp_I := NLQCLean.Gelfond.norm_eval_exp_I_ge
+/-- `thm:explicit` for `C₁` with no hypothesis, triple exponential:
+`g_K(1) ≥ exp(-exp(exp(175 K²)))`. -/
+alias thm_explicit_one_free_triple := NLQCLean.controlledPhase_one_lower_bound_free_triple
+/-- Protocol and free-classical forms: `ε ≥ exp(-exp(exp(175 K²)))`, resp.
+`exp(-exp(exp(44800 Kq¹⁰)))`. -/
+alias thm_explicit_one_protocol_free_triple :=
+  NLQCLean.controlledPhase_one_protocol_bound_free_triple
+/-- `log₂ K ≥ ½ log₂ ln ln ln(1/ε) - ½ log₂ 175` for `0 < ε < exp(-e)`. -/
+alias thm_explicit_one_triple_log_free := NLQCLean.controlledPhase_one_triple_log_bound_free
+/-- `thm:explicit` for `C₁`, assuming only E-QE, double exponential:
+`g_K(1) ≥ exp(-exp(C K²))`. -/
+alias thm_explicit_one_double_exp_of_QE :=
+  NLQCLean.exists_explicit_controlledPhase_one_double_exp_bound_of_QE
+/-- Protocol and free-classical forms: `ε ≥ exp(-exp(C K²))`, resp.
+`exp(-exp(256 C Kq¹⁰))`. -/
+alias thm_explicit_one_protocol_double_exp_of_QE :=
+  NLQCLean.exists_explicit_controlledPhase_one_protocol_double_exp_bound_of_QE
+/-- `log₂ K ≥ ½ log₂ ln ln(1/ε) - O(1)`. -/
+alias thm_explicit_one_iterated_log_of_QE :=
+  NLQCLean.exists_explicit_controlledPhase_one_iterated_log_bound_of_QE
+
+/-! ### Appendix C for every algebraic angle with quantifier elimination as the only input -/
+
+/-- Liouville inequality over `ℤ[i][ϑ]` used in the doubling step for `e^{iθ}`. -/
+alias thm_gelfond_angle_liouville := NLQCLean.Gelfond.eq_zero_of_norm_small_angle
+/-- Gelfond's method for `e^{iθ}`, `aθ` a root of a monic `f ∈ ℤ[X]`: for nonzero
+`P ∈ ℤ[X]` of degree at most `N ≤ B` and height at most `H` with `2^N (N+1) H ≤ 2^B`, and `B`
+also bounding `a`, `deg f`, `1 + max|f_i|` and `|θ|`, `|P(e^{iθ})| ≥ 2^{-N B (B⁴⁸ + 1)}`. -/
+alias thm_gelfond_measure_angle := NLQCLean.Gelfond.norm_eval_exp_angle_ge
+/-- The weak E-TM (`PolynomialTypeTranscendenceMeasureExpAngle`) is a theorem: exponent `50`. -/
+alias thm_explicit_transcendence_measure_angle :=
+  NLQCLean.polynomialTypeTranscendenceMeasureExpAngle
+/-- `thm:explicit` for every nonzero real algebraic angle, assuming only E-QE. -/
+alias thm_explicit_of_QE := NLQCLean.exists_explicit_controlledPhaseLeastDeficit_lower_bound_of_QE
+/-- `thm:explicit`, protocol form, assuming only E-QE. -/
+alias thm_explicit_protocol_of_QE := NLQCLean.exists_explicit_controlledPhase_protocol_bound_of_QE
+/-- `thm:explicit`, `log₂ K ≥ ½ log₂ ln ln(1/ε) - O(1)`, assuming only E-QE. -/
+alias thm_explicit_iterated_log_of_QE :=
+  NLQCLean.exists_explicit_controlledPhase_iterated_log_bound_of_QE
+/-- `thm:explicit`, `log₂ Kq ≥ (1/10) log₂ ln ln(1/ε) - O(1)`, assuming only E-QE. -/
+alias thm_explicit_quantum_iterated_log_of_QE :=
+  NLQCLean.exists_explicit_controlledPhase_quantum_iterated_log_bound_of_QE
+
 /-! ### Setting, floors and qualitative divergence -/
+
+/-- `cor:fixed-budget-stability` (unitary targets): for `d ≥ 2`, `K ≥ 1` and nonempty
+`E_{d,K} = Reach_{K,0}`, every `T ∈ Reach_{K,ε}` is within normalized Frobenius distance
+`C ε^α` of `E_{d,K}`. -/
+alias cor_fixed_budget_stability := NLQCLean.FixedBudget.exists_fixedBudget_stability
+/-- `cor:fixed-budget-stability`: `E_{d,K}` is a finite union of local-equivalence orbits. -/
+alias cor_fixed_budget_stability_orbits := NLQCLean.FixedBudget.exists_exactSet_eq_iUnion_orbits
+/-- `cor:fixed-budget-stability` for PVMs (basis unitaries): for `d ≥ 2`, `K ≥ 1` and a basis
+with an exact protocol of footprint at most `K`, every `M ∈ Reach^{PVM}_{K,ε}` is within
+normalized Frobenius distance `C ε^α` of `Reach^{PVM}_{K,0}`. -/
+alias cor_fixed_budget_stability_pvm := NLQCLean.FixedBudget.exists_fixedBudget_stability_pvm
+/-- `cor:fixed-budget-stability` for PVMs: the exact basis set is a finite union of basis
+orbits. -/
+alias cor_fixed_budget_stability_pvm_orbits :=
+  NLQCLean.FixedBudget.exists_pvmExactSet_eq_iUnion_orbits
+/-- The semialgebraic Łojasiewicz inequality used for `cor:fixed-budget-stability`. -/
+alias lojasiewicz_inequality := NLQCLean.lojasiewicz_inequality
 
 /-- `prop:qualitative`: least deficit attained. -/
 alias prop_qualitative_attained := NLQCLean.exists_unitaryScoreMaximum_protocol
@@ -295,5 +450,48 @@ two-qubit unitary, LOSCC with free shared randomness. The `log₂ K_ε` claim is
 `cor_almost_every_qubit` at `n = 1`. -/
 alias rem_two_qubit_loscc :=
   NLQCLean.exists_ae_sharedRandomLOSCCTwoQubit_qubit_bound
+
+/-! ### Appendix A: ingredients of the tube estimate -/
+
+/-- `prop:witness`, unitaries: at most `e^{3D}` compact families of norm `√6`, cut out by
+eight constraints of degree at most `100`, covering the reachable set at normalized distance
+`δ = √(2ε)`, with the derivative split `rank A ≤ 4d² − 3`, `‖dT̂‖ ≤ D`, `‖B‖ ≤ δD`. -/
+alias prop_witness := NLQCLean.witnessFamilies_unitary
+/-- `prop:witness`, measurements, with `δ = 2√ε` and `rank A ≤ 3d² − 2`. -/
+alias prop_witness_pvm := NLQCLean.witnessFamilies_pvm
+
+/-- `lem:image-volume` for every format budget `Δ₀ ≥ 2` (at most `Δ₀` equations and weak
+inequalities of degree at most `Δ₀`, `DirectVolume.PolyFormat` = `def:format`) and radius
+`R₀`: `Vol_m(φ(Y)) ≤ C^(k+m) ω_m sup J_m φ` for polynomial `φ` of degree at most `Δ₀`. -/
+alias lem_image_volume := NLQCLean.DirectVolume.exists_polynomialImageVolume_constant
+/-- `lem:image-volume` with the explicit constant `max(4, R+1)(2Δ+1)c'`. -/
+alias lem_image_volume_explicit := NLQCLean.DirectVolume.volume_image_le_of_polyFormat
+/-- `lem:image-volume` for the library's fixed format (at most `20` constraints of degree at
+most `100`, radius `3`) with the smaller base `35248`, by the barrier route. -/
+alias lem_image_volume_barrier := NLQCLean.polynomialImageVolumeBoundWith_imageVolumeConstant
+/-- `prop:tube` in its displayed form `μ(S) ≤ e^{C(D+N)} [C(L+s)]^ℓ (Cs)^{N-ℓ}`, with the
+singular-value hypotheses in their variational form `dT̂ = A + B`, `rank A ≤ ℓ`. -/
+alias prop_tube := NLQCLean.DirectVolume.exists_polynomial_tube_constant
+alias prop_tube_explicit := NLQCLean.DirectVolume.polynomial_tube_haar_le
+
+/-- `prop:overlap-derivative`, unitaries: local input and output generators and the
+leakage bound `‖Ξ‖_F ≤ dδ (‖Ė‖_op + ‖Ḋ‖_op)`. -/
+alias prop_overlap_derivative := NLQCLean.ReverseBlocks.IsValid.local_velocity_decomposition
+/-- `prop:overlap-derivative`, measurements: local input generator, diagonal output
+generator in `𝔲_diag`, and the same leakage bound. -/
+alias prop_overlap_derivative_pvm := NLQCLean.PVMReverseBlocks.IsValid.local_velocity_decomposition
+
+/-- `lem:normal-volume`, group volume: `Vol_F U(d²) ≥ (cd)^N ω_N` with `c = 1/256`,
+`N = d⁴`, where `Vol_F` is the Euclidean Hausdorff measure `μHE[N]` in Frobenius coordinates. -/
+alias lem_normal_volume_group := NLQCLean.unitaryFrobeniusVolume_ge
+/-- `lem:normal-volume`, tube inequality:
+`Vol_{2N}(U_t(S)) ≥ c^N ω_N t^N Vol_F U(d²) μ(S)` with `c = 1/1024`, `0 < t ≤ d/64`. -/
+alias lem_normal_volume := NLQCLean.volume_unitaryFrobeniusTube_ge
+/-- `lem:swap-cutoff`: on the near-SWAP polynomial witness source the normalized overlap
+derivative is `T + R` with `rank T ≤ ℓ⋆`, `σ₁ ≤ 4√K/d` and `‖R‖ ≤ 32δ√K/d`. -/
+alias lem_swap_cutoff := NLQCLean.SlimReverseBlocks.witnessFormat_sharp_rank_error
+/-- `lem:bell-cutoff`: the same split for near-Bell witnesses, with `‖dT̂‖ ≤ 4√K` and
+`‖R‖ ≤ 32δ√K` in Frobenius output coordinates (divide by `d` for the normalized norm). -/
+alias lem_bell_cutoff := NLQCLean.PVMReverseBlocks.witnessFormat_nearBell_rank_error
 
 end NLQCLean.Results.RobustPaper

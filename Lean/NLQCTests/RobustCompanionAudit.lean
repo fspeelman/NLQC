@@ -270,8 +270,8 @@ example {n K : ℕ} {ε : ℝ} (hε0 : 0 ≤ ε) (hε : ε ≤ 1 / 2)
 
 example (d r mA mB aA aB K : ℕ) (hmA : 1 ≤ mA) (hmB : 1 ≤ mB)
     (hK : r * mA * mB ≤ K)
-    (haA : aA ≤ 2 * d ^ 2 * r ^ 2) (haB : aB ≤ 2 * d ^ 2 * r ^ 2) :
-    r * (mA * aA) * (mB * aB) ≤ 4 * d ^ 4 * K ^ 5 :=
+    (haA : aA ≤ d ^ 2 * r ^ 2) (haB : aB ≤ d ^ 2 * r ^ 2) :
+    r * (mA * aA) * (mB * aB) ≤ d ^ 4 * K ^ 5 :=
   ClassicalCommunication.charged_message_footprint_le d r mA mB aA aB K
     hmA hmB hK haA haB
 

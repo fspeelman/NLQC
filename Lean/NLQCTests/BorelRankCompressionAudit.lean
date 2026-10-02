@@ -73,5 +73,5 @@ set_option pp.universes true in
 quantum-message and local workspace types, and arbitrary standard-Borel
 outcome spaces. The selected finite resource spaces use the original
 Schmidt rank, both final alphabets are bounded by `(d * rank) ^ 2 + 1`,
-and the charged budget is `4 * d ^ 4 * K ^ 5`. Operational error enters
+and the charged budget is `d ^ 4 * K ^ 5`. Operational error enters
 through the original-channel score inequality before compression. -/

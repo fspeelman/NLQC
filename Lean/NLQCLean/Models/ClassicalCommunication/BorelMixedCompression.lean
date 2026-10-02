@@ -40,22 +40,22 @@ theorem exists_component_bounded_outcomes_charged_linearScore
       Matrix (ιA' × ιB') (ιA' × ιB') ℂ) →ₗ[ℝ] ℝ)
     (hd : 0 < d) (hK : P.HasMixedQuantumFootprint m K) :
     ∃ k : Fin n,
-      ∃ nA : ℕ, nA ≤ (d * schmidtRank (m.component k)) ^ 2 + 1 ∧
-        ∃ nB : ℕ, nB ≤ (d * schmidtRank (m.component k)) ^ 2 + 1 ∧
+      ∃ nA : ℕ, nA ≤ (d * schmidtRank (m.component k)) ^ 2 ∧
+        ∃ nB : ℕ, nB ≤ (d * schmidtRank (m.component k)) ^ 2 ∧
           ∃ Q : FiniteClassicalProtocol (Fin d) (Fin d)
             (Fin (schmidtRank (m.component k))) (Fin (schmidtRank (m.component k)))
             κA κB μA μB (Fin nA) (Fin nB)
             ((κA × μA) × (Fin d × ρA)) ((κB × μB) × (Fin d × ρB))
             ιA' ιB' (Unit × (ιA' × (κA × μB))) (Unit × (ιB' × (κB × μA))),
             schmidtRank Q.resource ≤ schmidtRank (m.component k) ∧
-            Q.coherentProtocol.HasFootprint (4 * d ^ 4 * K ^ 5) ∧
+            Q.coherentProtocol.HasFootprint (d ^ 4 * K ^ 5) ∧
             S (P.mixedOperationalChannel m) ≤ S Q.coherentProtocol.operationalChannel := by
   obtain ⟨k, hscore, hfoot⟩ := P.exists_component_linearScore_ge_hasQuantumFootprint S m hK
   have hcompressed := (P.componentProtocol m k).exists_bounded_outcomes_charged_linearScore S hd hfoot
   simp only [componentProtocol_resource] at hcompressed
   obtain ⟨nA, hnA, nB, hnB, Q, hrank, _, hcharged, hsame⟩ := hcompressed
   refine ⟨k, nA, hnA, nB, hnB, Q, hrank, hcharged, ?_⟩
-  exact hscore.trans hsame.symm.le
+  exact hscore.trans hsame
 
 /-- The honest common-map mixed unitary score transfers to charged pure
 reachability through an actual component and pure Borel compression. -/
@@ -65,7 +65,7 @@ theorem mem_pureReachable_of_mixedQuantumFootprint
     (m : MixedResource ρA ρB n) (U : Matrix.unitaryGroup (Fin d × Fin d) ℂ) {ε : ℝ}
     (hd : 0 < d) (hK : P.HasMixedQuantumFootprint m K)
     (hscore : 1 - ε ≤ scoreU (U : Matrix _ _ ℂ) (P.mixedOperationalChannel m)) :
-    U ∈ pureReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    U ∈ pureReachable d (d ^ 4 * K ^ 5) ε := by
   obtain ⟨k, hcomponent, hfoot⟩ :=
     P.exists_component_linearScore_ge_hasQuantumFootprint
       (unitaryScoreRealLinear (U : Matrix _ _ ℂ)) m hK
@@ -79,7 +79,7 @@ theorem mem_purePVMReachable_of_mixedQuantumFootprint
     (m : MixedResource ρA ρB n) (M : Matrix.unitaryGroup (Fin d × Fin d) ℂ) {ε : ℝ}
     (hd : 0 < d) (hK : P.HasMixedQuantumFootprint m K)
     (hscore : 1 - ε ≤ scorePVM (M : Matrix _ _ ℂ) (P.mixedOperationalChannel m)) :
-    M ∈ purePVMReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    M ∈ purePVMReachable d (d ^ 4 * K ^ 5) ε := by
   obtain ⟨k, hcomponent, hfoot⟩ :=
     P.exists_component_linearScore_ge_hasQuantumFootprint
       (pvmScoreRealLinear (M : Matrix _ _ ℂ)) m hK
@@ -114,7 +114,7 @@ theorem mem_pureReachable_of_mixedQuantumFootprint_diamondError
     (m : MixedResource ρA ρB n) (U : Matrix.unitaryGroup (Fin d × Fin d) ℂ) {ε : ℝ}
     (hd : 0 < d) (hK : P.HasMixedQuantumFootprint m K)
     (herror : diamondError (P.mixedOperationalChannel m) (adConj (U : Matrix _ _ ℂ)) ≤ ε) :
-    U ∈ pureReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    U ∈ pureReachable d (d ^ 4 * K ^ 5) ε := by
   have hs := P.one_sub_scoreU_mixedOperationalChannel_le_diamondError m U hd
   apply P.mem_pureReachable_of_mixedQuantumFootprint m U hd hK
   linarith
@@ -147,7 +147,7 @@ theorem mem_purePVMReachable_of_mixedQuantumFootprint_pvmTVError
     (m : MixedResource ρA ρB n) (M : Matrix.unitaryGroup (Fin d × Fin d) ℂ) {ε : ℝ}
     (hd : 0 < d) (hK : P.HasMixedQuantumFootprint m K)
     (herror : pvmTVError (M : Matrix _ _ ℂ) (P.mixedOperationalChannel m) ≤ ε) :
-    M ∈ purePVMReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    M ∈ purePVMReachable d (d ^ 4 * K ^ 5) ε := by
   have hs := P.one_sub_scorePVM_mixedOperationalChannel_le_pvmTVError m M hd
   apply P.mem_purePVMReachable_of_mixedQuantumFootprint m M hd hK
   linarith

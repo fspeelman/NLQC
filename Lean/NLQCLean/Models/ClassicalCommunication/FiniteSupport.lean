@@ -61,8 +61,8 @@ theorem exists_finite_moment_support {E σ : Type*} [AddCommGroup E] [Module ℝ
 theorem charged_message_footprint_le (d r mA mB aA aB K : ℕ)
     (hmA : 1 ≤ mA) (hmB : 1 ≤ mB)
     (hK : r * mA * mB ≤ K)
-    (haA : aA ≤ 2 * d ^ 2 * r ^ 2) (haB : aB ≤ 2 * d ^ 2 * r ^ 2) :
-    r * (mA * aA) * (mB * aB) ≤ 4 * d ^ 4 * K ^ 5 := by
+    (haA : aA ≤ d ^ 2 * r ^ 2) (haB : aB ≤ d ^ 2 * r ^ 2) :
+    r * (mA * aA) * (mB * aB) ≤ d ^ 4 * K ^ 5 := by
   have hrK : r ≤ K := by
     calc
       r ≤ r * mA := Nat.le_mul_of_pos_right _ hmA
@@ -70,11 +70,11 @@ theorem charged_message_footprint_le (d r mA mB aA aB K : ℕ)
       _ ≤ K := hK
   calc
     r * (mA * aA) * (mB * aB) = (r * mA * mB) * (aA * aB) := by ring
-    _ ≤ K * ((2 * d ^ 2 * r ^ 2) * (2 * d ^ 2 * r ^ 2)) :=
+    _ ≤ K * ((d ^ 2 * r ^ 2) * (d ^ 2 * r ^ 2)) :=
       Nat.mul_le_mul hK (Nat.mul_le_mul haA haB)
-    _ = 4 * d ^ 4 * r ^ 4 * K := by ring
-    _ ≤ 4 * d ^ 4 * K ^ 4 * K :=
+    _ = d ^ 4 * r ^ 4 * K := by ring
+    _ ≤ d ^ 4 * K ^ 4 * K :=
       Nat.mul_le_mul_right K (Nat.mul_le_mul_left _ (Nat.pow_le_pow_left hrK 4))
-    _ = 4 * d ^ 4 * K ^ 5 := by ring
+    _ = d ^ 4 * K ^ 5 := by ring
 
 end NLQCLean.ClassicalCommunication

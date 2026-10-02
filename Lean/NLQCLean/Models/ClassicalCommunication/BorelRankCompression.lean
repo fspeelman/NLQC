@@ -36,7 +36,7 @@ variable [MeasurableSpace σA] [MeasurableSpace σB]
 variable [StandardBorelSpace σA] [StandardBorelSpace σB]
 
 /-- Pure Borel score compression gives actual rank-sized finite alphabets
-and a charged coherent protocol with footprint at most `4 * d ^ 4 * K ^ 5`.
+and a charged coherent protocol with footprint at most `d ^ 4 * K ^ 5`.
 The resource rank in both alphabet caps is that of the original protocol. -/
 theorem exists_bounded_outcomes_charged_linearScore
     (P : StandardBorelClassicalProtocol (Fin d) (Fin d)
@@ -44,25 +44,25 @@ theorem exists_bounded_outcomes_charged_linearScore
     (S : (Matrix (Fin d × Fin d) (Fin d × Fin d) ℂ →ₗ[ℂ]
       Matrix (ιA' × ιB') (ιA' × ιB') ℂ) →ₗ[ℝ] ℝ)
     (hd : 0 < d) (hK : P.HasQuantumFootprint K) :
-    ∃ nA : ℕ, nA ≤ (d * schmidtRank P.resource) ^ 2 + 1 ∧
-      ∃ nB : ℕ, nB ≤ (d * schmidtRank P.resource) ^ 2 + 1 ∧
+    ∃ nA : ℕ, nA ≤ (d * schmidtRank P.resource) ^ 2 ∧
+      ∃ nB : ℕ, nB ≤ (d * schmidtRank P.resource) ^ 2 ∧
         ∃ Q : FiniteClassicalProtocol (Fin d) (Fin d)
           (Fin (schmidtRank P.resource)) (Fin (schmidtRank P.resource))
           κA κB μA μB (Fin nA) (Fin nB)
           ((κA × μA) × (Fin d × ρA)) ((κB × μB) × (Fin d × ρB))
           ιA' ιB' (Unit × (ιA' × (κA × μB))) (Unit × (ιB' × (κB × μA))),
           schmidtRank Q.resource ≤ schmidtRank P.resource ∧
-          S Q.operationalChannel = S P.operationalChannel.toLinearMap ∧
-          Q.coherentProtocol.HasFootprint (4 * d ^ 4 * K ^ 5) ∧
-          S Q.coherentProtocol.operationalChannel = S P.operationalChannel.toLinearMap := by
+          S P.operationalChannel.toLinearMap ≤ S Q.operationalChannel ∧
+          Q.coherentProtocol.HasFootprint (d ^ 4 * K ^ 5) ∧
+          S P.operationalChannel.toLinearMap ≤ S Q.coherentProtocol.operationalChannel := by
   let : NeZero d := ⟨Nat.ne_of_gt hd⟩
   obtain ⟨_, _, _, _, F, hresource, hfoot, hscore⟩ :=
     P.exists_finite_protocol_preserving_linearScore S
   have hcompressed := F.exists_bounded_outcomes_charged_linearScore S hd ((hfoot K).mpr hK)
   rw [hresource] at hcompressed
   obtain ⟨nA, hnA, nB, hnB, Q, hrank, hscoreQ, hcharged, hcoherent⟩ := hcompressed
-  exact ⟨nA, hnA, nB, hnB, Q, hrank, hscoreQ.trans hscore,
-    hcharged, hcoherent.trans hscore⟩
+  exact ⟨nA, hnA, nB, hnB, Q, hrank, hscore.symm.trans_le hscoreQ,
+    hcharged, hscore.symm.trans_le hcoherent⟩
 
 /-- The actual Borel unitary score enters charged pure reachability after
 both finite selection and rank-sized recompression. -/
@@ -72,15 +72,14 @@ theorem mem_pureReachable_of_quantumFootprint
     (U : Matrix.unitaryGroup (Fin d × Fin d) ℂ) {ε : ℝ}
     (hd : 0 < d) (hK : P.HasQuantumFootprint K)
     (hscore : 1 - ε ≤ scoreU (U : Matrix _ _ ℂ) P.operationalChannel.toLinearMap) :
-    U ∈ pureReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    U ∈ pureReachable d (d ^ 4 * K ^ 5) ε := by
   obtain ⟨_, _, _, _, Q, _, _, hfoot, hsame⟩ :=
     P.exists_bounded_outcomes_charged_linearScore
       (unitaryScoreRealLinear (U : Matrix _ _ ℂ)) hd hK
   apply Q.coherentProtocol.mem_pureReachable hfoot
-  change scoreU (U : Matrix _ _ ℂ) Q.coherentProtocol.operationalChannel =
-    scoreU (U : Matrix _ _ ℂ) P.operationalChannel.toLinearMap at hsame
-  rw [hsame]
-  exact hscore
+  change scoreU (U : Matrix _ _ ℂ) P.operationalChannel.toLinearMap ≤
+    scoreU (U : Matrix _ _ ℂ) Q.coherentProtocol.operationalChannel at hsame
+  exact hscore.trans hsame
 
 /-- The PVM specialization retains both parties' correct output labels. -/
 theorem mem_purePVMReachable_of_quantumFootprint
@@ -89,15 +88,14 @@ theorem mem_purePVMReachable_of_quantumFootprint
     (M : Matrix.unitaryGroup (Fin d × Fin d) ℂ) {ε : ℝ}
     (hd : 0 < d) (hK : P.HasQuantumFootprint K)
     (hscore : 1 - ε ≤ scorePVM (M : Matrix _ _ ℂ) P.operationalChannel.toLinearMap) :
-    M ∈ purePVMReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    M ∈ purePVMReachable d (d ^ 4 * K ^ 5) ε := by
   obtain ⟨_, _, _, _, Q, _, _, hfoot, hsame⟩ :=
     P.exists_bounded_outcomes_charged_linearScore
       (pvmScoreRealLinear (M : Matrix _ _ ℂ)) hd hK
   apply Q.coherentProtocol.mem_purePVMReachable hfoot
-  change scorePVM (M : Matrix _ _ ℂ) Q.coherentProtocol.operationalChannel =
-    scorePVM (M : Matrix _ _ ℂ) P.operationalChannel.toLinearMap at hsame
-  rw [hsame]
-  exact hscore
+  change scorePVM (M : Matrix _ _ ℂ) P.operationalChannel.toLinearMap ≤
+    scorePVM (M : Matrix _ _ ℂ) Q.coherentProtocol.operationalChannel at hsame
+  exact hscore.trans hsame
 
 /-- The original operational Borel channel has normalized Choi trace one,
 as follows from its proved CP/TP properties and a finite Stinespring dilation. -/
@@ -132,7 +130,7 @@ theorem mem_pureReachable_of_quantumFootprint_diamondError
     (hd : 0 < d) (hK : P.HasQuantumFootprint K)
     (herror : diamondError P.operationalChannel.toLinearMap
       (adConj (U : Matrix _ _ ℂ)) ≤ ε) :
-    U ∈ pureReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    U ∈ pureReachable d (d ^ 4 * K ^ 5) ε := by
   let : NeZero d := ⟨Nat.ne_of_gt hd⟩
   have hs := P.one_sub_scoreU_le_diamondError U hd
   apply P.mem_pureReachable_of_quantumFootprint U hd hK
@@ -180,7 +178,7 @@ theorem mem_purePVMReachable_of_quantumFootprint_pvmTVError
     (M : Matrix.unitaryGroup (Fin d × Fin d) ℂ) {ε : ℝ}
     (hd : 0 < d) (hK : P.HasQuantumFootprint K)
     (herror : pvmTVError (M : Matrix _ _ ℂ) P.operationalChannel.toLinearMap ≤ ε) :
-    M ∈ purePVMReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    M ∈ purePVMReachable d (d ^ 4 * K ^ 5) ε := by
   have hs := P.one_sub_scorePVM_le_pvmTVError M hd
   apply P.mem_purePVMReachable_of_quantumFootprint M hd hK
   linarith

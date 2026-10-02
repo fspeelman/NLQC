@@ -64,27 +64,27 @@ def finiteMixedPVMScoreReachable (d K : ℕ) (ε : ℝ) :
 
 /-- Finite pure score reachability transfers through compression. -/
 theorem finitePureScoreReachable_subset_pureReachable {d K : ℕ} (hd : 0 < d) (ε : ℝ) :
-    finitePureScoreReachable d K ε ⊆ pureReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    finitePureScoreReachable d K ε ⊆ pureReachable d (d ^ 4 * K ^ 5) ε := by
   rintro U ⟨s, P, hK, hscore⟩
   exact P.mem_pureReachable_of_quantumFootprint U hd hK hscore
 
 /-- Mixed transfer uses a rank-capped actual component before finite compression. -/
 theorem finiteMixedScoreReachable_subset_pureReachable {d K : ℕ} (hd : 0 < d) (ε : ℝ) :
-    finiteMixedScoreReachable d K ε ⊆ pureReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    finiteMixedScoreReachable d K ε ⊆ pureReachable d (d ^ 4 * K ^ 5) ε := by
   rintro U ⟨s, n, m, P, hK, hscore⟩
   exact P.mem_pureReachable_of_mixedQuantumFootprint m U hd hK hscore
 
 /-- Finite pure PVM transfer retains the existing two-sided correct-label score. -/
 theorem finitePurePVMScoreReachable_subset_purePVMReachable {d K : ℕ}
     (hd : 0 < d) (ε : ℝ) :
-    finitePurePVMScoreReachable d K ε ⊆ purePVMReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    finitePurePVMScoreReachable d K ε ⊆ purePVMReachable d (d ^ 4 * K ^ 5) ε := by
   rintro M ⟨s, P, hK, hscore⟩
   exact P.mem_purePVMReachable_of_quantumFootprint M hd hK hscore
 
 /-- Finite mixed PVM transfer has the same fifth-power charged budget. -/
 theorem finiteMixedPVMScoreReachable_subset_purePVMReachable {d K : ℕ}
     (hd : 0 < d) (ε : ℝ) :
-    finiteMixedPVMScoreReachable d K ε ⊆ purePVMReachable d (4 * d ^ 4 * K ^ 5) ε := by
+    finiteMixedPVMScoreReachable d K ε ⊆ purePVMReachable d (d ^ 4 * K ^ 5) ε := by
   rintro M ⟨s, n, m, P, hK, hscore⟩
   exact P.mem_purePVMReachable_of_mixedQuantumFootprint m M hd hK hscore
 
