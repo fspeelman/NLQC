@@ -33,13 +33,12 @@ noncomputable local instance srOperationRealNormedSpace
     {ι κ : Type*} [Fintype ι] [Fintype κ] : NormedSpace ℝ (MatrixOperation ι κ) :=
   ContinuousLinearMap.toNormedSpace
 
-/-- **`eq:explicit-quantum-tradeoff` with free shared randomness.** With E-QE only, there is
+/-- **`eq:explicit-quantum-tradeoff` with free shared randomness.** Unconditionally, there is
 `C > 0` such that every standard-Borel free-classical protocol for `C₁` with measurable shared
 randomness, almost every branch of which has resource Schmidt number at most `R` (pure branches)
 or common-map mixed resource of Schmidt number at most `R`, and quantum footprint at most `Kq`,
 and whose averaged channel has score deficit at most `ε`, satisfies `ε ≥ exp(-exp(C R⁴ Kq²))`. -/
-theorem exists_explicit_controlledPhase_one_sharedRandom_quantum_tradeoff
-    (hQE : BasuPollackRoyExistentialElimination) :
+theorem exists_explicit_controlledPhase_one_sharedRandom_quantum_tradeoff :
     ∃ CE : ℝ, 0 < CE ∧ ∀ {α : Type*} [MeasurableSpace α] (μ : Measure α) [IsProbabilityMeasure μ]
       {ρA ρB κA κB μA μB σA σB : α → Type*}
       [∀ a, Fintype (ρA a)] [∀ a, Fintype (ρB a)] [∀ a, Fintype (κA a)] [∀ a, Fintype (κB a)]
@@ -59,7 +58,7 @@ theorem exists_explicit_controlledPhase_one_sharedRandom_quantum_tradeoff
         (∀ᵐ a ∂μ, (m a).schmidtNumberLE R ∧ (P a).HasMixedQuantumFootprint (m a) Kq) →
         1 - ε ≤ scoreU (controlledPhase 1) (mixedSharedRandomOperationalChannel μ P m).toLinearMap →
         Real.exp (-Real.exp (CE * ((R : ℝ) ^ 4 * (Kq : ℝ) ^ 2))) ≤ ε) := by
-  obtain ⟨CE, hCE, hB⟩ := exists_explicit_controlledPhase_one_borel_quantum_tradeoff hQE
+  obtain ⟨CE, hCE, hB⟩ := exists_explicit_controlledPhase_one_borel_quantum_tradeoff
   refine ⟨CE, hCE, ?_⟩
   intro α _ μ _ ρA ρB κA κB μA μB σA σB _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ P R Kq ε
   let S := unitaryScoreRealLinear (controlledPhase 1 : Matrix (Fin 2 × Fin 2) (Fin 2 × Fin 2) ℂ)

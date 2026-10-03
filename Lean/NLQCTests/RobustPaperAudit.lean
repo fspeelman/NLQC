@@ -339,37 +339,49 @@ set_option pp.maxSteps 1000000
 #guard_msgs (whitespace := lax) in
 #print axioms NLQCLean.Results.RobustPaper.thm_explicit_free_classical_transfer
 
-/-- info: 'NLQCLean.Results.RobustPaper.thm_explicit' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+/-- info: 'NLQCLean.Results.RobustPaper.thm_explicit_of_transcendence_measure' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
-#print axioms NLQCLean.Results.RobustPaper.thm_explicit
+#print axioms NLQCLean.Results.RobustPaper.thm_explicit_of_transcendence_measure
 
 /-- info: 'NLQCLean.Results.RobustPaper.thm_explicit_cijsouw_polynomialType' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
 #print axioms NLQCLean.Results.RobustPaper.thm_explicit_cijsouw_polynomialType
 
--- `thm:explicit` takes E-QE and the weak transcendence measure; Cijsouw's
--- E-TM still yields it.
-example (hQE : NLQCLean.BasuPollackRoyExistentialElimination)
-    (hTM : NLQCLean.CijsouwTranscendenceMeasureExp) :
+-- The `_of_transcendence_measure` forms take any polynomial-type measure; Cijsouw's E-TM yields one.
+example (hTM : NLQCLean.CijsouwTranscendenceMeasureExp) :
     ∃ CE : ℝ, 0 < CE ∧ ∀ K : ℕ, 1 ≤ K →
       Real.exp (-Real.exp (CE * (K : ℝ) ^ 2)) ≤ NLQCLean.controlledPhaseLeastDeficit K 1 :=
-  NLQCLean.Results.RobustPaper.thm_explicit_one hQE hTM.polynomialType
+  NLQCLean.Results.RobustPaper.thm_explicit_one_of_transcendence_measure hTM.polynomialType
 
-/-- info: 'NLQCLean.Results.RobustPaper.thm_explicit_one' depends on axioms: [propext, Classical.choice, Quot.sound] -/
-#guard_msgs (whitespace := lax) in
-#print axioms NLQCLean.Results.RobustPaper.thm_explicit_one
+-- `thm:explicit` for `C₁` and for every nonzero real algebraic angle, without hypotheses.
+example : ∃ CE : ℝ, 0 < CE ∧ ∀ K : ℕ, 1 ≤ K →
+    Real.exp (-Real.exp (CE * (K : ℝ) ^ 2)) ≤ NLQCLean.controlledPhaseLeastDeficit K 1 :=
+  NLQCLean.Results.RobustPaper.thm_explicit_one
 
-/-- info: 'NLQCLean.Results.RobustPaper.thm_explicit_protocol' depends on axioms: [propext, Classical.choice, Quot.sound] -/
-#guard_msgs (whitespace := lax) in
-#print axioms NLQCLean.Results.RobustPaper.thm_explicit_protocol
+example {θ : ℝ} (hθ0 : θ ≠ 0) (hθ : IsAlgebraic ℚ θ) :
+    ∃ CE : ℝ, 0 < CE ∧ ∀ K : ℕ, 1 ≤ K →
+      Real.exp (-Real.exp (CE * (K : ℝ) ^ 2)) ≤ NLQCLean.controlledPhaseLeastDeficit K θ :=
+  NLQCLean.Results.RobustPaper.thm_explicit hθ0 hθ
 
-/-- info: 'NLQCLean.Results.RobustPaper.thm_explicit_iterated_log' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+/-- info: 'NLQCLean.Results.RobustPaper.thm_explicit' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
-#print axioms NLQCLean.Results.RobustPaper.thm_explicit_iterated_log
+#print axioms NLQCLean.Results.RobustPaper.thm_explicit
 
-/-- info: 'NLQCLean.Results.RobustPaper.thm_explicit_quantum_iterated_log' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+/-- info: 'NLQCLean.Results.RobustPaper.thm_explicit_one_of_transcendence_measure' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
-#print axioms NLQCLean.Results.RobustPaper.thm_explicit_quantum_iterated_log
+#print axioms NLQCLean.Results.RobustPaper.thm_explicit_one_of_transcendence_measure
+
+/-- info: 'NLQCLean.Results.RobustPaper.thm_explicit_protocol_of_transcendence_measure' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms NLQCLean.Results.RobustPaper.thm_explicit_protocol_of_transcendence_measure
+
+/-- info: 'NLQCLean.Results.RobustPaper.thm_explicit_iterated_log_of_transcendence_measure' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms NLQCLean.Results.RobustPaper.thm_explicit_iterated_log_of_transcendence_measure
+
+/-- info: 'NLQCLean.Results.RobustPaper.thm_explicit_quantum_iterated_log_of_transcendence_measure' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms NLQCLean.Results.RobustPaper.thm_explicit_quantum_iterated_log_of_transcendence_measure
 
 /-- info: 'NLQCLean.Results.RobustPaper.cor_free_classical_universal_max' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in

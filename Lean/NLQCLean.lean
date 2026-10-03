@@ -274,7 +274,13 @@ import NLQCLean.Arithmetic.PVMScorePolynomial
 import NLQCLean.Arithmetic.ControlledPhaseScorePolynomial
 import NLQCLean.Arithmetic.PhysicalPolynomialHeight
 import NLQCLean.Arithmetic.ControlledPhaseLeastDeficit
-import NLQCLean.Bounds.ExplicitGateEpigraph
+import NLQCLean.Arithmetic.PurePowerReduction
+import NLQCLean.Arithmetic.DeformationSystem
+import NLQCLean.Arithmetic.DeformationAnalysis
+import NLQCLean.Arithmetic.DeformationEliminant
+import NLQCLean.Arithmetic.DeformationFinal
+import NLQCLean.Arithmetic.DeformationBounds
+import NLQCLean.Bounds.ControlledPhaseEliminant
 import NLQCLean.Bounds.ExplicitControlledPhase
 import NLQCLean.Bounds.AlmostEveryArithmetic
 import NLQCLean.Bounds.AlmostEveryTargets
@@ -316,8 +322,6 @@ import NLQCLean.Geometry.UnitaryFrobeniusVolume
 import NLQCLean.Approx.PVMWitnessCutoff
 import NLQCLean.Geometry.PolynomialTube
 import NLQCLean.Approx.WitnessFamilies
-import NLQCLean.Arithmetic.ExpITranscendence
-import NLQCLean.Bounds.ExplicitControlledPhaseQE
 import NLQCLean.Arithmetic.EliminationResultant
 import NLQCLean.Arithmetic.EliminationShear
 import NLQCLean.Arithmetic.EliminationSize
@@ -326,7 +330,7 @@ import NLQCLean.Arithmetic.EliminationGenericDerivation
 import NLQCLean.Arithmetic.EliminationLagrangeSystem
 import NLQCLean.Arithmetic.EliminationKKT
 import NLQCLean.Arithmetic.EliminationPhysicalLICQ
-import NLQCLean.Bounds.ExplicitControlledPhaseFree
+import NLQCLean.Bounds.ExplicitControlledPhaseResultant
 import NLQCLean.Arithmetic.GelfondZeroEstimate
 import NLQCLean.Arithmetic.GelfondInterpolation
 import NLQCLean.Arithmetic.GelfondSchwarz
@@ -361,7 +365,6 @@ import NLQCLean.LinearAlgebra.IsometryExtension
 import NLQCLean.Models.ClassicalCommunication.TranscriptCompression
 import NLQCLean.Arithmetic.TranscriptPolynomial
 import NLQCLean.Arithmetic.TranscriptHeight
-import NLQCLean.Bounds.GenericEpigraph
 import NLQCLean.Bounds.ExplicitControlledPhaseTranscript
 import NLQCLean.Bounds.ExplicitControlledPhaseSharedRandom
 import NLQCLean.Bounds.SwapNeighborhoodHaar
@@ -527,14 +530,12 @@ This root imports the complete library. The mathematical overview and main
 result modules are listed in `README.md`; `paper/lean-companion-notes.md`
 explains the proof and its relation to the source manuscripts.
 
-The qualitative unitary and PVM gaps and the almost-every exact impossibility
-results are unconditional. Semialgebraic projection closure is proved
-(`semialgebraicProjectionTheorem`) from a vendored slice of Sundog's real
-quantifier elimination. The quantitative bounds, including the almost-every
-fixed-target resource bounds, follow from three explicit external
-propositions: LRT's selection theorem, smooth stratification and a component
-bound; their four-input forms remain as compatibility theorems. The contracts
-and source references are documented in `docs/EXTERNAL_RESULTS.md`.
+All public results are unconditional. Semialgebraic projection closure is
+proved (`semialgebraicProjectionTheorem`) from a vendored slice of Sundog's real
+quantifier elimination, and the polynomial image-volume bound behind the
+quantitative bounds is proved. Forms that take the earlier external
+propositions remain as compatibility theorems; their contracts and source
+references are documented in `docs/EXTERNAL_RESULTS.md`.
 -/
 
 namespace NLQCLean

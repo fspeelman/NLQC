@@ -7,7 +7,7 @@
     },
     {
       "path": "NLQCLean.lean",
-      "sha256": "f5634afc0cd936dd0cbec44e15fc3d6728f8b4f1e064ccf713c4b9f5e195fdbb"
+      "sha256": "1420fb37ae1cc2fc4aecc196f8a49f3f705a938ade3df4009b66c83903a14388"
     },
     {
       "path": "NLQCLean/All.lean",
@@ -278,6 +278,26 @@
       "sha256": "e47f89070ba7c2c568361276e3d1b1742b00e4c9c3f5779fbfe39b84a0fe0692"
     },
     {
+      "path": "NLQCLean/Arithmetic/DeformationAnalysis.lean",
+      "sha256": "8bc58e037de2fb2e536a40ddd123ed95410cf91c034e12fea3807015de38b0b1"
+    },
+    {
+      "path": "NLQCLean/Arithmetic/DeformationBounds.lean",
+      "sha256": "5dc778ca7fb7bbc7ede43bb97a0adad89fa81abc392a81a1840163aa79a503b3"
+    },
+    {
+      "path": "NLQCLean/Arithmetic/DeformationEliminant.lean",
+      "sha256": "479ea4d691132e607c386db2a56a4eece98d2e7756f785fa2d16c6a922bffa4b"
+    },
+    {
+      "path": "NLQCLean/Arithmetic/DeformationFinal.lean",
+      "sha256": "0a271ae121eeae716c9cf87e6c9504b44406f851867c871418ef9a600e50d9a0"
+    },
+    {
+      "path": "NLQCLean/Arithmetic/DeformationSystem.lean",
+      "sha256": "c64bdbb194173020e07e96ac921f40bf2e7ff29d9e58b46a4e5119b839999556"
+    },
+    {
       "path": "NLQCLean/Arithmetic/EliminationGenericDerivation.lean",
       "sha256": "146283c111750be5cf0f996b9cd1f3a5b97d7a2236816bcdf33280f7875c4057"
     },
@@ -308,10 +328,6 @@
     {
       "path": "NLQCLean/Arithmetic/EliminationSize.lean",
       "sha256": "5c3d9d31f902941a1e486afba7eecd601620ddd63a833e04230b29dd2f6cba1f"
-    },
-    {
-      "path": "NLQCLean/Arithmetic/ExpITranscendence.lean",
-      "sha256": "73a4a76c4f1ebc23118233ed7a03f3fd4cc5d748242820a11a768b9f6b18ee84"
     },
     {
       "path": "NLQCLean/Arithmetic/GelfondAngleAuxiliary.lean",
@@ -406,6 +422,10 @@
       "sha256": "69a7cc651cef54f2adb5ffec76626301a023f7236be3fe63519b6ed850c7cf9e"
     },
     {
+      "path": "NLQCLean/Arithmetic/PurePowerReduction.lean",
+      "sha256": "05539f1ee28020e4eb12b0d32243280cc684f1294f54c59b85005c53dc65bb99"
+    },
+    {
       "path": "NLQCLean/Arithmetic/RationalIntegerPolynomials.lean",
       "sha256": "31a030929eb72ab3d975af7b3271b10de40c9177d333e11c2d6fe833e583d414"
     },
@@ -494,6 +514,10 @@
       "sha256": "7603f2420c117eadb7df488fc2d4f73ab9032223c3777ec4f89167b7e720508a"
     },
     {
+      "path": "NLQCLean/Bounds/ControlledPhaseEliminant.lean",
+      "sha256": "cfc4b99c459b0faeb56bee705dedb533d8a9556200a2574099cd9884dfb81950"
+    },
+    {
       "path": "NLQCLean/Bounds/ControlledPhaseLength.lean",
       "sha256": "7a612d63dde077baf990b1682114e04d6f7ddfb40ba6bef2c3e17b3b19349b27"
     },
@@ -503,35 +527,27 @@
     },
     {
       "path": "NLQCLean/Bounds/ExplicitControlledPhase.lean",
-      "sha256": "e2eaad8b1fc11d79d1b71269a26f5e2d6632959c96a31fea57938c281d8aa88a"
+      "sha256": "ed7143a16e9061c7b20b78cdb9a673dc480f16ce291c4689f832782fa9701a05"
     },
     {
       "path": "NLQCLean/Bounds/ExplicitControlledPhaseAngle.lean",
-      "sha256": "d38afdad58dc5f60454060a65c56181a0e2706e82b42ec6652239d0968569e98"
-    },
-    {
-      "path": "NLQCLean/Bounds/ExplicitControlledPhaseFree.lean",
-      "sha256": "36081353cb0ce7317046169c52b36d01de24f118c827e31c0a36fda9c320f395"
+      "sha256": "b13709ffa19e0195f58fec10d9a30199de07286e626250c93930ad4283986648"
     },
     {
       "path": "NLQCLean/Bounds/ExplicitControlledPhaseGelfond.lean",
-      "sha256": "e9c6ef1adba3d2135cb717f246413f59dd2ba7f5577fa07e01e64d5e04005539"
+      "sha256": "5197ed560940790a098a88ff54f6de07c1be5d17b3bddc79940777ab389f86c9"
     },
     {
-      "path": "NLQCLean/Bounds/ExplicitControlledPhaseQE.lean",
-      "sha256": "46fe9b931cf5a35d7e761f7743b0901fd8136d5804744db3742463073e584cd7"
+      "path": "NLQCLean/Bounds/ExplicitControlledPhaseResultant.lean",
+      "sha256": "9d4890da44d6fbe4b7bdf66657e92c2588b8d03833350968005282bca23845b3"
     },
     {
       "path": "NLQCLean/Bounds/ExplicitControlledPhaseSharedRandom.lean",
-      "sha256": "fd454594b58f910388804258e7b3dce132812ac8263056e87b80019ae3c66cf5"
+      "sha256": "2354acbb7c863af49ff7e622f18d198a96cd78f1d24aedc046191248afad6f96"
     },
     {
       "path": "NLQCLean/Bounds/ExplicitControlledPhaseTranscript.lean",
-      "sha256": "60ef65835ce08df84586a493f99cfa3b672fb64046d7cb038d4019c63716fdb5"
-    },
-    {
-      "path": "NLQCLean/Bounds/ExplicitGateEpigraph.lean",
-      "sha256": "391f5647b844ea62ad8b8de3533fd3452e856c48b50005838994a0afe8eeaebc"
+      "sha256": "5b3a1d392cb44084d053652fc103c5bd441f4b8d6fad0acc73a4e3809cbcaa35"
     },
     {
       "path": "NLQCLean/Bounds/FiniteClassicalAlmostEvery.lean",
@@ -576,10 +592,6 @@
     {
       "path": "NLQCLean/Bounds/GeneralTargetQualitativeGap.lean",
       "sha256": "9e366e2ce53100577b56f3ea061e8bc9363a1186048ddfea39b3b3a414b36213"
-    },
-    {
-      "path": "NLQCLean/Bounds/GenericEpigraph.lean",
-      "sha256": "4164856c00d4219df7cf26c2034389f0d7aad9b30f0976ef5a97e02bacc4495b"
     },
     {
       "path": "NLQCLean/Bounds/HaarAbsorption.lean",
@@ -879,7 +891,7 @@
     },
     {
       "path": "NLQCLean/External/EffectiveArithmetic.lean",
-      "sha256": "2a8203cf52408d94ec4c1aec059e829dcfddf1433fe6083f47f1fe5b218da0f1"
+      "sha256": "9d6f73261b1b78c541a81fae2c6c1a0d996221a3e99554972512461550e553ad"
     },
     {
       "path": "NLQCLean/External/SemialgebraicTextbook.lean",
@@ -1759,7 +1771,7 @@
     },
     {
       "path": "NLQCLean/Results/RobustPaper.lean",
-      "sha256": "64802fe2d40f99f15e5a5d2ddd25beec499133ee04a4b99ddaeba1795d8ac7af"
+      "sha256": "9d398cd5d05836412ab8ccdc02f74e5a04834deeec1d5f98f0f89b01509620aa"
     },
     {
       "path": "NLQCLean/Results/Unitary.lean",
@@ -2451,7 +2463,7 @@
     },
     {
       "path": "NLQCTests/PointCountAudit.lean",
-      "sha256": "e50978b100c1300f80973bbe311f2f3a8226f26896814a4a9361ae12d22e1a81"
+      "sha256": "a1a7e7f4942b8cb8d80af895d9bb9dcf21ca4f1a875fe24e5c617be257553803"
     },
     {
       "path": "NLQCTests/PositiveChoiDensityAudit.lean",
@@ -2507,7 +2519,7 @@
     },
     {
       "path": "NLQCTests/RobustPaperAudit.lean",
-      "sha256": "7ed0f115d9bb16649feb2fb5acc94d504532da09f3e68c882ac80a05143193f6"
+      "sha256": "cd09473fa26e7b44831797447a7ad0184bc22b6e813a4922676e1f2fa95090c3"
     },
     {
       "path": "NLQCTests/SemialgebraicProjectionAudit.lean",
@@ -2571,15 +2583,15 @@
     },
     {
       "path": "README.md",
-      "sha256": "1208abfe967aa689a84c1a14af3e9c94ad91bff4f20c5a39d264dec8db701ad8"
+      "sha256": "6779bf98973bca5ce223b8c4ab79cf8b8b38c03d5cdd8991a5e99f671fea6cc9"
     },
     {
       "path": "docs/ASSUMPTIONS.md",
-      "sha256": "86734c4c39322c0a19d83e04d53cc2329fa7dc045e17ff57f3521cc879b0d371"
+      "sha256": "c9981b0a9b390966e6aa3a9fb9f5ab2d0c230234bd785ad0a60ebf0912980dbd"
     },
     {
       "path": "docs/PUBLIC_RESULTS.md",
-      "sha256": "31e9f5addf2ceee6d24191493917027c5173105199c9c8438bf6924d4b603bcf"
+      "sha256": "94a4ccb60ba764ef80af36c8864c4cba00ca15ffabfc0b2e8a6414ca8e8bcac3"
     },
     {
       "path": "lake-manifest.json",

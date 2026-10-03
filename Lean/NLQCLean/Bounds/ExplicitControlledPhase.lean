@@ -1,4 +1,4 @@
-import NLQCLean.Bounds.ExplicitGateEpigraph
+import NLQCLean.Bounds.ControlledPhaseEliminant
 import NLQCLean.Arithmetic.SeparationCertificate
 import NLQCLean.Arithmetic.BivariateFactor
 import NLQCLean.Arithmetic.PhaseTranscendence
@@ -19,12 +19,11 @@ standard-Borel classical messages and quantum footprint `Kq ≥ 1` the bound is
 `exp(-exp(256 C_E Kq¹⁰))`. Consequently `log₂ K ≥ ½ log₂ ln ln(1/ε) - O(1)`
 and `log₂ Kq ≥ (1/10) log₂ ln ln(1/ε) - O(1)`.
 
-The proof uses exactly two external inputs, `BasuPollackRoyExistentialElimination`
-(E-QE) and the polynomial-type transcendence measure
-`PolynomialTypeTranscendenceMeasureExpAngle` (weak E-TM), which Cijsouw's
-theorem implies (`CijsouwTranscendenceMeasureExp.polynomialType`) and which is proved in
-`Arithmetic/GelfondAngleMeasure` (`Bounds/ExplicitControlledPhaseAngle` gives the E-QE-only
-forms); positivity of
+The eliminant of the epigraph is proved (`exists_controlledPhase_certificate_eliminant`, a
+deformed critical-point argument). The theorem takes the polynomial-type transcendence measure
+`PolynomialTypeTranscendenceMeasureExpAngle` (weak E-TM) as a hypothesis; Cijsouw's
+theorem implies it (`CijsouwTranscendenceMeasureExp.polynomialType`) and it is proved in
+`Arithmetic/GelfondAngleMeasure` (`Bounds/ExplicitControlledPhaseAngle` applies it); positivity of
 `g_K(θ)` is the proved exact exclusion. The sources state that the constants are
 effectively computable; here only their existence is proved.
 -/
@@ -246,60 +245,39 @@ theorem CijsouwTranscendenceMeasureExp.polynomialType (hTM : CijsouwTranscendenc
 
 end Arithmetic
 
-/-- **Theorem E (`thm:explicit`), least-deficit form.** Under E-QE and weak E-TM,
+/-- **Theorem E (`thm:explicit`), least-deficit form.** Under weak E-TM alone,
 for every nonzero real algebraic angle `θ` there is `C_E > 0` with
 `exp(-exp(C_E K²)) ≤ g_K(θ)` for every footprint `K ≥ 1`. -/
-theorem exists_explicit_controlledPhaseLeastDeficit_lower_bound
-    (hQE : BasuPollackRoyExistentialElimination)
+theorem exists_explicit_controlledPhaseLeastDeficit_lower_bound_of_transcendenceMeasure
     (hTM : PolynomialTypeTranscendenceMeasureExpAngle)
     {θ : ℝ} (hθ0 : θ ≠ 0) (hθ : IsAlgebraic ℚ θ) :
     ∃ CE : ℝ, 0 < CE ∧ ∀ K : ℕ, 1 ≤ K →
       Real.exp (-Real.exp (CE * (K : ℝ) ^ 2)) ≤ controlledPhaseLeastDeficit K θ := by
-  obtain ⟨a, hqe⟩ := hQE
   obtain ⟨Cc, c, hCc, htm⟩ := hTM θ hθ0 hθ
-  have hsin := sin_ne_zero_of_isAlgebraic hθ0 hθ
+  obtain ⟨a, ha⟩ : ∃ a : ℕ, a = 4 := ⟨4, rfl⟩
   refine ⟨Real.log (Cc + 1) + 6 * (c + 1 : ℕ) + 252 * a * (c + 1 : ℕ),
     by have := Real.log_nonneg (show (1 : ℝ) ≤ Cc + 1 by linarith); positivity,
     fun K hK => ?_⟩
-  obtain ⟨t, hbox, hcount, -, -, -, -, hupper, hattain⟩ :=
+  obtain ⟨t, hbox, hcount, hCdeg, hSdeg, hCm, hSm, hupper, hattain⟩ :=
     exists_controlledPhaseLeastDeficit_polynomial_certificate hK θ
   set g := controlledPhaseLeastDeficit K θ with hgdef
   have hg0 : 0 < g := controlledPhaseLeastDeficit_pos hK hθ0 hθ
   have hg1 : g ≤ 1 := (controlledPhaseLeastDeficit_mem_Icc hK θ).2
-  set σ : ℤ := if 0 < Real.sin θ then 1 else -1 with hσdef
-  have hσ : σ.natAbs = 1 := by by_cases h : 0 < Real.sin θ <;> simp [σ, h]
-  obtain ⟨Ψ, hΨbd, hΨ⟩ := hqe (BoundIndex t) 4 12 (56 + 14 * K) (by norm_num) (by omega)
-    (epigraphPolynomials t σ) (epigraphPolynomials_totalDegree_le t σ)
-    (epigraphPolynomials_bitsize t hK hbox hσ) epigraphFormula
-  obtain ⟨hin, hout⟩ := epigraph_boundary hsin hupper hattain
-  have hp : Ψ.Holds ![g, Real.cos θ] := (hΨ _).mpr hin
-  have hnear : ∀ δ > 0, ∃ q, dist q ![g, Real.cos θ] < δ ∧ ¬ Ψ.Holds q := by
-    intro δ hδ
-    have hm : 0 < min (δ / 2) (g / 2) := lt_min (by linarith) (by linarith)
-    refine ⟨![g - min (δ / 2) (g / 2), Real.cos θ], ?_, fun h => hout _ ?_ ((hΨ _).mp h)⟩
-    · rw [dist_pi_lt_iff hδ]
-      intro i
-      fin_cases i
-      · simp only [Fin.zero_eta, Fin.isValue, Matrix.cons_val_zero, Real.dist_eq]
-        rw [show g - min (δ / 2) (g / 2) - g = -min (δ / 2) (g / 2) by ring, abs_neg,
-          abs_of_pos hm]
-        exact (min_le_left _ _).trans_lt (by linarith)
-      · simpa using hδ
-    · linarith
-  obtain ⟨L, hL, A, hA, hQ0, hQzero⟩ := Ψ.exists_atom_zero_of_boundary hp hnear
-  obtain ⟨hdeg, hbits⟩ := hΨbd L hL A hA
+  obtain ⟨A, hQ0, hdeg, hbits, hQzero⟩ := exists_controlledPhase_certificate_eliminant hK θ g t
+    hg0 hg1 hCdeg hSdeg hCm hSm hupper hattain
+  rw [← ha] at hdeg hbits
   set M := 12 ^ (a * (Fintype.card (BoundIndex t) + 1)) with hMdef
   have hM : 1 ≤ M := Nat.one_le_pow _ _ (by norm_num)
   set τ' := (56 + 14 * K) * M with hτ'def
   set Hn : ℕ := (M + 1) * 2 ^ M * 2 ^ τ' with hHndef
   set sep : ℝ := Real.exp (-(Cc * (((2 * M : ℕ) : ℝ) + Real.log (Hn : ℝ)) ^ c)) with hsepdef
-  have hzero : bivariateEval (bivariateOfMv A.polynomial) (Real.cos θ) g = 0 := by
+  have hzero : bivariateEval (bivariateOfMv A) (Real.cos θ) g = 0 := by
     rw [bivariateEval_bivariateOfMv]
     have hfun : (Fin.cons g (fun _ : Fin 1 => Real.cos θ) : Fin 2 → ℝ) = ![g, Real.cos θ] := by
       funext i; fin_cases i <;> rfl
     rw [hfun]
     exact hQzero
-  have hheight : BivariateHeightLE (bivariateOfMv A.polynomial) ((2 : ℝ) ^ τ') :=
+  have hheight : BivariateHeightLE (bivariateOfMv A) ((2 : ℝ) ^ τ') :=
     bivariateOfMv_heightLE fun m => abs_intCast_le_of_natAbs_lt (hbits m)
   have hseparation : ∀ S : Polynomial ℤ, 0 < S.natDegree → S.natDegree ≤ 2 * M →
       (∀ i, |(S.coeff i : ℝ)| ≤ (M + 1 : ℕ) * (2 : ℝ) ^ M * (2 : ℝ) ^ τ') →
@@ -360,20 +338,18 @@ theorem exists_explicit_controlledPhaseLeastDeficit_lower_bound
     _ ≤ g := hcert
 
 /-- Theorem E for the named gate `C₁ = diag(1,1,1,e^i)`. -/
-theorem exists_explicit_controlledPhase_one_lower_bound
-    (hQE : BasuPollackRoyExistentialElimination)
+theorem exists_explicit_controlledPhase_one_lower_bound_of_transcendenceMeasure
     (hTM : PolynomialTypeTranscendenceMeasureExpAngle) :
     ∃ CE : ℝ, 0 < CE ∧ ∀ K : ℕ, 1 ≤ K →
       Real.exp (-Real.exp (CE * (K : ℝ) ^ 2)) ≤ controlledPhaseLeastDeficit K 1 :=
-  exists_explicit_controlledPhaseLeastDeficit_lower_bound hQE hTM one_ne_zero isAlgebraic_one
+  exists_explicit_controlledPhaseLeastDeficit_lower_bound_of_transcendenceMeasure hTM one_ne_zero isAlgebraic_one
 
 /-- **Theorem E, protocol form.** Every pure protocol of footprint at most `K ≥ 1`
 implementing the controlled phase with Choi infidelity (score deficit) at most `ε`,
 and every common-map mixed protocol, has `ε ≥ exp(-exp(C_E K²))`; with free
 standard-Borel classical messages and quantum footprint `Kq ≥ 1`,
 `ε ≥ exp(-exp(256 C_E Kq¹⁰))`. -/
-theorem exists_explicit_controlledPhase_protocol_bound
-    (hQE : BasuPollackRoyExistentialElimination)
+theorem exists_explicit_controlledPhase_protocol_bound_of_transcendenceMeasure
     (hTM : PolynomialTypeTranscendenceMeasureExpAngle)
     {θ : ℝ} (hθ0 : θ ≠ 0) (hθ : IsAlgebraic ℚ θ) :
     ∃ CE : ℝ, 0 < CE ∧
@@ -399,7 +375,7 @@ theorem exists_explicit_controlledPhase_protocol_bound
         (∀ (n : ℕ) (m : MixedResource ρA ρB n), P.HasMixedQuantumFootprint m Kq →
           1 - ε ≤ scoreU (controlledPhase θ) (P.mixedOperationalChannel m) →
             Real.exp (-Real.exp (256 * CE * (Kq : ℝ) ^ 10)) ≤ ε))) := by
-  obtain ⟨CE, hCE, hbound⟩ := exists_explicit_controlledPhaseLeastDeficit_lower_bound hQE hTM hθ0 hθ
+  obtain ⟨CE, hCE, hbound⟩ := exists_explicit_controlledPhaseLeastDeficit_lower_bound_of_transcendenceMeasure hTM hθ0 hθ
   refine ⟨CE, hCE, fun P K ε hK hP hs => (hbound K hK).trans
     (P.controlledPhaseLeastDeficit_le hK hP hs), fun P Kq ε hKq => ?_⟩
   have h64 : 1 ≤ 16 * Kq ^ 5 := by
@@ -416,14 +392,13 @@ theorem exists_explicit_controlledPhase_protocol_bound
 /-- **Theorem E, iterated-logarithm form.** For `0 < ε < 1/e`, a charged
 footprint `K ≥ 1` reaching least deficit at most `ε` satisfies
 `log₂ K ≥ ½ log₂ ln ln(1/ε) - b`. -/
-theorem exists_explicit_controlledPhase_iterated_log_bound
-    (hQE : BasuPollackRoyExistentialElimination)
+theorem exists_explicit_controlledPhase_iterated_log_bound_of_transcendenceMeasure
     (hTM : PolynomialTypeTranscendenceMeasureExpAngle)
     {θ : ℝ} (hθ0 : θ ≠ 0) (hθ : IsAlgebraic ℚ θ) :
     ∃ b : ℝ, 0 ≤ b ∧ ∀ (K : ℕ) (ε : ℝ), 1 ≤ K → 0 < ε → ε < Real.exp (-1) →
       controlledPhaseLeastDeficit K θ ≤ ε →
       (1 / 2 : ℝ) * Real.logb 2 (Real.log (Real.log (1 / ε))) - b ≤ Real.logb 2 K := by
-  obtain ⟨CE, hCE, hbound⟩ := exists_explicit_controlledPhaseLeastDeficit_lower_bound hQE hTM hθ0 hθ
+  obtain ⟨CE, hCE, hbound⟩ := exists_explicit_controlledPhaseLeastDeficit_lower_bound_of_transcendenceMeasure hTM hθ0 hθ
   refine ⟨max 0 ((1 / 2 : ℝ) * Real.logb 2 CE), le_max_left _ _, ?_⟩
   intro K ε hK hε hεe hle
   have hKr : (0 : ℝ) < K := by exact_mod_cast hK
@@ -484,8 +459,7 @@ standard-Borel classical messages, for `0 < ε < 1/e`, every pure or common-map
 mixed protocol of quantum footprint `Kq ≥ 1` and score deficit at most `ε`
 satisfies `log₂ Kq ≥ (1/10) log₂ ln ln(1/ε) - b`. In LOSCC `Kq` is the
 Schmidt number of the resource. -/
-theorem exists_explicit_controlledPhase_quantum_iterated_log_bound
-    (hQE : BasuPollackRoyExistentialElimination)
+theorem exists_explicit_controlledPhase_quantum_iterated_log_bound_of_transcendenceMeasure
     (hTM : PolynomialTypeTranscendenceMeasureExpAngle)
     {θ : ℝ} (hθ0 : θ ≠ 0) (hθ : IsAlgebraic ℚ θ) :
     ∃ b : ℝ, 0 ≤ b ∧
@@ -502,7 +476,7 @@ theorem exists_explicit_controlledPhase_quantum_iterated_log_bound
         (∀ (n : ℕ) (m : MixedResource ρA ρB n), P.HasMixedQuantumFootprint m Kq →
           1 - ε ≤ scoreU (controlledPhase θ) (P.mixedOperationalChannel m) →
             (1 / 10 : ℝ) * Real.logb 2 (Real.log (Real.log (1 / ε))) - b ≤ Real.logb 2 Kq)) := by
-  obtain ⟨CE, hCE, hbound⟩ := exists_explicit_controlledPhaseLeastDeficit_lower_bound hQE hTM hθ0 hθ
+  obtain ⟨CE, hCE, hbound⟩ := exists_explicit_controlledPhaseLeastDeficit_lower_bound_of_transcendenceMeasure hTM hθ0 hθ
   refine ⟨max 0 ((1 / 10 : ℝ) * Real.logb 2 (256 * CE)), le_max_left _ _, ?_⟩
   intro ρA ρB κA κB μA μB σA σB _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ P Kq ε hKq hε hεe
   have hKr : (0 : ℝ) < Kq := by exact_mod_cast hKq

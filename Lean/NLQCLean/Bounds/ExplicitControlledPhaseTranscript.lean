@@ -1,5 +1,5 @@
 import NLQCLean.Arithmetic.TranscriptHeight
-import NLQCLean.Bounds.GenericEpigraph
+import NLQCLean.Bounds.ControlledPhaseEliminant
 import NLQCLean.Bounds.ExplicitControlledPhaseGelfond
 import NLQCLean.Bounds.SharedRandomLOSCC
 
@@ -8,7 +8,8 @@ import NLQCLean.Bounds.SharedRandomLOSCC
 
 For a transcript shape the score of the transcript family is maximized on a compact real
 algebraic set; at `C₁` the maximum is below one by exact impossibility, and the boundary
-eliminant of the epigraph (one-block quantifier elimination) with the proved Gelfond measure
+eliminant of the epigraph (`Deformation.exists_eliminant_of_family`) with the proved
+Gelfond measure
 for `e^i` gives a least deficit at least `exp(-exp(C r⁴ q²))`, `q = rab`, uniformly in the
 shape. The transcript representative then bounds every free-classical protocol.
 -/
@@ -228,16 +229,16 @@ theorem transcript_exponent_le {α N q : ℕ} {P : ℝ} (hq : 1 ≤ q) (hP1 : 1 
         rw [← Real.exp_nat_mul, ← Real.exp_add]; push_cast; ring_nf
     _ ≤ Real.exp ((108108 * α + 237) * P) := Real.exp_le_exp.mpr (by nlinarith)
 
-/-- **Uniform bound for transcript shapes** (E-QE only). There is `C > 0` such that for every
+/-- **Uniform bound for transcript shapes.** There is `C > 0` such that for every
 shape produced by the transcript representative, `g ≥ exp(-exp(C r⁴ q²))`, `q = rab`. -/
-theorem exists_transcript_deficit_bound (hQE : BasuPollackRoyExistentialElimination) :
+theorem exists_transcript_deficit_bound :
     ∃ CE : ℝ, 0 < CE ∧ ∀ (r a b kA kB eA eB nA nB : ℕ), 1 ≤ r → 1 ≤ a → 1 ≤ b →
       kA ≤ 2 * r * a → kB ≤ 2 * r * b → eA ≤ 2 * kA * b → eB ≤ 2 * kB * a →
       nA ≤ 4 * r ^ 2 → nB ≤ 4 * r ^ 2 →
       (tPhys ![r, r, kA, kB, a, b, eA, eB] nA nB).Nonempty →
       Real.exp (-Real.exp (CE * ((r : ℝ) ^ 4 * ((r * a * b : ℕ) : ℝ) ^ 2))) ≤
         1 - tScoreMax ![r, r, kA, kB, a, b, eA, eB] nA nB 1 / 16 := by
-  obtain ⟨α, helim⟩ := GenericEpigraph.exists_eliminant_of_family hQE
+  obtain ⟨α, helim⟩ := Deformation.exists_eliminant_of_family
   refine ⟨108108 * α + 237, by positivity, ?_⟩
   intro r a b kA kB eA eB nA nB hr ha hb hkA hkB heA heB hnA hnB hne
   set s : Fin 8 → ℕ := ![r, r, kA, kB, a, b, eA, eB] with hsdef
@@ -284,20 +285,19 @@ theorem exists_transcript_deficit_bound (hQE : BasuPollackRoyExistentialEliminat
   have hattain : ∃ w : TCoordIndex s nA nB → ℝ,
       PhysicalPolynomial.eval w (transcriptConstraintSumSquares s nA nB) = 0 ∧
       PhysicalPolynomial.eval (Sum.elim ![Real.cos 1, Real.sin 1] w)
-        (transcriptScorePolynomial s nA nB) = 16 * (1 - g) := by
+        (transcriptScorePolynomial s nA nB) = 16 * (1 - g) ∧ ∀ i, |w i| ≤ 1 := by
     obtain ⟨w, hw, hwv⟩ := hG.1
-    exact ⟨w, hw, hwv.trans hval⟩
-  have hCst : ∀ m, ((transcriptConstraintSumSquares s nA nB).coeff m).natAbs ≤ 2 ^ 55 * q ^ 18 :=
-    (transcriptConstraintSumSquares_massLE hq1 hs hnA' hnB').coefficient_natAbs_le
-  have hSc : ∀ m, ((transcriptScorePolynomial s nA nB).coeff m).natAbs ≤ 2 ^ 55 * q ^ 18 :=
-    (transcriptScorePolynomial_massLE hs hnA' hnB').coefficient_natAbs_le
-  have hsin : Real.sin 1 ≠ 0 := sin_ne_zero_of_isAlgebraic one_ne_zero isAlgebraic_one
+    refine ⟨w, hw, hwv.trans hval, fun i => ?_⟩
+    have hz := (mem_tPhys_iff w).mp hw
+    simpa using abs_tCoords_le_one hz i
   obtain ⟨A, hA0, hdeg, hbits, hzero⟩ := helim (TCoordIndex s nA nB)
     (transcriptConstraintSumSquares s nA nB) (transcriptScorePolynomial s nA nB)
     (2 ^ 55 * q ^ 18) (56 + 18 * q) 1 g (by omega)
     ((transcriptConstraintSumSquares_degree_le s nA nB).trans (by norm_num))
-    (transcriptScorePolynomial_degree_le s nA nB) hCst hSc (two_pow_transcript_bit_bound q)
-    hsin hg0 hupper hattain
+    (transcriptScorePolynomial_degree_le s nA nB)
+    (transcriptConstraintSumSquares_massLE hq1 hs hnA' hnB')
+    (transcriptScorePolynomial_massLE hs hnA' hnB') (two_pow_transcript_bit_bound q)
+    hg0 hg1 hupper hattain
   set N := Fintype.card (TCoordIndex s nA nB) with hNdef
   have hM : 1 ≤ 12 ^ (α * (N + 2)) := Nat.one_le_pow _ _ (by norm_num)
   have hgap := gap_ge_of_cos_one_eliminant_gelfond hg0 hg1 hA0 hM hdeg
@@ -328,7 +328,7 @@ theorem exists_transcript_deficit_bound (hQE : BasuPollackRoyExistentialEliminat
 
 /-- **Core transfer.** A finite free-classical protocol on rank-sized resource registers with
 at most `(2r)²` outcomes per party has deficit at least `exp(-exp(C r⁴ q²))` at `C₁`. -/
-theorem exists_transcript_core_bound (hQE : BasuPollackRoyExistentialElimination) :
+theorem exists_transcript_core_bound :
     ∃ CE : ℝ, 0 < CE ∧ ∀ {κA κB μA μB ηA ηB εA εB : Type*}
       [Fintype κA] [Fintype κB] [Fintype μA] [Fintype μB] [Fintype ηA] [Fintype ηB]
       [Fintype εA] [Fintype εB] [DecidableEq κA] [DecidableEq κB] [DecidableEq μA]
@@ -340,7 +340,7 @@ theorem exists_transcript_core_bound (hQE : BasuPollackRoyExistentialElimination
       Real.exp (-Real.exp (CE * ((r : ℝ) ^ 4 *
           ((r * Fintype.card μA * Fintype.card μB : ℕ) : ℝ) ^ 2))) ≤
         1 - scoreU (controlledPhase 1) Q.operationalChannel := by
-  obtain ⟨CE, hCE, hfam⟩ := exists_transcript_deficit_bound hQE
+  obtain ⟨CE, hCE, hfam⟩ := exists_transcript_deficit_bound
   refine ⟨CE, hCE, fun {κA κB μA μB ηA ηB εA εB} _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ {r nA nB} Q
     hnA hnB => ?_⟩
   classical
@@ -390,12 +390,11 @@ theorem rank_quantum_le {r a b R Kq : ℕ} (hrR : r ≤ R) (hK : r * a * b ≤ K
   have h2 : ((r * a * b : ℕ) : ℝ) ≤ Kq := by exact_mod_cast hK
   gcongr
 
-/-- **`eq:explicit-quantum-tradeoff`, finite free-classical protocols.** With E-QE only (the
-transcendence input for `e^i` is proved), there is `C > 0` such that every finite
+/-- **`eq:explicit-quantum-tradeoff`, finite free-classical protocols.** Unconditionally, there
+is `C > 0` such that every finite
 free-classical protocol for `C₁` with resource Schmidt number at most `R`, quantum footprint at
 most `Kq` and score deficit at most `ε` has `ε ≥ exp(-exp(C R⁴ Kq²))`. -/
-theorem exists_explicit_controlledPhase_one_quantum_tradeoff
-    (hQE : BasuPollackRoyExistentialElimination) :
+theorem exists_explicit_controlledPhase_one_quantum_tradeoff :
     ∃ CE : ℝ, 0 < CE ∧ ∀ {ρA ρB κA κB μA μB σA σB ηA ηB εA εB : Type*}
       [Fintype ρA] [Fintype ρB] [Fintype κA] [Fintype κB] [Fintype μA] [Fintype μB]
       [Fintype σA] [Fintype σB] [Fintype ηA] [Fintype ηB] [Fintype εA] [Fintype εB]
@@ -407,7 +406,7 @@ theorem exists_explicit_controlledPhase_one_quantum_tradeoff
       schmidtRank P.resource ≤ R → P.HasQuantumFootprint Kq →
       1 - ε ≤ scoreU (controlledPhase 1) P.operationalChannel →
       Real.exp (-Real.exp (CE * ((R : ℝ) ^ 4 * (Kq : ℝ) ^ 2))) ≤ ε := by
-  obtain ⟨CE, hCE, hcore⟩ := exists_transcript_core_bound hQE
+  obtain ⟨CE, hCE, hcore⟩ := exists_transcript_core_bound
   refine ⟨CE, hCE, fun {ρA ρB κA κB μA μB σA σB ηA ηB εA εB} _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
     _ _ _ _ _ _ P {R Kq ε} hR hK hs => ?_⟩
   classical
@@ -425,8 +424,7 @@ set_option maxHeartbeats 1000000 in
 set_option synthInstance.maxHeartbeats 200000 in
 /-- **`eq:explicit-quantum-tradeoff`, standard-Borel free-classical protocols**, pure and
 common-map mixed resources (Schmidt number at most `R`). -/
-theorem exists_explicit_controlledPhase_one_borel_quantum_tradeoff
-    (hQE : BasuPollackRoyExistentialElimination) :
+theorem exists_explicit_controlledPhase_one_borel_quantum_tradeoff :
     ∃ CE : ℝ, 0 < CE ∧ ∀ {ρA ρB κA κB μA μB σA σB : Type*}
       [Fintype ρA] [Fintype ρB] [Fintype κA] [Fintype κB] [Fintype μA] [Fintype μB]
       [DecidableEq ρA] [DecidableEq ρB] [DecidableEq κA] [DecidableEq κB]
@@ -441,7 +439,7 @@ theorem exists_explicit_controlledPhase_one_borel_quantum_tradeoff
         P.HasMixedQuantumFootprint m Kq →
         1 - ε ≤ scoreU (controlledPhase 1) (P.mixedOperationalChannel m) →
         Real.exp (-Real.exp (CE * ((R : ℝ) ^ 4 * (Kq : ℝ) ^ 2))) ≤ ε) := by
-  obtain ⟨CE, hCE, hcore⟩ := exists_transcript_core_bound hQE
+  obtain ⟨CE, hCE, hcore⟩ := exists_transcript_core_bound
   refine ⟨CE, hCE, fun {ρA ρB κA κB μA μB σA σB} _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ P {R Kq ε} =>
     ⟨fun hR hK hs => ?_, fun n m hm hK hs => ?_⟩⟩
   · obtain ⟨nA, hnA, nB, hnB, Q, -, hscore, -, -⟩ :=
@@ -471,8 +469,7 @@ theorem exists_explicit_controlledPhase_one_borel_quantum_tradeoff
 
 /-- **The sixth-power bound.** Every finite or standard-Borel free-classical protocol for `C₁`
 of quantum footprint at most `Kq` has `ε ≥ exp(-exp(C Kq⁶))`. -/
-theorem exists_explicit_controlledPhase_one_sixth_power
-    (hQE : BasuPollackRoyExistentialElimination) :
+theorem exists_explicit_controlledPhase_one_sixth_power :
     ∃ CE : ℝ, 0 < CE ∧ ∀ {ρA ρB κA κB μA μB σA σB : Type*}
       [Fintype ρA] [Fintype ρB] [Fintype κA] [Fintype κB] [Fintype μA] [Fintype μB]
       [DecidableEq ρA] [DecidableEq ρB] [DecidableEq κA] [DecidableEq κB]
@@ -483,7 +480,7 @@ theorem exists_explicit_controlledPhase_one_sixth_power
       P.HasQuantumFootprint Kq →
       1 - ε ≤ scoreU (controlledPhase 1) P.operationalChannel.toLinearMap →
       Real.exp (-Real.exp (CE * (Kq : ℝ) ^ 6)) ≤ ε := by
-  obtain ⟨CE, hCE, hB⟩ := exists_explicit_controlledPhase_one_borel_quantum_tradeoff hQE
+  obtain ⟨CE, hCE, hB⟩ := exists_explicit_controlledPhase_one_borel_quantum_tradeoff
   refine ⟨CE, hCE, fun {ρA ρB κA κB μA μB σA σB} _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ P {Kq ε}
     hK hs => ?_⟩
   have hfoot := (hasFootprint_iff Kq P.resource).mp hK
@@ -518,8 +515,7 @@ theorem exists_explicit_controlledPhase_one_sixth_power
 /-- **Iterated-logarithm form.** For `0 < ε < 1/e`, a standard-Borel free-classical protocol
 for `C₁` of quantum footprint `Kq` with score deficit at most `ε` has
 `log₂ Kq ≥ (1/6) log₂ ln ln(1/ε) - O(1)`. -/
-theorem exists_explicit_controlledPhase_one_sixth_log_bound
-    (hQE : BasuPollackRoyExistentialElimination) :
+theorem exists_explicit_controlledPhase_one_sixth_log_bound :
     ∃ b : ℝ, 0 ≤ b ∧ ∀ {ρA ρB κA κB μA μB σA σB : Type*}
       [Fintype ρA] [Fintype ρB] [Fintype κA] [Fintype κB] [Fintype μA] [Fintype μB]
       [DecidableEq ρA] [DecidableEq ρB] [DecidableEq κA] [DecidableEq κB]
@@ -530,7 +526,7 @@ theorem exists_explicit_controlledPhase_one_sixth_log_bound
       P.HasQuantumFootprint Kq →
       1 - ε ≤ scoreU (controlledPhase 1) P.operationalChannel.toLinearMap →
       (1 / 6 : ℝ) * Real.logb 2 (Real.log (Real.log (1 / ε))) - b ≤ Real.logb 2 Kq := by
-  obtain ⟨CE, hCE, hbound⟩ := exists_explicit_controlledPhase_one_sixth_power hQE
+  obtain ⟨CE, hCE, hbound⟩ := exists_explicit_controlledPhase_one_sixth_power
   refine ⟨max 0 ((1 / 6 : ℝ) * Real.logb 2 CE), le_max_left _ _, ?_⟩
   intro ρA ρB κA κB μA μB σA σB _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ P Kq ε hKq hε hεe hK hs
   have hKr : (0 : ℝ) < Kq := by exact_mod_cast hKq
@@ -542,8 +538,7 @@ theorem exists_explicit_controlledPhase_one_sixth_log_bound
 /-- **Resource qubits in LOSCC.** For `0 < ε < 1/e`, an LOSCC protocol for `C₁` (classical
 messages only) with at most `q` initial resource qubits and score deficit at most `ε` has
 `q ≥ (1/3) log₂ ln ln(1/ε) - O(1)`. -/
-theorem exists_explicit_controlledPhase_one_loscc_qubit_bound
-    (hQE : BasuPollackRoyExistentialElimination) :
+theorem exists_explicit_controlledPhase_one_loscc_qubit_bound :
     ∃ b : ℝ, 0 ≤ b ∧ ∀ {ρA ρB κA κB μA μB σA σB : Type*}
       [Fintype ρA] [Fintype ρB] [Fintype κA] [Fintype κB] [Fintype μA] [Fintype μB]
       [DecidableEq ρA] [DecidableEq ρB] [DecidableEq κA] [DecidableEq κB]
@@ -554,7 +549,7 @@ theorem exists_explicit_controlledPhase_one_loscc_qubit_bound
       Fintype.card ρA * Fintype.card ρB ≤ 2 ^ q → Fintype.card μA = 1 → Fintype.card μB = 1 →
       1 - ε ≤ scoreU (controlledPhase 1) P.operationalChannel.toLinearMap →
       (1 / 3 : ℝ) * Real.logb 2 (Real.log (Real.log (1 / ε))) - b ≤ q := by
-  obtain ⟨CE, hCE, hbound⟩ := exists_explicit_controlledPhase_one_sixth_power hQE
+  obtain ⟨CE, hCE, hbound⟩ := exists_explicit_controlledPhase_one_sixth_power
   refine ⟨max 0 ((1 / 3 : ℝ) * Real.logb 2 CE), le_max_left _ _, ?_⟩
   intro ρA ρB κA κB μA μB σA σB _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ P q ε hε hεe hcard hμA hμB hs
   have hK := P.hasQuantumFootprint_of_loscc hcard hμA hμB

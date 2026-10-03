@@ -15,8 +15,7 @@ import NLQCLean.Geometry.UnitaryFrobeniusVolume
 import NLQCLean.Approx.PVMWitnessCutoff
 import NLQCLean.Geometry.PolynomialTube
 import NLQCLean.Approx.WitnessFamilies
-import NLQCLean.Bounds.ExplicitControlledPhaseQE
-import NLQCLean.Bounds.ExplicitControlledPhaseFree
+import NLQCLean.Bounds.ExplicitControlledPhaseResultant
 import NLQCLean.Bounds.ExplicitControlledPhaseGelfond
 import NLQCLean.ImageVolume.PolynomialImageVolume
 import NLQCLean.Bounds.FixedBudgetStability
@@ -37,13 +36,12 @@ polynomial image-volume bound `DirectVolume.polynomialImageVolumeBound`.
 
 Errors are score deficits (`1 - ε ≤ score`) unless the name says diamond or
 total variation; footprints charge resource Schmidt rank times both message
-dimensions. Only the effective Appendix C bound (`thm:explicit`) takes
-hypotheses, the two inputs `BasuPollackRoyExistentialElimination` and the polynomial-type
-transcendence measure `PolynomialTypeTranscendenceMeasureExpAngle` (implied by
-`CijsouwTranscendenceMeasureExp`). The latter is proved
-(`thm_explicit_transcendence_measure_angle`), and the `thm_explicit*_of_QE` forms take
-`BasuPollackRoyExistentialElimination` only;
-its constants are proved to exist, not to be computable.
+dimensions. The effective Appendix C bound (`thm:explicit`) takes no hypothesis either: the
+epigraph eliminant is proved by a deformed critical-point argument
+(`Arithmetic/DeformationBounds`) and the polynomial-type transcendence measure for `e^{iθ}` by
+Gelfond's method (`thm_explicit_transcendence_measure_angle`). The `*_of_transcendence_measure`
+forms derive it from any such measure (Cijsouw's `CijsouwTranscendenceMeasureExp` implies one).
+Its constants are proved to exist, not to be computable.
 -/
 
 namespace NLQCLean.Results.RobustPaper
@@ -207,14 +205,8 @@ alias thm_explicit_free_classical_transfer :=
   NLQCLean.StandardBorelClassicalProtocol.controlledPhaseLeastDeficit_le
 
 /-- `thm:explicit` (Theorem E): for every nonzero real algebraic angle,
-`g_K(θ) ≥ exp(-exp(C_E K²))` for all `K ≥ 1`; from E-QE and weak E-TM. -/
+`g_K(θ) ≥ exp(-exp(C_E K²))` for all `K ≥ 1`. -/
 alias thm_explicit := NLQCLean.exists_explicit_controlledPhaseLeastDeficit_lower_bound
-/-- `thm:explicit`: Cijsouw's transcendence measure (E-TM) implies the
-polynomial-type measure (weak E-TM) that the effective bound takes. -/
-alias thm_explicit_cijsouw_polynomialType :=
-  NLQCLean.CijsouwTranscendenceMeasureExp.polynomialType
-/-- `thm:explicit` for the named gate `C₁`. -/
-alias thm_explicit_one := NLQCLean.exists_explicit_controlledPhase_one_lower_bound
 /-- `thm:explicit`, protocol form: charged footprint `exp(-exp(C_E K²))` and free
 standard-Borel classical messages `exp(-exp(256 C_E Kq¹⁰))`. -/
 alias thm_explicit_protocol := NLQCLean.exists_explicit_controlledPhase_protocol_bound
@@ -223,36 +215,77 @@ alias thm_explicit_iterated_log := NLQCLean.exists_explicit_controlledPhase_iter
 /-- `thm:explicit`: `log₂ Kq ≥ (1/10) log₂ ln ln(1/ε) - O(1)` with free classical messages. -/
 alias thm_explicit_quantum_iterated_log :=
   NLQCLean.exists_explicit_controlledPhase_quantum_iterated_log_bound
+/-- `thm:explicit` for the named gate `C₁`: `g_K(1) ≥ exp(-exp(C K²))`. -/
+alias thm_explicit_one := NLQCLean.exists_explicit_controlledPhase_one_lower_bound
+/-- `thm:explicit` for `C₁`, protocol and free-classical forms: `ε ≥ exp(-exp(C K²))`, resp.
+`exp(-exp(256 C Kq¹⁰))`. -/
+alias thm_explicit_one_protocol := NLQCLean.exists_explicit_controlledPhase_one_protocol_bound
+/-- `thm:explicit` for `C₁`: `log₂ K ≥ ½ log₂ ln ln(1/ε) - O(1)`. -/
+alias thm_explicit_one_iterated_log :=
+  NLQCLean.exists_explicit_controlledPhase_one_iterated_log_bound
 
-/-! ### Appendix C with quantifier elimination as the only input -/
+/-! ### Appendix C: the arithmetic ingredients -/
 
-/-- Hypothesis-free transcendence measure for `e^i` (Hermite's method):
-`|P(e^i)|² ≥ Z^{-Z^{2N+9}}`, `Z = 6(N+1)²(H+1)²`, for every nonzero integer polynomial of
-degree at most `N ≥ 1` and height at most `H`. -/
-alias thm_explicit_transcendence_measure_exp_I :=
-  NLQCLean.ExpITranscendence.normSq_aeval_exp_I_ge
-/-- `thm:explicit` for `C₁`, assuming only E-QE: `g_K(1) ≥ exp(-exp(exp(C K²)))`. -/
-alias thm_explicit_one_of_QE := NLQCLean.exists_explicit_controlledPhase_one_lower_bound_of_QE
-/-- Protocol and free-classical forms: `ε ≥ exp(-exp(exp(C K²)))`, resp.
-`exp(-exp(exp(256 C Kq¹⁰)))`. -/
-alias thm_explicit_one_protocol_of_QE :=
-  NLQCLean.exists_explicit_controlledPhase_one_protocol_bound_of_QE
-/-- `log₂ K ≥ ½ log₂ ln ln ln(1/ε) - O(1)`. -/
-alias thm_explicit_one_triple_log_of_QE :=
-  NLQCLean.exists_explicit_controlledPhase_one_triple_log_bound_of_QE
-
-/-! ### Appendix C without external inputs -/
-
+/-- The polynomial-type transcendence measure for `e^{iθ}`
+(`PolynomialTypeTranscendenceMeasureExpAngle`, exponent `50`, Gelfond's method). -/
+alias thm_explicit_transcendence_measure_angle :=
+  NLQCLean.polynomialTypeTranscendenceMeasureExpAngle
+/-- Liouville inequality over `ℤ[i][ϑ]` used in the doubling step for `e^{iθ}`. -/
+alias thm_gelfond_angle_liouville := NLQCLean.Gelfond.eq_zero_of_norm_small_angle
+/-- Gelfond's method for `e^{iθ}`, `aθ` a root of a monic `f ∈ ℤ[X]`: for nonzero
+`P ∈ ℤ[X]` of degree at most `N ≤ B` and height at most `H` with `2^N (N+1) H ≤ 2^B`, and `B`
+also bounding `a`, `deg f`, `1 + max|f_i|` and `|θ|`, `|P(e^{iθ})| ≥ 2^{-N B (B⁴⁸ + 1)}`. -/
+alias thm_gelfond_measure_angle := NLQCLean.Gelfond.norm_eval_exp_angle_ge
+/-- Polynomial-type transcendence measure for `e^i` (Gelfond's method), for irreducible
+`G ∈ ℤ[i][X]` of degree at most `B` with coefficients at most `2^B`, `B ≥ 128`:
+`|G(e^i)| ≥ 2^{-B (200 B^{31} + 1)}`. -/
+alias thm_gelfond_measure_exp_I_irreducible :=
+  NLQCLean.Gelfond.norm_eval_exp_I_ge_of_irreducible
+/-- Polynomial-type transcendence measure for `e^i`: for nonzero `P ∈ ℤ[X]` of degree at most
+`N ≤ B` and height at most `H` with `2^N (N+1) H ≤ 2^B`, `B ≥ 128`,
+`|P(e^i)| ≥ 2^{-N B (200 B^{31} + 1)}`. -/
+alias thm_gelfond_measure_exp_I := NLQCLean.Gelfond.norm_eval_exp_I_ge
 /-- The least deficit and `cos 1` are a root of an explicit nonzero integer polynomial of
-degree at most `L = (835 K²)^(2^(2+164K²))` with coefficients at most `(2⁵⁵ K¹⁴)^(L³)`. -/
-alias thm_explicit_one_eliminant := NLQCLean.exists_controlledPhase_one_eliminant
-/-- `thm:explicit` for `C₁` with no hypothesis: `g_K(1) ≥ exp(-exp(exp(exp(171 K²))))`. -/
-alias thm_explicit_one_free := NLQCLean.controlledPhase_one_lower_bound_free
-/-- Protocol and free-classical forms: `ε ≥ exp(-exp(exp(exp(171 K²))))`, resp.
-`exp(-exp(exp(exp(43776 Kq¹⁰))))`. -/
-alias thm_explicit_one_protocol_free := NLQCLean.controlledPhase_one_protocol_bound_free
-/-- `log₂ K ≥ ½ log₂ ln ln ln ln(1/ε) - ½ log₂ 171` for `0 < ε < exp(-exp e)`. -/
-alias thm_explicit_one_quadruple_log_free := NLQCLean.controlledPhase_one_quadruple_log_bound_free
+degree at most `L = (835 K²)^(2^(2+164K²))` with coefficients at most `(2⁵⁵ K¹⁴)^(L³)`
+(iterated resultants of the Lagrange system). -/
+alias thm_explicit_one_resultant_eliminant :=
+  NLQCLean.exists_controlledPhase_one_resultant_eliminant
+
+/-! ### Appendix C: forms taking a transcendence measure
+
+These derive `thm:explicit` from any polynomial-type transcendence measure for `e^{iθ}`, for
+instance Cijsouw's. -/
+
+/-- `thm:explicit` from a polynomial-type transcendence measure. -/
+alias thm_explicit_of_transcendence_measure :=
+  NLQCLean.exists_explicit_controlledPhaseLeastDeficit_lower_bound_of_transcendenceMeasure
+/-- `thm:explicit`: Cijsouw's transcendence measure (E-TM) implies the
+polynomial-type measure (weak E-TM). -/
+alias thm_explicit_cijsouw_polynomialType :=
+  NLQCLean.CijsouwTranscendenceMeasureExp.polynomialType
+/-- `thm:explicit` for `C₁` from a polynomial-type transcendence measure. -/
+alias thm_explicit_one_of_transcendence_measure :=
+  NLQCLean.exists_explicit_controlledPhase_one_lower_bound_of_transcendenceMeasure
+/-- `thm:explicit`, protocol form, from a polynomial-type transcendence measure. -/
+alias thm_explicit_protocol_of_transcendence_measure :=
+  NLQCLean.exists_explicit_controlledPhase_protocol_bound_of_transcendenceMeasure
+/-- `thm:explicit`, iterated-log form, from a polynomial-type transcendence measure. -/
+alias thm_explicit_iterated_log_of_transcendence_measure :=
+  NLQCLean.exists_explicit_controlledPhase_iterated_log_bound_of_transcendenceMeasure
+/-- `thm:explicit`, quantum iterated-log form, from a polynomial-type transcendence measure. -/
+alias thm_explicit_quantum_iterated_log_of_transcendence_measure :=
+  NLQCLean.exists_explicit_controlledPhase_quantum_iterated_log_bound_of_transcendenceMeasure
+
+/-! ### Appendix C for `C₁` with explicit constants -/
+
+/-- `C₁` with explicit constant, triple exponential: `g_K(1) ≥ exp(-exp(exp(175 K²)))`. -/
+alias thm_explicit_one_triple_exp := NLQCLean.controlledPhase_one_triple_exp_bound
+/-- Protocol and free-classical forms: `ε ≥ exp(-exp(exp(175 K²)))`, resp.
+`exp(-exp(exp(44800 Kq¹⁰)))`. -/
+alias thm_explicit_one_protocol_triple_exp :=
+  NLQCLean.controlledPhase_one_protocol_triple_exp_bound
+/-- `log₂ K ≥ ½ log₂ ln ln ln(1/ε) - ½ log₂ 175` for `0 < ε < exp(-e)`. -/
+alias thm_explicit_one_triple_log := NLQCLean.controlledPhase_one_triple_log_bound
 
 /-! ### Appendix C: the direct transcript parametrization -/
 
@@ -264,16 +297,16 @@ alias thm_explicit_transcript_representative :=
   NLQCLean.ClassicalCommunication.exists_transcript_representative
 /-- `eq:explicit-quantum-variables` (count): at most `1090 r⁴ q²` real coordinates. -/
 alias thm_explicit_transcript_coordinates := NLQCLean.TranscriptPolynomial.card_tCoordIndex_le
-/-- `eq:explicit-quantum-tradeoff`, finite free-classical protocols, E-QE only:
+/-- `eq:explicit-quantum-tradeoff`, finite free-classical protocols, unconditional:
 `ε ≥ exp(-exp(C R⁴ Kq²))`. -/
 alias thm_explicit_one_quantum_tradeoff :=
   NLQCLean.exists_explicit_controlledPhase_one_quantum_tradeoff
 /-- `eq:explicit-quantum-tradeoff`, standard-Borel free-classical protocols, pure and
-common-map mixed resources, E-QE only. -/
+common-map mixed resources, unconditional. -/
 alias thm_explicit_one_borel_quantum_tradeoff :=
   NLQCLean.exists_explicit_controlledPhase_one_borel_quantum_tradeoff
 /-- `eq:explicit-quantum-tradeoff` with measurable shared randomness under uniform budgets,
-pure and common-map mixed branches, E-QE only. -/
+pure and common-map mixed branches, unconditional. -/
 alias thm_explicit_one_sharedRandom_quantum_tradeoff :=
   NLQCLean.exists_explicit_controlledPhase_one_sharedRandom_quantum_tradeoff
 /-- `thm:explicit`: `ε ≥ exp(-exp(C Kq⁶))` for every protocol of quantum footprint `Kq`. -/
@@ -283,60 +316,6 @@ alias thm_explicit_one_sixth_log := NLQCLean.exists_explicit_controlledPhase_one
 /-- `thm:explicit`: in LOSCC, at least `(1/3) log₂ ln ln(1/ε) - O(1)` resource qubits. -/
 alias thm_explicit_one_loscc_qubits :=
   NLQCLean.exists_explicit_controlledPhase_one_loscc_qubit_bound
-
-/-! ### Appendix C with the Gelfond measure for `e^i` -/
-
-/-- Polynomial-type transcendence measure for `e^i` (Gelfond's method), for irreducible
-`G ∈ ℤ[i][X]` of degree at most `B` with coefficients at most `2^B`, `B ≥ 128`:
-`|G(e^i)| ≥ 2^{-B (200 B^{31} + 1)}`. -/
-alias thm_gelfond_measure_exp_I_irreducible :=
-  NLQCLean.Gelfond.norm_eval_exp_I_ge_of_irreducible
-/-- Polynomial-type transcendence measure for `e^i`: for nonzero `P ∈ ℤ[X]` of degree at most
-`N ≤ B` and height at most `H` with `2^N (N+1) H ≤ 2^B`, `B ≥ 128`,
-`|P(e^i)| ≥ 2^{-N B (200 B^{31} + 1)}`. -/
-alias thm_gelfond_measure_exp_I := NLQCLean.Gelfond.norm_eval_exp_I_ge
-/-- `thm:explicit` for `C₁` with no hypothesis, triple exponential:
-`g_K(1) ≥ exp(-exp(exp(175 K²)))`. -/
-alias thm_explicit_one_free_triple := NLQCLean.controlledPhase_one_lower_bound_free_triple
-/-- Protocol and free-classical forms: `ε ≥ exp(-exp(exp(175 K²)))`, resp.
-`exp(-exp(exp(44800 Kq¹⁰)))`. -/
-alias thm_explicit_one_protocol_free_triple :=
-  NLQCLean.controlledPhase_one_protocol_bound_free_triple
-/-- `log₂ K ≥ ½ log₂ ln ln ln(1/ε) - ½ log₂ 175` for `0 < ε < exp(-e)`. -/
-alias thm_explicit_one_triple_log_free := NLQCLean.controlledPhase_one_triple_log_bound_free
-/-- `thm:explicit` for `C₁`, assuming only E-QE, double exponential:
-`g_K(1) ≥ exp(-exp(C K²))`. -/
-alias thm_explicit_one_double_exp_of_QE :=
-  NLQCLean.exists_explicit_controlledPhase_one_double_exp_bound_of_QE
-/-- Protocol and free-classical forms: `ε ≥ exp(-exp(C K²))`, resp.
-`exp(-exp(256 C Kq¹⁰))`. -/
-alias thm_explicit_one_protocol_double_exp_of_QE :=
-  NLQCLean.exists_explicit_controlledPhase_one_protocol_double_exp_bound_of_QE
-/-- `log₂ K ≥ ½ log₂ ln ln(1/ε) - O(1)`. -/
-alias thm_explicit_one_iterated_log_of_QE :=
-  NLQCLean.exists_explicit_controlledPhase_one_iterated_log_bound_of_QE
-
-/-! ### Appendix C for every algebraic angle with quantifier elimination as the only input -/
-
-/-- Liouville inequality over `ℤ[i][ϑ]` used in the doubling step for `e^{iθ}`. -/
-alias thm_gelfond_angle_liouville := NLQCLean.Gelfond.eq_zero_of_norm_small_angle
-/-- Gelfond's method for `e^{iθ}`, `aθ` a root of a monic `f ∈ ℤ[X]`: for nonzero
-`P ∈ ℤ[X]` of degree at most `N ≤ B` and height at most `H` with `2^N (N+1) H ≤ 2^B`, and `B`
-also bounding `a`, `deg f`, `1 + max|f_i|` and `|θ|`, `|P(e^{iθ})| ≥ 2^{-N B (B⁴⁸ + 1)}`. -/
-alias thm_gelfond_measure_angle := NLQCLean.Gelfond.norm_eval_exp_angle_ge
-/-- The weak E-TM (`PolynomialTypeTranscendenceMeasureExpAngle`) is a theorem: exponent `50`. -/
-alias thm_explicit_transcendence_measure_angle :=
-  NLQCLean.polynomialTypeTranscendenceMeasureExpAngle
-/-- `thm:explicit` for every nonzero real algebraic angle, assuming only E-QE. -/
-alias thm_explicit_of_QE := NLQCLean.exists_explicit_controlledPhaseLeastDeficit_lower_bound_of_QE
-/-- `thm:explicit`, protocol form, assuming only E-QE. -/
-alias thm_explicit_protocol_of_QE := NLQCLean.exists_explicit_controlledPhase_protocol_bound_of_QE
-/-- `thm:explicit`, `log₂ K ≥ ½ log₂ ln ln(1/ε) - O(1)`, assuming only E-QE. -/
-alias thm_explicit_iterated_log_of_QE :=
-  NLQCLean.exists_explicit_controlledPhase_iterated_log_bound_of_QE
-/-- `thm:explicit`, `log₂ Kq ≥ (1/10) log₂ ln ln(1/ε) - O(1)`, assuming only E-QE. -/
-alias thm_explicit_quantum_iterated_log_of_QE :=
-  NLQCLean.exists_explicit_controlledPhase_quantum_iterated_log_bound_of_QE
 
 /-! ### Setting, floors and qualitative divergence -/
 

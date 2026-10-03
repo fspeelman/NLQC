@@ -1,17 +1,17 @@
-import NLQCLean.Bounds.ExplicitControlledPhaseFree
+import NLQCLean.Bounds.ExplicitControlledPhaseResultant
 import NLQCLean.Arithmetic.GelfondMeasure
 
 /-!
 # The effective bound for `C₁` with the Gelfond measure for `e^i`
 
 The polynomial-type measure `|P(e^i)| ≥ 2^{-N B (200 B^{31} + 1)}`
-(`Gelfond.norm_eval_exp_I_ge`, proved here by Gelfond's method) replaces the weaker
-hypothesis-free measure in the separation step. A root `(g, cos 1)` of a nonzero integer
-polynomial of degree at most `M` with coefficients below `2^τ` then gives
-`g ≥ exp(-202 (6M + τ + 128)^{33})`, which removes one exponential from each bound:
+(`Gelfond.norm_eval_exp_I_ge`, proved by Gelfond's method) is used in the separation step.
+A root `(g, cos 1)` of a nonzero integer polynomial of degree at most `M` with coefficients
+below `2^τ` then gives `g ≥ exp(-202 (6M + τ + 128)^{33})`, so:
 
-* with no hypothesis, `g_K(1) ≥ exp(-exp(exp(175 K²)))`;
-* assuming only `BasuPollackRoyExistentialElimination`, `g_K(1) ≥ exp(-exp(C K²))`.
+* with the resultant eliminant, `g_K(1) ≥ exp(-exp(exp(175 K²)))` with an explicit constant;
+* with the deformation eliminant (`exists_controlledPhase_certificate_eliminant`),
+  `g_K(1) ≥ exp(-exp(C K²))`.
 -/
 
 namespace NLQCLean
@@ -108,9 +108,9 @@ theorem tower_arith_gelfond {K : ℕ} (hK : 1 ≤ K) {L T B : ℝ} (hL0 : 0 ≤ 
 
 /-- **Theorem E for `C₁` without external inputs, triple-exponential form.** For every
 footprint `K ≥ 1`, `exp(-exp(exp(175 K²))) ≤ g_K(1)`. -/
-theorem controlledPhase_one_lower_bound_free_triple {K : ℕ} (hK : 1 ≤ K) :
+theorem controlledPhase_one_triple_exp_bound {K : ℕ} (hK : 1 ≤ K) :
     Real.exp (-Real.exp (Real.exp (175 * (K : ℝ) ^ 2))) ≤ controlledPhaseLeastDeficit K 1 := by
-  obtain ⟨α, hα0, hαzero, hαdeg, hαcoeff⟩ := exists_controlledPhase_one_eliminant hK
+  obtain ⟨α, hα0, hαzero, hαdeg, hαcoeff⟩ := exists_controlledPhase_one_resultant_eliminant hK
   generalize hN : 2 + 164 * K ^ 2 = N at hαdeg hαcoeff
   generalize hL : (5 * (167 * K ^ 2)) ^ (2 ^ N) = L at hαdeg hαcoeff
   have hL1 : 1 ≤ L := by rw [← hL]; exact Nat.one_le_pow _ _ (by positivity)
@@ -163,7 +163,7 @@ theorem controlledPhase_one_lower_bound_free_triple {K : ℕ} (hK : 1 ≤ K) :
 pure or common-map mixed protocol of footprint `K ≥ 1` implementing `C₁` with score deficit at
 most `ε` has `ε ≥ exp(-exp(exp(175 K²)))`; with free standard-Borel classical messages and
 quantum footprint `Kq ≥ 1`, `ε ≥ exp(-exp(exp(44800 Kq¹⁰)))`. -/
-theorem controlledPhase_one_protocol_bound_free_triple :
+theorem controlledPhase_one_protocol_triple_exp_bound :
     (∀ {ρA ρB κA κB μA μB εA εB : Type*}
         [Fintype ρA] [Fintype ρB] [Fintype κA] [Fintype κB]
         [Fintype μA] [Fintype μB] [Fintype εA] [Fintype εB]
@@ -186,7 +186,7 @@ theorem controlledPhase_one_protocol_bound_free_triple :
         (∀ (n : ℕ) (m : MixedResource ρA ρB n), P.HasMixedQuantumFootprint m Kq →
           1 - ε ≤ scoreU (controlledPhase 1) (P.mixedOperationalChannel m) →
             Real.exp (-Real.exp (Real.exp (44800 * (Kq : ℝ) ^ 10))) ≤ ε))) := by
-  refine ⟨fun P K ε hK hP hs => (controlledPhase_one_lower_bound_free_triple hK).trans
+  refine ⟨fun P K ε hK hP hs => (controlledPhase_one_triple_exp_bound hK).trans
     (P.controlledPhaseLeastDeficit_le hK hP hs), fun P Kq ε hKq => ?_⟩
   have h64 : 1 ≤ 16 * Kq ^ 5 := by
     have := Nat.one_le_pow 5 Kq hKq
@@ -196,19 +196,19 @@ theorem controlledPhase_one_protocol_bound_free_triple :
     push_cast; ring_nf
   obtain ⟨hpure, hmixed⟩ :=
     NLQCLean.StandardBorelClassicalProtocol.controlledPhaseLeastDeficit_le P (θ := 1) (ε := ε) hKq
-  exact ⟨fun hK hs => hexp ▸ (controlledPhase_one_lower_bound_free_triple h64).trans (hpure hK hs),
-    fun n m hK hs => hexp ▸ (controlledPhase_one_lower_bound_free_triple h64).trans
+  exact ⟨fun hK hs => hexp ▸ (controlledPhase_one_triple_exp_bound h64).trans (hpure hK hs),
+    fun n m hK hs => hexp ▸ (controlledPhase_one_triple_exp_bound h64).trans
       (hmixed n m hK hs)⟩
 
 /-- **Theorem E for `C₁` without external inputs, triple-logarithm form.** For
 `0 < ε < exp(-e)`, a charged footprint `K ≥ 1` with least deficit at most `ε` satisfies
 `log₂ K ≥ ½ log₂ ln ln ln(1/ε) - ½ log₂ 175`. -/
-theorem controlledPhase_one_triple_log_bound_free (K : ℕ) (ε : ℝ) (hK : 1 ≤ K) (hε : 0 < ε)
+theorem controlledPhase_one_triple_log_bound (K : ℕ) (ε : ℝ) (hK : 1 ≤ K) (hε : 0 < ε)
     (hεe : ε < Real.exp (-Real.exp 1)) (hle : controlledPhaseLeastDeficit K 1 ≤ ε) :
     (1 / 2 : ℝ) * Real.logb 2 (Real.log (Real.log (Real.log (1 / ε)))) -
       (1 / 2 : ℝ) * Real.logb 2 175 ≤ Real.logb 2 K := by
   have hKr : (0 : ℝ) < K := by exact_mod_cast hK
-  have h1 := (controlledPhase_one_lower_bound_free_triple hK).trans hle
+  have h1 := (controlledPhase_one_triple_exp_bound hK).trans hle
   have hL1 : Real.exp 1 < Real.log (1 / ε) := by
     rw [one_div, Real.log_inv, lt_neg]
     calc Real.log ε < Real.log (Real.exp (-Real.exp 1)) := Real.log_lt_log hε hεe
@@ -234,14 +234,52 @@ theorem controlledPhase_one_triple_log_bound_free (K : ℕ) (ε : ℝ) (hK : 1 �
   push_cast at hb
   linarith
 
-/-- **Theorem E for `C₁` with quantifier elimination as the only input, double-exponential
-form.** With the Gelfond measure for `e^i`, there is `C > 0` with
+set_option maxHeartbeats 1000000 in
+/-- The eliminant of the epigraph of `g_K(1)` (`exists_controlledPhase_certificate_eliminant`,
+with `a = 4`): the point `(g_K(1), cos 1)` is
+a zero of a nonzero integer polynomial of degree at most `M ≤ exp(252 a K²)` with coefficients
+below `2^{(56 + 14K) M}`. -/
+theorem exists_controlledPhase_one_eliminant :
+    ∃ a : ℕ, ∀ K : ℕ, 1 ≤ K → ∃ M : ℕ, 1 ≤ M ∧ (M : ℝ) ≤ Real.exp (252 * a * (K : ℝ) ^ 2) ∧
+      ∃ A : MvPolynomial (Fin 2) ℤ, A ≠ 0 ∧ A.totalDegree ≤ M ∧
+        (∀ m, (A.coeff m).natAbs < 2 ^ ((56 + 14 * K) * M)) ∧
+        eval₂ (Int.castRingHom ℝ) ![controlledPhaseLeastDeficit K 1, Real.cos 1] A = 0 := by
+  obtain ⟨a, ha⟩ : ∃ a : ℕ, a = 4 := ⟨4, rfl⟩
+  refine ⟨a, fun K hK => ?_⟩
+  obtain ⟨t, hbox, hcount, hCdeg, hSdeg, hCm, hSm, hupper, hattain⟩ :=
+    exists_controlledPhaseLeastDeficit_polynomial_certificate hK 1
+  set g := controlledPhaseLeastDeficit K 1 with hgdef
+  have hg0 : 0 < g := controlledPhaseLeastDeficit_pos hK one_ne_zero isAlgebraic_one
+  have hg1 : g ≤ 1 := (controlledPhaseLeastDeficit_mem_Icc hK 1).2
+  obtain ⟨A, hQ0, hdeg, hbits, hQzero⟩ := exists_controlledPhase_certificate_eliminant hK 1 g t
+    hg0 hg1 hCdeg hSdeg hCm hSm hupper hattain
+  rw [← ha] at hdeg hbits
+  set M := 12 ^ (a * (Fintype.card (BoundIndex t) + 1)) with hMdef
+  have hM : 1 ≤ M := Nat.one_le_pow _ _ (by norm_num)
+  have hMexp : (M : ℝ) ≤ Real.exp (252 * a * (K : ℝ) ^ 2) := by
+    have hcard : Fintype.card (BoundIndex t) ≤ 1 + 82 * K ^ 2 := by
+      rw [Fintype.card_sum, Fintype.card_unit, card_physicalCoordinateIndex]
+      omega
+    have h12 := twelve_pow_le_exp (a * (Fintype.card (BoundIndex t) + 1))
+    have hMcast : (M : ℝ) = (12 : ℝ) ^ (a * (Fintype.card (BoundIndex t) + 1)) := by
+      rw [hMdef]; push_cast; ring
+    rw [hMcast]
+    push_cast at h12
+    refine h12.trans (Real.exp_le_exp.mpr ?_)
+    have hc : ((Fintype.card (BoundIndex t) : ℕ) : ℝ) ≤ 1 + 82 * (K : ℝ) ^ 2 := by
+      exact_mod_cast hcard
+    have hKr : (1 : ℝ) ≤ K := by exact_mod_cast hK
+    have hK2 : (1 : ℝ) ≤ (K : ℝ) ^ 2 := by nlinarith
+    have ha : (0 : ℝ) ≤ a := Nat.cast_nonneg a
+    nlinarith [mul_le_mul_of_nonneg_left hc ha, mul_le_mul_of_nonneg_left hK2 ha]
+  exact ⟨M, hM, hMexp, A, hQ0, hdeg, hbits, hQzero⟩
+
+/-- **Theorem E for `C₁`.** With the Gelfond measure for `e^i`, there is `C > 0` with
 `exp(-exp(C K²)) ≤ g_K(1)` for every footprint `K ≥ 1`. -/
-theorem exists_explicit_controlledPhase_one_double_exp_bound_of_QE
-    (hQE : BasuPollackRoyExistentialElimination) :
+theorem exists_explicit_controlledPhase_one_lower_bound :
     ∃ CE : ℝ, 0 < CE ∧ ∀ K : ℕ, 1 ≤ K →
       Real.exp (-Real.exp (CE * (K : ℝ) ^ 2)) ≤ controlledPhaseLeastDeficit K 1 := by
-  obtain ⟨a, helim⟩ := exists_controlledPhase_one_eliminant_of_QE hQE
+  obtain ⟨a, helim⟩ := exists_controlledPhase_one_eliminant
   refine ⟨8316 * a + 237, by positivity, fun K hK => ?_⟩
   obtain ⟨M, hM, hMexp, A, hA0, hdeg, hbits, hzero⟩ := helim K hK
   have hg0 : 0 < controlledPhaseLeastDeficit K 1 :=
@@ -273,12 +311,11 @@ theorem exists_explicit_controlledPhase_one_double_exp_bound_of_QE
         have hK2 : (K : ℝ) ≤ (K : ℝ) ^ 2 := by nlinarith
         nlinarith
 
-/-- **Theorem E for `C₁`, protocol form, quantifier elimination only, double exponential.**
+/-- **Theorem E for `C₁`, protocol form.**
 Every pure or common-map mixed protocol of footprint `K ≥ 1` implementing `C₁` with score
 deficit at most `ε` has `ε ≥ exp(-exp(C K²))`; with free standard-Borel classical messages and
 quantum footprint `Kq ≥ 1`, `ε ≥ exp(-exp(256 C Kq¹⁰))`. -/
-theorem exists_explicit_controlledPhase_one_protocol_double_exp_bound_of_QE
-    (hQE : BasuPollackRoyExistentialElimination) :
+theorem exists_explicit_controlledPhase_one_protocol_bound :
     ∃ CE : ℝ, 0 < CE ∧
       (∀ {ρA ρB κA κB μA μB εA εB : Type*}
         [Fintype ρA] [Fintype ρB] [Fintype κA] [Fintype κB]
@@ -302,7 +339,7 @@ theorem exists_explicit_controlledPhase_one_protocol_double_exp_bound_of_QE
         (∀ (n : ℕ) (m : MixedResource ρA ρB n), P.HasMixedQuantumFootprint m Kq →
           1 - ε ≤ scoreU (controlledPhase 1) (P.mixedOperationalChannel m) →
             Real.exp (-Real.exp (256 * CE * (Kq : ℝ) ^ 10)) ≤ ε))) := by
-  obtain ⟨CE, hCE, hbound⟩ := exists_explicit_controlledPhase_one_double_exp_bound_of_QE hQE
+  obtain ⟨CE, hCE, hbound⟩ := exists_explicit_controlledPhase_one_lower_bound
   refine ⟨CE, hCE, fun P K ε hK hP hs => (hbound K hK).trans
     (P.controlledPhaseLeastDeficit_le hK hP hs), fun P Kq ε hKq => ?_⟩
   have h64 : 1 ≤ 16 * Kq ^ 5 := by
@@ -316,15 +353,14 @@ theorem exists_explicit_controlledPhase_one_protocol_double_exp_bound_of_QE
   exact ⟨fun hK hs => hexp ▸ (hbound _ h64).trans (hpure hK hs),
     fun n m hK hs => hexp ▸ (hbound _ h64).trans (hmixed n m hK hs)⟩
 
-/-- **Theorem E for `C₁`, iterated-logarithm form, quantifier elimination only.** For
+/-- **Theorem E for `C₁`, iterated-logarithm form.** For
 `0 < ε < 1/e`, a charged footprint `K ≥ 1` with least deficit at most `ε` satisfies
 `log₂ K ≥ ½ log₂ ln ln(1/ε) - b`. -/
-theorem exists_explicit_controlledPhase_one_iterated_log_bound_of_QE
-    (hQE : BasuPollackRoyExistentialElimination) :
+theorem exists_explicit_controlledPhase_one_iterated_log_bound :
     ∃ b : ℝ, 0 ≤ b ∧ ∀ (K : ℕ) (ε : ℝ), 1 ≤ K → 0 < ε → ε < Real.exp (-1) →
       controlledPhaseLeastDeficit K 1 ≤ ε →
       (1 / 2 : ℝ) * Real.logb 2 (Real.log (Real.log (1 / ε))) - b ≤ Real.logb 2 K := by
-  obtain ⟨CE, hCE, hbound⟩ := exists_explicit_controlledPhase_one_double_exp_bound_of_QE hQE
+  obtain ⟨CE, hCE, hbound⟩ := exists_explicit_controlledPhase_one_lower_bound
   refine ⟨max 0 ((1 / 2 : ℝ) * Real.logb 2 CE), le_max_left _ _, ?_⟩
   intro K ε hK hε hεe hle
   have hKr : (0 : ℝ) < K := by exact_mod_cast hK
