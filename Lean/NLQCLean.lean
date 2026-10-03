@@ -369,6 +369,8 @@ import NLQCLean.Geometry.StrongPolynomialTubeConditional
 import NLQCLean.Bounds.StrongHaarArithmetic
 import NLQCLean.Bounds.StrongHaarConditional
 import NLQCLean.Bounds.StrongUniversalResources
+import NLQCLean.Geometry.StrongWitnessBarrierVolume
+import NLQCLean.Bounds.StrongUniversalExplicit
 import NLQCLean.Approx.PVMRankFloor
 import NLQCLean.Models.ForwardWitness
 import NLQCLean.Models.ForwardReindex
@@ -512,6 +514,8 @@ import NLQCLean.Bounds.NearBellWitnessCover
 import NLQCLean.Bounds.NearBellHaarArithmetic
 import NLQCLean.Bounds.NearBellHaar
 import NLQCLean.Bounds.NearBellUniversal
+import NLQCLean.Geometry.PVMWitnessBarrierVolume
+import NLQCLean.Bounds.NearBellUniversalExplicit
 import NLQCLean.Bounds.NearBellAlmostEvery
 import NLQCLean.Bounds.BorelClassicalStrongPVM
 import NLQCLean.Results.RobustPaper

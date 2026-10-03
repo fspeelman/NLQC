@@ -7,7 +7,7 @@
     },
     {
       "path": "NLQCLean.lean",
-      "sha256": "9b3093ac14db52382124a87ae4866e3b53bebb6b0305da43e2ffc11f82918c23"
+      "sha256": "f5634afc0cd936dd0cbec44e15fc3d6728f8b4f1e064ccf713c4b9f5e195fdbb"
     },
     {
       "path": "NLQCLean/All.lean",
@@ -195,11 +195,11 @@
     },
     {
       "path": "NLQCLean/Approx/SlimPolynomialWitness.lean",
-      "sha256": "b0d6aa9ff3d6d97191cc81df2aa444cdba12ddc1b60378f44f39a2b518d80dfd"
+      "sha256": "5e84ebeadba1da58abd93fddff953af51f130ade5c6eab534a725216bf9e2a75"
     },
     {
       "path": "NLQCLean/Approx/SlimReverseWitness.lean",
-      "sha256": "d6e16a04d85e1b21919f08cc62a06414a4474ead0e67a67c48a67bd5bbc08e17"
+      "sha256": "4c3937c5c6a413f23d54e4a182207a32436abf647de003fceac25daf025218d8"
     },
     {
       "path": "NLQCLean/Approx/SlimWitnessCalculus.lean",
@@ -207,7 +207,7 @@
     },
     {
       "path": "NLQCLean/Approx/SlimWitnessCoordinates.lean",
-      "sha256": "f90bae7b257d3da15bd3e6d61e1b549d8537d5dd2e2fbd5ae9b03d484d402da6"
+      "sha256": "338b07f130d6295582597ab378820066ebe962a5388ad802e48628bc22451c7b"
     },
     {
       "path": "NLQCLean/Approx/SlimWitnessDifferential.lean",
@@ -618,6 +618,10 @@
       "sha256": "fae23ba10ead2fe08ae906ca9357652a48d4f0b909f41def451dd05f56870f3f"
     },
     {
+      "path": "NLQCLean/Bounds/NearBellUniversalExplicit.lean",
+      "sha256": "6aa4e790e31ad33a68fed939b5ec5066aa99a12d61468a2a3b0d003453a956bf"
+    },
+    {
       "path": "NLQCLean/Bounds/NearBellWitnessCover.lean",
       "sha256": "bca0e71dccbef774ac2f82dd9e476c4565f078121900ef84bc4e2cced4ff307c"
     },
@@ -687,11 +691,15 @@
     },
     {
       "path": "NLQCLean/Bounds/StrongHaarConditional.lean",
-      "sha256": "ac37a1e4be1cffaadb367a945a64b84603bbf1b12cbfde91a0cef28043dd6af5"
+      "sha256": "d8f01b5141582420b411b729b1dd93e8f1c3f814e498754355c61419c78f2954"
     },
     {
       "path": "NLQCLean/Bounds/StrongUnitaryTargets.lean",
       "sha256": "7f73334186668eee04a3bf4aa7791470373e608cef0ed4949860643f8842acd6"
+    },
+    {
+      "path": "NLQCLean/Bounds/StrongUniversalExplicit.lean",
+      "sha256": "60c573e359d78b671bbd532f4d2d7b65a05d6d55b9c17ac942bff720f71e392e"
     },
     {
       "path": "NLQCLean/Bounds/StrongUniversalResources.lean",
@@ -1019,7 +1027,11 @@
     },
     {
       "path": "NLQCLean/Geometry/PVMPolynomialTubeConditional.lean",
-      "sha256": "664ba14f34d1c135eb06d1d1251ca3758b3dc61a2a4a7c369af87f3b1105857b"
+      "sha256": "176714526e7a2912712be62c121ee048b111a7c0933c962eaf674383e693b0bc"
+    },
+    {
+      "path": "NLQCLean/Geometry/PVMWitnessBarrierVolume.lean",
+      "sha256": "b414f4ed7222a189f9868ade9f96437ac8d10c4298f416628b587d3a054a225e"
     },
     {
       "path": "NLQCLean/Geometry/PolynomialCoefficients.lean",
@@ -1099,7 +1111,11 @@
     },
     {
       "path": "NLQCLean/Geometry/StrongPolynomialTubeConditional.lean",
-      "sha256": "b7ba297bd782a1b4f02bba3a5b0a795efa8fa58a2e25cd960dc25b940aa3d0f5"
+      "sha256": "b838aed3ebf61028d21717da02e2a42726ad2b22bec50ccf2c62f2b4db0215e9"
+    },
+    {
+      "path": "NLQCLean/Geometry/StrongWitnessBarrierVolume.lean",
+      "sha256": "e77f87f9748c8794a53102adb7e6c42316b1244191381570e4a589bbbacf06a7"
     },
     {
       "path": "NLQCLean/Geometry/ThickenedJacobian.lean",
@@ -1183,7 +1199,7 @@
     },
     {
       "path": "NLQCLean/ImageVolume/PolynomialImageVolume.lean",
-      "sha256": "488fe96745738049721732242ada2a7f2bce712e68280ae93eaa1c35df1ad3e8"
+      "sha256": "09510229024ded2506ddce023febc1ec41ccebec4f48b273e8227c01c4b0e5aa"
     },
     {
       "path": "NLQCLean/Invariants/CompactSeparation.lean",
@@ -1739,15 +1755,15 @@
     },
     {
       "path": "NLQCLean/Results/PVM.lean",
-      "sha256": "9814c2d50f4e97442c0dade9c23d9c038411b041684c2e18d879c9cd9aa1d11f"
+      "sha256": "be61fa6c5dfab05e2b51cdf68ae79c5087373902a26e515663738bb3da1c60fa"
     },
     {
       "path": "NLQCLean/Results/RobustPaper.lean",
-      "sha256": "e597afe35449f83330b619af3e7dde3548f84fcaeb6ac1032e74e7bd6962ea6d"
+      "sha256": "64802fe2d40f99f15e5a5d2ddd25beec499133ee04a4b99ddaeba1795d8ac7af"
     },
     {
       "path": "NLQCLean/Results/Unitary.lean",
-      "sha256": "d8e6ad47d14b1aaa9f5145f3cfb1d52c55e05408690870e70a8e24dbfe495708"
+      "sha256": "20503a7b0c2ed9112ae564aff213e8794874f583427801d2d6f19d6910607de5"
     },
     {
       "path": "NLQCLean/Rigidity/Compression.lean",
@@ -2155,7 +2171,7 @@
     },
     {
       "path": "NLQCTests.lean",
-      "sha256": "523bc4079445bbcff467773eb69e0b37575105a9e971999448e343dcd2797f5d"
+      "sha256": "86d2212a3fdd9cdb47cb5fa4652ac850168acd548cd43884c911234b403c17db"
     },
     {
       "path": "NLQCTests/ArbitraryFiniteClassicalAlmostEveryAudit.lean",
@@ -2292,6 +2308,10 @@
     {
       "path": "NLQCTests/ExactWitnessHaarAudit.lean",
       "sha256": "b7c22980f768e829f824a6de743079563fc5b31b6415e45a14cbcb513924c1f9"
+    },
+    {
+      "path": "NLQCTests/ExplicitUniversalConstants.lean",
+      "sha256": "b36e9dc6574d27c52586cb6a88383d4856a29dbe3e3afcc0716378dff16d70de"
     },
     {
       "path": "NLQCTests/FiniteClassicalAlmostEveryAudit.lean",
@@ -2555,11 +2575,11 @@
     },
     {
       "path": "docs/ASSUMPTIONS.md",
-      "sha256": "e7efdf32c429b6c8d6a84f8ed87beef7f503c95141b27927baa3c8b9da371dfa"
+      "sha256": "86734c4c39322c0a19d83e04d53cc2329fa7dc045e17ff57f3521cc879b0d371"
     },
     {
       "path": "docs/PUBLIC_RESULTS.md",
-      "sha256": "12d73888e1fc4b8d7f0430e15e08d0c099fb1e5e02cc51a262da3786aa105852"
+      "sha256": "31e9f5addf2ceee6d24191493917027c5173105199c9c8438bf6924d4b603bcf"
     },
     {
       "path": "lake-manifest.json",

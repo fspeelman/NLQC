@@ -15,7 +15,7 @@ isometry has `d(K+s)` rows and `ds` columns, with row embeddings fixed by the sh
   with footprint `K`, target `U ∈ S_d` and score `≥ 1 − e`, `0 ≤ e ≤ 1/16`, is covered by a
   valid slim six-block witness at Frobenius distance `d √(21 e / 2)`.
 * `SlimReverseBlocks.finrank_real` is the exact real dimension of the block space, and
-  `SlimReverseBlocks.finrank_real_le` bounds it by `64 K²`.
+  `SlimReverseBlocks.finrank_real_le` bounds it by `38 K²`.
 -/
 
 namespace NLQCLean
@@ -172,15 +172,44 @@ theorem finrank_real (s : SlimReverseShape d K) :
     Module.finrank_self, Fintype.card_prod, Fintype.card_fin]
   ring
 
-/-- Raw dimension bound: the slim block space has real dimension `≤ 64 K²`. -/
+/-- Raw dimension bound: the slim block space has real dimension `≤ 38 K²`. -/
 theorem finrank_real_le (s : SlimReverseShape d K) (hd : 2 ≤ d) :
-    Module.finrank ℝ (SlimReverseBlocks s) ≤ 64 * K ^ 2 := by
+    Module.finrank ℝ (SlimReverseBlocks s) ≤ 38 * K ^ 2 := by
   obtain ⟨hA, hB⟩ := s.2
   have hK2 := SlimReverseShape.sq_le_two_mul_budget s
-  have hfs := frozenSupport_le hd hK2
   have hdfs := sq_mul_frozenSupport_le (by omega : 0 < d) hK2
-  have hr := s.1.dimensions_le_budget.1
   have hf := s.1.footprint
+  have hd4 : 4 ≤ d ^ 2 := by nlinarith
+  have hK : 2 ≤ K := by omega
+  have hmA : 2 ≤ s.1.mA := by
+    by_contra h
+    have : s.1.mA ^ 2 ≤ 1 := by
+      have : s.1.mA ≤ 1 := by omega
+      nlinarith
+    omega
+  have hmB : 2 ≤ s.1.mB := by
+    by_contra h
+    have : s.1.mB ^ 2 ≤ 1 := by
+      have : s.1.mB ≤ 1 := by omega
+      nlinarith
+    omega
+  have hr4 : 4 * s.1.r ≤ K := by
+    have : s.1.r * 2 * 2 ≤ s.1.r * s.1.mA * s.1.mB :=
+      Nat.mul_le_mul (Nat.mul_le_mul_left _ hmA) hmB
+    omega
+  have hq2 : 2 ≤ flatSupportCount d := by
+    have := two_mul_flatSupportCount_le d
+    have := sq_le_two_mul_flatSupportCount d
+    omega
+  have hf2 : 2 * frozenSupport d K ≤ K + 1 := by
+    have hb := (flatSupportCount_mul_frozenSupport_bounds (by omega : 0 < d) K).2
+    rcases Nat.eq_zero_or_pos (frozenSupport d K) with h0 | h0
+    · omega
+    · obtain ⟨g, hg⟩ : ∃ g, frozenSupport d K = g + 1 := ⟨_, (Nat.succ_pred_eq_of_pos h0).symm⟩
+      rw [hg] at hb ⊢
+      have hmul : 2 * g ≤ flatSupportCount d * g := Nat.mul_le_mul_right g hq2
+      have : flatSupportCount d * (g + 1) = flatSupportCount d * g + flatSupportCount d := by ring
+      omega
   have hAenc : d ^ 2 * (s.1.r * s.1.mA) ^ 2 ≤ 2 * K ^ 2 := by
     calc d ^ 2 * (s.1.r * s.1.mA) ^ 2 ≤ (2 * s.1.mB ^ 2) * (s.1.r * s.1.mA) ^ 2 :=
           Nat.mul_le_mul_right _ hB
@@ -191,13 +220,18 @@ theorem finrank_real_le (s : SlimReverseShape d K) (hd : 2 ≤ d) :
           Nat.mul_le_mul_right _ hA
       _ = 2 * (s.1.r * s.1.mA * s.1.mB) ^ 2 := by ring
       _ ≤ 2 * K ^ 2 := Nat.mul_le_mul_left 2 (Nat.pow_le_pow_left hf 2)
-  have hcomp : d ^ 2 * ((K + frozenSupport d K) * frozenSupport d K) ≤ 8 * K ^ 2 := by
-    calc d ^ 2 * ((K + frozenSupport d K) * frozenSupport d K) =
-        (K + frozenSupport d K) * (d ^ 2 * frozenSupport d K) := by ring
-      _ ≤ (2 * K) * (4 * K) := Nat.mul_le_mul (by omega) hdfs
-      _ = 8 * K ^ 2 := by ring
-  have hr2 : s.1.r ^ 2 ≤ K ^ 2 := Nat.pow_le_pow_left hr 2
-  have hs2 : frozenSupport d K ^ 2 ≤ K ^ 2 := Nat.pow_le_pow_left hfs 2
+  have hcomp : 4 * (d ^ 2 * ((K + frozenSupport d K) * frozenSupport d K)) ≤ 28 * K ^ 2 := by
+    have h7 : 4 * (K + frozenSupport d K) ≤ 7 * K := by omega
+    calc 4 * (d ^ 2 * ((K + frozenSupport d K) * frozenSupport d K)) =
+        (4 * (K + frozenSupport d K)) * (d ^ 2 * frozenSupport d K) := by ring
+      _ ≤ (7 * K) * (4 * K) := Nat.mul_le_mul h7 hdfs
+      _ = 28 * K ^ 2 := by ring
+  have hr2 : 16 * s.1.r ^ 2 ≤ K ^ 2 := by
+    have := Nat.pow_le_pow_left hr4 2
+    nlinarith
+  have hs2 : 16 * frozenSupport d K ^ 2 ≤ 9 * K ^ 2 := by
+    have := Nat.pow_le_pow_left hf2 2
+    nlinarith
   rw [finrank_real]
   nlinarith
 

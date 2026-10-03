@@ -21,6 +21,7 @@ import NLQCTests.SundogProjectionAudit
 import NLQCTests.SundogBridgeAudit
 import NLQCTests.SemialgebraicProjectionAudit
 import NLQCTests.QuantitativeResultTypes
+import NLQCTests.ExplicitUniversalConstants
 import NLQCTests.ChargedCompressionAudit
 import NLQCTests.RobustCompanionAudit
 import NLQCTests.ControlledPhaseAudit

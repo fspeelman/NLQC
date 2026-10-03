@@ -78,6 +78,9 @@ approximation, pure and common-map mixed resources. -/
 alias cor_universal_d2 := NLQCLean.exists_strongUniversalMaxResourceBound
 /-- `cor:universal-d2`, qubit form `log₂ K ≥ 2n + ½ log₂ ln(1/ε) - O(1)`. -/
 alias cor_universal_d2_qubit := NLQCLean.exists_strongUniversalQubitBound
+/-- `cor:universal-d2` with explicit constants:
+`K ≥ d² max(1 − ε, √ln(1/ε)/51, √(ln(1/ε) − 420)/46)`. -/
+alias cor_universal_d2_explicit := NLQCLean.strongUniversal_explicit
 /-- Regional almost-every bound near SWAP (unlabelled conclusion of the SWAP section). -/
 alias regional_swap_almost_every :=
   NLQCLean.exists_ae_swapNeighborhood_resource_constant
@@ -105,6 +108,8 @@ alias thm_bell_haar := NLQCLean.exists_nearBell_haar_constant
 universal PVM approximation (score and joint total variation, pure and
 common-map mixed resources). -/
 alias cor_universal_pvm := NLQCLean.exists_nearBell_universal_max_constant
+/-- `cor:universal-pvm` with explicit constants: `K ≥ max(d³(1 − ε)², d² √ln(1/ε)/36)`. -/
+alias cor_universal_pvm_explicit := NLQCLean.pvmUniversal_explicit
 /-- `cor:universal-pvm`, qubit form
 `log₂ K ≥ max(3n - 2, 2n + ½ log₂ ln(1/ε) - O(1))`. -/
 alias cor_universal_pvm_qubit := NLQCLean.exists_nearBell_universal_qubit_constant

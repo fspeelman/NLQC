@@ -55,4 +55,4 @@ almost-every exact-impossibility results use vector Sard.
 The maintained audits print full theorem types as well as axioms, so explicit
 hypotheses remain visible.
 
-The formal effective bound proves existence of its constants; their effective computability is not formalized. The source-to-theorem map describes other scope differences.
+The universal bounds of Theorem B also have proved explicit constants, with no premise: K ≥ d² max(1−ε, √ln(1/ε)/51, √(ln(1/ε)−420)/46) for universal unitary approximation and K ≥ max(d³(1−ε)², d²√ln(1/ε)/36) for universal measurement approximation (`strongUniversal_explicit`, `pvmUniversal_explicit`). Other quantitative constants remain existential. The formal effective bound proves existence of its constants; their effective computability is not formalized. The source-to-theorem map describes other scope differences.

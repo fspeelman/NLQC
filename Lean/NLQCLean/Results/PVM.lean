@@ -13,6 +13,7 @@ import NLQCLean.Bounds.FiniteClassicalHaar
 import NLQCLean.Bounds.FiniteClassicalAlmostEvery
 import NLQCLean.Bounds.ArbitraryFiniteClassicalAlmostEvery
 import NLQCLean.Bounds.FiniteClassicalQubits
+import NLQCLean.Bounds.NearBellUniversalExplicit
 
 /-!
 # Main projective-measurement results
@@ -178,6 +179,25 @@ alias exists_universal_resource_bound :=
 
 alias exists_universal_qubit_bound :=
   NLQCLean.exists_pvm_universal_qubit_constant
+
+/-- Explicit universal PVM bound (Theorem B(ii)) for `d ≥ 2`:
+`K ≥ max(d³(1 − ε)², d² √ln(1/ε)/36)`, score and joint TV, pure and common-map mixed. -/
+alias universal_explicit_resource_bound := NLQCLean.pvmUniversal_explicit
+
+/-- Explicit universal PVM bound for `d ≥ 3`: `K ≥ max(d³(1 − ε)², d² √ln(1/ε)/27)`. -/
+alias universal_explicit_resource_bound_of_three := NLQCLean.pvmUniversal_explicit_of_three
+
+/-- Theorem B(ii) in its displayed form with `c = 1/36`. -/
+alias universal_max_resource_bound_explicit := NLQCLean.pvmUniversal_max_explicit
+
+/-- `log₂ K ≥ max(3n − 2, 2n + ½ log₂ ln(1/ε) − 6)` at `d = 2ⁿ`. -/
+alias universal_qubit_bound_explicit := NLQCLean.pvmUniversal_qubit_explicit
+
+/-- Offset `5` once `n ≥ 2`. -/
+alias universal_qubit_bound_explicit_of_two := NLQCLean.pvmUniversal_qubit_explicit_of_two
+
+/-- The near-Bell Haar estimate with explicit factors at tube radius at most `1/2`. -/
+alias near_bell_haar_bound_explicit := NLQCLean.nearBell_haar_le_sharp
 
 alias exists_ae_forbidden_error_threshold :=
   NLQCLean.exists_ae_pvm_forbidden_error_constant

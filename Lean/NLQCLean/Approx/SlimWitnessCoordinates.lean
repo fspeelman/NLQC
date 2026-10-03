@@ -5,7 +5,7 @@ import NLQCLean.Approx.WitnessNormalization
 # Common Euclidean coordinates for slim witnesses
 
 The entries of the six slim blocks are enumerated, split into real and imaginary
-parts, and embedded in the common source `ℝ^(64 K²)`; the embedding depends only on the slim
+parts, and embedded in the common source `ℝ^(38 K²)`; the embedding depends only on the slim
 shape. Encoder blocks are divided by `√(d r)` and reverse completions by `√(d s)`, so every
 padded valid source point has norm `√6`. The output is the overlap matrix in real Frobenius
 coordinates scaled by `1/d` (normalized target distance).
@@ -18,8 +18,8 @@ open scoped Matrix.Norms.Frobenius
 
 local notation "∞" => ((⊤ : ℕ∞) : WithTop ℕ∞)
 
-/-- Common slim source dimension `P = 64 K²`. -/
-def slimCoordinateBudget (K : ℕ) : ℕ := 64 * K ^ 2
+/-- Common slim source dimension `P = 38 K²`. -/
+def slimCoordinateBudget (K : ℕ) : ℕ := 38 * K ^ 2
 
 /-- Normalized Frobenius output coordinates `H ↦ H/d` in `ℝ^(2d⁴)`. -/
 noncomputable def normalizedOutputCoordinates (d : ℕ) :

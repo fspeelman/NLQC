@@ -217,6 +217,55 @@ theorem normalizedWitnessTube_subset_imageTube {δ ρ u : ℝ} (hρ : ρ ≤ u)
     ((coordinateOverlapPolynomial s hd).eval x)
   linarith
 
+/-- The strong tube estimate for any image-volume factor `V` of the thickened slim family:
+`μ(S) ≤ 4 · 1024ᴺ · 9ᴺ · V · (Λ + 2u)^b u^(N−b)`. -/
+theorem strong_witness_haar_le_of_volume {V : ℝ} (hV : 0 ≤ V)
+    (hvol : ∀ δ c : ℝ, 0 ≤ δ → 0 ≤ c →
+      volume ((thickenedWitnessPolynomial s hd c).eval '' (thickenedWitnessFormat s hd δ).source) ≤
+        ENNReal.ofReal V * euclideanUnitBallVolume (2 * d ^ 4) *
+        ENNReal.ofReal (((4 + 32 * δ) * Real.sqrt K / d + c) ^ strongUncontrolledRank d *
+          (32 * δ * Real.sqrt K / d + c) ^ (2 * d ^ 4 - strongUncontrolledRank d)))
+    {δ ρ u : ℝ} (hδ : 0 ≤ δ) (hu : 0 < u) (hu' : u ≤ 1 / 64)
+    (hlam : 32 * δ * Real.sqrt K / d ≤ u) (hρ : ρ ≤ u)
+    {S : Set (Matrix.unitaryGroup (Fin d × Fin d) ℂ)} (hS : MeasurableSet S)
+    (hcover : S ⊆ witnessTargets s hd δ ρ) :
+    unitaryHaar (Fin d × Fin d) S ≤
+      ENNReal.ofReal ((4 * 1024 ^ (d ^ 4) * 9 ^ (d ^ 4) * V) *
+        (((4 + 32 * δ) * Real.sqrt K / d + 2 * u) ^ strongUncontrolledRank d *
+        u ^ (d ^ 4 - strongUncontrolledRank d))) := by
+  have hbN : strongUncontrolledRank d ≤ d ^ 4 := by
+    have := eight_mul_strongUncontrolledRank_le hd
+    omega
+  have hsq := Real.sqrt_nonneg (K : ℝ)
+  have hΛ0 : 0 ≤ (4 + 32 * δ) * Real.sqrt K / d := by positivity
+  have hμ0 : 0 ≤ 32 * δ * Real.sqrt K / d := by positivity
+  have hlow := strong_normalizedWitnessTube_volume_lower hd hu hu' hS
+  have hincl : normalizedWitnessTube d u S ⊆
+      (thickenedWitnessPolynomial s hd (2 * u)).eval '' (thickenedWitnessFormat s hd δ).source :=
+    (normalizedWitnessTube_subset_imageTube s hd hρ hcover).trans
+      ((coordinateOverlapPolynomial s hd).tube_subset_thicken_image (witnessFormat s hd δ)
+        (by change 7 + 1 + 1 ≤ 20; decide) (by positivity))
+  have hup := (measure_mono hincl).trans (hvol δ (2 * u) hδ (by positivity))
+  have hJ := strongJacobian_le hbN hΛ0 hμ0 hlam
+  have hchain : ENNReal.ofReal ((1 / 4 : ℝ) * (1 / 1024 : ℝ) ^ (d ^ 4)) *
+      euclideanUnitBallVolume (d ^ 4) ^ 2 * ENNReal.ofReal u ^ (d ^ 4) *
+        unitaryHaar (Fin d × Fin d) S ≤
+      ENNReal.ofReal V * euclideanUnitBallVolume (d ^ 4) ^ 2 *
+        ENNReal.ofReal (u ^ (d ^ 4) * (((4 + 32 * δ) * Real.sqrt K / d + 2 * u) ^ strongUncontrolledRank d *
+          9 ^ (d ^ 4) * u ^ (d ^ 4 - strongUncontrolledRank d))) := by
+    refine hlow.trans (hup.trans ?_)
+    exact mul_le_mul (mul_le_mul_right (euclideanUnitBallVolume_twice_le_sq (d ^ 4)) _)
+      (ENNReal.ofReal_le_ofReal hJ) zero_le zero_le
+  have hcancel := cancel_strong_tube_volume hu (by positivity) hV hchain
+  refine hcancel.trans (le_of_eq ?_)
+  congr 1
+  set X := (4 + 32 * δ) * Real.sqrt K / d + 2 * u
+  set N := d ^ 4
+  set b := strongUncontrolledRank d
+  have hinv : ((1 / 4 : ℝ) * (1 / 1024 : ℝ) ^ N)⁻¹ = 4 * 1024 ^ N := by
+    simp only [one_div, mul_inv, inv_pow, inv_inv]
+  rw [div_eq_mul_inv, hinv]; ring
+
 /-- The strong tube estimate, with the geometry constant `C` displayed. -/
 theorem strong_witness_haar_le {C : ℝ} (hC : 1 ≤ C) (hGeom : PolynomialImageVolumeBoundWith C)
     {δ ρ u : ℝ} (hδ : 0 ≤ δ) (hu : 0 < u) (hu' : u ≤ 1 / 64)
@@ -228,50 +277,21 @@ theorem strong_witness_haar_le {C : ℝ} (hC : 1 ≤ C) (hGeom : PolynomialImage
         ((4 + 32 * δ) * Real.sqrt K / d + 2 * u) ^ strongUncontrolledRank d *
         u ^ (d ^ 4 - strongUncontrolledRank d)) := by
   have hd0 : 0 < d := by omega
-  have hbN : strongUncontrolledRank d ≤ d ^ 4 := by
-    have := eight_mul_strongUncontrolledRank_le hd
-    omega
   have hN1 : 1 ≤ d ^ 4 := Nat.one_le_pow _ _ hd0
   have hC0 : 0 ≤ C := by linarith
+  have hexp : slimCoordinateBudget K + 2 * d ^ 4 + 2 * d ^ 4 = slimCoordinateBudget K + 4 * d ^ 4 := by
+    omega
+  have h := strong_witness_haar_le_of_volume s hd (V := C ^ (slimCoordinateBudget K + 4 * d ^ 4))
+    (pow_nonneg hC0 _) (fun δ c hδ hc => by
+      rw [← hexp]; exact strong_thickenedWitness_image_volume_le s hd hGeom hδ hc)
+    hδ hu hu' hlam hρ hS hcover
+  refine h.trans (ENNReal.ofReal_le_ofReal ?_)
   have hsq := Real.sqrt_nonneg (K : ℝ)
-  have hΛ0 : 0 ≤ (4 + 32 * δ) * Real.sqrt K / d := by positivity
-  have hμ0 : 0 ≤ 32 * δ * Real.sqrt K / d := by positivity
-  have hlow := strong_normalizedWitnessTube_volume_lower hd hu hu' hS
-  have hincl : normalizedWitnessTube d u S ⊆
-      (thickenedWitnessPolynomial s hd (2 * u)).eval '' (thickenedWitnessFormat s hd δ).source :=
-    (normalizedWitnessTube_subset_imageTube s hd hρ hcover).trans
-      ((coordinateOverlapPolynomial s hd).tube_subset_thicken_image (witnessFormat s hd δ)
-        (by change 7 + 1 + 1 ≤ 20; decide) (by positivity))
-  have hup := (measure_mono hincl).trans
-    (strong_thickenedWitness_image_volume_le s hd hGeom hδ (by positivity : (0 : ℝ) ≤ 2 * u))
-  have hJ := strongJacobian_le hbN hΛ0 hμ0 hlam
-  have hchain : ENNReal.ofReal ((1 / 4 : ℝ) * (1 / 1024 : ℝ) ^ (d ^ 4)) *
-      euclideanUnitBallVolume (d ^ 4) ^ 2 * ENNReal.ofReal u ^ (d ^ 4) *
-        unitaryHaar (Fin d × Fin d) S ≤
-      ENNReal.ofReal (C ^ (slimCoordinateBudget K + 4 * d ^ 4)) * euclideanUnitBallVolume (d ^ 4) ^ 2 *
-        ENNReal.ofReal (u ^ (d ^ 4) * (((4 + 32 * δ) * Real.sqrt K / d + 2 * u) ^ strongUncontrolledRank d *
-          9 ^ (d ^ 4) * u ^ (d ^ 4 - strongUncontrolledRank d))) := by
-    refine hlow.trans (hup.trans ?_)
-    have hexp : slimCoordinateBudget K + 2 * d ^ 4 + 2 * d ^ 4 = slimCoordinateBudget K + 4 * d ^ 4 := by
-      omega
-    rw [hexp]
-    exact mul_le_mul (mul_le_mul_right (euclideanUnitBallVolume_twice_le_sq (d ^ 4)) _)
-      (ENNReal.ofReal_le_ofReal hJ) zero_le zero_le
-  have hcancel := cancel_strong_tube_volume hu (by positivity) (pow_nonneg hC0 _) hchain
-  refine hcancel.trans (ENNReal.ofReal_le_ofReal ?_)
-  set X := (4 + 32 * δ) * Real.sqrt K / d + 2 * u
-  set N := d ^ 4
-  set b := strongUncontrolledRank d
-  set P := slimCoordinateBudget K
-  have hinv : ((1 / 4 : ℝ) * (1 / 1024 : ℝ) ^ N)⁻¹ = 4 * 1024 ^ N := by
-    simp only [one_div, mul_inv, inv_pow, inv_inv]
-  have hX : 0 ≤ X := by positivity
-  calc C ^ (P + 4 * N) * (X ^ b * 9 ^ N * u ^ (N - b)) / ((1 / 4 : ℝ) * (1 / 1024 : ℝ) ^ N)
-      = (4 * 1024 ^ N * 9 ^ N * C ^ (P + 4 * N)) * (X ^ b * u ^ (N - b)) := by
-        rw [div_eq_mul_inv, hinv]; ring
-    _ ≤ Real.exp ((36864 * C ^ 4) * ((P : ℝ) + N)) * (X ^ b * u ^ (N - b)) :=
-        mul_le_mul_of_nonneg_right (strong_fixed_base_le_exp hC P N hN1) (by positivity)
-    _ = _ := by simp only [N, Nat.cast_pow]; ring
+  have hX : 0 ≤ (4 + 32 * δ) * Real.sqrt K / d + 2 * u := by positivity
+  have hbase := strong_fixed_base_le_exp hC (slimCoordinateBudget K) (d ^ 4) hN1
+  push_cast at hbase
+  rw [mul_assoc (Real.exp _)]
+  exact mul_le_mul_of_nonneg_right hbase (by positivity)
 
 end SlimReverseBlocks
 

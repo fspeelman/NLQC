@@ -63,8 +63,9 @@ theorem exists_strongRestrictedHaarBound_of_imageVolumeBound (hGeom : Polynomial
               (d ^ 4 - strongUncontrolledRank d)) := fun s =>
         hbound d K s hd _ _ _ hδ0.le hu0 hu hlam hρ _
           (SlimReverseBlocks.measurableSet_witnessTargets s hd _ _) subset_rfl
-      have hP : ((slimCoordinateBudget K : ℕ) : ℝ) = 64 * (K : ℝ) ^ 2 := by
-        simp [slimCoordinateBudget]
+      have hP : ((slimCoordinateBudget K : ℕ) : ℝ) ≤ 64 * (K : ℝ) ^ 2 := by
+        simp only [slimCoordinateBudget, Nat.cast_mul, Nat.cast_pow, Nat.cast_ofNat]
+        nlinarith [sq_nonneg (K : ℝ)]
       have hcard : (Fintype.card (SlimReverseShape d K) : ℝ≥0∞) ≤ ENNReal.ofReal ((K : ℝ) ^ 3) := by
         rw [← ENNReal.ofReal_natCast]
         exact ENNReal.ofReal_le_ofReal (by exact_mod_cast SlimReverseShape.card_le_cube d K)
@@ -109,9 +110,9 @@ theorem exists_strongRestrictedHaarBound_of_imageVolumeBound (hGeom : Polynomial
             (ENNReal.ofReal_mul (by positivity)).symm
         _ ≤ _ := by
             apply ENNReal.ofReal_le_ofReal
-            rw [hP]
-            exact strong_small_radius_arith (by linarith) hd hK
-              (eight_mul_strongUncontrolledRank_le hd) he hu
+            refine le_trans ?_ (strong_small_radius_arith (by linarith) hd hK
+              (eight_mul_strongUncontrolledRank_le hd) he hu)
+            gcongr
     · exact prob_le_one.trans (ENNReal.one_le_ofReal.mpr
         (one_le_strong_haar_rhs (by linarith) hd hK he hcase))
   refine ⟨hpure, ?_⟩

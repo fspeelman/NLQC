@@ -158,6 +158,27 @@ theorem totalDegree_barrier_le (F : PolynomialBasicClosedFormat a) (t : ℝ) :
   have h1 := totalDegree_mul (C t - F.equationSquares) (∏ j, (F.inequalities j + C t))
   omega
 
+/-- The barrier degree in terms of the actual constraint degrees. -/
+theorem totalDegree_barrier_le_of (F : PolynomialBasicClosedFormat a) {e g : ℕ}
+    (he : ∀ i, (F.equations i).totalDegree ≤ e)
+    (hg : ∑ j, (F.inequalities j).totalDegree ≤ g) (t : ℝ) :
+    (F.barrier t).totalDegree ≤ 2 * e + g + 2 := by
+  unfold barrier
+  have hsq : (C t - F.equationSquares).totalDegree ≤ 2 * e := by
+    refine (totalDegree_sub _ _).trans (max_le (by simp) ?_)
+    refine (totalDegree_finsetSum _ _).trans (Finset.sup_le fun i _ => ?_)
+    exact (totalDegree_pow _ _).trans (by have := he i; omega)
+  have hprod : (∏ j, (F.inequalities j + C t)).totalDegree ≤ g := by
+    refine (totalDegree_finsetProd _ _).trans ((Finset.sum_le_sum fun j _ => ?_).trans hg)
+    exact (totalDegree_add _ _).trans (max_le le_rfl (by simp))
+  have hnorm : (C 10 - normSquare a).totalDegree ≤ 2 := by
+    refine (totalDegree_sub _ _).trans (max_le (by simp) ?_)
+    refine (totalDegree_finsetSum _ _).trans (Finset.sup_le fun i _ => ?_)
+    exact (totalDegree_pow _ _).trans (by simp)
+  refine (totalDegree_mul _ _).trans ?_
+  have h1 := totalDegree_mul (C t - F.equationSquares) (∏ j, (F.inequalities j + C t))
+  omega
+
 theorem openNbhd_subset_closedNbhd (F : PolynomialBasicClosedFormat a) (t : ℝ) :
     F.openNbhd t ⊆ F.closedNbhd t := fun _ hx =>
   ⟨hx.1.le, fun j => (hx.2.1 j).le, hx.2.2.le⟩
@@ -386,17 +407,22 @@ theorem natCast_mul_sqrt_ten_le (a m : ℕ) :
       rw [← mul_pow, ← mul_pow]
       norm_num [imageVolumeConstant]
 
-/-- The polynomial image-volume property with the explicit constant `35248`. -/
-theorem polynomialImageVolumeBoundWith_imageVolumeConstant :
-    PolynomialImageVolumeBoundWith imageVolumeConstant := by
-  intro a m _ha _hm F P _hF hFball B hB hJ
+/-- The barrier route with an explicit degree bound `D` for the map and the barrier
+polynomials: `vol p(S) ≤ 2^a (2D+2)^(a+m) √10^m · vol(B^m) · B`. -/
+theorem volume_image_le_of_barrier_degree {a m D : ℕ} (F : PolynomialBasicClosedFormat a)
+    (P : BoundedPolynomialMap a m) (hFball : F.source ⊆ Metric.closedBall 0 3)
+    (hP : ∀ k, (P.coordinates k).totalDegree ≤ D) (hbar : ∀ t, (F.barrier t).totalDegree ≤ D)
+    {B : ℝ} (hB : 0 ≤ B) (hJ : ∀ x ∈ F.source, topRealJacobian (fderiv ℝ P.eval x) ≤ B) :
+    volume (P.eval '' F.source) ≤
+      ENNReal.ofReal (((2 ^ a * (2 * D + 2) ^ (a + m) : ℕ) : ℝ) * Real.sqrt 10 ^ m) *
+        euclideanUnitBallVolume m * ENNReal.ofReal B := by
+  set V : ℝ := ((2 ^ a * (2 * D + 2) ^ (a + m) : ℕ) : ℝ) * Real.sqrt 10 ^ m
   have hη : ∀ η : ℝ, 0 < η → volume (P.eval '' F.source) ≤
-      ENNReal.ofReal (imageVolumeConstant ^ (a + m)) * euclideanUnitBallVolume m *
-        ENNReal.ofReal (B + η) := by
+      ENNReal.ofReal V * euclideanUnitBallVolume m * ENNReal.ofReal (B + η) := by
     intro η hη
     obtain ⟨t, ht, hJt⟩ := F.exists_openNbhd_gradJacobian_le P hJ hη
-    have hcore := volume_polyMap_image_le (D := 2202) P.coordinates (F.barrier t)
-      (fun k => (P.degree_le k).trans (by norm_num)) (F.totalDegree_barrier_le t)
+    have hcore := volume_polyMap_image_le (D := D) P.coordinates (F.barrier t)
+      hP (hbar t)
       (F.isOpen_openNbhd t) (F.isCompact_closedNbhd t) (F.openNbhd_subset_closedNbhd t)
       (fun x hx => F.barrier_pos t hx) (fun x hx hφ => F.mem_openNbhd_of_barrier_pos t hx hφ)
       (fun x hx => F.openNbhd_sum_sq_le t hx) (by linarith) hJt
@@ -408,28 +434,33 @@ theorem polynomialImageVolumeBoundWith_imageVolumeConstant :
       rintro _ ⟨x, hx, rfl⟩
       exact ⟨WithLp.ofLp x, F.ofLp_mem_openNbhd ht hFball hx, rfl⟩
     rw [volume_sum_sq_le m (Real.sqrt_nonneg 10)] at hcore
-    have hnum := natCast_mul_sqrt_ten_le a m
-    have hnum' : (((2 ^ a * (2 * 2202 + 2) ^ (a + m) : ℕ) : ℝ≥0∞)) *
-        ENNReal.ofReal (Real.sqrt 10 ^ m) ≤ ENNReal.ofReal (imageVolumeConstant ^ (a + m)) := by
+    have hnum' : (((2 ^ a * (2 * D + 2) ^ (a + m) : ℕ) : ℝ≥0∞)) *
+        ENNReal.ofReal (Real.sqrt 10 ^ m) = ENNReal.ofReal V := by
       rw [← ENNReal.ofReal_natCast, ← ENNReal.ofReal_mul (Nat.cast_nonneg _)]
-      exact ENNReal.ofReal_le_ofReal hnum
     calc volume (P.eval '' F.source)
-        ≤ ENNReal.ofReal (B + η) * ((2 ^ a * (2 * 2202 + 2) ^ (a + m) : ℕ) : ℝ≥0∞) *
+        ≤ ENNReal.ofReal (B + η) * ((2 ^ a * (2 * D + 2) ^ (a + m) : ℕ) : ℝ≥0∞) *
             (ENNReal.ofReal (Real.sqrt 10 ^ m) * euclideanUnitBallVolume m) := hsub.trans hcore
-      _ = ENNReal.ofReal (B + η) * ((((2 ^ a * (2 * 2202 + 2) ^ (a + m) : ℕ) : ℝ≥0∞)) *
+      _ = ENNReal.ofReal (B + η) * ((((2 ^ a * (2 * D + 2) ^ (a + m) : ℕ) : ℝ≥0∞)) *
             ENNReal.ofReal (Real.sqrt 10 ^ m)) * euclideanUnitBallVolume m := by ring
-      _ ≤ ENNReal.ofReal (B + η) * ENNReal.ofReal (imageVolumeConstant ^ (a + m)) *
-            euclideanUnitBallVolume m := by gcongr
-      _ = _ := by ring
+      _ = _ := by rw [hnum']; ring
   have hlim : Tendsto (fun n : ℕ => ENNReal.ofReal (B + 1 / ((n : ℝ) + 1))) atTop
       (𝓝 (ENNReal.ofReal B)) := by
     have h : Tendsto (fun n : ℕ => B + 1 / ((n : ℝ) + 1)) atTop (𝓝 B) := by
       simpa using tendsto_one_div_add_atTop_nhds_zero_nat.const_add B
     exact (ENNReal.continuous_ofReal.tendsto B).comp h
-  have hK : ENNReal.ofReal (imageVolumeConstant ^ (a + m)) * euclideanUnitBallVolume m ≠ ∞ :=
+  have hK : ENNReal.ofReal V * euclideanUnitBallVolume m ≠ ∞ :=
     ENNReal.mul_ne_top ENNReal.ofReal_ne_top (euclideanUnitBallVolume_ne_top m)
   exact ge_of_tendsto' (ENNReal.Tendsto.const_mul hlim (Or.inr hK)) fun n =>
     hη _ (by positivity)
+
+/-- The polynomial image-volume property with the explicit constant `35248`. -/
+theorem polynomialImageVolumeBoundWith_imageVolumeConstant :
+    PolynomialImageVolumeBoundWith imageVolumeConstant := by
+  intro a m _ha _hm F P _hF hFball B hB hJ
+  refine (volume_image_le_of_barrier_degree (D := 2202) F P hFball
+    (fun k => (P.degree_le k).trans (by norm_num)) F.totalDegree_barrier_le hB hJ).trans ?_
+  gcongr
+  exact natCast_mul_sqrt_ten_le a m
 
 /-- **The polynomial image-volume bound**, proved without external hypotheses. -/
 theorem polynomialImageVolumeBound : PolynomialImageVolumeBound :=

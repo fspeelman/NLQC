@@ -6,6 +6,7 @@ import NLQCLean.Invariants.SpectatorControlledPhasePurity
 import NLQCLean.Approx.FiniteClassicalSpectralFloors
 import NLQCLean.Models.ClassicalCommunication.BorelMixedCompression
 import NLQCLean.Bounds.UniversalMaxBounds
+import NLQCLean.Bounds.StrongUniversalExplicit
 import NLQCLean.Bounds.SwapNeighborhoodAlmostEvery
 import NLQCLean.Models.ClassicalCommunication.BorelRankCompression
 import NLQCLean.Bounds.Quantitative
@@ -81,6 +82,44 @@ alias exists_universal_max_resource_bound :=
 
 alias exists_universal_max_diamond_resource_bound :=
   NLQCLean.exists_strongUniversalMaxDiamondResourceBound
+
+/-- Explicit universal unitary bound for `d ≥ 2`:
+`K ≥ d² max(1 − ε, √ln(1/ε)/51, √(ln(1/ε) − 420)/46)`. -/
+alias universal_explicit_resource_bound := NLQCLean.strongUniversal_explicit
+
+/-- Explicit universal unitary bound for `d ≥ 8`:
+`K ≥ d² max(1 − ε, √ln(1/ε)/24, √(ln(1/ε) − 92)/22)`. -/
+alias universal_explicit_resource_bound_of_eight := NLQCLean.strongUniversal_explicit_of_eight
+
+alias universal_explicit_diamond_resource_bound := NLQCLean.strongUniversalDiamond_explicit
+
+alias universal_explicit_diamond_resource_bound_of_eight :=
+  NLQCLean.strongUniversalDiamond_explicit_of_eight
+
+/-- The named forms with explicit constants: `c = 1/51`, qubit offset `6`, restricted
+Haar constant `336`. -/
+alias universal_resource_bound_explicit := NLQCLean.strongUniversalResourceBound_explicit
+
+alias universal_diamond_resource_bound_explicit :=
+  NLQCLean.strongUniversalDiamondResourceBound_explicit
+
+alias universal_qubit_bound_explicit := NLQCLean.strongUniversalQubitBound_explicit
+
+alias universal_diamond_qubit_bound_explicit :=
+  NLQCLean.strongUniversalDiamondQubitBound_explicit
+
+/-- Qubit offset `5` once `n ≥ 3`. -/
+alias universal_qubit_bound_explicit_of_three := NLQCLean.strongUniversalQubitBound_explicit_of_three
+
+alias restricted_haar_bound_explicit := NLQCLean.strongRestrictedHaarBound_explicit
+
+alias restricted_diamond_haar_bound_explicit := NLQCLean.strongRestrictedDiamondHaarBound_explicit
+
+/-- The split near-SWAP Haar bound `exp((595/3)K² + (687/20)N) ε^(3N/32)`, `d ≥ 2`. -/
+alias restricted_haar_split_bound := NLQCLean.strongRestrictedHaarSplitBound_two
+
+/-- The split near-SWAP Haar bound `exp((595/3)K² + (703/20)N) ε^(7N/16)`, `d ≥ 8`. -/
+alias restricted_haar_split_bound_of_eight := NLQCLean.strongRestrictedHaarSplitBound_eight
 
 /-- One fixed-target threshold throughout the near-SWAP region. -/
 alias exists_ae_swap_neighborhood_resource_bound :=

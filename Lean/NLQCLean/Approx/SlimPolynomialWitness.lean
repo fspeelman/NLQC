@@ -7,7 +7,7 @@ import NLQCLean.Approx.ReachableWitnessCover
 
 Seven polynomial equations (two spheres, four normalized Gram
 constraints with column counts `d r` and `d s`, zero padding) and one leakage inequality,
-all of degree at most twelve, define a compact source of radius `√6` in `ℝ^(64K²)`. The
+all of degree at most twelve, define a compact source of radius `√6` in `ℝ^(38K²)`. The
 normalized cubic overlap `h = H/d` is a polynomial map of degree at most eighteen.
 Thickening adds one ball constraint (radius `√7 < 3`). Every target `U ∈ S_d` that is pure or
 finite-mixed score reachable at `0 ≤ e ≤ 1/16` lies in the compact witness target set of some
