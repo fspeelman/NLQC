@@ -322,15 +322,8 @@ import NLQCLean.Geometry.UnitaryFrobeniusVolume
 import NLQCLean.Approx.PVMWitnessCutoff
 import NLQCLean.Geometry.PolynomialTube
 import NLQCLean.Approx.WitnessFamilies
-import NLQCLean.Arithmetic.EliminationResultant
-import NLQCLean.Arithmetic.EliminationShear
 import NLQCLean.Arithmetic.EliminationSize
-import NLQCLean.Arithmetic.EliminationIterated
-import NLQCLean.Arithmetic.EliminationGenericDerivation
-import NLQCLean.Arithmetic.EliminationLagrangeSystem
 import NLQCLean.Arithmetic.EliminationKKT
-import NLQCLean.Arithmetic.EliminationPhysicalLICQ
-import NLQCLean.Bounds.ExplicitControlledPhaseResultant
 import NLQCLean.Arithmetic.GelfondZeroEstimate
 import NLQCLean.Arithmetic.GelfondInterpolation
 import NLQCLean.Arithmetic.GelfondSchwarz

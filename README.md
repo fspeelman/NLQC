@@ -4,6 +4,8 @@ This repository contains files to accompany the recent preprint [Perfect non-loc
 
 The [companion notes](companion-notes.pdf) file presents robust extensions to the (exact) results of the paper. The extensions were the result of human questions and human selection, but the proofs and presentation are (currently still) AI generated.
 
-The [Lean folder](Lean/) contains formal proofs of the exact impossibility and finite-orbit results and of the main results of the companion notes. It includes build instructions and uses Lean and Mathlib v4.34.1.
+The [Lean folder](Lean/) contains formal proofs of the exact impossibility and finite-orbit results and of the main results of the companion notes. It includes build instructions and uses Lean and Mathlib v4.35.0.
 
 The [coverage guide](docs/robust-companion-lean.md) describes the proved statements, models and constants. The proofs use only Lean's standard axioms.
+
+The Lean sources and accompanying documentation specified in [Lean/README.md](Lean/README.md#license) are licensed under [Apache-2.0](Lean/LICENSE). Vendored code retains its upstream licenses and notices. The paper and companion-notes PDFs are not covered by this software license.

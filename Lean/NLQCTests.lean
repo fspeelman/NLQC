@@ -104,8 +104,8 @@ import NLQCTests.ExactPaperAudit
 import NLQCTests.RobustPaperAudit
 
 /-!
-# NLQC refactor audit target
+# NLQC audit target
 
 This root is deliberately separate from `NLQCLean`. Build it with
-`cluster/lbuild NLQCTests` to check the contracts preserved by the refactor.
+`lake build NLQCTests` to check the statements, full types and axioms of the results.
 -/

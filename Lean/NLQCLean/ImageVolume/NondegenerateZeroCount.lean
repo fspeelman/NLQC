@@ -41,7 +41,7 @@ theorem contDiff_eval_pi {n : WithTop ℕ∞} (P : MvPolynomial σ ℝ) :
   | C a => simpa using (contDiff_const : ContDiff ℝ n (fun _ : σ → ℝ => a))
   | add p q hp hq => simpa only [map_add] using hp.add hq
   | mul_X p i hp =>
-    simpa only [map_mul, eval_X] using hp.mul (contDiff_apply ℝ ℝ i)
+    simpa only [map_mul, eval_X] using hp.mul (contDiff_apply ℝ (fun _ => ℝ) i)
 
 omit [DecidableEq σ] in
 theorem contDiff_polyEvalMap {n : WithTop ℕ∞} (G : σ → MvPolynomial σ ℝ) :
@@ -58,7 +58,7 @@ noncomputable def coordinatePowerMap (e : ℕ) (w : σ → ℝ) : σ → ℝ := 
 omit [DecidableEq σ] in
 theorem contDiff_coordinatePowerMap {n : WithTop ℕ∞} (e : ℕ) :
     ContDiff ℝ n (coordinatePowerMap (σ := σ) e) :=
-  contDiff_pi.mpr fun i => (contDiff_apply ℝ ℝ i).pow e
+  contDiff_pi.mpr fun i => (contDiff_apply ℝ (fun _ => ℝ) i).pow e
 
 omit [DecidableEq σ] in
 /-- A nondegenerate zero persists in every neighborhood under all small perturbations

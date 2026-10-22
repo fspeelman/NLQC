@@ -190,6 +190,80 @@ theorem dNrm_le (k : ℕ) : dNrm k ≤ 12 ^ (4 * (k + 2)) := by
     _ ≤ (12 ^ 4) ^ (k + 2) := Nat.pow_le_pow_left (by norm_num) _
     _ = 12 ^ (4 * (k + 2)) := by rw [← pow_mul]
 
+/-- The exponent of the sharp mass bound, `12 + N (10k + 12 + D (2k + 246 + 4τ))` with
+`N = 26 · 25^k` and `D = 26 + 24k`. -/
+def sharpExp (k τ : ℕ) : ℕ := 12 + NB k * (10 * k + 12 + DB k * (2 * k + 246 + 4 * τ))
+
+theorem MPhi_le_sharp (k H τ : ℕ) (hH : 32 + H < 2 ^ τ) :
+    MPhi k H ≤ 2 ^ (NB k * ((5 * k + 6) + DB k * (k + 111 + 2 * τ))) := by
+  unfold MPhi
+  set kb := k + 111 + 2 * τ
+  have hKB := KB_le k H τ hH
+  have hfac : (NB k).factorial ≤ 2 ^ ((5 * k + 5) * NB k) := by
+    calc (NB k).factorial ≤ NB k ^ NB k := Nat.factorial_le_pow _
+      _ ≤ (2 ^ (5 * k + 5)) ^ NB k := Nat.pow_le_pow_left (NB_le k) _
+      _ = 2 ^ ((5 * k + 5) * NB k) := by rw [← pow_mul]
+  have hbase : KB k H ^ DB k + KB k H ^ DB k ≤ 2 ^ (1 + DB k * kb) := by
+    have : KB k H ^ DB k ≤ 2 ^ (DB k * kb) := by
+      calc KB k H ^ DB k ≤ (2 ^ kb) ^ DB k := Nat.pow_le_pow_left hKB _
+        _ = 2 ^ (DB k * kb) := by rw [← pow_mul, mul_comm]
+    calc KB k H ^ DB k + KB k H ^ DB k ≤ 2 ^ (DB k * kb) + 2 ^ (DB k * kb) :=
+          Nat.add_le_add this this
+      _ = 2 ^ (1 + DB k * kb) := by rw [← two_mul, ← pow_succ']; congr 1; ring
+  calc (NB k).factorial * (KB k H ^ DB k + KB k H ^ DB k) ^ NB k
+      ≤ 2 ^ ((5 * k + 5) * NB k) * (2 ^ (1 + DB k * kb)) ^ NB k :=
+        Nat.mul_le_mul hfac (Nat.pow_le_pow_left hbase _)
+    _ = 2 ^ (NB k * ((5 * k + 6) + DB k * kb)) := by
+        rw [← pow_mul, ← pow_add]; congr 1; ring
+
+/-- The sharp mass bound: `M_Nrm · 32^{d_Nrm} ≤ 2^{sharpExp k τ}`. -/
+theorem mass_le_sharpExp (k H τ : ℕ) (hH : 32 + H < 2 ^ τ) :
+    MNrm k H * 32 ^ dNrm k ≤ 2 ^ sharpExp k τ := by
+  obtain ⟨Y, hY⟩ : ∃ Y, Y = NB k * ((5 * k + 6) + DB k * (k + 111 + 2 * τ)) := ⟨_, rfl⟩
+  have hM : MPhi k H ≤ 2 ^ Y := hY ▸ MPhi_le_sharp k H τ hH
+  have hd1 : dPhi k + 1 ≤ 2 ^ dPhi k := Nat.lt_two_pow_self
+  have hinner : (dPhi k + 1) * (MPhi k H * 2 ^ dPhi k) ≤ 2 ^ (2 * dPhi k + Y) := by
+    calc (dPhi k + 1) * (MPhi k H * 2 ^ dPhi k) ≤ 2 ^ dPhi k * (2 ^ Y * 2 ^ dPhi k) :=
+          Nat.mul_le_mul hd1 (Nat.mul_le_mul_right _ hM)
+      _ = 2 ^ (2 * dPhi k + Y) := by rw [← pow_add, ← pow_add]; congr 1; ring
+  have hM3 : MNrm k H ≤ 2 ^ (2 + 2 * (2 * dPhi k + Y)) := by
+    unfold MNrm
+    calc 3 * ((dPhi k + 1) * (MPhi k H * 2 ^ dPhi k)) ^ 2
+        ≤ 2 ^ 2 * (2 ^ (2 * dPhi k + Y)) ^ 2 :=
+          Nat.mul_le_mul (by norm_num) (Nat.pow_le_pow_left hinner 2)
+      _ = 2 ^ (2 + 2 * (2 * dPhi k + Y)) := by rw [← pow_mul, ← pow_add, mul_comm _ 2]
+  have h32 : (32 : ℕ) ^ dNrm k = 2 ^ (5 * dNrm k) := by
+    rw [show (32 : ℕ) = 2 ^ 5 by norm_num, ← pow_mul]
+  have hexp : 2 + 2 * (2 * dPhi k + Y) + 5 * dNrm k = sharpExp k τ := by
+    rw [hY]; unfold sharpExp dNrm dPhi; ring
+  calc MNrm k H * 32 ^ dNrm k ≤ 2 ^ (2 + 2 * (2 * dPhi k + Y)) * 2 ^ (5 * dNrm k) :=
+        Nat.mul_le_mul hM3 h32.le
+    _ = 2 ^ sharpExp k τ := by rw [← pow_add, hexp]
+
+/-- **The optimization eliminant with sharp size bounds**: degree at most
+`d_Nrm(k) = 4 · 26 · 25^k (26 + 24k) + 2` and coefficients below `2^{sharpExp k τ + 1}`. -/
+theorem exists_eliminant_sharp (κ : Type) [Fintype κ] (Cst : MvPolynomial κ ℤ)
+    (Sc : MvPolynomial (Fin 2 ⊕ κ) ℤ) (H τ : ℕ) (θ g : ℝ)
+    (hC : Cst.totalDegree ≤ 12) (hS : Sc.totalDegree ≤ 12)
+    (hCm : CoefficientMassLE Cst H) (hSm : CoefficientMassLE Sc H) (hH : 32 + H < 2 ^ τ)
+    (hg0 : 0 < g) (hg1 : g ≤ 1)
+    (hupper : ∀ w : κ → ℝ, PhysicalPolynomial.eval w Cst = 0 →
+      PhysicalPolynomial.eval (Sum.elim ![Real.cos θ, Real.sin θ] w) Sc ≤ 16 * (1 - g))
+    (hattain : ∃ w : κ → ℝ, PhysicalPolynomial.eval w Cst = 0 ∧
+      PhysicalPolynomial.eval (Sum.elim ![Real.cos θ, Real.sin θ] w) Sc = 16 * (1 - g) ∧
+      ∀ i, |w i| ≤ 1) :
+    ∃ A : MvPolynomial (Fin 2) ℤ, A ≠ 0 ∧ A.totalDegree ≤ dNrm (Fintype.card κ) ∧
+      (∀ m, (A.coeff m).natAbs < 2 ^ (sharpExp (Fintype.card κ) τ + 1)) ∧
+      MvPolynomial.eval₂ (Int.castRingHom ℝ) ![g, Real.cos θ] A = 0 := by
+  classical
+  obtain ⟨A, hA0, hAsz, hAz⟩ :=
+    exists_deformation_eliminant Cst Sc hC hS hCm hSm θ g hg0 hg1 hupper hattain
+  refine ⟨A, hA0, hAsz.1, fun m => ?_, hAz⟩
+  calc (A.coeff m).natAbs ≤ MNrm (Fintype.card κ) H * 32 ^ dNrm (Fintype.card κ) :=
+        hAsz.2.coefficient_natAbs_le m
+    _ ≤ 2 ^ sharpExp (Fintype.card κ) τ := mass_le_sharpExp _ H τ hH
+    _ < 2 ^ (sharpExp (Fintype.card κ) τ + 1) := Nat.pow_lt_pow_right (by norm_num) (by omega)
+
 /-- **The optimization eliminant in the epigraph form, without external input**, with the
 exponent `a = 4`. -/
 theorem exists_eliminant_explicit (κ : Type) [Fintype κ] (Cst : MvPolynomial κ ℤ)

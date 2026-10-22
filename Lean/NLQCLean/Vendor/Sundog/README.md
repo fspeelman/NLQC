@@ -81,9 +81,9 @@ otherwise need.
 Upstream uses Lean `v4.30.0` and Mathlib `v4.30.0` (upstream `lake-manifest.json` revision
 `c5ea00351c28e24afc9f0f84379aa41082b1188f`). This port initially targeted project Lean
 `v4.33.1` and Mathlib `0df444a360eaa60ab8c11dca51a86af692955474` (`v4.33.1`). No package
-dependency was added by that port. The project now uses Lean `v4.34.1` and
-Mathlib `d13f23b723b8a846827a245b89c10fc7d3f11612`; the Sundog source
-adaptations and upstream pin are unchanged.
+dependency was added by that port. The project now uses Lean `v4.35.0` and
+Mathlib `56a005855ea17e0b0958f73ec801ae140b0a1679` (`v4.35.0`); the Sundog source
+adaptations and upstream pin are unchanged by the `v4.35.0` update.
 
 The upstream `lakefile.toml` sets `relaxedAutoImplicit = false`, `maxSynthPendingDepth = 3`,
 `pp.unicode.fun = true`, `weak.linter.mathlibStandardSet = true` and

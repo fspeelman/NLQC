@@ -75,7 +75,7 @@ theorem contDiff_maskedLevelMap (p : PolyMap a m D)
   · simp only [ht, ite_true]
     exact (contDiff_evalE (g t)).comp contDiff_fst
   · simp only [ht, ite_false]
-    exact (contDiff_apply ℝ ℝ t).comp contDiff_snd
+    exact (contDiff_apply ℝ (fun _ => ℝ) t).comp contDiff_snd
 
 /-- Values over the level `b` with a singular preimage. -/
 def singularLevelValues (p : PolyMap a m D) (g : Fin L → MvPolynomial (Fin a) ℝ)

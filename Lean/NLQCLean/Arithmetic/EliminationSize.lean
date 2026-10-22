@@ -1,23 +1,20 @@
 import NLQCLean.Arithmetic.PhysicalPolynomialHeight
-import NLQCLean.Arithmetic.EliminationResultant
-import NLQCLean.Arithmetic.EliminationShear
+import Mathlib.Algebra.MvPolynomial.Equiv
+import Mathlib.Algebra.MvPolynomial.Monad
+import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 
 /-!
-# Degree and coefficient-mass bookkeeping for iterated resultants
+# Degree and coefficient-mass bookkeeping
 
-Polynomials in `z₀, …, zₙ₋₁` over the parameter ring `ℤ[y, c]` are measured after
-flattening into integer polynomials in `z` and the parameters; polynomials in an
-auxiliary variable `u` over that ring are flattened with `u` as one more variable.
-Total degree and the existing coefficient-mass certificates `CoefficientMassLE` are
-transported through coefficient extraction, shears and Sylvester determinants.
+`SizeLE p d M` bounds the total degree of an integer polynomial by `d` and its coefficient
+mass by `M` (`CoefficientMassLE`). The bounds are transported through sums, products,
+powers, partial derivatives, substitution, renaming, determinants and coefficient
+extraction in one variable.
 -/
 
 namespace NLQCLean.Elimination
 
 open MvPolynomial NLQCLean.PhysicalPolynomial
-
-/-- The parameter ring `ℤ[y, c]`; variable `0` is `y` and variable `1` is `c`. -/
-abbrev Par := MvPolynomial (Fin 2) ℤ
 
 /-- Joint degree and coefficient-mass bound. -/
 def SizeLE {σ : Type*} (p : MvPolynomial σ ℤ) (d M : ℕ) : Prop :=
@@ -270,92 +267,6 @@ theorem SizeLE.det {σ : Type*} {N d B : ℕ} (A : Matrix (Fin N) (Fin N) (MvPol
   have := SizeLE.finsetSum Finset.univ _ (fun τ _ => hterm τ)
   rwa [Finset.card_univ, Fintype.card_perm, Fintype.card_fin] at this
 
-/-! ### Flattening -/
-
-/-- Flattening of `ℤ[y, c][z₀, …, zₙ₋₁]` into integer polynomials in `z` and the
-parameters. -/
-noncomputable def flat (n : ℕ) : MvPolynomial (Fin n) Par →+* MvPolynomial (Fin n ⊕ Fin 2) ℤ :=
-  eval₂Hom (MvPolynomial.rename Sum.inr : Par →ₐ[ℤ] MvPolynomial (Fin n ⊕ Fin 2) ℤ).toRingHom
-    (fun i => X (Sum.inl i))
-
-/-- Flattening of `ℤ[y, c][z][u]`, with `u` as the variable `none`. -/
-noncomputable def flatU (n : ℕ) :
-    Polynomial (MvPolynomial (Fin n) Par) →+* MvPolynomial (Option (Fin n ⊕ Fin 2)) ℤ :=
-  Polynomial.eval₂RingHom ((MvPolynomial.rename some).toRingHom.comp (flat n)) (X none)
-
-@[simp] theorem flat_C (n : ℕ) (r : Par) : flat n (C r) = MvPolynomial.rename Sum.inr r := by
-  simp [flat]
-
-@[simp] theorem flat_X (n : ℕ) (i : Fin n) : flat n (X i) = X (Sum.inl i) := by
-  simp [flat]
-
-@[simp] theorem flatU_C (n : ℕ) (b : MvPolynomial (Fin n) Par) :
-    flatU n (Polynomial.C b) = MvPolynomial.rename some (flat n b) := by
-  simp [flatU]
-
-@[simp] theorem flatU_X (n : ℕ) : flatU n Polynomial.X = X none := by
-  simp [flatU]
-
-theorem flat_eq_sumRingEquiv_symm (n : ℕ) :
-    flat n = (sumRingEquiv ℤ (Fin n) (Fin 2)).symm.toRingHom := by
-  refine MvPolynomial.ringHom_ext (fun r => ?_) (fun i => ?_)
-  · rw [flat_C]
-    have : ((sumRingEquiv ℤ (Fin n) (Fin 2)).symm.toRingHom.comp
-        (C : Par →+* MvPolynomial (Fin n) Par)) =
-        (MvPolynomial.rename Sum.inr : Par →ₐ[ℤ] _).toRingHom := by
-      refine MvPolynomial.ringHom_ext (fun z => ?_) (fun k => ?_)
-      · simp
-      · simp [sumRingEquiv_symm_C_X]
-    exact (RingHom.congr_fun this r).symm
-  · simp [sumRingEquiv_symm_X]
-
-theorem flat_injective (n : ℕ) : Function.Injective (flat n) := by
-  rw [flat_eq_sumRingEquiv_symm]
-  exact (sumRingEquiv ℤ (Fin n) (Fin 2)).symm.injective
-
-/-- Reindexing `Fin (n+1) ⊕ Fin 2` with `z₀` as the distinguished variable `none`. -/
-def splitFirst (n : ℕ) : Fin (n + 1) ⊕ Fin 2 → Option (Fin n ⊕ Fin 2)
-  | Sum.inl i => Fin.cases none (fun j => some (Sum.inl j)) i
-  | Sum.inr k => some (Sum.inr k)
-
-theorem flatU_finSuccEquiv (n : ℕ) (P : MvPolynomial (Fin (n + 1)) Par) :
-    flatU n (finSuccEquiv Par n P) = MvPolynomial.rename (splitFirst n) (flat (n + 1) P) := by
-  have h : (flatU n).comp (finSuccEquiv Par n).toRingEquiv.toRingHom =
-      (MvPolynomial.rename (splitFirst n)).toRingHom.comp (flat (n + 1)) := by
-    refine MvPolynomial.ringHom_ext (fun r => ?_) (fun i => ?_)
-    · simp only [RingHom.coe_comp, Function.comp_apply, RingEquiv.toRingHom_eq_coe,
-        AlgEquiv.toRingEquiv_toRingHom, RingHom.coe_coe, flat_C, AlgHom.toRingHom_eq_coe]
-      rw [show (C r : MvPolynomial (Fin (n + 1)) Par) = algebraMap Par _ r from rfl,
-        AlgEquiv.commutes]
-      simp [MvPolynomial.rename_rename]
-      rfl
-    · cases i using Fin.cases with
-      | zero => simp [finSuccEquiv_X_zero, splitFirst]
-      | succ j => simp [finSuccEquiv_X_succ, splitFirst]
-  exact RingHom.congr_fun h P
-
-theorem optionEquivLeft_comp_rename_some {τ : Type*} :
-    (optionEquivLeft ℤ τ).toRingEquiv.toRingHom.comp
-        (MvPolynomial.rename (some : τ → Option τ)).toRingHom = Polynomial.C := by
-  refine MvPolynomial.ringHom_ext (fun z => ?_) (fun i => ?_)
-  · simp
-  · simp [optionEquivLeft_X_some]
-
-theorem optionEquivLeft_flatU (n : ℕ) (p : Polynomial (MvPolynomial (Fin n) Par)) :
-    optionEquivLeft ℤ _ (flatU n p) = p.map (flat n) := by
-  have h : (optionEquivLeft ℤ (Fin n ⊕ Fin 2)).toRingEquiv.toRingHom.comp (flatU n) =
-      Polynomial.mapRingHom (flat n) := by
-    refine Polynomial.ringHom_ext (fun b => ?_) ?_
-    · have := RingHom.congr_fun (optionEquivLeft_comp_rename_some (τ := Fin n ⊕ Fin 2))
-        (flat n b)
-      simpa using this
-    · simp [optionEquivLeft_X_none]
-  exact RingHom.congr_fun h p
-
-theorem flat_coeff (n : ℕ) (p : Polynomial (MvPolynomial (Fin n) Par)) (k : ℕ) :
-    flat n (p.coeff k) = (optionEquivLeft ℤ _ (flatU n p)).coeff k := by
-  rw [optionEquivLeft_flatU, Polynomial.coeff_map]
-
 theorem SizeLE.coeff_optionEquivLeft {τ : Type*} {q : MvPolynomial (Option τ) ℤ} {d M : ℕ}
     (hq : SizeLE q d M) (k : ℕ) : SizeLE ((optionEquivLeft ℤ τ q).coeff k) d M := by
   refine ⟨(totalDegree_coeff_optionEquivLeft_le (p := q) (i := k)).trans hq.1, ?_⟩
@@ -364,124 +275,5 @@ theorem SizeLE.coeff_optionEquivLeft {τ : Type*} {q : MvPolynomial (Option τ) 
   intro d d' h
   ext i
   simpa using congrArg (fun t : Option τ →₀ ℕ => t (some i)) h
-
-theorem SizeLE.flat_coeff {n : ℕ} {p : Polynomial (MvPolynomial (Fin n) Par)} {d M : ℕ}
-    (hp : SizeLE (flatU n p) d M) (k : ℕ) : SizeLE (flat n (p.coeff k)) d M := by
-  rw [NLQCLean.Elimination.flat_coeff]; exact hp.coeff_optionEquivLeft k
-
-theorem natDegree_le_totalDegree_flatU (n : ℕ) (p : Polynomial (MvPolynomial (Fin n) Par)) :
-    p.natDegree ≤ (flatU n p).totalDegree := by
-  have h1 : (p.map (flat n)).natDegree = p.natDegree :=
-    Polynomial.natDegree_map_eq_of_injective (flat_injective n) p
-  rw [← h1, ← optionEquivLeft_flatU, natDegree_optionEquivLeft]
-  exact degreeOf_le_totalDegree _ _
-
-theorem SizeLE.flatU_finSuccEquiv {n : ℕ} {P : MvPolynomial (Fin (n + 1)) Par} {d M : ℕ}
-    (hP : SizeLE (flat (n + 1) P) d M) : SizeLE (flatU n (finSuccEquiv Par n P)) d M := by
-  rw [NLQCLean.Elimination.flatU_finSuccEquiv]; exact hP.rename _
-
-
-/-! ### Shears -/
-
-/-- The shear on flattened polynomials. -/
-noncomputable def flatShearVariables {n : ℕ} (b : Fin n → ℕ) :
-    Fin (n + 1) ⊕ Fin 2 → MvPolynomial (Fin (n + 1) ⊕ Fin 2) ℤ
-  | Sum.inl i => Fin.cases (X (Sum.inl 0))
-      (fun j => X (Sum.inl j.succ) + C (b j : ℤ) * X (Sum.inl 0)) i
-  | Sum.inr k => X (Sum.inr k)
-
-theorem flat_shear {n : ℕ} (b : Fin n → ℕ) (P : MvPolynomial (Fin (n + 1)) Par) :
-    flat (n + 1) (shear (fun j => (b j : Par)) P) =
-      MvPolynomial.bind₁ (flatShearVariables b) (flat (n + 1) P) := by
-  have h : (flat (n + 1)).comp (shear (fun j => (b j : Par))).toRingHom =
-      (MvPolynomial.bind₁ (flatShearVariables b)).toRingHom.comp (flat (n + 1)) := by
-    refine MvPolynomial.ringHom_ext (fun r => ?_) (fun i => ?_)
-    · simp only [RingHom.coe_comp, Function.comp_apply, AlgHom.toRingHom_eq_coe,
-        RingHom.coe_coe, flat_C]
-      rw [show (C r : MvPolynomial (Fin (n + 1)) Par) = algebraMap Par _ r from rfl,
-        AlgHom.commutes, MvPolynomial.algebraMap_eq, flat_C, bind₁_rename]
-      have : (flatShearVariables b ∘ Sum.inr : Fin 2 → _) = X ∘ Sum.inr := by
-        funext k; rfl
-      rw [this, ← bind₁_rename, bind₁_X_left, AlgHom.id_apply]
-    · cases i using Fin.cases with
-      | zero => simp [shear, shearVariables, flatShearVariables]
-      | succ j => simp [shear, shearVariables, flatShearVariables]
-  exact RingHom.congr_fun h P
-
-theorem SizeLE.flatShearVariables {n B : ℕ} (b : Fin n → ℕ) (hb : ∀ j, b j ≤ B)
-    (v : Fin (n + 1) ⊕ Fin 2) : SizeLE (NLQCLean.Elimination.flatShearVariables b v) 1 (B + 1) := by
-  rcases v with i | k
-  · cases i using Fin.cases with
-    | zero => exact (SizeLE.X _).mono le_rfl (by omega)
-    | succ j =>
-      have hC : SizeLE (C (b j : ℤ) : MvPolynomial (Fin (n + 1) ⊕ Fin 2) ℤ) 0 B :=
-        ⟨(totalDegree_C _).le, (CoefficientMassLE.constant _).mono (by simpa using hb j)⟩
-      have := (SizeLE.X (Sum.inl j.succ)).add ((hC.mul (SizeLE.X (Sum.inl 0))).mono
-        (by omega) (le_refl (B * 1)))
-      exact this.mono le_rfl (by omega)
-  · exact (SizeLE.X _).mono le_rfl (by omega)
-
-theorem SizeLE.flat_shear {n d M B : ℕ} {P : MvPolynomial (Fin (n + 1)) Par}
-    (hP : SizeLE (flat (n + 1) P) d M) (b : Fin n → ℕ) (hb : ∀ j, b j ≤ B) :
-    SizeLE (flat (n + 1) (shear (fun j => (b j : Par)) P)) d (M * (B + 1) ^ d) := by
-  rw [NLQCLean.Elimination.flat_shear]
-  refine ⟨(PhysicalPolynomial.totalDegree_bind₁_le_of_linear_variables _
-    (fun v => (SizeLE.flatShearVariables b hb v).1) _).trans hP.1, ?_⟩
-  exact CoefficientMassLE.bind₁_le hP.2 hP.1 _ (by omega)
-    (fun v => (SizeLE.flatShearVariables b hb v).2)
-
-/-! ### The eliminant -/
-
-theorem sylvester_entry_cases {R : Type*} [CommRing R] (f g : Polynomial R) (m n : ℕ)
-    (i j : Fin (m + n)) :
-    Polynomial.sylvester f g m n i j = 0 ∨ (∃ k, Polynomial.sylvester f g m n i j = f.coeff k) ∨
-      ∃ k, Polynomial.sylvester f g m n i j = g.coeff k := by
-  unfold Polynomial.sylvester
-  induction j using Fin.addCases with
-  | left j =>
-    simp only [Matrix.of_apply, Fin.addCases_left]
-    split_ifs
-    · exact Or.inr (Or.inr ⟨_, rfl⟩)
-    · exact Or.inl rfl
-  | right j =>
-    simp only [Matrix.of_apply, Fin.addCases_right]
-    split_ifs
-    · exact Or.inr (Or.inl ⟨_, rfl⟩)
-    · exact Or.inl rfl
-
-theorem coeff_kronecker {n s : ℕ} (G : Fin s → Polynomial (MvPolynomial (Fin n) Par)) (k : ℕ) :
-    (kronecker G).coeff k = ∑ i, Polynomial.C ((G i).coeff k) * Polynomial.X ^ (i : ℕ) := by
-  unfold kronecker
-  rw [Polynomial.finsetSum_coeff]
-  refine Finset.sum_congr rfl fun i _ => ?_
-  rw [Polynomial.coeff_mul_C, Polynomial.coeff_map]
-
-/-- Size of the flattened eliminant. -/
-theorem SizeLE.flatU_eliminant {n s D M m n' : ℕ} (hD : 1 ≤ D) (hs : s ≤ D)
-    {f : Polynomial (MvPolynomial (Fin n) Par)} {G : Fin s → Polynomial (MvPolynomial (Fin n) Par)}
-    (hf : ∀ k, SizeLE (flat n (f.coeff k)) D M) (hG : ∀ i k, SizeLE (flat n ((G i).coeff k)) D M) :
-    SizeLE (flatU n (eliminant f G m n')) ((m + n') * (2 * D))
-      ((m + n').factorial * (D * M) ^ (m + n')) := by
-  unfold eliminant Polynomial.resultant
-  have hdet := RingHom.map_det (flatU n) ((f.map Polynomial.C).sylvester (kronecker G) m n')
-  erw [hdet]
-  refine SizeLE.det _ fun i j => ?_
-  rw [RingHom.mapMatrix_apply, Matrix.map_apply]
-  rcases sylvester_entry_cases (f.map Polynomial.C) (kronecker G) m n' i j with h | ⟨k, h⟩ | ⟨k, h⟩
-  · rw [h, map_zero]; exact SizeLE.zero _ _
-  · rw [h, Polynomial.coeff_map, flatU_C]
-    exact ((hf k).rename _).mono (by omega) (Nat.le_mul_of_pos_left _ hD)
-  · rw [h, coeff_kronecker, map_sum]
-    have hterm : ∀ i : Fin s, SizeLE (flatU n (Polynomial.C ((G i).coeff k) *
-        Polynomial.X ^ (i : ℕ))) (2 * D) M := by
-      intro i
-      rw [map_mul, map_pow, flatU_C, flatU_X]
-      have := ((hG i k).rename some).mul ((SizeLE.X (none : Option (Fin n ⊕ Fin 2))).pow i)
-      refine this.mono ?_ (by simp)
-      have := i.isLt
-      omega
-    have := SizeLE.finsetSum Finset.univ _ (fun i _ => hterm i)
-    rw [Finset.card_univ, Fintype.card_fin] at this
-    exact this.mono le_rfl (Nat.mul_le_mul_right _ hs)
 
 end NLQCLean.Elimination

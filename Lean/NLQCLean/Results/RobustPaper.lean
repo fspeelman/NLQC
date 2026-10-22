@@ -15,7 +15,6 @@ import NLQCLean.Geometry.UnitaryFrobeniusVolume
 import NLQCLean.Approx.PVMWitnessCutoff
 import NLQCLean.Geometry.PolynomialTube
 import NLQCLean.Approx.WitnessFamilies
-import NLQCLean.Bounds.ExplicitControlledPhaseResultant
 import NLQCLean.Bounds.ExplicitControlledPhaseGelfond
 import NLQCLean.ImageVolume.PolynomialImageVolume
 import NLQCLean.Bounds.FixedBudgetStability
@@ -223,6 +222,15 @@ alias thm_explicit_one_protocol := NLQCLean.exists_explicit_controlledPhase_one_
 /-- `thm:explicit` for `C₁`: `log₂ K ≥ ½ log₂ ln ln(1/ε) - O(1)`. -/
 alias thm_explicit_one_iterated_log :=
   NLQCLean.exists_explicit_controlledPhase_one_iterated_log_bound
+/-- `thm:explicit` for the named gate `C₁`, explicit constant: `g_K(1) ≥ exp(-exp(9400 K²))`. -/
+alias thm_explicit_one_explicit_constant := NLQCLean.controlledPhase_one_lower_bound
+/-- `thm:explicit` for `C₁`, protocol and free-classical forms, explicit constants:
+`ε ≥ exp(-exp(9400 K²))`, resp. `exp(-exp(2406400 Kq¹⁰))`. -/
+alias thm_explicit_one_protocol_explicit_constant := NLQCLean.controlledPhase_one_protocol_bound
+/-- `thm:explicit` for `C₁`, explicit offset: `log₂ K ≥ ½ log₂ ln ln(1/ε) - ½ log₂ 9400` for
+`0 < ε < 1/e`. -/
+alias thm_explicit_one_iterated_log_explicit_constant :=
+  NLQCLean.controlledPhase_one_iterated_log_bound
 
 /-! ### Appendix C: the arithmetic ingredients -/
 
@@ -245,11 +253,6 @@ alias thm_gelfond_measure_exp_I_irreducible :=
 `N ≤ B` and height at most `H` with `2^N (N+1) H ≤ 2^B`, `B ≥ 128`,
 `|P(e^i)| ≥ 2^{-N B (200 B^{31} + 1)}`. -/
 alias thm_gelfond_measure_exp_I := NLQCLean.Gelfond.norm_eval_exp_I_ge
-/-- The least deficit and `cos 1` are a root of an explicit nonzero integer polynomial of
-degree at most `L = (835 K²)^(2^(2+164K²))` with coefficients at most `(2⁵⁵ K¹⁴)^(L³)`
-(iterated resultants of the Lagrange system). -/
-alias thm_explicit_one_resultant_eliminant :=
-  NLQCLean.exists_controlledPhase_one_resultant_eliminant
 
 /-! ### Appendix C: forms taking a transcendence measure
 
@@ -275,17 +278,6 @@ alias thm_explicit_iterated_log_of_transcendence_measure :=
 /-- `thm:explicit`, quantum iterated-log form, from a polynomial-type transcendence measure. -/
 alias thm_explicit_quantum_iterated_log_of_transcendence_measure :=
   NLQCLean.exists_explicit_controlledPhase_quantum_iterated_log_bound_of_transcendenceMeasure
-
-/-! ### Appendix C for `C₁` with explicit constants -/
-
-/-- `C₁` with explicit constant, triple exponential: `g_K(1) ≥ exp(-exp(exp(175 K²)))`. -/
-alias thm_explicit_one_triple_exp := NLQCLean.controlledPhase_one_triple_exp_bound
-/-- Protocol and free-classical forms: `ε ≥ exp(-exp(exp(175 K²)))`, resp.
-`exp(-exp(exp(44800 Kq¹⁰)))`. -/
-alias thm_explicit_one_protocol_triple_exp :=
-  NLQCLean.controlledPhase_one_protocol_triple_exp_bound
-/-- `log₂ K ≥ ½ log₂ ln ln ln(1/ε) - ½ log₂ 175` for `0 < ε < exp(-e)`. -/
-alias thm_explicit_one_triple_log := NLQCLean.controlledPhase_one_triple_log_bound
 
 /-! ### Appendix C: the direct transcript parametrization -/
 

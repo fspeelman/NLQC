@@ -358,6 +358,101 @@ example : ∃ CE : ℝ, 0 < CE ∧ ∀ K : ℕ, 1 ≤ K →
     Real.exp (-Real.exp (CE * (K : ℝ) ^ 2)) ≤ NLQCLean.controlledPhaseLeastDeficit K 1 :=
   NLQCLean.Results.RobustPaper.thm_explicit_one
 
+example (K : ℕ) (hK : 1 ≤ K) :
+    Real.exp (-Real.exp (9400 * (K : ℝ) ^ 2)) ≤ NLQCLean.controlledPhaseLeastDeficit K 1 :=
+  NLQCLean.Results.RobustPaper.thm_explicit_one_explicit_constant hK
+
+example : ∃ b : ℝ, 0 ≤ b ∧ ∀ (K : ℕ) (ε : ℝ), 1 ≤ K → 0 < ε → ε < Real.exp (-1) →
+    NLQCLean.controlledPhaseLeastDeficit K 1 ≤ ε →
+    (1 / 2 : ℝ) * Real.logb 2 (Real.log (Real.log (1 / ε))) - b ≤ Real.logb 2 K :=
+  NLQCLean.Results.RobustPaper.thm_explicit_one_iterated_log
+
+example (K : ℕ) (ε : ℝ) (hK : 1 ≤ K) (hε : 0 < ε) (hεe : ε < Real.exp (-1))
+    (hle : NLQCLean.controlledPhaseLeastDeficit K 1 ≤ ε) :
+    (1 / 2 : ℝ) * Real.logb 2 (Real.log (Real.log (1 / ε))) -
+      (1 / 2 : ℝ) * Real.logb 2 9400 ≤ Real.logb 2 K :=
+  NLQCLean.Results.RobustPaper.thm_explicit_one_iterated_log_explicit_constant K ε hK hε hεe hle
+
+section ExplicitOneProtocol
+
+open NLQCLean NLQCLean.ClassicalCommunication
+
+example : ∃ CE : ℝ, 0 < CE ∧
+    (∀ {ρA ρB κA κB μA μB εA εB : Type}
+      [Fintype ρA] [Fintype ρB] [Fintype κA] [Fintype κB]
+      [Fintype μA] [Fintype μB] [Fintype εA] [Fintype εB]
+      [DecidableEq ρA] [DecidableEq ρB] [DecidableEq κA] [DecidableEq κB]
+      [DecidableEq μA] [DecidableEq μB] [DecidableEq εA] [DecidableEq εB]
+      (P : PureProtocol (Fin 2) (Fin 2) ρA ρB κA κB μA μB (Fin 2) (Fin 2) εA εB)
+      {K : ℕ} {ε : ℝ}, 1 ≤ K → P.HasFootprint K →
+      1 - ε ≤ scoreU (controlledPhase 1) P.operationalChannel →
+      Real.exp (-Real.exp (CE * (K : ℝ) ^ 2)) ≤ ε) ∧
+    (∀ {ρA ρB κA κB μA μB σA σB : Type}
+      [Fintype ρA] [Fintype ρB] [Fintype κA] [Fintype κB] [Fintype μA] [Fintype μB]
+      [DecidableEq ρA] [DecidableEq ρB] [DecidableEq κA] [DecidableEq κB]
+      [DecidableEq μA] [DecidableEq μB]
+      [MeasurableSpace σA] [MeasurableSpace σB] [StandardBorelSpace σA] [StandardBorelSpace σB]
+      (P : StandardBorelClassicalProtocol (Fin 2) (Fin 2) ρA ρB κA κB μA μB σA σB
+        (Fin 2) (Fin 2)) {Kq : ℕ} {ε : ℝ}, 1 ≤ Kq →
+      ((P.HasQuantumFootprint Kq →
+        1 - ε ≤ scoreU (controlledPhase 1) P.operationalChannel.toLinearMap →
+          Real.exp (-Real.exp (256 * CE * (Kq : ℝ) ^ 10)) ≤ ε) ∧
+      (∀ (n : ℕ) (m : MixedResource ρA ρB n), P.HasMixedQuantumFootprint m Kq →
+        1 - ε ≤ scoreU (controlledPhase 1) (P.mixedOperationalChannel m) →
+          Real.exp (-Real.exp (256 * CE * (Kq : ℝ) ^ 10)) ≤ ε))) :=
+  NLQCLean.Results.RobustPaper.thm_explicit_one_protocol
+
+example :
+    (∀ {ρA ρB κA κB μA μB εA εB : Type}
+      [Fintype ρA] [Fintype ρB] [Fintype κA] [Fintype κB]
+      [Fintype μA] [Fintype μB] [Fintype εA] [Fintype εB]
+      [DecidableEq ρA] [DecidableEq ρB] [DecidableEq κA] [DecidableEq κB]
+      [DecidableEq μA] [DecidableEq μB] [DecidableEq εA] [DecidableEq εB]
+      (P : PureProtocol (Fin 2) (Fin 2) ρA ρB κA κB μA μB (Fin 2) (Fin 2) εA εB)
+      {K : ℕ} {ε : ℝ}, 1 ≤ K → P.HasFootprint K →
+      1 - ε ≤ scoreU (controlledPhase 1) P.operationalChannel →
+      Real.exp (-Real.exp (9400 * (K : ℝ) ^ 2)) ≤ ε) ∧
+    (∀ {ρA ρB κA κB μA μB σA σB : Type}
+      [Fintype ρA] [Fintype ρB] [Fintype κA] [Fintype κB] [Fintype μA] [Fintype μB]
+      [DecidableEq ρA] [DecidableEq ρB] [DecidableEq κA] [DecidableEq κB]
+      [DecidableEq μA] [DecidableEq μB]
+      [MeasurableSpace σA] [MeasurableSpace σB] [StandardBorelSpace σA] [StandardBorelSpace σB]
+      (P : StandardBorelClassicalProtocol (Fin 2) (Fin 2) ρA ρB κA κB μA μB σA σB
+        (Fin 2) (Fin 2)) {Kq : ℕ} {ε : ℝ}, 1 ≤ Kq →
+      ((P.HasQuantumFootprint Kq →
+        1 - ε ≤ scoreU (controlledPhase 1) P.operationalChannel.toLinearMap →
+          Real.exp (-Real.exp (2406400 * (Kq : ℝ) ^ 10)) ≤ ε) ∧
+      (∀ (n : ℕ) (m : MixedResource ρA ρB n), P.HasMixedQuantumFootprint m Kq →
+        1 - ε ≤ scoreU (controlledPhase 1) (P.mixedOperationalChannel m) →
+          Real.exp (-Real.exp (2406400 * (Kq : ℝ) ^ 10)) ≤ ε))) :=
+  NLQCLean.Results.RobustPaper.thm_explicit_one_protocol_explicit_constant
+
+end ExplicitOneProtocol
+
+/-- info: 'NLQCLean.Results.RobustPaper.thm_explicit_one' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms NLQCLean.Results.RobustPaper.thm_explicit_one
+
+/-- info: 'NLQCLean.Results.RobustPaper.thm_explicit_one_protocol' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms NLQCLean.Results.RobustPaper.thm_explicit_one_protocol
+
+/-- info: 'NLQCLean.Results.RobustPaper.thm_explicit_one_iterated_log' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms NLQCLean.Results.RobustPaper.thm_explicit_one_iterated_log
+
+/-- info: 'NLQCLean.Results.RobustPaper.thm_explicit_one_explicit_constant' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms NLQCLean.Results.RobustPaper.thm_explicit_one_explicit_constant
+
+/-- info: 'NLQCLean.Results.RobustPaper.thm_explicit_one_protocol_explicit_constant' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms NLQCLean.Results.RobustPaper.thm_explicit_one_protocol_explicit_constant
+
+/-- info: 'NLQCLean.Results.RobustPaper.thm_explicit_one_iterated_log_explicit_constant' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms NLQCLean.Results.RobustPaper.thm_explicit_one_iterated_log_explicit_constant
+
 example {θ : ℝ} (hθ0 : θ ≠ 0) (hθ : IsAlgebraic ℚ θ) :
     ∃ CE : ℝ, 0 < CE ∧ ∀ K : ℕ, 1 ≤ K →
       Real.exp (-Real.exp (CE * (K : ℝ) ^ 2)) ≤ NLQCLean.controlledPhaseLeastDeficit K θ :=

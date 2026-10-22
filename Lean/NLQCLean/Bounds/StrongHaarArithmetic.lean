@@ -143,9 +143,7 @@ theorem strong_small_radius_arith {C₀ : ℝ} (hC₀ : 0 ≤ C₀) {d K b : ℕ
     _ ≤ Real.exp (3 * (K : ℝ) ^ 2) * (Real.exp (68 * C₀ * (K : ℝ) ^ 2) *
         (Real.exp (17 * (K : ℝ) ^ 2) * (Real.exp ((K : ℝ) ^ 2) * e ^ ((d : ℝ) ^ 4 / 16)))) := by
         gcongr
-        all_goals first
-          | exact h32N
-          | exact hδpow.trans (mul_le_mul_of_nonneg_right hbaseN (by positivity))
+        exact hδpow.trans (mul_le_mul_of_nonneg_right hbaseN (by positivity))
     _ = _ := by
         rw [show (68 * C₀ + 21) * (K : ℝ) ^ 2 =
           3 * (K : ℝ) ^ 2 + (68 * C₀ * (K : ℝ) ^ 2 + (17 * (K : ℝ) ^ 2 + (K : ℝ) ^ 2)) by ring,

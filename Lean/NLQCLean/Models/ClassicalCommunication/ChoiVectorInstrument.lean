@@ -33,10 +33,11 @@ local instance : MeasurableSpace (Matrix (κ × ι) (κ × ι) ℂ) :=
   borel (Matrix (κ × ι) (κ × ι) ℂ)
 
 noncomputable local instance : ContinuousENorm (Matrix (κ × ι) (κ × ι) ℂ) :=
-  @SeminormedAddGroup.toContinuousENorm (Matrix (κ × ι) (κ × ι) ℂ)
-    (@SeminormedAddCommGroup.toSeminormedAddGroup (Matrix (κ × ι) (κ × ι) ℂ)
-      (@NormedAddCommGroup.toSeminormedAddCommGroup (Matrix (κ × ι) (κ × ι) ℂ)
-        (choiMatrixNormedAddCommGroup (ι := ι) (κ := κ))))
+  @ESeminormedAddMonoid.toContinuousENorm _ _ <|
+    @SeminormedAddGroup.toESeminormedAddMonoid (Matrix (κ × ι) (κ × ι) ℂ)
+      (@SeminormedAddCommGroup.toSeminormedAddGroup (Matrix (κ × ι) (κ × ι) ℂ)
+        (@NormedAddCommGroup.toSeminormedAddCommGroup (Matrix (κ × ι) (κ × ι) ℂ)
+          (choiMatrixNormedAddCommGroup (ι := ι) (κ := κ))))
 
 local instance : BorelSpace (Matrix (κ × ι) (κ × ι) ℂ) :=
   ⟨rfl⟩

@@ -24,7 +24,7 @@ noncomputable def evalE (P : MvPolynomial (Fin a) ℝ) (x : RealEuclidean a) : �
 
 theorem contDiff_eval_top (P : MvPolynomial (Fin n) ℝ) :
     ContDiff ℝ ∞ (fun q : Fin n → ℝ => eval q P) :=
-  contDiff_mvPolynomial_eval_comp (f := fun q => q) (fun i => contDiff_apply ℝ ℝ i) P
+  contDiff_mvPolynomial_eval_comp (f := fun q => q) (fun i => contDiff_apply ℝ (fun _ => ℝ) i) P
 
 theorem contDiff_evalE (P : MvPolynomial (Fin a) ℝ) : ContDiff ℝ ∞ (evalE P) :=
   contDiff_mvPolynomial_eval_comp (f := fun x : RealEuclidean a => fun i => x i)

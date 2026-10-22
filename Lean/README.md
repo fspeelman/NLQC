@@ -6,7 +6,7 @@ The models allow arbitrary finite original registers and pure or common-map
 finite-mixed shared resources. The charged footprint counts resource Schmidt
 rank and both communicated messages.
 
-This library uses Lean/Mathlib v4.34.1 and formalizes results from the
+This library uses Lean/Mathlib v4.35.0 and formalizes results from the
 exact paper and its robust companion. The
 [source-to-theorem map](docs/PUBLIC_RESULTS.md) lists the covered statements
 and their restrictions.
@@ -26,7 +26,7 @@ and their restrictions.
 | Universal measurement precision near Bell bases, including the 2n charged and −2n/5 free-classical dimension terms | Unconditional |
 | Finite-orbit structure for exact unitary and projective-measurement targets | Unconditional |
 | Rectangular diagonal-gate bounds, standard-Borel localization and shared-randomness extensions | Unconditional |
-| Effective bound for the named controlled-phase gate (Appendix C) | Unconditional at the stated rate `exp(-exp(C K²))` for every nonzero algebraic angle: the epigraph eliminant is proved by a deformed critical-point argument and the polynomial-type transcendence measure for `e^{iθ}` by Gelfond's method. For `C₁` the free-classical `exp(-exp(C R⁴ Kq²))` / `Kq⁶` refinement is unconditional too |
+| Effective bound for the named controlled-phase gate (Appendix C) | Unconditional at the stated rate `exp(-exp(C K²))` for every nonzero algebraic angle: the epigraph eliminant is proved by a deformed critical-point argument and the polynomial-type transcendence measure for `e^{iθ}` by Gelfond's method. With free classical messages the general bound is `exp(-exp(C Kq¹⁰))`. For `C₁` the constant is explicit, `g_K(1) ≥ exp(-exp(9400 K²))`, and the free-classical `exp(-exp(C R⁴ Kq²))` / `Kq⁶` / LOSCC refinements are unconditional too; their sixth-power extension to other angles is not formalized |
 
 The quantitative bounds rest on the polynomial image-volume bound
 (`DirectVolume.polynomialImageVolumeBound`), proved by a Lagrange-maximum
@@ -63,6 +63,21 @@ The [example Linux CI workflow](.github/workflows/lean.yml) uses these same
 targets. When placing the library in a subfolder, configure the workflow in
 the hosting repository to run from that folder. Do not update the pinned
 dependencies to
-reproduce the checked results. Vendor licenses and port provenance are in
-[Tau Ceti](NLQCLean/Vendor/TauCeti/README.md) and
-[Sundog](NLQCLean/Vendor/Sundog/README.md).
+reproduce the checked results.
+
+## License
+
+The Lean sources (`NLQCLean/`, `NLQCTests/` and the root Lean and Lake files),
+this README and the documentation in `docs/PUBLIC_RESULTS.md` and
+`docs/ASSUMPTIONS.md` are licensed under the
+[Apache License, Version 2.0](LICENSE).
+
+Code vendored under `NLQCLean/Vendor/` keeps its upstream license and
+notices; each directory has its own `LICENSE` and a README with provenance
+and modification notes:
+[Tau Ceti](NLQCLean/Vendor/TauCeti/README.md),
+[Sundog](NLQCLean/Vendor/Sundog/README.md) and
+[Hermite–Lindemann](NLQCLean/Vendor/HermiteLindemann/README.md)
+(all Apache-2.0). Mathlib and the other Lake dependencies are fetched
+separately under their own licenses. Material outside these files, such as
+reference documents and manuscript sources, is not covered by this license.

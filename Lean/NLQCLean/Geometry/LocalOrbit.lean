@@ -28,6 +28,10 @@ open scoped Matrix.Norms.Frobenius
 variable {𝕜 : Type*} [RCLike 𝕜]
 variable {ι κ : Type*} [Fintype ι] [Fintype κ] [DecidableEq ι] [DecidableEq κ]
 
+/-- Finite-dimensional matrix spaces are normable over `ℝ`. -/
+local instance {m n : Type*} [Fintype m] [Fintype n] : IsNormableSpace ℝ (Matrix m n 𝕜) :=
+  isNormableSpace_of_finiteDimensional
+
 /-- Right translation `a ↦ X * a`. -/
 noncomputable def mulRightCLM (X : Matrix κ ι 𝕜) : Matrix ι ι 𝕜 →L[ℝ] Matrix κ ι 𝕜 :=
   mulCLM X

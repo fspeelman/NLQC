@@ -36,7 +36,7 @@ smoothness order and with no decidable equality assumption. -/
 @[fun_prop] theorem contDiff_mvPolynomial_eval_pi
     {σ : Type u} [Fintype σ] (order : WithTop ℕ∞) (p : MvPolynomial σ ℝ) :
     ContDiff ℝ order (fun x : σ → ℝ => MvPolynomial.eval x p) :=
-  contDiff_mvPolynomial_eval_comp (fun i => contDiff_apply ℝ ℝ i) p
+  contDiff_mvPolynomial_eval_comp (fun i => contDiff_apply ℝ (fun _ => ℝ) i) p
 
 /-- Polynomial evaluation on Euclidean space with arbitrary finite indices. -/
 @[fun_prop] theorem contDiff_mvPolynomial_eval_euclidean

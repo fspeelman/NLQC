@@ -59,10 +59,11 @@ noncomputable local instance densityHermitianTopologicalSpace :
   (densityHermitianNormedAddCommGroup (ι := ι)).toMetricSpace.toPseudoMetricSpace.toUniformSpace.toTopologicalSpace
 
 noncomputable local instance density_compression_instance_7 : ContinuousENorm (selfAdjoint (Matrix ι ι ℂ)) :=
-  @SeminormedAddGroup.toContinuousENorm (selfAdjoint (Matrix ι ι ℂ))
-    (@SeminormedAddCommGroup.toSeminormedAddGroup (selfAdjoint (Matrix ι ι ℂ))
-      (@NormedAddCommGroup.toSeminormedAddCommGroup (selfAdjoint (Matrix ι ι ℂ))
-        (densityHermitianNormedAddCommGroup (ι := ι))))
+  @ESeminormedAddMonoid.toContinuousENorm _ _ <|
+    @SeminormedAddGroup.toESeminormedAddMonoid (selfAdjoint (Matrix ι ι ℂ))
+      (@SeminormedAddCommGroup.toSeminormedAddGroup (selfAdjoint (Matrix ι ι ℂ))
+        (@NormedAddCommGroup.toSeminormedAddCommGroup (selfAdjoint (Matrix ι ι ℂ))
+          (densityHermitianNormedAddCommGroup (ι := ι))))
 
 local instance density_compression_instance_8 : FiniteDimensional ℝ (selfAdjoint (Matrix ι ι ℂ)) :=
   inferInstanceAs (FiniteDimensional ℝ (selfAdjoint.submodule ℝ (Matrix ι ι ℂ)))

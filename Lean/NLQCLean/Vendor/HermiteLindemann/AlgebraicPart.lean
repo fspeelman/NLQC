@@ -77,7 +77,7 @@ theorem coeff_single_mul_single_zero_ne_zero_iff [CharZero F] [NoZeroDivisors R]
     (mapDomainFixed.single x a * mapDomainFixed.single y b).val.coeff 0 ≠ 0 ↔ x = -y := by
   classical
   simp_rw [mapDomainFixed.single, MulMemClass.mk_mul_mk]
-  have : IsAddTorsionFree R := .of_isTorsionFree F R
+  have : HasUniqueDiv R := .of_isTorsionFree F R
   simp_rw [Finsupp.indicator_eq_sum_single, AddMonoidAlgebra.ofCoeff_sum,
     sum_mul, mul_sum, AddMonoidAlgebra.ofCoeff_single, AddMonoidAlgebra.single_mul_single,
     AddMonoidAlgebra.coeff_sum, Finsupp.coe_finsetSum, Finset.sum_apply,

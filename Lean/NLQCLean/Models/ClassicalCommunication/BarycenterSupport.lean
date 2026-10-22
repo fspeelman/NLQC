@@ -39,8 +39,8 @@ private theorem zero_mem_convexHull_image_of_submodule
   have hgf : (fun a => (g a : E)) =ᵐ[μ] f := hG.mono fun a ha => hg a ha
   have hcomp : Integrable (W.subtypeₗᵢ ∘ g) μ := hf.congr hgf.symm
   have hgi : Integrable g μ :=
-    (W.subtypeₗᵢ.lipschitz.integrable_comp_iff_of_antilipschitz
-      W.subtypeₗᵢ.antilipschitz W.subtypeₗᵢ.map_zero).mp hcomp
+    (W.subtypeₗᵢ.lipschitzWith.integrable_comp_iff_of_antilipschitz
+      W.subtypeₗᵢ.antilipschitzWith W.subtypeₗᵢ.map_zero).mp hcomp
   have hg0 : (∫ a, g a ∂μ) = 0 := by
     apply Subtype.ext
     change W.subtypeₗᵢ (∫ a, g a ∂μ) = 0
@@ -188,10 +188,11 @@ noncomputable local instance hermitianTopologicalSpace :
   (hermitianNormedAddCommGroup (ι := ι)).toMetricSpace.toPseudoMetricSpace.toUniformSpace.toTopologicalSpace
 
 noncomputable local instance : ContinuousENorm (selfAdjoint (Matrix ι ι ℂ)) :=
-  @SeminormedAddGroup.toContinuousENorm (selfAdjoint (Matrix ι ι ℂ))
-    (@SeminormedAddCommGroup.toSeminormedAddGroup (selfAdjoint (Matrix ι ι ℂ))
-      (@NormedAddCommGroup.toSeminormedAddCommGroup (selfAdjoint (Matrix ι ι ℂ))
-        (hermitianNormedAddCommGroup (ι := ι))))
+  @ESeminormedAddMonoid.toContinuousENorm _ _ <|
+    @SeminormedAddGroup.toESeminormedAddMonoid (selfAdjoint (Matrix ι ι ℂ))
+      (@SeminormedAddCommGroup.toSeminormedAddGroup (selfAdjoint (Matrix ι ι ℂ))
+        (@NormedAddCommGroup.toSeminormedAddCommGroup (selfAdjoint (Matrix ι ι ℂ))
+          (hermitianNormedAddCommGroup (ι := ι))))
 
 local instance : FiniteDimensional ℝ (selfAdjoint (Matrix ι ι ℂ)) :=
   inferInstanceAs (FiniteDimensional ℝ (selfAdjoint.submodule ℝ (Matrix ι ι ℂ)))

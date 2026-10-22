@@ -110,6 +110,42 @@ theorem thirty_two_add_lt_two_pow (K : ℕ) :
         omega
     _ = 2 ^ (56 + 14 * K) := by rw [← pow_add, ← pow_add]; congr 1; ring
 
+/-- The certificate of `g_K(θ)` in the generic epigraph form. -/
+theorem controlledPhase_certificate_generic {θ g : ℝ} (t : Fin 8 → ℕ)
+    (hupper : ∀ x : PhysicalBlocks 2 t,
+      eval (physicalCoordinatesEquiv 2 t x) (physicalConstraintSumSquares 2 t) = 0 →
+        eval (phaseScoreCoordinates t (Real.cos θ) (Real.sin θ) x)
+          (controlledPhaseScoreNumeratorPolynomial t) ≤ 16 * (1 - g))
+    (hattain : ∃ x : PhysicalBlocks 2 t,
+      eval (physicalCoordinatesEquiv 2 t x) (physicalConstraintSumSquares 2 t) = 0 ∧
+        eval (phaseScoreCoordinates t (Real.cos θ) (Real.sin θ) x)
+          (controlledPhaseScoreNumeratorPolynomial t) = 16 * (1 - g)) :
+    (∀ w : PhysicalCoordinateIndex 2 t → ℝ, eval w (physicalConstraintSumSquares 2 t) = 0 →
+      eval (Sum.elim ![Real.cos θ, Real.sin θ] w) (controlledPhaseScoreNumeratorPolynomial t) ≤
+        16 * (1 - g)) ∧
+    (∃ w : PhysicalCoordinateIndex 2 t → ℝ, eval w (physicalConstraintSumSquares 2 t) = 0 ∧
+      eval (Sum.elim ![Real.cos θ, Real.sin θ] w) (controlledPhaseScoreNumeratorPolynomial t) =
+        16 * (1 - g) ∧ ∀ i, |w i| ≤ 1) := by
+  refine ⟨fun w hw => ?_, ?_⟩
+  · have h := hupper ((physicalCoordinatesEquiv 2 t).symm w) (by
+      rw [LinearEquiv.apply_symm_apply]; exact hw)
+    have hphase : phaseScoreCoordinates t (Real.cos θ) (Real.sin θ)
+        ((physicalCoordinatesEquiv 2 t).symm w) = Sum.elim ![Real.cos θ, Real.sin θ] w := by
+      show Sum.elim ![Real.cos θ, Real.sin θ] _ = _
+      rw [LinearEquiv.apply_symm_apply]
+    rwa [hphase] at h
+  · obtain ⟨x, hx, hxv⟩ := hattain
+    have hxP : x ∈ physicalSet 2 t :=
+      (physicalConstraintSumSquares_eval_coordinates_eq_zero_iff 2 t x).mp hx
+    exact ⟨physicalCoordinatesEquiv 2 t x, hx, hxv, abs_physicalCoordinates_le_one hxP⟩
+
+theorem constraint_massLE_score_bound {K : ℕ} (hK : 1 ≤ K) {t : Fin 8 → ℕ}
+    (hCm : CoefficientMassLE (physicalConstraintSumSquares 2 t) (34406400 * K ^ 8)) :
+    CoefficientMassLE (physicalConstraintSumSquares 2 t) (2 ^ 51 * K ^ 14) :=
+  hCm.mono (by
+    have : K ^ 8 ≤ K ^ 14 := Nat.pow_le_pow_right hK (by norm_num)
+    calc 34406400 * K ^ 8 ≤ 2 ^ 51 * K ^ 14 := Nat.mul_le_mul (by norm_num) this)
+
 /-- **Controlled-phase eliminant without external input.** -/
 theorem exists_controlledPhase_certificate_eliminant {K : ℕ} (hK : 1 ≤ K) (θ g : ℝ)
     (t : Fin 8 → ℕ) (hg0 : 0 < g) (hg1 : g ≤ 1)
@@ -135,28 +171,43 @@ theorem exists_controlledPhase_certificate_eliminant {K : ℕ} (hK : 1 ≤ K) (�
       Fintype.card (PhysicalCoordinateIndex 2 t) + 2 := by
     simp only [ExplicitGate.BoundIndex, Fintype.card_sum, Fintype.card_unit]
     omega
-  have hCm' : CoefficientMassLE (physicalConstraintSumSquares 2 t) (2 ^ 51 * K ^ 14) :=
-    hCm.mono (by
-      have : K ^ 8 ≤ K ^ 14 := Nat.pow_le_pow_right hK (by norm_num)
-      calc 34406400 * K ^ 8 ≤ 2 ^ 51 * K ^ 14 := Nat.mul_le_mul (by norm_num) this)
+  obtain ⟨hup, hat⟩ := controlledPhase_certificate_generic t hupper hattain
   obtain ⟨A, hA0, hdeg, hbits, hz⟩ := Deformation.exists_eliminant_explicit
     (PhysicalCoordinateIndex 2 t) (physicalConstraintSumSquares 2 t)
     (controlledPhaseScoreNumeratorPolynomial t) (2 ^ 51 * K ^ 14) (56 + 14 * K) θ g (by omega)
-    (hCdeg.trans (by norm_num)) hSdeg hCm' hSm (thirty_two_add_lt_two_pow K) hg0 hg1
-    (fun w hw => by
-      have h := hupper ((physicalCoordinatesEquiv 2 t).symm w) (by
-        rw [LinearEquiv.apply_symm_apply]; exact hw)
-      have hphase : phaseScoreCoordinates t (Real.cos θ) (Real.sin θ)
-          ((physicalCoordinatesEquiv 2 t).symm w) = Sum.elim ![Real.cos θ, Real.sin θ] w := by
-        show Sum.elim ![Real.cos θ, Real.sin θ] _ = _
-        rw [LinearEquiv.apply_symm_apply]
-      rwa [hphase] at h)
-    (by
-      obtain ⟨x, hx, hxv⟩ := hattain
-      have hxP : x ∈ physicalSet 2 t :=
-        (physicalConstraintSumSquares_eval_coordinates_eq_zero_iff 2 t x).mp hx
-      exact ⟨physicalCoordinatesEquiv 2 t x, hx, hxv, abs_physicalCoordinates_le_one hxP⟩)
+    (hCdeg.trans (by norm_num)) hSdeg (constraint_massLE_score_bound hK hCm) hSm
+    (thirty_two_add_lt_two_pow K) hg0 hg1 hup hat
   rw [hcard]
   exact ⟨A, hA0, hdeg, hbits, hz⟩
+
+/-- **Controlled-phase eliminant with sharp size bounds**: with `k` real coordinates, degree at
+most `d_Nrm(k)` and coefficients below `2^{sharpExp k (56 + 14K) + 1}`. -/
+theorem exists_controlledPhase_certificate_eliminant_sharp {K : ℕ} (hK : 1 ≤ K) (θ g : ℝ)
+    (t : Fin 8 → ℕ) (hg0 : 0 < g) (hg1 : g ≤ 1)
+    (hCdeg : (physicalConstraintSumSquares 2 t).totalDegree ≤ 4)
+    (hSdeg : (controlledPhaseScoreNumeratorPolynomial t).totalDegree ≤ 12)
+    (hCm : CoefficientMassLE (physicalConstraintSumSquares 2 t) (34406400 * K ^ 8))
+    (hSm : CoefficientMassLE (controlledPhaseScoreNumeratorPolynomial t) (2 ^ 51 * K ^ 14))
+    (hupper : ∀ x : PhysicalBlocks 2 t,
+      eval (physicalCoordinatesEquiv 2 t x) (physicalConstraintSumSquares 2 t) = 0 →
+        eval (phaseScoreCoordinates t (Real.cos θ) (Real.sin θ) x)
+          (controlledPhaseScoreNumeratorPolynomial t) ≤ 16 * (1 - g))
+    (hattain : ∃ x : PhysicalBlocks 2 t,
+      eval (physicalCoordinatesEquiv 2 t x) (physicalConstraintSumSquares 2 t) = 0 ∧
+        eval (phaseScoreCoordinates t (Real.cos θ) (Real.sin θ) x)
+          (controlledPhaseScoreNumeratorPolynomial t) = 16 * (1 - g)) :
+    ∃ A : MvPolynomial (Fin 2) ℤ, A ≠ 0 ∧
+      A.totalDegree ≤ Deformation.dNrm (physicalRawRealCoordinateCount 2 t) ∧
+      (∀ m, (A.coeff m).natAbs <
+        2 ^ (Deformation.sharpExp (physicalRawRealCoordinateCount 2 t) (56 + 14 * K) + 1)) ∧
+      MvPolynomial.eval₂ (Int.castRingHom ℝ) ![g, Real.cos θ] A = 0 := by
+  classical
+  obtain ⟨hup, hat⟩ := controlledPhase_certificate_generic t hupper hattain
+  have h := Deformation.exists_eliminant_sharp
+    (PhysicalCoordinateIndex 2 t) (physicalConstraintSumSquares 2 t)
+    (controlledPhaseScoreNumeratorPolynomial t) (2 ^ 51 * K ^ 14) (56 + 14 * K) θ g
+    (hCdeg.trans (by norm_num)) hSdeg (constraint_massLE_score_bound hK hCm) hSm
+    (thirty_two_add_lt_two_pow K) hg0 hg1 hup hat
+  rwa [card_physicalCoordinateIndex] at h
 
 end NLQCLean

@@ -170,7 +170,7 @@ theorem contDiffAt_chartMap {n : WithTop ℕ∞} (p : Fin m → MvPolynomial (Fi
   refine contDiffAt_pi.mpr fun r => ?_
   rcases r with j | k
   · exact contDiffAt_lagrangeMap p φ j hw
-  · exact (contDiff_apply ℝ ℝ (Sum.inl (coordinateMinorAxes s k))).contDiffAt
+  · exact (contDiff_apply ℝ (fun _ => ℝ) (Sum.inl (coordinateMinorAxes s k))).contDiffAt
 
 /-- The shared upper rows of the two Jacobian matrices. -/
 noncomputable def lagrangeRows (p : Fin m → MvPolynomial (Fin a) ℝ) (φ : MvPolynomial (Fin a) ℝ)

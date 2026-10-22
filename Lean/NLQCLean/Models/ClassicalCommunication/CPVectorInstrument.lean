@@ -29,10 +29,11 @@ noncomputable local instance cpMatrixTopologicalSpace
 
 noncomputable local instance {ν : Type*} [Fintype ν] :
     ContinuousENorm (Matrix ν ν ℂ) :=
-  @SeminormedAddGroup.toContinuousENorm (Matrix ν ν ℂ)
-    (@SeminormedAddCommGroup.toSeminormedAddGroup (Matrix ν ν ℂ)
-      (@NormedAddCommGroup.toSeminormedAddCommGroup (Matrix ν ν ℂ)
-        (cpMatrixNormedAddCommGroup (ν := ν))))
+  @ESeminormedAddMonoid.toContinuousENorm _ _ <|
+    @SeminormedAddGroup.toESeminormedAddMonoid (Matrix ν ν ℂ)
+      (@SeminormedAddCommGroup.toSeminormedAddGroup (Matrix ν ν ℂ)
+        (@NormedAddCommGroup.toSeminormedAddCommGroup (Matrix ν ν ℂ)
+          (cpMatrixNormedAddCommGroup (ν := ν))))
 
 local instance {ν : Type*} [Fintype ν] : MeasurableSpace (Matrix ν ν ℂ) :=
   borel (Matrix ν ν ℂ)

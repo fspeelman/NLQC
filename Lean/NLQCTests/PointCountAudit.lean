@@ -11,7 +11,6 @@ import NLQCLean.Geometry.PolynomialTube
 import NLQCLean.Geometry.UnitaryFrobeniusVolume
 import NLQCLean.Approx.PVMWitnessCutoff
 import NLQCLean.Exact.OrbitInvariantAlgebraicity
-import NLQCLean.Bounds.ExplicitControlledPhaseResultant
 import NLQCLean.Bounds.ExplicitControlledPhaseGelfond
 import NLQCLean.Bounds.ExplicitControlledPhaseAngle
 
@@ -86,18 +85,6 @@ import NLQCLean.Bounds.ExplicitControlledPhaseAngle
 #guard_msgs (whitespace := lax) in
 #print axioms NLQCLean.purity_isRationalOrbitInvariant
 
-/-- info: 'NLQCLean.Elimination.elim_flat' depends on axioms: [propext, Classical.choice, Quot.sound] -/
-#guard_msgs (whitespace := lax) in
-#print axioms NLQCLean.Elimination.elim_flat
-
-/-- info: 'NLQCLean.Elimination.lagrangeSystem_generic' depends on axioms: [propext, Classical.choice, Quot.sound] -/
-#guard_msgs (whitespace := lax) in
-#print axioms NLQCLean.Elimination.lagrangeSystem_generic
-
-/-- info: 'NLQCLean.exists_controlledPhase_one_resultant_eliminant' depends on axioms: [propext, Classical.choice, Quot.sound] -/
-#guard_msgs (whitespace := lax) in
-#print axioms NLQCLean.exists_controlledPhase_one_resultant_eliminant
-
 /-- info: 'NLQCLean.Gelfond.norm_eval_exp_I_ge_of_irreducible' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
 #print axioms NLQCLean.Gelfond.norm_eval_exp_I_ge_of_irreducible
@@ -138,21 +125,25 @@ import NLQCLean.Bounds.ExplicitControlledPhaseAngle
 #guard_msgs (whitespace := lax) in
 #print axioms NLQCLean.exists_explicit_controlledPhase_quantum_iterated_log_bound
 
+/-- info: 'NLQCLean.exists_controlledPhase_certificate_eliminant_sharp' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms NLQCLean.exists_controlledPhase_certificate_eliminant_sharp
+
 /-- info: 'NLQCLean.exists_controlledPhase_one_eliminant' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
 #print axioms NLQCLean.exists_controlledPhase_one_eliminant
 
-/-- info: 'NLQCLean.controlledPhase_one_triple_exp_bound' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+/-- info: 'NLQCLean.controlledPhase_one_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
-#print axioms NLQCLean.controlledPhase_one_triple_exp_bound
+#print axioms NLQCLean.controlledPhase_one_lower_bound
 
-/-- info: 'NLQCLean.controlledPhase_one_protocol_triple_exp_bound' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+/-- info: 'NLQCLean.controlledPhase_one_protocol_bound' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
-#print axioms NLQCLean.controlledPhase_one_protocol_triple_exp_bound
+#print axioms NLQCLean.controlledPhase_one_protocol_bound
 
-/-- info: 'NLQCLean.controlledPhase_one_triple_log_bound' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+/-- info: 'NLQCLean.controlledPhase_one_iterated_log_bound' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
-#print axioms NLQCLean.controlledPhase_one_triple_log_bound
+#print axioms NLQCLean.controlledPhase_one_iterated_log_bound
 
 /-- info: 'NLQCLean.exists_explicit_controlledPhase_one_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in

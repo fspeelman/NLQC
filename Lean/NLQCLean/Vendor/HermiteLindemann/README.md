@@ -4,8 +4,8 @@ Required missing-module closure from [Mathlib PR 28013](https://github.com/leanp
 `5a0057ccc26b13a4e361f503f5f765bf56a8d353`, retrieved 1 October 2026.
 The original source paths and SHA-256 hashes are in
 [SOURCE_MANIFEST.json](SOURCE_MANIFEST.json). Upstream licenses and genuine
-copyright/author notices are preserved. The project toolchain remains
-Lean/Mathlib v4.34.1.
+copyright/author notices are preserved. The project toolchain is now
+Lean/Mathlib v4.35.0.
 
 Initial compatibility modifications: redirect the four missing module
 imports to this directory; remove newer module-system commands and import
@@ -32,3 +32,10 @@ the same upstream pin and source manifest: `AlgebraicPart.lean` uses
 `Multiset.esymm_zero` and `Multiset.esymm_of_card_lt` instead of declaring
 the v4.33.1 compatibility copies; `Basic.lean` supplies the explicit base
 ring to `Complex.isIntegral_I`. The original upstream notices remain.
+
+Compatibility update for Lean/Mathlib v4.35.0 (22 October 2026), retaining
+the same upstream pin and source manifest: in
+`coeff_single_mul_single_zero_ne_zero_iff`, `AlgebraicPart.lean` states the
+local torsion-freeness fact as `HasUniqueDiv R` (Mathlib renamed
+`IsAddTorsionFree.of_isTorsionFree` to `HasUniqueDiv.of_isTorsionFree`; the
+`IsAddTorsionFree` instance is derived from it). No other vendored file changed.
