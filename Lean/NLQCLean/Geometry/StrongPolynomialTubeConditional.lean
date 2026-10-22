@@ -1,7 +1,11 @@
-import NLQCLean.Approx.SlimWitnessDifferential
-import NLQCLean.Geometry.ScaledUnitaryNormalVolume
-import NLQCLean.Geometry.UnitaryWitnessTube
-import NLQCLean.Geometry.PolynomialTubeConditional
+module
+
+public import NLQCLean.Approx.SlimWitnessDifferential
+public import NLQCLean.Geometry.ScaledUnitaryNormalVolume
+public import NLQCLean.Geometry.UnitaryWitnessTube
+public import NLQCLean.Geometry.PolynomialTubeConditional
+
+@[expose] public section
 
 /-!
 # The strong polynomial tube estimate

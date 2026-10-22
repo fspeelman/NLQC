@@ -1,4 +1,8 @@
-import NLQCLean.Arithmetic.PhysicalPolynomialHeight
+module
+
+public import NLQCLean.Arithmetic.PhysicalPolynomialHeight
+
+@[expose] public section
 
 /-! # Explicit coefficient heights of physical polynomials -/
 

@@ -2,13 +2,17 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.ImageVolume.LagrangeCharts
-import NLQCLean.Geometry.VectorSard
-import Mathlib.Analysis.Calculus.LagrangeMultipliers
-import Mathlib.Analysis.SpecialFunctions.ExpDeriv
-import Mathlib.Analysis.Calculus.FDeriv.Measurable
-import Mathlib.MeasureTheory.Constructions.Pi
-import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+module
+
+public import NLQCLean.ImageVolume.LagrangeCharts
+public import NLQCLean.Geometry.VectorSard
+public import Mathlib.Analysis.Calculus.LagrangeMultipliers
+public import Mathlib.Analysis.SpecialFunctions.ExpDeriv
+public import Mathlib.Analysis.Calculus.FDeriv.Measurable
+public import Mathlib.MeasureTheory.Constructions.Pi
+public import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+
+@[expose] public section
 
 /-!
 # Image volume of a polynomial map on a barrier domain

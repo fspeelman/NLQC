@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.CoherentConversion
+module
+
+public import NLQCLean.Models.ClassicalCommunication.CoherentConversion
+
+@[expose] public section
 
 /-!
 # Common-map finite mixed resources for classical instruments

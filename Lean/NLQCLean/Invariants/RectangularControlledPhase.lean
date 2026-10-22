@@ -1,6 +1,10 @@
-import NLQCLean.Invariants.ControlledPhase
-import NLQCLean.LinearAlgebra.Isometry
-import Mathlib.Data.Fin.Embedding
+module
+
+public import NLQCLean.Invariants.ControlledPhase
+public import NLQCLean.LinearAlgebra.Isometry
+public import Mathlib.Data.Fin.Embedding
+
+@[expose] public section
 
 /-!
 # Two-level restriction of arbitrary rectangular diagonal phases

@@ -2,7 +2,11 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.External.SemialgebraicTextbook
+module
+
+public import NLQCLean.External.SemialgebraicTextbook
+
+@[expose] public section
 
 /-!
 # Coordinate elimination and polynomial images

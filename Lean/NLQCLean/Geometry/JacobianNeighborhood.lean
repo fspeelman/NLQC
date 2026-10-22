@@ -2,10 +2,14 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Geometry.PolynomialGraphFormat
-import NLQCLean.Geometry.CoordinateProjectionNorms
-import Mathlib.Topology.MetricSpace.Thickening
-import Mathlib.Analysis.Normed.Operator.BoundedLinearMaps
+module
+
+public import NLQCLean.Geometry.PolynomialGraphFormat
+public import NLQCLean.Geometry.CoordinateProjectionNorms
+public import Mathlib.Topology.MetricSpace.Thickening
+public import Mathlib.Analysis.Normed.Operator.BoundedLinearMaps
+
+@[expose] public section
 
 /-!
 # Ambient Jacobian bounds near the original source

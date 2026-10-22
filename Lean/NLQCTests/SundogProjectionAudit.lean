@@ -2,7 +2,11 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Vendor.Sundog.SemialgebraicProjection
+module
+
+public import NLQCLean.Vendor.Sundog.SemialgebraicProjection
+
+@[expose] public section
 
 /-!
 # Audit of the vendored Sundog projection theorem

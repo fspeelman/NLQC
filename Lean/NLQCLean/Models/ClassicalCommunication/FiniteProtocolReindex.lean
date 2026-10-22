@@ -1,5 +1,9 @@
-import NLQCLean.Models.ClassicalCommunication.FiniteProtocol
-import NLQCLean.Models.ClassicalCommunication.FiniteInstrumentReindex
+module
+
+public import NLQCLean.Models.ClassicalCommunication.FiniteProtocol
+public import NLQCLean.Models.ClassicalCommunication.FiniteInstrumentReindex
+
+@[expose] public section
 
 /-! # Relabeling the internal registers of finite classical protocols
 

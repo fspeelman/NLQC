@@ -1,5 +1,9 @@
-import NLQCLean.Arithmetic.PurePowerReduction
-import NLQCLean.Arithmetic.PhysicalPolynomialConstraints
+module
+
+public import NLQCLean.Arithmetic.PurePowerReduction
+public import NLQCLean.Arithmetic.PhysicalPolynomialConstraints
+
+@[expose] public section
 
 /-!
 # The deformed critical system of a polynomial optimization problem

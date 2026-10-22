@@ -1,4 +1,8 @@
-import NLQCLean.Approx.BorelClassicalSpectralFloors
+module
+
+public import NLQCLean.Approx.BorelClassicalSpectralFloors
+
+@[expose] public section
 
 /-! Full types and standard-axiom checks for quantum-footprint Borel floors.
 Source proof label: `lem:free-classical-floors`.

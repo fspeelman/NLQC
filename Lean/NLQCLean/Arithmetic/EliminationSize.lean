@@ -1,7 +1,11 @@
-import NLQCLean.Arithmetic.PhysicalPolynomialHeight
-import Mathlib.Algebra.MvPolynomial.Equiv
-import Mathlib.Algebra.MvPolynomial.Monad
-import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+module
+
+public import NLQCLean.Arithmetic.PhysicalPolynomialHeight
+public import Mathlib.Algebra.MvPolynomial.Equiv
+public import Mathlib.Algebra.MvPolynomial.Monad
+public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+
+@[expose] public section
 
 /-!
 # Degree and coefficient-mass bookkeeping

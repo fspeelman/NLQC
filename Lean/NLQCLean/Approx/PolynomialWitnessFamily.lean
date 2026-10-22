@@ -1,5 +1,9 @@
-import NLQCLean.Approx.WitnessPolynomialDegree
-import Mathlib.Topology.Algebra.MvPolynomial
+module
+
+public import NLQCLean.Approx.WitnessPolynomialDegree
+public import Mathlib.Topology.Algebra.MvPolynomial
+
+@[expose] public section
 
 /-!
 # The exact basic closed polynomial witness source

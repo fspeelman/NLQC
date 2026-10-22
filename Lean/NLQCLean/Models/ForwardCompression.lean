@@ -1,6 +1,10 @@
-import NLQCLean.LinearAlgebra.SupportFactorization
-import NLQCLean.Models.Resource
-import NLQCLean.Models.ForwardReindex
+module
+
+public import NLQCLean.LinearAlgebra.SupportFactorization
+public import NLQCLean.Models.Resource
+public import NLQCLean.Models.ForwardReindex
+
+@[expose] public section
 
 /-!
 # Exact finite compression of forward protocols

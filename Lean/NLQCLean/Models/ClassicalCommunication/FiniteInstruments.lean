@@ -1,6 +1,10 @@
-import NLQCLean.Models.Channels
-import NLQCLean.Models.ChannelAmplification
-import Mathlib.LinearAlgebra.Matrix.PosDef
+module
+
+public import NLQCLean.Models.Channels
+public import NLQCLean.Models.ChannelAmplification
+public import Mathlib.LinearAlgebra.Matrix.PosDef
+
+@[expose] public section
 
 /-!
 # Finite Kraus instruments

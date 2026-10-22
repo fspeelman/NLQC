@@ -1,5 +1,9 @@
-import NLQCLean.Models.ChannelAmplification
-import NLQCLean.LinearAlgebra.TraceNormReindex
+module
+
+public import NLQCLean.Models.ChannelAmplification
+public import NLQCLean.LinearAlgebra.TraceNormReindex
+
+@[expose] public section
 
 /-!
 # The all-ancilla diamond norm and normalized diamond error

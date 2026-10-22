@@ -1,5 +1,9 @@
-import NLQCLean.LinearAlgebra.SupportFactorization
-import NLQCLean.LinearAlgebra.IsometricCompletion
+module
+
+public import NLQCLean.LinearAlgebra.SupportFactorization
+public import NLQCLean.LinearAlgebra.IsometricCompletion
+
+@[expose] public section
 
 /-!
 # Extending isometries to a prescribed number of columns

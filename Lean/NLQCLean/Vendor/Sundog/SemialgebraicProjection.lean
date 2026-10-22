@@ -5,7 +5,11 @@ licensed under Apache-2.0 (see NLQCLean/Vendor/Sundog/LICENSE).
 Modified for NLQCLean: extraction of two declarations, import paths and
 Lean/Mathlib v4.33.1 compatibility; see NLQCLean/Vendor/Sundog/README.md.
 -/
-import NLQCLean.Vendor.Sundog.DiagramAssembly
+module
+
+public import NLQCLean.Vendor.Sundog.DiagramAssembly
+
+@[expose] public section
 
 /-!
 # Projection of `SADef` sets

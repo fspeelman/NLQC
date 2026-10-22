@@ -1,4 +1,8 @@
-import NLQCLean.Exact.RationalPolynomialSmoothness
+module
+
+public import NLQCLean.Exact.RationalPolynomialSmoothness
+
+@[expose] public section
 
 /-! Arbitrary smoothness orders, minimal finite index assumptions and standard axioms. -/
 

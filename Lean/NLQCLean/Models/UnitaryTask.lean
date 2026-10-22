@@ -1,7 +1,11 @@
 /-
 The exact unitary task for a one-round protocol.
 -/
-import NLQCLean.Models.Resource
+module
+
+public import NLQCLean.Models.Resource
+
+@[expose] public section
 
 /-!
 # The unitary task

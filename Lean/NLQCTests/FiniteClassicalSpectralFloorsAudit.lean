@@ -1,4 +1,8 @@
-import NLQCLean.Approx.FiniteClassicalSpectralFloors
+module
+
+public import NLQCLean.Approx.FiniteClassicalSpectralFloors
+
+@[expose] public section
 
 /-!
 # Finite classical spectral-floor audit

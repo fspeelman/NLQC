@@ -1,5 +1,9 @@
-import NLQCLean.Models.ClassicalCommunication.FiniteInstruments
-import NLQCLean.Models.ClassicalCommunication.HermitianMomentSupport
+module
+
+public import NLQCLean.Models.ClassicalCommunication.FiniteInstruments
+public import NLQCLean.Models.ClassicalCommunication.HermitianMomentSupport
+
+@[expose] public section
 
 /-!
 # Score-preserving finite Kraus instrument compression
@@ -17,13 +21,13 @@ open scoped ComplexOrder
 
 noncomputable section
 
-private def hermitianMatrixCoe (ι : Type*) [Fintype ι] [DecidableEq ι] :
+def hermitianMatrixCoe (ι : Type*) [Fintype ι] [DecidableEq ι] :
     selfAdjoint (Matrix ι ι ℂ) →ₗ[ℝ] Matrix ι ι ℂ where
   toFun A := A
   map_add' _ _ := rfl
   map_smul' _ _ := rfl
 
-@[simp] private theorem hermitianMatrixCoe_apply
+@[simp] theorem hermitianMatrixCoe_apply
     (ι : Type*) [Fintype ι] [DecidableEq ι] (A : selfAdjoint (Matrix ι ι ℂ)) :
     hermitianMatrixCoe ι A = (A : Matrix ι ι ℂ) := rfl
 

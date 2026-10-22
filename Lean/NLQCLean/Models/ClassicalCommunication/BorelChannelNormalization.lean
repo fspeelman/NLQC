@@ -1,5 +1,9 @@
-import NLQCLean.Models.ClassicalCommunication.BorelOperationalChannel
-import Mathlib.Analysis.Convex.Integral
+module
+
+public import NLQCLean.Models.ClassicalCommunication.BorelOperationalChannel
+public import Mathlib.Analysis.Convex.Integral
+
+@[expose] public section
 
 /-!
 # Normalization of actual Borel operational channels

@@ -1,5 +1,9 @@
-import NLQCLean.Geometry.DirectVolume.Assembly
-import NLQCLean.Bounds.Quantitative
+module
+
+public import NLQCLean.Geometry.DirectVolume.Assembly
+public import NLQCLean.Bounds.Quantitative
+
+@[expose] public section
 
 /-! # Universal unitary bounds combining the SWAP floor and precision -/
 

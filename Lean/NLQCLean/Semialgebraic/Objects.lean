@@ -2,9 +2,13 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Semialgebraic.DimensionDef
-import Mathlib.Analysis.Calculus.ContDiff.Defs
-import Mathlib.Topology.Connected.Clopen
+module
+
+public import NLQCLean.Semialgebraic.DimensionDef
+public import Mathlib.Analysis.Calculus.ContDiff.Defs
+public import Mathlib.Topology.Connected.Clopen
+
+@[expose] public section
 
 /-!
 # Concrete objects used by the external semialgebraic contracts

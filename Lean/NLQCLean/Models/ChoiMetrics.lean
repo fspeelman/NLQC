@@ -1,4 +1,8 @@
-import NLQCLean.Models.ChoiAlgebra
+module
+
+public import NLQCLean.Models.ChoiAlgebra
+
+@[expose] public section
 
 /-!
 # The actual Choi-to-diamond and diamond-to-score bridges

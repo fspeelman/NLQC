@@ -42,9 +42,13 @@ semialgebraic case; formalized in Coq by Cohen–Mahboubi, not in Lean) and the 
 monotonicity/cell-decomposition machinery — those are the next, genuinely large walls, named in
 the ladder and not claimed here.
 -/
-import NLQCLean.Vendor.Sundog.DefinableRate
-import Mathlib.Algebra.Polynomial.Roots
-import Mathlib.Topology.Algebra.Polynomial
+module
+
+public import NLQCLean.Vendor.Sundog.DefinableRate
+public import Mathlib.Algebra.Polynomial.Roots
+public import Mathlib.Topology.Algebra.Polynomial
+
+@[expose] public section
 
 namespace Sundog.OMinimalOne
 

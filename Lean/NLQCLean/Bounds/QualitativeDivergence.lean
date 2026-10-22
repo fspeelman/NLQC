@@ -1,5 +1,9 @@
-import NLQCLean.Models.CompactForward
-import NLQCLean.Exact.ScalarCriticalValues
+module
+
+public import NLQCLean.Models.CompactForward
+public import NLQCLean.Exact.ScalarCriticalValues
+
+@[expose] public section
 
 /-!
 # Unconditional qualitative unitary divergence

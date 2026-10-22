@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Yuyang Zhao
 -/
 
-import Mathlib.RingTheory.MvPolynomial.Symmetric.FundamentalTheorem
-import Mathlib.Algebra.Polynomial.Splits
+module
 
-import Mathlib.Data.Multiset.Fintype
-import Mathlib.RingTheory.Polynomial.Vieta
-import Mathlib.RingTheory.Polynomial.ScaleRoots
+public import Mathlib.RingTheory.MvPolynomial.Symmetric.FundamentalTheorem
+public import Mathlib.Algebra.Polynomial.Splits
+
+public import Mathlib.Data.Multiset.Fintype
+public import Mathlib.RingTheory.Polynomial.Vieta
+public import Mathlib.RingTheory.Polynomial.ScaleRoots
+
+@[expose] public section
 
 /-!
 # Evaluating symmetric polynomials

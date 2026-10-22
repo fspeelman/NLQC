@@ -1,5 +1,9 @@
-import NLQCLean.Arithmetic.TranscriptPolynomial
-import NLQCLean.Arithmetic.PhysicalPolynomialHeight
+module
+
+public import NLQCLean.Arithmetic.TranscriptPolynomial
+public import NLQCLean.Arithmetic.PhysicalPolynomialHeight
+
+@[expose] public section
 
 /-!
 # Coefficient heights and coordinate count of the transcript family

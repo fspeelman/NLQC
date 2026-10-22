@@ -1,8 +1,12 @@
 /-
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import NLQCLean.Semialgebraic.SundogBridge
-import Mathlib.Analysis.SpecialFunctions.Pow.Real
+module
+
+public import NLQCLean.Semialgebraic.SundogBridge
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+
+@[expose] public section
 
 /-!
 # Audit of the bridge to Sundog's semialgebraic sets

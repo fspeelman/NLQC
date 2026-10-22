@@ -1,5 +1,9 @@
-import NLQCLean.Approx.WitnessDifferentialBounds
-import Mathlib.Analysis.SpecialFunctions.Pow.Real
+module
+
+public import NLQCLean.Approx.WitnessDifferentialBounds
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+
+@[expose] public section
 
 /-!
 # Dimension and logarithmic estimates for the Haar bound

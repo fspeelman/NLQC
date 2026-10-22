@@ -1,4 +1,8 @@
-import NLQCLean.Bounds.FiniteControlledPhaseQubits
+module
+
+public import NLQCLean.Bounds.FiniteControlledPhaseQubits
+
+@[expose] public section
 
 /-! # initial-resource accounting for finite LOSCC -/
 

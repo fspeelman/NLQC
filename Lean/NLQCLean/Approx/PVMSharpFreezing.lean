@@ -1,7 +1,11 @@
-import NLQCLean.Approx.PVMChoiProjection
-import NLQCLean.Approx.PVMBlockTruncation
-import NLQCLean.Approx.SharpFreezing
-import NLQCLean.LinearAlgebra.FlaggedSchmidtWeights
+module
+
+public import NLQCLean.Approx.PVMChoiProjection
+public import NLQCLean.Approx.PVMBlockTruncation
+public import NLQCLean.Approx.SharpFreezing
+public import NLQCLean.LinearAlgebra.FlaggedSchmidtWeights
+
+@[expose] public section
 
 /-!
 # Flagged freezing with one total Schmidt-rank budget

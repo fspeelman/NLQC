@@ -1,4 +1,8 @@
-import NLQCLean.Results.RobustPaper
+module
+
+public import NLQCLean.Results.RobustPaper
+
+@[expose] public section
 
 set_option pp.deepTerms true
 set_option pp.maxSteps 1000000

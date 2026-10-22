@@ -1,12 +1,16 @@
 /-
 Frozen target dilations: the two rigid forms of a purified global isometry.
 -/
-import NLQCLean.Models.Channels
-import NLQCLean.Rigidity.Compression
-import Mathlib.LinearAlgebra.Matrix.PosDef
-import Mathlib.LinearAlgebra.Matrix.DotProduct
-import Mathlib.Analysis.Complex.Order
-import Mathlib.Analysis.RCLike.Basic
+module
+
+public import NLQCLean.Models.Channels
+public import NLQCLean.Rigidity.Compression
+public import Mathlib.LinearAlgebra.Matrix.PosDef
+public import Mathlib.LinearAlgebra.Matrix.DotProduct
+public import Mathlib.Analysis.Complex.Order
+public import Mathlib.Analysis.RCLike.Basic
+
+@[expose] public section
 
 /-!
 # Frozen target dilations

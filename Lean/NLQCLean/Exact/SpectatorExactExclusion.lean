@@ -1,6 +1,10 @@
-import NLQCLean.Exact.FiniteExactRestriction
-import NLQCLean.Exact.SpectatorControlledPhase
-import NLQCLean.Exact.LocalChannelRestriction
+module
+
+public import NLQCLean.Exact.FiniteExactRestriction
+public import NLQCLean.Exact.SpectatorControlledPhase
+public import NLQCLean.Exact.LocalChannelRestriction
+
+@[expose] public section
 
 /-!
 # Exact exclusion of controlled phases with identity spectators

@@ -1,6 +1,10 @@
-import NLQCLean.Approx.PVMSharpFreezing
-import NLQCLean.LinearAlgebra.CrossedSinglet
-import NLQCLean.LinearAlgebra.FlatGroupedTail
+module
+
+public import NLQCLean.Approx.PVMSharpFreezing
+public import NLQCLean.LinearAlgebra.CrossedSinglet
+public import NLQCLean.LinearAlgebra.FlatGroupedTail
+
+@[expose] public section
 
 /-!
 # Corrected reference projections and near-Bell freezing

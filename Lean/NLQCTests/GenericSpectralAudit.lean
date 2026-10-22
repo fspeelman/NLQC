@@ -1,4 +1,8 @@
-import NLQCLean.Approx.GenericSpectralThresholds
+module
+
+public import NLQCLean.Approx.GenericSpectralThresholds
+
+@[expose] public section
 
 /-!
 # Intrinsic Haar nullity and fixed-target spectral thresholds

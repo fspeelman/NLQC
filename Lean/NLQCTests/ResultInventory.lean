@@ -1,12 +1,16 @@
-import NLQCLean.Results.Unitary
-import NLQCLean.Results.PVM
-import NLQCLean.Bounds.PVMQualitativeGap
-import NLQCLean.Bounds.QualitativeDiamond
-import NLQCLean.Bounds.StrongHaarConditional
-import NLQCLean.Bounds.StrongUniversalResources
-import NLQCLean.Bounds.SwapFloor
-import NLQCLean.Approx.PVMRankFloor
-import NLQCLean.ImageVolume.PolynomialImageVolume
+module
+
+public import NLQCLean.Results.Unitary
+public import NLQCLean.Results.PVM
+public import NLQCLean.Bounds.PVMQualitativeGap
+public import NLQCLean.Bounds.QualitativeDiamond
+public import NLQCLean.Bounds.StrongHaarConditional
+public import NLQCLean.Bounds.StrongUniversalResources
+public import NLQCLean.Bounds.SwapFloor
+public import NLQCLean.Approx.PVMRankFloor
+public import NLQCLean.ImageVolume.PolynomialImageVolume
+
+@[expose] public section
 
 /-!
 # Reference result inventory

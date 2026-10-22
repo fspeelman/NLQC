@@ -1,8 +1,12 @@
-import NLQCLean.Models.CompactForward
-import Mathlib.Topology.Algebra.Star.Unitary
-import Mathlib.MeasureTheory.Constructions.BorelSpace.Basic
-import Mathlib.MeasureTheory.Constructions.Pi
-import Mathlib.MeasureTheory.Constructions.BorelSpace.Complex
+module
+
+public import NLQCLean.Models.CompactForward
+public import Mathlib.Topology.Algebra.Star.Unitary
+public import Mathlib.MeasureTheory.Constructions.BorelSpace.Basic
+public import Mathlib.MeasureTheory.Constructions.Pi
+public import Mathlib.MeasureTheory.Constructions.BorelSpace.Complex
+
+@[expose] public section
 
 /-!
 # The compact unitary normal embedding

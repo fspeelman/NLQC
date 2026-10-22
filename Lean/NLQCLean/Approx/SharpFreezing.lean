@@ -1,4 +1,8 @@
-import NLQCLean.Approx.ChoiProjection
+module
+
+public import NLQCLean.Approx.ChoiProjection
+
+@[expose] public section
 
 /-!
 # Sharp bounded-rank freezing

@@ -1,11 +1,15 @@
 /-
 Isometries and the differentiation facts the cross-Gram lemma needs.
 -/
-import NLQCLean.LinearAlgebra.Basic
-import Mathlib.LinearAlgebra.Matrix.Kronecker
-import Mathlib.Analysis.Calculus.FDeriv.Bilinear
-import Mathlib.Analysis.Calculus.Deriv.Comp
-import Mathlib.Analysis.Calculus.Deriv.Mul
+module
+
+public import NLQCLean.LinearAlgebra.Basic
+public import Mathlib.LinearAlgebra.Matrix.Kronecker
+public import Mathlib.Analysis.Calculus.FDeriv.Bilinear
+public import Mathlib.Analysis.Calculus.Deriv.Comp
+public import Mathlib.Analysis.Calculus.Deriv.Mul
+
+@[expose] public section
 
 /-!
 # Differentiable paths of matrices and of isometries

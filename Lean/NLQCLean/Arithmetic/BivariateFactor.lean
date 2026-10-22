@@ -1,9 +1,13 @@
-import Mathlib.Algebra.Polynomial.Bivariate
-import Mathlib.Algebra.Polynomial.Div
-import Mathlib.Algebra.Polynomial.Degree.TrailingDegree
-import Mathlib.Algebra.Polynomial.Eval.Degree
-import Mathlib.Algebra.Order.BigOperators.Group.Finset
-import Mathlib.Tactic
+module
+
+public import Mathlib.Algebra.Polynomial.Bivariate
+public import Mathlib.Algebra.Polynomial.Div
+public import Mathlib.Algebra.Polynomial.Degree.TrailingDegree
+public import Mathlib.Algebra.Polynomial.Eval.Degree
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
+public import Mathlib.Tactic
+
+@[expose] public section
 
 /-!
 # Removing the maximal second-variable factor from an integer polynomial

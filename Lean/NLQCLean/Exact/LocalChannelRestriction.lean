@@ -1,5 +1,9 @@
-import NLQCLean.Models.ClassicalCommunication.TwoLevelDecoder
-import NLQCLean.Invariants.LocalUnitaryPurity
+module
+
+public import NLQCLean.Models.ClassicalCommunication.TwoLevelDecoder
+public import NLQCLean.Invariants.LocalUnitaryPurity
+
+@[expose] public section
 
 /-!
 # Local-unitary cancellation in an exact channel restriction

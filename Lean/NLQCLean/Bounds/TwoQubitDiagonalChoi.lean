@@ -1,6 +1,10 @@
-import NLQCLean.Geometry.DirectVolume.Assembly
-import NLQCLean.Bounds.RectangularDiagonalWorstCase
-import NLQCLean.Models.ChoiAlgebra
+module
+
+public import NLQCLean.Geometry.DirectVolume.Assembly
+public import NLQCLean.Bounds.RectangularDiagonalWorstCase
+public import NLQCLean.Models.ChoiAlgebra
+
+@[expose] public section
 
 /-!
 # Two-qubit diagonal gates with Choi infidelity

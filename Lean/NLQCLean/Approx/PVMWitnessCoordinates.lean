@@ -1,6 +1,10 @@
-import NLQCLean.Approx.PVMCoordinateCount
-import NLQCLean.Approx.PVMBlockNormalization
-import NLQCLean.Approx.WitnessEuclideanCoordinates
+module
+
+public import NLQCLean.Approx.PVMCoordinateCount
+public import NLQCLean.Approx.PVMBlockNormalization
+public import NLQCLean.Approx.WitnessEuclideanCoordinates
+
+@[expose] public section
 
 /-!
 # Padded real coordinates for the PVM six-block witness

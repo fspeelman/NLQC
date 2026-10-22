@@ -1,7 +1,11 @@
-import NLQCLean.Models.ChargedCompactProtocols
-import NLQCLean.Models.ChargedCompactPVMProtocols
-import NLQCLean.Bounds.QualitativeDiamond
-import NLQCLean.Rigidity.FlaggedSupports
+module
+
+public import NLQCLean.Models.ChargedCompactProtocols
+public import NLQCLean.Models.ChargedCompactPVMProtocols
+public import NLQCLean.Bounds.QualitativeDiamond
+public import NLQCLean.Rigidity.FlaggedSupports
+
+@[expose] public section
 
 /-!
 # Qualitative divergence for every exactly impossible target

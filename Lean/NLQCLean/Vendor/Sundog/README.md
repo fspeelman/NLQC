@@ -157,9 +157,14 @@ The complete list of changes relative to the unmodified upstream bytes follows.
      `Sundog.TarskiQE.sadef_proj` (upstream line 143), `Set.mem_setOf_eq` →
      `Set.mem_ofPred_eq` in `simp only`, because the old name is deprecated.
 
+5. **Module system (22 October 2026).** Each of the 26 files starts with `module` after
+   the notice and comments, every import is `public import`, and `@[expose] public section`
+   follows the imports, because module files cannot import non-module files. No other line
+   changed.
+
 **Statements.** No edit changed a theorem, lemma or definition statement, a definition body,
-or a declaration name. Every change above is in a proof body, an import, an `open` command
-or a comment, or omits whole upstream declarations from the extract. The retained upstream
+or a declaration name. Every change above is in a proof body, an import, the module-system header, an `open`
+command or a comment, or omits whole upstream declarations from the extract. The retained upstream
 diagnostic commands are unchanged: `#print axioms` in `CircuitNet` (6), `RegionCount` (3) and
 `CancellationFree` (4), and two `example`s in `DefinableRate`. The `#print axioms` commands
 emit 13 informational messages during builds, each reporting exactly

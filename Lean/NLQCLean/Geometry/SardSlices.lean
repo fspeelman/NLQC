@@ -1,6 +1,10 @@
-import NLQCLean.Geometry.VectorSard
-import Mathlib.MeasureTheory.Measure.Haar.Basic
-import Mathlib.MeasureTheory.Measure.Lebesgue.EqHaar
+module
+
+public import NLQCLean.Geometry.VectorSard
+public import Mathlib.MeasureTheory.Measure.Haar.Basic
+public import Mathlib.MeasureTheory.Measure.Lebesgue.EqHaar
+
+@[expose] public section
 
 /-!
 # Sard slices

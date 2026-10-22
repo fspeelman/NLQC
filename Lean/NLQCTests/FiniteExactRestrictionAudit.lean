@@ -1,4 +1,8 @@
-import NLQCLean.Exact.FiniteExactRestriction
+module
+
+public import NLQCLean.Exact.FiniteExactRestriction
+
+@[expose] public section
 
 set_option pp.deepTerms true
 set_option pp.maxSteps 1000000

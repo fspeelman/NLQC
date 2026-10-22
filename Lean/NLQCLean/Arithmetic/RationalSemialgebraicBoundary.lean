@@ -1,7 +1,11 @@
-import NLQCLean.Arithmetic.PolynomialBoundary
-import NLQCLean.Semialgebraic.RationalSignDiagrams
-import Mathlib.Algebra.MvPolynomial.Equiv
-import Mathlib.RingTheory.Localization.Integral
+module
+
+public import NLQCLean.Arithmetic.PolynomialBoundary
+public import NLQCLean.Semialgebraic.RationalSignDiagrams
+public import Mathlib.Algebra.MvPolynomial.Equiv
+public import Mathlib.RingTheory.Localization.Integral
+
+@[expose] public section
 
 /-!
 # Algebraic points of rational semialgebraic null sets

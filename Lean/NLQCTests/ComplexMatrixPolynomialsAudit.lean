@@ -1,4 +1,8 @@
-import NLQCLean.Arithmetic.ComplexMatrixPolynomials
+module
+
+public import NLQCLean.Arithmetic.ComplexMatrixPolynomials
+
+@[expose] public section
 
 /-! Full statements and standard-axiom checks for integer complex-matrix polynomials. -/
 

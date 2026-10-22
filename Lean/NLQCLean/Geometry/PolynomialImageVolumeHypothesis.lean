@@ -2,11 +2,15 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import Mathlib.Algebra.MvPolynomial.Degrees
-import Mathlib.Analysis.InnerProductSpace.Adjoint
-import Mathlib.Analysis.Calculus.FDeriv.Basic
-import Mathlib.MeasureTheory.Measure.Lebesgue.EqHaar
-import Mathlib.MeasureTheory.Measure.Haar.InnerProductSpace
+module
+
+public import Mathlib.Algebra.MvPolynomial.Degrees
+public import Mathlib.Analysis.InnerProductSpace.Adjoint
+public import Mathlib.Analysis.Calculus.FDeriv.Basic
+public import Mathlib.MeasureTheory.Measure.Lebesgue.EqHaar
+public import Mathlib.MeasureTheory.Measure.Haar.InnerProductSpace
+
+@[expose] public section
 
 /-!
 # The explicit polynomial image-volume hypothesis

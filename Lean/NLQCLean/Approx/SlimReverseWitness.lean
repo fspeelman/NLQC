@@ -1,7 +1,11 @@
-import NLQCLean.Approx.ReverseWitness
-import NLQCLean.Approx.PolynomialWitnessCoverage
-import NLQCLean.Approx.SwapNeighborhoodFreezing
-import NLQCLean.Bounds.SwapNeighborhoodMessages
+module
+
+public import NLQCLean.Approx.ReverseWitness
+public import NLQCLean.Approx.PolynomialWitnessCoverage
+public import NLQCLean.Approx.SwapNeighborhoodFreezing
+public import NLQCLean.Bounds.SwapNeighborhoodMessages
+
+@[expose] public section
 
 /-!
 # Slim six-block reverse witnesses near SWAP

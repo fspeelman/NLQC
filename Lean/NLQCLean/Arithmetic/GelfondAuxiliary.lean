@@ -1,6 +1,10 @@
-import NLQCLean.Arithmetic.GelfondSchwarz
-import NLQCLean.Arithmetic.GelfondLiouville
-import Mathlib.Analysis.SpecialFunctions.Exponential
+module
+
+public import NLQCLean.Arithmetic.GelfondSchwarz
+public import NLQCLean.Arithmetic.GelfondLiouville
+public import Mathlib.Analysis.SpecialFunctions.Exponential
+
+@[expose] public section
 
 /-!
 # The auxiliary function of Gelfond's method for `e^i`

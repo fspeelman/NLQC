@@ -1,4 +1,8 @@
-import NLQCLean.Bounds.ControlledPhaseLength
+module
+
+public import NLQCLean.Bounds.ControlledPhaseLength
+
+@[expose] public section
 
 /-!
 # Controlled-phase scalar certificate audit

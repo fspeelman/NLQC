@@ -1,5 +1,9 @@
-import NLQCLean.Geometry.DirectVolume.Assembly
-import NLQCLean.Bounds.FiniteClassicalAlmostEvery
+module
+
+public import NLQCLean.Geometry.DirectVolume.Assembly
+public import NLQCLean.Bounds.FiniteClassicalAlmostEvery
+
+@[expose] public section
 
 /-!
 # Fixed-target rates for arbitrary original finite classical protocols

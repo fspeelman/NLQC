@@ -1,5 +1,9 @@
-import NLQCLean.Geometry.DirectVolume.Assembly
-import NLQCLean.Bounds.FiniteClassicalHaar
+module
+
+public import NLQCLean.Geometry.DirectVolume.Assembly
+public import NLQCLean.Bounds.FiniteClassicalHaar
+
+@[expose] public section
 
 /-!
 # Stronger universal unitary bound for finite-shape classical protocols

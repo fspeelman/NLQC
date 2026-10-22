@@ -1,4 +1,8 @@
-import NLQCLean.Arithmetic.GelfondNumerics
+module
+
+public import NLQCLean.Arithmetic.GelfondNumerics
+
+@[expose] public section
 
 /-!
 # A Liouville inequality over `ℤ[i][ϑ]`

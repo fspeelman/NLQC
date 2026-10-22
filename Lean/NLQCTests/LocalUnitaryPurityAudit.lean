@@ -1,4 +1,8 @@
-import NLQCLean.Invariants.LocalUnitaryPurity
+module
+
+public import NLQCLean.Invariants.LocalUnitaryPurity
+
+@[expose] public section
 
 /-! Full types and axioms for finite local-unitary purity invariance. -/
 

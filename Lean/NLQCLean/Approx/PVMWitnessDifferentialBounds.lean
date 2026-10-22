@@ -1,5 +1,9 @@
-import NLQCLean.Approx.PVMWitnessVelocityBounds
-import NLQCLean.Approx.WitnessDifferentialBounds
+module
+
+public import NLQCLean.Approx.PVMWitnessVelocityBounds
+public import NLQCLean.Approx.WitnessDifferentialBounds
+
+@[expose] public section
 
 /-!
 # PVM raw ambient derivative and residual bounds

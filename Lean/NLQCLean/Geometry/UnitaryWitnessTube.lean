@@ -1,5 +1,9 @@
-import NLQCLean.Geometry.UnitaryNormalVolume
-import NLQCLean.Approx.WitnessEuclideanCoordinates
+module
+
+public import NLQCLean.Geometry.UnitaryNormalVolume
+public import NLQCLean.Approx.WitnessEuclideanCoordinates
+
+@[expose] public section
 
 /-!
 # The unitary tube in the witness output coordinates

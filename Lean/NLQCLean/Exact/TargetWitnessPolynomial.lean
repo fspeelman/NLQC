@@ -1,7 +1,11 @@
-import NLQCLean.Exact.TargetWitness
-import NLQCLean.Exact.WitnessRationalCoordinates
-import NLQCLean.Arithmetic.ComplexMatrixPolynomials
-import Mathlib.Algebra.MvPolynomial.Rename
+module
+
+public import NLQCLean.Exact.TargetWitness
+public import NLQCLean.Exact.WitnessRationalCoordinates
+public import NLQCLean.Arithmetic.ComplexMatrixPolynomials
+public import Mathlib.Algebra.MvPolynomial.Rename
+
+@[expose] public section
 
 /-!
 # Integer polynomial equations for exact target witnesses

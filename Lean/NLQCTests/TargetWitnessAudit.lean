@@ -1,4 +1,8 @@
-import NLQCLean.Exact.TargetWitness
+module
+
+public import NLQCLean.Exact.TargetWitness
+
+@[expose] public section
 
 set_option pp.universes true in
 #check @NLQCLean.mem_targetExactWitnessSet_iff

@@ -46,7 +46,11 @@ tropical function, not of the ReLU wiring.
 * Zhang, Naitzat, Lim, *Tropical geometry of deep neural networks*, ICML 2018
   (ReLU nets ↔ tropical rational maps; regions ↔ tropical hypersurfaces).
 -/
-import NLQCLean.Vendor.Sundog.CircuitNet
+module
+
+public import NLQCLean.Vendor.Sundog.CircuitNet
+
+@[expose] public section
 
 namespace Sundog.RegionCount
 

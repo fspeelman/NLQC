@@ -1,8 +1,12 @@
-import NLQCLean.Geometry.DirectVolume.Assembly
-import NLQCLean.Invariants.ControlledPhase
-import NLQCLean.Approx.ScalarPurityWitness
-import NLQCLean.Bounds.Quantitative
-import Mathlib.MeasureTheory.Measure.Hausdorff
+module
+
+public import NLQCLean.Geometry.DirectVolume.Assembly
+public import NLQCLean.Invariants.ControlledPhase
+public import NLQCLean.Approx.ScalarPurityWitness
+public import NLQCLean.Bounds.Quantitative
+public import Mathlib.MeasureTheory.Measure.Hausdorff
+
+@[expose] public section
 
 /-!
 # Scalar image-volume estimates for the charged two-qubit witnesses

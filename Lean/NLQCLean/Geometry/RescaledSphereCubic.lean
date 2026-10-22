@@ -1,4 +1,8 @@
-import NLQCLean.Geometry.MatrixPolynomialDegree
+module
+
+public import NLQCLean.Geometry.MatrixPolynomialDegree
+
+@[expose] public section
 
 /-!
 # Cubic projection for rescaled sphere blocks

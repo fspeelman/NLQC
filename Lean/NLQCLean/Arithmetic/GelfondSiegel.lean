@@ -1,6 +1,10 @@
-import NLQCLean.Arithmetic.GelfondAuxiliary
-import Mathlib.NumberTheory.SiegelsLemma
-import Mathlib.RingTheory.Polynomial.IntegralNormalization
+module
+
+public import NLQCLean.Arithmetic.GelfondAuxiliary
+public import Mathlib.NumberTheory.SiegelsLemma
+public import Mathlib.RingTheory.Polynomial.IntegralNormalization
+
+@[expose] public section
 
 /-!
 # The Siegel step of Gelfond's method

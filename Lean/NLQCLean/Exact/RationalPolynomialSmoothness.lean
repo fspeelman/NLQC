@@ -1,5 +1,9 @@
-import NLQCLean.Semialgebraic.Format
-import Mathlib.Analysis.Calculus.ContDiff.WithLp
+module
+
+public import NLQCLean.Semialgebraic.Format
+public import Mathlib.Analysis.Calculus.ContDiff.WithLp
+
+@[expose] public section
 
 /-!
 # Smoothness of rational and real polynomial evaluation

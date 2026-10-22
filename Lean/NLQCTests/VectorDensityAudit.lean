@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.ChoiInstrumentDensities
+module
+
+public import NLQCLean.Models.ClassicalCommunication.ChoiInstrumentDensities
+
+@[expose] public section
 
 /-!
 # Derived finite-dimensional vector-measure densities

@@ -1,4 +1,8 @@
-import NLQCLean.LinearAlgebra.TraceDistance
+module
+
+public import NLQCLean.LinearAlgebra.TraceDistance
+
+@[expose] public section
 
 /-!
 # Trace norm under finite basis relabeling

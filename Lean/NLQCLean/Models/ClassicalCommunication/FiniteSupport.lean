@@ -1,6 +1,10 @@
-import Mathlib.Analysis.Convex.Caratheodory
-import Mathlib.LinearAlgebra.AffineSpace.FiniteDimensional
-import Mathlib.Basic.Real.Basic
+module
+
+public import Mathlib.Analysis.Convex.Caratheodory
+public import Mathlib.LinearAlgebra.AffineSpace.FiniteDimensional
+public import Mathlib.Basic.Real.Basic
+
+@[expose] public section
 
 /-!
 # Finite support preserving a vector of moments

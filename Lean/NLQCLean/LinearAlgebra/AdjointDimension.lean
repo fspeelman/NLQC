@@ -1,6 +1,10 @@
-import NLQCLean.LinearAlgebra.Bipartite
-import Mathlib.LinearAlgebra.Complex.FiniteDimensional
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+module
+
+public import NLQCLean.LinearAlgebra.Bipartite
+public import Mathlib.LinearAlgebra.Complex.FiniteDimensional
+public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+
+@[expose] public section
 
 /-!
 # Real dimensions of the adjoint matrix spaces

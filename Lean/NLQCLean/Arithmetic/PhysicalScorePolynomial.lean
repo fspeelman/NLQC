@@ -1,4 +1,8 @@
-import NLQCLean.Arithmetic.PhysicalPolynomialEncoding
+module
+
+public import NLQCLean.Arithmetic.PhysicalPolynomialEncoding
+
+@[expose] public section
 
 /-!
 # Integer polynomials for raw physical target scores

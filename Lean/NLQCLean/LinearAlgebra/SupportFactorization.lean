@@ -1,6 +1,10 @@
-import NLQCLean.LinearAlgebra.Isometry
-import Mathlib.LinearAlgebra.Matrix.Rank
-import Mathlib.Analysis.InnerProductSpace.PiL2
+module
+
+public import NLQCLean.LinearAlgebra.Isometry
+public import Mathlib.LinearAlgebra.Matrix.Rank
+public import Mathlib.Analysis.InnerProductSpace.PiL2
+
+@[expose] public section
 
 /-!
 # Exact coefficient-support factorization

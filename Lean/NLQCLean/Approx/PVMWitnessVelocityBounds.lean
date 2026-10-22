@@ -1,7 +1,11 @@
-import NLQCLean.Rigidity.PVMWitnessCalculus
-import NLQCLean.Approx.PVMBlockNormalization
-import NLQCLean.Approx.PVMCoordinateCount
-import NLQCLean.Approx.WitnessVelocityBounds
+module
+
+public import NLQCLean.Rigidity.PVMWitnessCalculus
+public import NLQCLean.Approx.PVMBlockNormalization
+public import NLQCLean.Approx.PVMCoordinateCount
+public import NLQCLean.Approx.WitnessVelocityBounds
+
+@[expose] public section
 
 /-!
 # PVM witness velocity bounds

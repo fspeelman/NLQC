@@ -35,10 +35,14 @@ by mathlib's `finSuccEquiv` (first variable distinguished; the last-variable for
 **Honest fence.** TS-2a only: no sign matrix (2b), no between-roots analysis (2c), no
 elimination (2d).
 -/
-import NLQCLean.Vendor.Sundog.PolySignPartition
-import Mathlib.Algebra.MvPolynomial.Equiv
-import Mathlib.Algebra.Polynomial.EraseLead
-import Mathlib.Data.Multiset.DershowitzManna
+module
+
+public import NLQCLean.Vendor.Sundog.PolySignPartition
+public import Mathlib.Algebra.MvPolynomial.Equiv
+public import Mathlib.Algebra.Polynomial.EraseLead
+public import Mathlib.Data.Multiset.DershowitzManna
+
+@[expose] public section
 
 namespace Sundog.TarskiQE
 

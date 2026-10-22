@@ -1,4 +1,8 @@
-import NLQCLean.Semialgebraic.Lojasiewicz
+module
+
+public import NLQCLean.Semialgebraic.Lojasiewicz
+
+@[expose] public section
 
 /-!
 # Stability for maxima of polynomial families

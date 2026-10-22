@@ -1,8 +1,12 @@
-import NLQCLean.Exact.RigidityStatements
-import NLQCLean.Exact.UnequalDimensions
-import NLQCLean.Exact.CompressionFiniteOrbits
-import NLQCLean.Exact.PaperFoundations
-import NLQCLean.Exact.PVMPathFactorization
+module
+
+public import NLQCLean.Exact.RigidityStatements
+public import NLQCLean.Exact.UnequalDimensions
+public import NLQCLean.Exact.CompressionFiniteOrbits
+public import NLQCLean.Exact.PaperFoundations
+public import NLQCLean.Exact.PVMPathFactorization
+
+@[expose] public section
 
 set_option pp.deepTerms true
 set_option pp.maxSteps 1000000

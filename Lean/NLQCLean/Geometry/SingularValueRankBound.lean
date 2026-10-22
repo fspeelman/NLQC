@@ -1,4 +1,8 @@
-import Mathlib.Analysis.InnerProductSpace.SingularValues
+module
+
+public import Mathlib.Analysis.InnerProductSpace.SingularValues
+
+@[expose] public section
 
 /-!
 # Singular-value bounds from a low-rank part and a small residual

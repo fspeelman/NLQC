@@ -41,7 +41,11 @@ members from root coverage.
 2d-2b transfer data and branch conditions, the Dershowitz–Manna descent, and
 `DiagramPartition` for every family.
 -/
-import NLQCLean.Vendor.Sundog.DiagramGraft
+module
+
+public import NLQCLean.Vendor.Sundog.DiagramGraft
+
+@[expose] public section
 
 namespace Sundog.TarskiQE
 

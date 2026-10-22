@@ -2,7 +2,11 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Semialgebraic.Projection
+module
+
+public import NLQCLean.Semialgebraic.Projection
+
+@[expose] public section
 
 /-!
 # Degree and format bounds under constant parameter specialization

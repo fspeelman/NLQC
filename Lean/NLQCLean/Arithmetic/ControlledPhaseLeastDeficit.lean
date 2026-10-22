@@ -1,8 +1,12 @@
-import NLQCLean.Arithmetic.ChargedPhysicalCoordinates
-import NLQCLean.Arithmetic.PhysicalPolynomialHeight
-import NLQCLean.Exact.ControlledPhaseExclusion
-import NLQCLean.Bounds.ControlledPhaseLength
-import NLQCLean.Bounds.BorelClassicalRates
+module
+
+public import NLQCLean.Arithmetic.ChargedPhysicalCoordinates
+public import NLQCLean.Arithmetic.PhysicalPolynomialHeight
+public import NLQCLean.Exact.ControlledPhaseExclusion
+public import NLQCLean.Bounds.ControlledPhaseLength
+public import NLQCLean.Bounds.BorelClassicalRates
+
+@[expose] public section
 
 /-!
 # The least deficit of a controlled phase as a polynomial optimization

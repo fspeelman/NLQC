@@ -1,6 +1,10 @@
-import NLQCLean.LinearAlgebra.Calculus
-import NLQCLean.Models.Targets
-import Mathlib.Analysis.SpecialFunctions.Exponential
+module
+
+public import NLQCLean.LinearAlgebra.Calculus
+public import NLQCLean.Models.Targets
+public import Mathlib.Analysis.SpecialFunctions.Exponential
+
+@[expose] public section
 
 /-!
 # Differentiating scalar invariants of local-unitary orbits

@@ -1,5 +1,9 @@
-import NLQCLean.Arithmetic.ControlledPhaseLeastDeficit
-import NLQCLean.Models.ClassicalCommunication.TranscriptCompression
+module
+
+public import NLQCLean.Arithmetic.ControlledPhaseLeastDeficit
+public import NLQCLean.Models.ClassicalCommunication.TranscriptCompression
+
+@[expose] public section
 
 /-!
 # Integer-polynomial encoding of the transcript family

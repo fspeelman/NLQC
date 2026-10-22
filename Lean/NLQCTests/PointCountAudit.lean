@@ -1,18 +1,22 @@
-import NLQCLean.Semialgebraic.FinitePointCount
-import NLQCLean.Geometry.C1PieceFamilyVolume
-import NLQCLean.Geometry.PolynomialStrictDeriv
-import NLQCLean.Geometry.DirectVolume.Assembly
-import NLQCLean.ImageVolume.PolynomialImageVolume
-import NLQCLean.Bounds.FixedBudgetStability
-import NLQCLean.Bounds.FixedBudgetStabilityPVM
-import NLQCLean.Bounds.ExplicitControlledPhaseTranscript
-import NLQCLean.Bounds.ExplicitControlledPhaseSharedRandom
-import NLQCLean.Geometry.PolynomialTube
-import NLQCLean.Geometry.UnitaryFrobeniusVolume
-import NLQCLean.Approx.PVMWitnessCutoff
-import NLQCLean.Exact.OrbitInvariantAlgebraicity
-import NLQCLean.Bounds.ExplicitControlledPhaseGelfond
-import NLQCLean.Bounds.ExplicitControlledPhaseAngle
+module
+
+public import NLQCLean.Semialgebraic.FinitePointCount
+public import NLQCLean.Geometry.C1PieceFamilyVolume
+public import NLQCLean.Geometry.PolynomialStrictDeriv
+public import NLQCLean.Geometry.DirectVolume.Assembly
+public import NLQCLean.ImageVolume.PolynomialImageVolume
+public import NLQCLean.Bounds.FixedBudgetStability
+public import NLQCLean.Bounds.FixedBudgetStabilityPVM
+public import NLQCLean.Bounds.ExplicitControlledPhaseTranscript
+public import NLQCLean.Bounds.ExplicitControlledPhaseSharedRandom
+public import NLQCLean.Geometry.PolynomialTube
+public import NLQCLean.Geometry.UnitaryFrobeniusVolume
+public import NLQCLean.Approx.PVMWitnessCutoff
+public import NLQCLean.Exact.OrbitInvariantAlgebraicity
+public import NLQCLean.Bounds.ExplicitControlledPhaseGelfond
+public import NLQCLean.Bounds.ExplicitControlledPhaseAngle
+
+@[expose] public section
 
 /-! Axiom audit of the hypothesis-free geometry steps: the elementary point count
 (track C), the C¹-piece volume engine (D1) and polynomial strict derivatives (B1). -/

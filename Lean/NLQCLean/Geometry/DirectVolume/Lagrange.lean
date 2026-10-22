@@ -1,4 +1,8 @@
-import NLQCLean.Geometry.DirectVolume.Strata
+module
+
+public import NLQCLean.Geometry.DirectVolume.Strata
+
+@[expose] public section
 
 /-!
 # Direct image-volume route: the Lagrange-maximum covering

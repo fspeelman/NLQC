@@ -1,6 +1,10 @@
-import NLQCLean.Models.ClassicalCommunication.BorelFiniteCompression
-import NLQCLean.Models.ClassicalCommunication.BorelChannelNormalization
-import NLQCLean.Models.ClassicalCommunication.FiniteCompression
+module
+
+public import NLQCLean.Models.ClassicalCommunication.BorelFiniteCompression
+public import NLQCLean.Models.ClassicalCommunication.BorelChannelNormalization
+public import NLQCLean.Models.ClassicalCommunication.FiniteCompression
+
+@[expose] public section
 
 /-!
 # Rank-sized score compression for pure standard-Borel protocols

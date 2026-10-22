@@ -1,8 +1,12 @@
 /-
 The operator-Schmidt purity invariant and its differential.
 -/
-import NLQCLean.LinearAlgebra.RealCoordinates
-import NLQCLean.LinearAlgebra.Bipartite
+module
+
+public import NLQCLean.LinearAlgebra.RealCoordinates
+public import NLQCLean.LinearAlgebra.Bipartite
+
+@[expose] public section
 
 /-!
 # The realignment invariant annihilates local motion

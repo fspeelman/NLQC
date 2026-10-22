@@ -1,6 +1,10 @@
-import NLQCLean.Models.Metrics
-import NLQCLean.Models.ClassicalCommunication.CoherentConversion
-import NLQCLean.Models.ForwardReindex
+module
+
+public import NLQCLean.Models.Metrics
+public import NLQCLean.Models.ClassicalCommunication.CoherentConversion
+public import NLQCLean.Models.ForwardReindex
+
+@[expose] public section
 
 /-!
 # Diamond contraction under physical input and output maps

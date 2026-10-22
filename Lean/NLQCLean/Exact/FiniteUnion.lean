@@ -1,8 +1,12 @@
-import NLQCLean.Exact.ExactBadDecomposition
-import NLQCLean.Exact.ExactPurityAlgebraicity
-import NLQCLean.Semialgebraic.Components
-import Mathlib.Topology.Homeomorph.Lemmas
-import Mathlib.Topology.Algebra.Module.FiniteDimension
+module
+
+public import NLQCLean.Exact.ExactBadDecomposition
+public import NLQCLean.Exact.ExactPurityAlgebraicity
+public import NLQCLean.Semialgebraic.Components
+public import Mathlib.Topology.Homeomorph.Lemmas
+public import Mathlib.Topology.Algebra.Module.FiniteDimension
+
+@[expose] public section
 
 /-!
 # `lem:finiteunion`

@@ -1,4 +1,8 @@
-import NLQCLean.Arithmetic.GelfondAngleAuxiliary
+module
+
+public import NLQCLean.Arithmetic.GelfondAngleAuxiliary
+
+@[expose] public section
 
 /-!
 # The Siegel step of Gelfond's method for `e^{iθ}`

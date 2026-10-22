@@ -1,4 +1,8 @@
-import NLQCLean.Geometry.NormDetBounds
+module
+
+public import NLQCLean.Geometry.NormDetBounds
+
+@[expose] public section
 
 /-!
 # Determinant lower bound from uniform expansion

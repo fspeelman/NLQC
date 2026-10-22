@@ -1,4 +1,8 @@
-import NLQCLean.Approx.WitnessEuclideanCoordinates
+module
+
+public import NLQCLean.Approx.WitnessEuclideanCoordinates
+
+@[expose] public section
 
 /-!
 # Ambient differential bounds in common real Euclidean coordinates

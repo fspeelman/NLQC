@@ -1,6 +1,10 @@
-import NLQCLean.LinearAlgebra.EuclideanCoordinates
-import NLQCLean.Rigidity.ExtendedWitnessDifferential
-import NLQCLean.Geometry.PolynomialImageVolumeHypothesis
+module
+
+public import NLQCLean.LinearAlgebra.EuclideanCoordinates
+public import NLQCLean.Rigidity.ExtendedWitnessDifferential
+public import NLQCLean.Geometry.PolynomialImageVolumeHypothesis
+
+@[expose] public section
 
 /-!
 # Real Euclidean coordinates for the six-block witness

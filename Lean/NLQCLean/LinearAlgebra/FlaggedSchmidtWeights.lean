@@ -1,4 +1,8 @@
-import NLQCLean.LinearAlgebra.SchmidtTruncation
+module
+
+public import NLQCLean.LinearAlgebra.SchmidtTruncation
+
+@[expose] public section
 
 /-!
 # Grouped weights for flagged Schmidt truncation

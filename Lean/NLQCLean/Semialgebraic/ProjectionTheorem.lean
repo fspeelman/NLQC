@@ -2,8 +2,12 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Vendor.Sundog.SemialgebraicProjection
-import NLQCLean.Semialgebraic.SundogBridge
+module
+
+public import NLQCLean.Vendor.Sundog.SemialgebraicProjection
+public import NLQCLean.Semialgebraic.SundogBridge
+
+@[expose] public section
 
 /-!
 # Semialgebraic projection theorem

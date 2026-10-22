@@ -1,5 +1,9 @@
-import NLQCLean.Exact.ScalarCriticalValues
-import NLQCLean.Models.CompactForward
+module
+
+public import NLQCLean.Exact.ScalarCriticalValues
+public import NLQCLean.Models.CompactForward
+
+@[expose] public section
 
 /-!
 # Exact witnesses with an explicit target block

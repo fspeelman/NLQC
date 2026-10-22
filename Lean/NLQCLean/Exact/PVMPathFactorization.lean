@@ -1,5 +1,9 @@
-import NLQCLean.Exact.PathDerivatives
-import NLQCLean.LinearAlgebra.LinearODE
+module
+
+public import NLQCLean.Exact.PathDerivatives
+public import NLQCLean.LinearAlgebra.LinearODE
+
+@[expose] public section
 
 /-!
 # Integrating the measurement derivative (`lem:smoothsameorbit-pvm`)

@@ -1,5 +1,9 @@
-import NLQCLean.Geometry.UnitaryNormalVolume
-import Mathlib.Analysis.SpecialFunctions.Exp
+module
+
+public import NLQCLean.Geometry.UnitaryNormalVolume
+public import Mathlib.Analysis.SpecialFunctions.Exp
+
+@[expose] public section
 
 /-!
 # Arithmetic of the transverse tube exponent

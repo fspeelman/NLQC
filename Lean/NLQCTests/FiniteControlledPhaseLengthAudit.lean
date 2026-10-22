@@ -1,4 +1,8 @@
-import NLQCLean.Bounds.FiniteControlledPhaseLength
+module
+
+public import NLQCLean.Bounds.FiniteControlledPhaseLength
+
+@[expose] public section
 
 /-! # Finite-shape phase length and simultaneous worst-case targets -/
 

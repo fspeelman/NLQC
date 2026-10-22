@@ -1,5 +1,9 @@
-import NLQCLean.Geometry.CubicExtension
-import NLQCLean.LinearAlgebra.FrobeniusInner
+module
+
+public import NLQCLean.Geometry.CubicExtension
+public import NLQCLean.LinearAlgebra.FrobeniusInner
+
+@[expose] public section
 
 /-!
 # The cubic derivatives are real orthogonal projections

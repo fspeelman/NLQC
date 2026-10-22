@@ -1,5 +1,9 @@
-import NLQCLean.Geometry.NormDetBounds
-import NLQCLean.Geometry.PolynomialImageVolumeHypothesis
+module
+
+public import NLQCLean.Geometry.NormDetBounds
+public import NLQCLean.Geometry.PolynomialImageVolumeHypothesis
+
+@[expose] public section
 
 /-!
 # The determinant estimate for a thickened map

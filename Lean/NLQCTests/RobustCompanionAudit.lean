@@ -1,10 +1,14 @@
-import NLQCLean.Results.Unitary
-import NLQCLean.Results.PVM
-import NLQCLean.Models.ChargedProtocolExamples
-import NLQCLean.Models.ClassicalCommunication.FiniteInstruments
-import NLQCLean.Models.ClassicalCommunication.FiniteSupport
-import NLQCLean.Models.ClassicalCommunication.HermitianMomentSupport
-import NLQCLean.Arithmetic.PolynomialBoundary
+module
+
+public import NLQCLean.Results.Unitary
+public import NLQCLean.Results.PVM
+public import NLQCLean.Models.ChargedProtocolExamples
+public import NLQCLean.Models.ClassicalCommunication.FiniteInstruments
+public import NLQCLean.Models.ClassicalCommunication.FiniteSupport
+public import NLQCLean.Models.ClassicalCommunication.HermitianMomentSupport
+public import NLQCLean.Arithmetic.PolynomialBoundary
+
+@[expose] public section
 
 /-!
 # Robust companion proof boundaries

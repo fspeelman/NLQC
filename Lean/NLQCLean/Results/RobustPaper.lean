@@ -1,27 +1,31 @@
-import NLQCLean.Results.Unitary
-import NLQCLean.Results.PVM
-import NLQCLean.Bounds.BorelClassicalQubits
-import NLQCLean.Bounds.FiniteLocalization
-import NLQCLean.Bounds.RectangularDiagonalAlmostEvery
-import NLQCLean.Bounds.FiniteControlledPhaseLength
-import NLQCLean.Bounds.NearBellAlmostEvery
-import NLQCLean.Bounds.BorelClassicalStrongPVM
-import NLQCLean.Bounds.SharedRandomLOSCC
-import NLQCLean.Bounds.BorelClassicalUniversalMax
-import NLQCLean.Bounds.BorelControlledPhaseLength
-import NLQCLean.Bounds.BorelLocalization
-import NLQCLean.Bounds.ExplicitControlledPhase
-import NLQCLean.Geometry.UnitaryFrobeniusVolume
-import NLQCLean.Approx.PVMWitnessCutoff
-import NLQCLean.Geometry.PolynomialTube
-import NLQCLean.Approx.WitnessFamilies
-import NLQCLean.Bounds.ExplicitControlledPhaseGelfond
-import NLQCLean.ImageVolume.PolynomialImageVolume
-import NLQCLean.Bounds.FixedBudgetStability
-import NLQCLean.Bounds.FixedBudgetStabilityPVM
-import NLQCLean.Bounds.ExplicitControlledPhaseTranscript
-import NLQCLean.Bounds.ExplicitControlledPhaseSharedRandom
-import NLQCLean.Bounds.ExplicitControlledPhaseAngle
+module
+
+public import NLQCLean.Results.Unitary
+public import NLQCLean.Results.PVM
+public import NLQCLean.Bounds.BorelClassicalQubits
+public import NLQCLean.Bounds.FiniteLocalization
+public import NLQCLean.Bounds.RectangularDiagonalAlmostEvery
+public import NLQCLean.Bounds.FiniteControlledPhaseLength
+public import NLQCLean.Bounds.NearBellAlmostEvery
+public import NLQCLean.Bounds.BorelClassicalStrongPVM
+public import NLQCLean.Bounds.SharedRandomLOSCC
+public import NLQCLean.Bounds.BorelClassicalUniversalMax
+public import NLQCLean.Bounds.BorelControlledPhaseLength
+public import NLQCLean.Bounds.BorelLocalization
+public import NLQCLean.Bounds.ExplicitControlledPhase
+public import NLQCLean.Geometry.UnitaryFrobeniusVolume
+public import NLQCLean.Approx.PVMWitnessCutoff
+public import NLQCLean.Geometry.PolynomialTube
+public import NLQCLean.Approx.WitnessFamilies
+public import NLQCLean.Bounds.ExplicitControlledPhaseGelfond
+public import NLQCLean.ImageVolume.PolynomialImageVolume
+public import NLQCLean.Bounds.FixedBudgetStability
+public import NLQCLean.Bounds.FixedBudgetStabilityPVM
+public import NLQCLean.Bounds.ExplicitControlledPhaseTranscript
+public import NLQCLean.Bounds.ExplicitControlledPhaseSharedRandom
+public import NLQCLean.Bounds.ExplicitControlledPhaseAngle
+
+@[expose] public section
 
 /-!
 # Robust companion: results by source label

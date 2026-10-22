@@ -2,9 +2,14 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Geometry.VectorSard
-import Mathlib.Analysis.Calculus.LocalExtr.Basic
-import Mathlib.MeasureTheory.Measure.Haar.InnerProductSpace
+module
+
+public import NLQCLean.Geometry.VectorSard
+public import Mathlib.Analysis.Calculus.LocalExtr.Basic
+public import Mathlib.MeasureTheory.Measure.Haar.InnerProductSpace
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
+
+@[expose] public section
 
 /-!
 # Audit of vector-valued Sard

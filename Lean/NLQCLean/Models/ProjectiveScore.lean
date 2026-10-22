@@ -1,7 +1,11 @@
 /-
 The scalar score for the two-sided rank-one PVM task.
 -/
-import NLQCLean.Models.ProjectiveTask
+module
+
+public import NLQCLean.Models.ProjectiveTask
+
+@[expose] public section
 
 /-!
 # The projective-task score

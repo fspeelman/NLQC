@@ -1,5 +1,9 @@
-import NLQCLean.Geometry.UnitaryNormalEmbedding
-import Mathlib.MeasureTheory.Measure.Haar.Unique
+module
+
+public import NLQCLean.Geometry.UnitaryNormalEmbedding
+public import Mathlib.MeasureTheory.Measure.Haar.Unique
+
+@[expose] public section
 
 /-!
 # Probability Haar measure on the finite unitary group

@@ -1,7 +1,11 @@
-import NLQCLean.Models.ClassicalCommunication.FiniteSupport
-import NLQCLean.LinearAlgebra.AdjointDimension
-import Mathlib.LinearAlgebra.Dual.Lemmas
-import Mathlib.LinearAlgebra.Matrix.Trace
+module
+
+public import NLQCLean.Models.ClassicalCommunication.FiniteSupport
+public import NLQCLean.LinearAlgebra.AdjointDimension
+public import Mathlib.LinearAlgebra.Dual.Lemmas
+public import Mathlib.LinearAlgebra.Matrix.Trace
+
+@[expose] public section
 
 /-!
 # Actual-outcome support for a Hermitian marginal and a real score

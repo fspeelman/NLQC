@@ -1,5 +1,9 @@
-import NLQCLean.Models.ChoiMetrics
-import NLQCLean.Models.ForwardReindex
+module
+
+public import NLQCLean.Models.ChoiMetrics
+public import NLQCLean.Models.ForwardReindex
+
+@[expose] public section
 
 /-!
 # Diamond-to-score conversion for actual one-round protocols

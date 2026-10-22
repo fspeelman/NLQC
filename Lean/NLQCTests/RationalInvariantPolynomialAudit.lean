@@ -1,4 +1,8 @@
-import NLQCLean.Exact.RationalInvariantPolynomial
+module
+
+public import NLQCLean.Exact.RationalInvariantPolynomial
+
+@[expose] public section
 
 /-! Full types and axioms of rational target-entry polynomial evaluation. -/
 

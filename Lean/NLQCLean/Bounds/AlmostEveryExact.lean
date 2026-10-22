@@ -1,9 +1,13 @@
 /-
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import NLQCLean.Bounds.AlmostEveryPhysical
-import NLQCLean.Exact.UnitaryWitnessHaar
-import NLQCLean.Exact.PVMWitnessHaar
+module
+
+public import NLQCLean.Bounds.AlmostEveryPhysical
+public import NLQCLean.Exact.UnitaryWitnessHaar
+public import NLQCLean.Exact.PVMWitnessHaar
+
+@[expose] public section
 
 /-!
 # Almost every target has no finite exact implementation

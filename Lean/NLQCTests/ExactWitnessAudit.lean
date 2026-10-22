@@ -2,8 +2,12 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Exact.UnitaryExactWitness
-import NLQCLean.Exact.PVMExactWitness
+module
+
+public import NLQCLean.Exact.UnitaryExactWitness
+public import NLQCLean.Exact.PVMExactWitness
+
+@[expose] public section
 
 /-!
 # Exact zero-error witness audit

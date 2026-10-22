@@ -1,6 +1,10 @@
-import NLQCLean.Approx.PVMNormalizedCubicWitness
-import NLQCLean.Approx.PVMWitnessDifferentialBounds
-import NLQCLean.Approx.PVMWitnessCoordinates
+module
+
+public import NLQCLean.Approx.PVMNormalizedCubicWitness
+public import NLQCLean.Approx.PVMWitnessDifferentialBounds
+public import NLQCLean.Approx.PVMWitnessCoordinates
+
+@[expose] public section
 
 /-!
 # Cubic PVM witnesses in common Euclidean coordinates

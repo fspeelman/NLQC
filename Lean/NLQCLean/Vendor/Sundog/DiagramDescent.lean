@@ -37,7 +37,11 @@ diagram, refining branches by `truncChain` live-lead and end-sign `SADef` condit
 the drop-a-member projection, and `DiagramPartition` for every family — is the
 remaining assembly.
 -/
-import NLQCLean.Vendor.Sundog.DiagramAnnotate
+module
+
+public import NLQCLean.Vendor.Sundog.DiagramAnnotate
+
+@[expose] public section
 
 namespace Sundog.TarskiQE
 

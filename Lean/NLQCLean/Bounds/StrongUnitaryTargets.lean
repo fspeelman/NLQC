@@ -1,7 +1,11 @@
-import NLQCLean.Models.DiamondReachability
-import NLQCLean.Models.SwapNeighborhood
-import NLQCLean.Geometry.UnitaryHaar
-import Mathlib.Analysis.SpecialFunctions.Log.Base
+module
+
+public import NLQCLean.Models.DiamondReachability
+public import NLQCLean.Models.SwapNeighborhood
+public import NLQCLean.Geometry.UnitaryHaar
+public import Mathlib.Analysis.SpecialFunctions.Log.Base
+
+@[expose] public section
 
 /-!
 # Strong unitary bound statements

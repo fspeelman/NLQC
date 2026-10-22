@@ -1,6 +1,10 @@
-import NLQCLean.Models.ClassicalCommunication.CoherentLabels
-import NLQCLean.Models.ClassicalCommunication.FiniteSupport
-import NLQCLean.Models.Resource
+module
+
+public import NLQCLean.Models.ClassicalCommunication.CoherentLabels
+public import NLQCLean.Models.ClassicalCommunication.FiniteSupport
+public import NLQCLean.Models.Resource
+
+@[expose] public section
 
 /-!
 # Finite simultaneous classical communication

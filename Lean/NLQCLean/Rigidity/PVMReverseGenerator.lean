@@ -1,4 +1,8 @@
-import NLQCLean.Rigidity.PVMWitnessCalculus
+module
+
+public import NLQCLean.Rigidity.PVMWitnessCalculus
+
+@[expose] public section
 
 /-!
 # Diagonal output generator of a compressed PVM reverse witness

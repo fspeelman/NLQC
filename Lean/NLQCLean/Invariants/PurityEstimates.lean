@@ -1,7 +1,11 @@
-import NLQCLean.Invariants.OperatorSchmidtPurity
-import NLQCLean.Geometry.MatrixPolynomialDegree
-import NLQCLean.LinearAlgebra.FrobeniusInner
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import NLQCLean.Invariants.OperatorSchmidtPurity
+public import NLQCLean.Geometry.MatrixPolynomialDegree
+public import NLQCLean.LinearAlgebra.FrobeniusInner
+public import Mathlib.Analysis.Calculus.MeanValue
+
+@[expose] public section
 
 /-!
 # Quantitative estimates for realignment purity

@@ -1,4 +1,8 @@
-import NLQCLean.LinearAlgebra.SchmidtOverlap
+module
+
+public import NLQCLean.LinearAlgebra.SchmidtOverlap
+
+@[expose] public section
 
 /-!
 # Normalizing individual PVM environment blocks

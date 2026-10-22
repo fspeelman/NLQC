@@ -1,10 +1,14 @@
 /-
 Real coordinates and multivariate polynomial calculus.
 -/
-import NLQCLean.LinearAlgebra.Calculus
-import Mathlib.Analysis.Calculus.ContDiff.Basic
-import Mathlib.Analysis.Calculus.ContDiff.Comp
-import Mathlib.Analysis.Calculus.ContDiff.Operations
+module
+
+public import NLQCLean.LinearAlgebra.Calculus
+public import Mathlib.Analysis.Calculus.ContDiff.Basic
+public import Mathlib.Analysis.Calculus.ContDiff.Comp
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
+
+@[expose] public section
 
 /-!
 # Multivariate smoothness for the qualitative Sard argument

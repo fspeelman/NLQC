@@ -1,4 +1,8 @@
-import NLQCLean.Arithmetic.PhysicalPolynomialConstraints
+module
+
+public import NLQCLean.Arithmetic.PhysicalPolynomialConstraints
+
+@[expose] public section
 
 /-!
 # Raw integer-polynomial encoding of the five physical blocks

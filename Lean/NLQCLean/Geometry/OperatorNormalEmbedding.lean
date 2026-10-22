@@ -1,6 +1,10 @@
-import NLQCLean.Geometry.UnitaryNormalCoordinates
-import NLQCLean.Approx.WitnessDifferentialBounds
-import NLQCLean.LinearAlgebra.TensorOperatorNorm
+module
+
+public import NLQCLean.Geometry.UnitaryNormalCoordinates
+public import NLQCLean.Approx.WitnessDifferentialBounds
+public import NLQCLean.LinearAlgebra.TensorOperatorNorm
+
+@[expose] public section
 
 /-!
 # The operator-norm unitary normal embedding

@@ -1,5 +1,9 @@
-import NLQCLean.Geometry.ScaledUnitaryNormalVolume
-import Mathlib.Geometry.Euclidean.Volume.Measure
+module
+
+public import NLQCLean.Geometry.ScaledUnitaryNormalVolume
+public import Mathlib.Geometry.Euclidean.Volume.Measure
+
+@[expose] public section
 
 /-!
 # The intrinsic Frobenius volume of the unitary group (`lem:normal-volume`)

@@ -1,5 +1,9 @@
-import NLQCLean.Models.NearBellResourceFloors
-import NLQCLean.Approx.NearBellFreezing
+module
+
+public import NLQCLean.Models.NearBellResourceFloors
+public import NLQCLean.Approx.NearBellFreezing
+
+@[expose] public section
 
 /-!
 # Near-Bell physical reference and witness audit

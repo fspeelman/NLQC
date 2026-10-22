@@ -1,4 +1,8 @@
-import NLQCLean.Geometry.UnitaryHaar
+module
+
+public import NLQCLean.Geometry.UnitaryHaar
+
+@[expose] public section
 
 /-!
 # Inversion invariance of probability Haar measure on the unitary group

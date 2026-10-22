@@ -1,5 +1,9 @@
-import NLQCLean.LinearAlgebra.RealCoordinates
-import Mathlib.Analysis.InnerProductSpace.PiL2
+module
+
+public import NLQCLean.LinearAlgebra.RealCoordinates
+public import Mathlib.Analysis.InnerProductSpace.PiL2
+
+@[expose] public section
 
 /-!
 # Explicit real Euclidean entry coordinates

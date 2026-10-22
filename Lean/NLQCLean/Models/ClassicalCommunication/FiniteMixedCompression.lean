@@ -1,5 +1,9 @@
-import NLQCLean.Models.ClassicalCommunication.FiniteCompression
-import NLQCLean.Models.ClassicalCommunication.FiniteMixed
+module
+
+public import NLQCLean.Models.ClassicalCommunication.FiniteCompression
+public import NLQCLean.Models.ClassicalCommunication.FiniteMixed
+
+@[expose] public section
 
 /-!
 # Finite common-map mixtures with free classical outcomes

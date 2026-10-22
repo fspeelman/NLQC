@@ -1,6 +1,10 @@
-import NLQCLean.Approx.PVMBlockSpectrum
-import NLQCLean.Approx.PVMChoiProjection
-import NLQCLean.Models.ProjectiveProtocolScore
+module
+
+public import NLQCLean.Approx.PVMBlockSpectrum
+public import NLQCLean.Approx.PVMChoiProjection
+public import NLQCLean.Models.ProjectiveProtocolScore
+
+@[expose] public section
 
 /-!
 # Unconditional rank floor for ordered rank-one PVMs

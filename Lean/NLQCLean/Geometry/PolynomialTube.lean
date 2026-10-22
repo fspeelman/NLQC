@@ -1,5 +1,9 @@
-import NLQCLean.Geometry.DirectVolume.Assembly
-import NLQCLean.Geometry.StrongPolynomialTubeConditional
+module
+
+public import NLQCLean.Geometry.DirectVolume.Assembly
+public import NLQCLean.Geometry.StrongPolynomialTubeConditional
+
+@[expose] public section
 
 /-!
 # The transverse tube estimate for polynomial formats (`prop:tube`)

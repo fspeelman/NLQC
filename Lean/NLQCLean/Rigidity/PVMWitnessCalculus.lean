@@ -1,6 +1,10 @@
-import NLQCLean.Approx.PVMReverseWitness
-import NLQCLean.Rigidity.QuantitativeDifferential
-import NLQCLean.Rigidity.ReverseWitnessCalculus
+module
+
+public import NLQCLean.Approx.PVMReverseWitness
+public import NLQCLean.Rigidity.QuantitativeDifferential
+public import NLQCLean.Rigidity.ReverseWitnessCalculus
+
+@[expose] public section
 
 /-!
 # Ambient calculus of compressed PVM reverse witnesses

@@ -2,9 +2,13 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Geometry.MaximalCoordinateGraphs
-import NLQCLean.Geometry.CoordinateProjectionNorms
-import Mathlib.MeasureTheory.Integral.Lebesgue.Countable
+module
+
+public import NLQCLean.Geometry.MaximalCoordinateGraphs
+public import NLQCLean.Geometry.CoordinateProjectionNorms
+public import Mathlib.MeasureTheory.Integral.Lebesgue.Countable
+
+@[expose] public section
 
 /-!
 # graph-domain multiplicities

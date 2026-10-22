@@ -1,5 +1,9 @@
-import NLQCLean.Models.ClassicalCommunication.BorelMixed
-import NLQCLean.Models.ProjectiveScore
+module
+
+public import NLQCLean.Models.ClassicalCommunication.BorelMixed
+public import NLQCLean.Models.ProjectiveScore
+
+@[expose] public section
 
 /-!
 # Standard-Borel localization with measurable postprocessing

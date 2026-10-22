@@ -1,5 +1,9 @@
-import NLQCLean.Rigidity.CoordinateWitnessDifferential
-import NLQCLean.Models.CompactForward
+module
+
+public import NLQCLean.Rigidity.CoordinateWitnessDifferential
+public import NLQCLean.Models.CompactForward
+
+@[expose] public section
 
 /-!
 # Inverse normalization and the exact six-block source radius

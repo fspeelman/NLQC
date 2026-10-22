@@ -1,5 +1,9 @@
-import NLQCLean.Bounds.ResourceArithmetic
-import NLQCLean.Bounds.CodimensionArithmetic
+module
+
+public import NLQCLean.Bounds.ResourceArithmetic
+public import NLQCLean.Bounds.CodimensionArithmetic
+
+@[expose] public section
 
 /-!
 # Arithmetic of the universal PVM resource lower bound

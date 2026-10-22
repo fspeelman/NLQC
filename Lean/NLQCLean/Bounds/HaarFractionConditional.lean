@@ -1,6 +1,10 @@
-import NLQCLean.Approx.ReachableWitnessCover
-import NLQCLean.Bounds.HaarAbsorption
-import NLQCLean.Bounds.CodimensionArithmetic
+module
+
+public import NLQCLean.Approx.ReachableWitnessCover
+public import NLQCLean.Bounds.HaarAbsorption
+public import NLQCLean.Bounds.CodimensionArithmetic
+
+@[expose] public section
 
 /-!
 # Conditional Haar bounds for physical reachability

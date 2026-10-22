@@ -1,5 +1,9 @@
-import NLQCLean.Approx.ChoiProjection
-import Mathlib.Data.Matrix.Block
+module
+
+public import NLQCLean.Approx.ChoiProjection
+public import Mathlib.Data.Matrix.Block
+
+@[expose] public section
 
 /-!
 # Schmidt spectrum of flagged block matrices

@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.CPVectorInstrument
+module
+
+public import NLQCLean.Models.ClassicalCommunication.CPVectorInstrument
+
+@[expose] public section
 
 /-! # CP-valued instrument representation, with original quantum systems -/
 

@@ -1,5 +1,9 @@
-import NLQCLean.Bounds.ExplicitControlledPhase
-import NLQCLean.Arithmetic.GelfondMeasure
+module
+
+public import NLQCLean.Bounds.ExplicitControlledPhase
+public import NLQCLean.Arithmetic.GelfondMeasure
+
+@[expose] public section
 
 /-!
 # The effective bound for `C₁` with the Gelfond measure for `e^i`

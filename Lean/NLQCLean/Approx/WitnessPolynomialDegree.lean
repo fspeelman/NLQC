@@ -1,5 +1,9 @@
-import NLQCLean.Geometry.MatrixPolynomialDegree
-import NLQCLean.Approx.WitnessNormalization
+module
+
+public import NLQCLean.Geometry.MatrixPolynomialDegree
+public import NLQCLean.Approx.WitnessNormalization
+
+@[expose] public section
 
 /-!
 # Explicit polynomial degrees of the common-coordinate witness maps

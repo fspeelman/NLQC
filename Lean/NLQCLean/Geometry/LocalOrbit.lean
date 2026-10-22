@@ -1,9 +1,13 @@
 /-
 The allowed tangent space of the cross-Gram lemma.
 -/
-import NLQCLean.LinearAlgebra.Isometry
-import Mathlib.Algebra.Star.Module
-import Mathlib.Topology.MetricSpace.HausdorffDistance
+module
+
+public import NLQCLean.LinearAlgebra.Isometry
+public import Mathlib.Algebra.Star.Module
+public import Mathlib.Topology.MetricSpace.HausdorffDistance
+
+@[expose] public section
 
 /-!
 # Allowed tangent spaces

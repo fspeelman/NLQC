@@ -2,11 +2,15 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Semialgebraic.Projection
-import Mathlib.Topology.MetricSpace.HausdorffDimension
-import Mathlib.MeasureTheory.Measure.Haar.Unique
-import Mathlib.Analysis.Calculus.ContDiff.Comp
-import Mathlib.Analysis.Calculus.ContDiff.WithLp
+module
+
+public import NLQCLean.Semialgebraic.Projection
+public import Mathlib.Topology.MetricSpace.HausdorffDimension
+public import Mathlib.MeasureTheory.Measure.Haar.Unique
+public import Mathlib.Analysis.Calculus.ContDiff.Comp
+public import Mathlib.Analysis.Calculus.ContDiff.WithLp
+
+@[expose] public section
 
 /-!
 # Analytic consequences of the audited smooth cubes

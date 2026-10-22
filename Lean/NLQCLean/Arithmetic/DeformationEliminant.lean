@@ -1,5 +1,9 @@
-import NLQCLean.Arithmetic.DeformationAnalysis
-import Mathlib.Algebra.Polynomial.Eval.Degree
+module
+
+public import NLQCLean.Arithmetic.DeformationAnalysis
+public import Mathlib.Algebra.Polynomial.Eval.Degree
+
+@[expose] public section
 
 /-!
 # The deformation eliminant

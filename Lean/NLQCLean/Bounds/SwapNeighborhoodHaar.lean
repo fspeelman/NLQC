@@ -1,7 +1,11 @@
-import NLQCLean.Geometry.FiniteDimensionalNets
-import NLQCLean.Geometry.OperatorNormalEmbedding
-import NLQCLean.Bounds.StrongUnitaryTargets
-import Mathlib.Analysis.Complex.ExponentialBounds
+module
+
+public import NLQCLean.Geometry.FiniteDimensionalNets
+public import NLQCLean.Geometry.OperatorNormalEmbedding
+public import NLQCLean.Bounds.StrongUnitaryTargets
+public import Mathlib.Analysis.Complex.ExponentialBounds
+
+@[expose] public section
 
 /-!
 # Full Haar mass of the SWAP neighbourhood

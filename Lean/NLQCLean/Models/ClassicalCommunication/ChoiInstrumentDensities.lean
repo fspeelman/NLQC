@@ -1,7 +1,11 @@
-import NLQCLean.Models.ClassicalCommunication.KrausRepresentation
-import Mathlib.MeasureTheory.VectorMeasure.Decomposition.RadonNikodym
-import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
-import Mathlib.Analysis.Normed.Module.FiniteDimension
+module
+
+public import NLQCLean.Models.ClassicalCommunication.KrausRepresentation
+public import Mathlib.MeasureTheory.VectorMeasure.Decomposition.RadonNikodym
+public import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
+public import Mathlib.Analysis.Normed.Module.FiniteDimension
+
+@[expose] public section
 
 /-!
 # Finite-dimensional vector-measure densities

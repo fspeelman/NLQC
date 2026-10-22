@@ -2,7 +2,11 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Semialgebraic.CoordinateMaps
+module
+
+public import NLQCLean.Semialgebraic.CoordinateMaps
+
+@[expose] public section
 
 /-!
 # Coordinate-interior dimension

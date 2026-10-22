@@ -1,4 +1,8 @@
-import NLQCLean.Models.ProjectiveScore
+module
+
+public import NLQCLean.Models.ProjectiveScore
+
+@[expose] public section
 
 /-!
 # Actual joint PVM probabilities and score bounds

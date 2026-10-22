@@ -1,6 +1,10 @@
-import NLQCLean.Exact.PVMBadDecomposition
-import NLQCLean.Exact.ExactBadDecomposition
-import NLQCLean.Exact.PolynomialWitnessMaps
+module
+
+public import NLQCLean.Exact.PVMBadDecomposition
+public import NLQCLean.Exact.ExactBadDecomposition
+public import NLQCLean.Exact.PolynomialWitnessMaps
+
+@[expose] public section
 
 /-!
 # Rigidity statements of the exact paper

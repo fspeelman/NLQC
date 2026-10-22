@@ -1,8 +1,12 @@
-import NLQCLean.Geometry.DirectVolume.Assembly
-import NLQCLean.Models.ClassicalCommunication.FiniteLocalization
-import NLQCLean.Bounds.AlmostEveryExact
-import NLQCLean.Bounds.ArbitraryFiniteClassicalAlmostEvery
-import NLQCLean.Approx.FiniteClassicalSpectralFloors
+module
+
+public import NLQCLean.Geometry.DirectVolume.Assembly
+public import NLQCLean.Models.ClassicalCommunication.FiniteLocalization
+public import NLQCLean.Bounds.AlmostEveryExact
+public import NLQCLean.Bounds.ArbitraryFiniteClassicalAlmostEvery
+public import NLQCLean.Approx.FiniteClassicalSpectralFloors
+
+@[expose] public section
 
 /-!
 # Exact and robust finite localization

@@ -1,4 +1,8 @@
-import NLQCLean.Arithmetic.PhaseTranscendence
+module
+
+public import NLQCLean.Arithmetic.PhaseTranscendence
+
+@[expose] public section
 
 /-! Full arithmetic statements and standard-axiom checks for phase transcendence. -/
 

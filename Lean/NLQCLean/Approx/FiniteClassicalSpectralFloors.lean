@@ -1,10 +1,14 @@
-import NLQCLean.Models.ClassicalCommunication.FiniteBranchSchmidtRank
-import NLQCLean.Models.ClassicalCommunication.FiniteMixed
-import NLQCLean.Models.ClassicalCommunication.TargetScores
-import NLQCLean.Models.ClassicalCommunication.FiniteReachability
-import NLQCLean.Approx.PVMSpectralFootprintFloors
-import NLQCLean.Approx.GenericSpectralThresholds
-import NLQCLean.Models.ProjectiveTV
+module
+
+public import NLQCLean.Models.ClassicalCommunication.FiniteBranchSchmidtRank
+public import NLQCLean.Models.ClassicalCommunication.FiniteMixed
+public import NLQCLean.Models.ClassicalCommunication.TargetScores
+public import NLQCLean.Models.ClassicalCommunication.FiniteReachability
+public import NLQCLean.Approx.PVMSpectralFootprintFloors
+public import NLQCLean.Approx.GenericSpectralThresholds
+public import NLQCLean.Models.ProjectiveTV
+
+@[expose] public section
 
 /-!
 # Spectral floors with finite free classical communication

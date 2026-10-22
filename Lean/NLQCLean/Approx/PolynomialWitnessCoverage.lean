@@ -1,4 +1,8 @@
-import NLQCLean.Approx.PolynomialWitnessFamily
+module
+
+public import NLQCLean.Approx.PolynomialWitnessFamily
+
+@[expose] public section
 
 /-!
 # Finite family count and physical coverage by polynomial witnesses

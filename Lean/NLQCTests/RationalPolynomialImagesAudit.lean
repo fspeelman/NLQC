@@ -1,4 +1,8 @@
-import NLQCLean.Semialgebraic.RationalPolynomialImages
+module
+
+public import NLQCLean.Semialgebraic.RationalPolynomialImages
+
+@[expose] public section
 
 /-! Full types and axioms for rational polynomial graphs and images. -/
 

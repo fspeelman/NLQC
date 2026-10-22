@@ -1,4 +1,8 @@
-import NLQCLean.Arithmetic.PhysicalPolynomialEncoding
+module
+
+public import NLQCLean.Arithmetic.PhysicalPolynomialEncoding
+
+@[expose] public section
 
 /-! # five-block integer physical-constraint encoding -/
 

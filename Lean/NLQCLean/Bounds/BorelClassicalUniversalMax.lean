@@ -1,6 +1,10 @@
-import NLQCLean.Bounds.BorelClassicalStrongPVM
-import NLQCLean.Bounds.FiniteLocalization
-import NLQCLean.Models.SwapNeighborhood
+module
+
+public import NLQCLean.Bounds.BorelClassicalStrongPVM
+public import NLQCLean.Bounds.FiniteLocalization
+public import NLQCLean.Models.SwapNeighborhood
+
+@[expose] public section
 
 /-!
 # Universal free-classical bounds in general dimension

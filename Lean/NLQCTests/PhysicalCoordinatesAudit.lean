@@ -1,4 +1,8 @@
-import NLQCLean.Arithmetic.ChargedPhysicalCoordinates
+module
+
+public import NLQCLean.Arithmetic.ChargedPhysicalCoordinates
+
+@[expose] public section
 
 /-!
 # Sharp physical coordinate count and attained architecture

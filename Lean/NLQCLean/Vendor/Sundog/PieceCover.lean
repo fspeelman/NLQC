@@ -35,10 +35,14 @@ quantitative form of N-1 on the 1-D depth axis. The remaining wiring to a fully 
 `isMono_regions_poly` over arbitrary `IsMono` circuits is the per-gate (`+`, `max`, `scale`)
 piece lemmas over `Trop`; the composition/iteration core is here.
 -/
-import Mathlib.Order.Iterate
-import Mathlib.Order.ConditionallyCompleteLattice.Basic
-import Mathlib.Basic.Real.Basic
-import Mathlib.Tactic
+module
+
+public import Mathlib.Order.Iterate
+public import Mathlib.Order.ConditionallyCompleteLattice.Basic
+public import Mathlib.Basic.Real.Basic
+public import Mathlib.Tactic
+
+@[expose] public section
 
 namespace Sundog.PieceCover
 

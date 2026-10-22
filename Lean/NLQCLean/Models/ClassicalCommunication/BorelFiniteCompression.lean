@@ -1,7 +1,11 @@
-import NLQCLean.Models.ClassicalCommunication.BorelOperationalChannel
-import NLQCLean.Models.ClassicalCommunication.SequentialDensityCompression
-import NLQCLean.Models.ClassicalCommunication.BranchChannels
-import NLQCLean.Models.ClassicalCommunication.TwoLevelDecoder
+module
+
+public import NLQCLean.Models.ClassicalCommunication.BorelOperationalChannel
+public import NLQCLean.Models.ClassicalCommunication.SequentialDensityCompression
+public import NLQCLean.Models.ClassicalCommunication.BranchChannels
+public import NLQCLean.Models.ClassicalCommunication.TwoLevelDecoder
+
+@[expose] public section
 
 /-!
 # Actual finite protocols from original Borel instruments

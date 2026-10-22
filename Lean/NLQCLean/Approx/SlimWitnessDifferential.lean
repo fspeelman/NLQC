@@ -1,6 +1,10 @@
-import NLQCLean.Approx.SlimPolynomialWitness
-import NLQCLean.LinearAlgebra.ResidualSpectralCutoff
-import NLQCLean.LinearAlgebra.FrobeniusInsertion
+module
+
+public import NLQCLean.Approx.SlimPolynomialWitness
+public import NLQCLean.LinearAlgebra.ResidualSpectralCutoff
+public import NLQCLean.LinearAlgebra.FrobeniusInsertion
+
+@[expose] public section
 
 /-!
 # Sharp velocity bounds and the rank/error split of the slim witness

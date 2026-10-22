@@ -1,6 +1,10 @@
-import NLQCLean.Geometry.RealFrobeniusInner
-import NLQCLean.LinearAlgebra.AdjointDimension
-import NLQCLean.Geometry.PolynomialImageVolumeHypothesis
+module
+
+public import NLQCLean.Geometry.RealFrobeniusInner
+public import NLQCLean.LinearAlgebra.AdjointDimension
+public import NLQCLean.Geometry.PolynomialImageVolumeHypothesis
+
+@[expose] public section
 
 /-!
 # Orthogonal adjoint coordinates and volume

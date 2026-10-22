@@ -1,6 +1,10 @@
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
-import Mathlib.Basic.Complex.Basic
-import Mathlib.Data.Fintype.BigOperators
+module
+
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+public import Mathlib.Basic.Complex.Basic
+public import Mathlib.Data.Fintype.BigOperators
+
+@[expose] public section
 
 /-!
 # Contraction of copied finite classical labels

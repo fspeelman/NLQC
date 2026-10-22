@@ -1,4 +1,8 @@
-import NLQCLean.Exact.ExactBadDecomposition
+module
+
+public import NLQCLean.Exact.ExactBadDecomposition
+
+@[expose] public section
 
 set_option pp.deepTerms true
 set_option pp.maxSteps 1000000

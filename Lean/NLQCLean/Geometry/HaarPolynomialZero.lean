@@ -1,9 +1,13 @@
-import NLQCLean.Geometry.PolynomialZeroMeasure
-import NLQCLean.Geometry.CriticalNormalImages
-import NLQCLean.Geometry.UnitaryCayleyNormal
-import Mathlib.MeasureTheory.Function.Jacobian
-import Mathlib.MeasureTheory.Group.Measure
-import Mathlib.LinearAlgebra.Matrix.Polynomial
+module
+
+public import NLQCLean.Geometry.PolynomialZeroMeasure
+public import NLQCLean.Geometry.CriticalNormalImages
+public import NLQCLean.Geometry.UnitaryCayleyNormal
+public import Mathlib.MeasureTheory.Function.Jacobian
+public import Mathlib.MeasureTheory.Group.Measure
+public import Mathlib.LinearAlgebra.Matrix.Polynomial
+
+@[expose] public section
 
 /-!
 # Intrinsic polynomial zero sets on the unitary group

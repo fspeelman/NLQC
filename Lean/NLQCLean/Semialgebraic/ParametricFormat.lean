@@ -2,8 +2,12 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Semialgebraic.PolynomialSubstitution
-import NLQCLean.Semialgebraic.FormatParameters
+module
+
+public import NLQCLean.Semialgebraic.PolynomialSubstitution
+public import NLQCLean.Semialgebraic.FormatParameters
+
+@[expose] public section
 
 /-!
 # Uniform image formats by retaining coefficient parameters

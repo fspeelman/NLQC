@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.StandardBorelProtocol
+module
+
+public import NLQCLean.Models.ClassicalCommunication.StandardBorelProtocol
+
+@[expose] public section
 
 /-! # Original CP-valued Borel protocols and derived score integrability -/
 

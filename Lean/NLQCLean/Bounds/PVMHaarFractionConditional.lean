@@ -1,9 +1,13 @@
-import NLQCLean.Approx.PVMReachableWitnessCover
-import NLQCLean.Bounds.PVMHaarArithmetic
-import NLQCLean.Bounds.HaarAbsorption
-import NLQCLean.Bounds.CodimensionArithmetic
-import NLQCLean.Geometry.PVMPolynomialTubeConditional
-import NLQCLean.Geometry.UnitaryHaarInverse
+module
+
+public import NLQCLean.Approx.PVMReachableWitnessCover
+public import NLQCLean.Bounds.PVMHaarArithmetic
+public import NLQCLean.Bounds.HaarAbsorption
+public import NLQCLean.Bounds.CodimensionArithmetic
+public import NLQCLean.Geometry.PVMPolynomialTubeConditional
+public import NLQCLean.Geometry.UnitaryHaarInverse
+
+@[expose] public section
 
 /-!
 # Conditional PVM Haar bounds for physical reachability

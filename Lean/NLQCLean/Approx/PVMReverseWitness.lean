@@ -1,8 +1,12 @@
-import NLQCLean.Rigidity.FlaggedSupports
-import NLQCLean.Approx.PVMRankAllocations
-import NLQCLean.Models.PVMForwardCompression
-import NLQCLean.Approx.PVMSharpFreezing
-import NLQCLean.Approx.ReverseWitness
+module
+
+public import NLQCLean.Rigidity.FlaggedSupports
+public import NLQCLean.Approx.PVMRankAllocations
+public import NLQCLean.Models.PVMForwardCompression
+public import NLQCLean.Approx.PVMSharpFreezing
+public import NLQCLean.Approx.ReverseWitness
+
+@[expose] public section
 
 /-!
 # Compressed physical reverse witnesses for rank-one PVMs

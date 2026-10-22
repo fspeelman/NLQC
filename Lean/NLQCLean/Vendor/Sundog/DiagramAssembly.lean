@@ -27,7 +27,11 @@ each recursive branch × end-sign cell run the pipeline:
 and the two end tags; every branch set is `SADef` by the resolve-cell and sign-condition
 algebra.
 -/
-import NLQCLean.Vendor.Sundog.DiagramBranches
+module
+
+public import NLQCLean.Vendor.Sundog.DiagramBranches
+
+@[expose] public section
 
 namespace Sundog.TarskiQE
 

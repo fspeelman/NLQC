@@ -1,4 +1,8 @@
-import NLQCLean.Semialgebraic.CurveSelection
+module
+
+public import NLQCLean.Semialgebraic.CurveSelection
+
+@[expose] public section
 
 /-!
 # Semialgebraic paths in connected semialgebraic sets (`fact:paths`)

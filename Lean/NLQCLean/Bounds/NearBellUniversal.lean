@@ -1,9 +1,13 @@
-import NLQCLean.Geometry.DirectVolume.Assembly
-import NLQCLean.Bounds.NearBellHaar
-import NLQCLean.Bounds.SwapNeighborhoodHaar
-import NLQCLean.Bounds.StrongUniversalResources
-import NLQCLean.Models.PVMUniversalReachability
-import NLQCLean.Bounds.Quantitative
+module
+
+public import NLQCLean.Geometry.DirectVolume.Assembly
+public import NLQCLean.Bounds.NearBellHaar
+public import NLQCLean.Bounds.SwapNeighborhoodHaar
+public import NLQCLean.Bounds.StrongUniversalResources
+public import NLQCLean.Models.PVMUniversalReachability
+public import NLQCLean.Bounds.Quantitative
+
+@[expose] public section
 
 /-!
 # Universal measurement approximation (`cor:universal-pvm`, Theorem B(ii))

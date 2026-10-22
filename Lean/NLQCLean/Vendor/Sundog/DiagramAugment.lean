@@ -31,7 +31,11 @@ The augmentation pitch needs three tools and one integration receipt, landed her
 (branch-uniformly, via the column positions) and the gap/root-insertion splice are the
 remaining pitches (2b-uniform, 2c).
 -/
-import NLQCLean.Vendor.Sundog.DiagramNormalize
+module
+
+public import NLQCLean.Vendor.Sundog.DiagramNormalize
+
+@[expose] public section
 
 namespace Sundog.TarskiQE
 

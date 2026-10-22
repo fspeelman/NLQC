@@ -1,5 +1,9 @@
-import NLQCLean.Approx.PVMCoordinateCount
-import NLQCLean.Bounds.HaarArithmetic
+module
+
+public import NLQCLean.Approx.PVMCoordinateCount
+public import NLQCLean.Bounds.HaarArithmetic
+
+@[expose] public section
 
 /-!
 # Arithmetic estimates for the PVM Haar bound

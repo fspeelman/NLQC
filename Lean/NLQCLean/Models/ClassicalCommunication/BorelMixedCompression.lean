@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.BorelMixed
+module
+
+public import NLQCLean.Models.ClassicalCommunication.BorelMixed
+
+@[expose] public section
 
 /-!
 # Charged compression of common-map mixed Borel scores

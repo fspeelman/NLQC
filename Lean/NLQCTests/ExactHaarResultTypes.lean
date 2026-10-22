@@ -1,8 +1,12 @@
 /-
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import NLQCLean.Results.Unitary
-import NLQCLean.Results.PVM
+module
+
+public import NLQCLean.Results.Unitary
+public import NLQCLean.Results.PVM
+
+@[expose] public section
 
 /-!
 # Frozen types of the unconditional almost-every exact results

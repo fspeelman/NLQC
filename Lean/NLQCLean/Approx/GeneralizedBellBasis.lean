@@ -1,8 +1,12 @@
-import NLQCLean.Approx.PVMSpectralFootprintFloors
-import NLQCLean.Models.ForwardReindex
-import NLQCLean.Models.PVMUniversalReachability
-import Mathlib.Analysis.SpecialFunctions.Complex.CircleAddChar
-import Mathlib.Analysis.SpecialFunctions.Log.Base
+module
+
+public import NLQCLean.Approx.PVMSpectralFootprintFloors
+public import NLQCLean.Models.ForwardReindex
+public import NLQCLean.Models.PVMUniversalReachability
+public import Mathlib.Analysis.SpecialFunctions.Complex.CircleAddChar
+public import Mathlib.Analysis.SpecialFunctions.Log.Base
+
+@[expose] public section
 
 /-!
 # A complete generalized Bell basis in every positive finite dimension

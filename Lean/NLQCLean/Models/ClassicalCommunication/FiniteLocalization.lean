@@ -1,9 +1,13 @@
-import NLQCLean.Models.ClassicalCommunication.FiniteMixed
-import NLQCLean.Models.ClassicalCommunication.BranchChannels
-import NLQCLean.Models.ClassicalCommunication.TargetScores
-import NLQCLean.Models.ProjectiveProbability
-import NLQCLean.Models.ProjectiveMixedExactness
-import Mathlib.Analysis.Matrix.Order
+module
+
+public import NLQCLean.Models.ClassicalCommunication.FiniteMixed
+public import NLQCLean.Models.ClassicalCommunication.BranchChannels
+public import NLQCLean.Models.ClassicalCommunication.TargetScores
+public import NLQCLean.Models.ProjectiveProbability
+public import NLQCLean.Models.ProjectiveMixedExactness
+public import Mathlib.Analysis.Matrix.Order
+
+@[expose] public section
 
 /-!
 # Finite local POVMs and reported measurement outcomes

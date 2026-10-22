@@ -1,5 +1,9 @@
-import NLQCLean.Models.ClassicalCommunication.TwoLevelDecoder
-import NLQCLean.Models.StinespringDiamondContractivity
+module
+
+public import NLQCLean.Models.ClassicalCommunication.TwoLevelDecoder
+public import NLQCLean.Models.StinespringDiamondContractivity
+
+@[expose] public section
 
 /-!
 # Physical restriction of rectangular diagonal channels

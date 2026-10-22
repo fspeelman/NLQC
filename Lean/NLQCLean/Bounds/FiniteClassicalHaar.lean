@@ -1,6 +1,10 @@
-import NLQCLean.Geometry.DirectVolume.Assembly
-import NLQCLean.Models.ClassicalCommunication.FiniteReachability
-import NLQCLean.Bounds.Quantitative
+module
+
+public import NLQCLean.Geometry.DirectVolume.Assembly
+public import NLQCLean.Models.ClassicalCommunication.FiniteReachability
+public import NLQCLean.Bounds.Quantitative
+
+@[expose] public section
 
 /-!
 # Haar and universal bounds for finite-shape classical protocols

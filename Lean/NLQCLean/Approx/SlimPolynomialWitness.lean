@@ -1,6 +1,10 @@
-import NLQCLean.Approx.SlimWitnessCoordinates
-import NLQCLean.Approx.PolynomialWitnessThickening
-import NLQCLean.Approx.ReachableWitnessCover
+module
+
+public import NLQCLean.Approx.SlimWitnessCoordinates
+public import NLQCLean.Approx.PolynomialWitnessThickening
+public import NLQCLean.Approx.ReachableWitnessCover
+
+@[expose] public section
 
 /-!
 # The slim polynomial witness family and its compact target cover

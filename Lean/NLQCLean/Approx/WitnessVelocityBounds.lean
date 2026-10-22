@@ -1,5 +1,9 @@
-import NLQCLean.LinearAlgebra.TensorOperatorNorm
-import NLQCLean.Rigidity.QuantitativeDifferential
+module
+
+public import NLQCLean.LinearAlgebra.TensorOperatorNorm
+public import NLQCLean.Rigidity.QuantitativeDifferential
+
+@[expose] public section
 
 /-!
 # Six-block velocity bounds

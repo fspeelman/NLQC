@@ -1,7 +1,11 @@
-import NLQCLean.Bounds.ResourceArithmetic
-import NLQCLean.Bounds.SwapFloor
-import NLQCLean.Bounds.HaarFractionConditional
-import NLQCLean.Models.UniversalReachability
+module
+
+public import NLQCLean.Bounds.ResourceArithmetic
+public import NLQCLean.Bounds.SwapFloor
+public import NLQCLean.Bounds.HaarFractionConditional
+public import NLQCLean.Models.UniversalReachability
+
+@[expose] public section
 
 /-!
 # Conditional universal footprint and qubit lower bounds

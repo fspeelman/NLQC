@@ -1,4 +1,8 @@
-import NLQCLean.Bounds.FiniteClassicalStrongUniversal
+module
+
+public import NLQCLean.Bounds.FiniteClassicalStrongUniversal
+
+@[expose] public section
 
 /-! # Improved unitary universal finite-shape dimension factor -/
 

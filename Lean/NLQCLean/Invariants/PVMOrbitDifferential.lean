@@ -1,6 +1,10 @@
-import NLQCLean.Invariants.LocalOrbitDifferential
-import NLQCLean.LinearAlgebra.Bipartite
-import Mathlib.Analysis.Normed.Algebra.MatrixExponential
+module
+
+public import NLQCLean.Invariants.LocalOrbitDifferential
+public import NLQCLean.LinearAlgebra.Bipartite
+public import Mathlib.Analysis.Normed.Algebra.MatrixExponential
+
+@[expose] public section
 
 /-!
 # Differentiating scalar invariants of measurement orbits

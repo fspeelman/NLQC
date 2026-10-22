@@ -1,6 +1,10 @@
-import NLQCLean.Geometry.PVMWitnessBarrierVolume
-import NLQCLean.Bounds.NearBellUniversal
-import NLQCLean.Bounds.StrongUniversalExplicit
+module
+
+public import NLQCLean.Geometry.PVMWitnessBarrierVolume
+public import NLQCLean.Bounds.NearBellUniversal
+public import NLQCLean.Bounds.StrongUniversalExplicit
+
+@[expose] public section
 
 /-!
 # Explicit constants for universal measurement approximation (Theorem B(ii))

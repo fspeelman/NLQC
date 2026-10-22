@@ -1,4 +1,8 @@
-import NLQCLean.Invariants.SpectatorControlledPhasePurity
+module
+
+public import NLQCLean.Invariants.SpectatorControlledPhasePurity
+
+@[expose] public section
 
 set_option pp.deepTerms true
 set_option pp.maxSteps 1000000

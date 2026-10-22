@@ -1,5 +1,9 @@
-import NLQCLean.Models.ClassicalCommunication.FiniteInstruments
-import NLQCLean.Models.ForwardReindex
+module
+
+public import NLQCLean.Models.ClassicalCommunication.FiniteInstruments
+public import NLQCLean.Models.ForwardReindex
+
+@[expose] public section
 
 /-! # Relabeling finite Kraus instruments -/
 

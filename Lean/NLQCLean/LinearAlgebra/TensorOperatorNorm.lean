@@ -1,4 +1,8 @@
-import NLQCLean.LinearAlgebra.Isometry
+module
+
+public import NLQCLean.LinearAlgebra.Isometry
+
+@[expose] public section
 
 /-!
 # Operator norms for tensor velocities

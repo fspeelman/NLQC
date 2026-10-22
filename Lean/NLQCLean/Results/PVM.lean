@@ -1,19 +1,23 @@
-import NLQCLean.Approx.FiniteClassicalSpectralFloors
-import NLQCLean.Models.ClassicalCommunication.BorelMixedCompression
-import NLQCLean.Models.ClassicalCommunication.BorelRankCompression
-import NLQCLean.Bounds.Quantitative
-import NLQCLean.Bounds.AlmostEveryExact
-import NLQCLean.Bounds.PVMQualitativeGap
-import NLQCLean.Approx.PVMRankFloor
-import NLQCLean.Bounds.AlmostEveryQualitativeGap
-import NLQCLean.Approx.GeneralizedBellBasis
-import NLQCLean.Approx.GenericSpectralThresholds
-import NLQCLean.Models.ClassicalCommunication.FiniteMixedCompression
-import NLQCLean.Bounds.FiniteClassicalHaar
-import NLQCLean.Bounds.FiniteClassicalAlmostEvery
-import NLQCLean.Bounds.ArbitraryFiniteClassicalAlmostEvery
-import NLQCLean.Bounds.FiniteClassicalQubits
-import NLQCLean.Bounds.NearBellUniversalExplicit
+module
+
+public import NLQCLean.Approx.FiniteClassicalSpectralFloors
+public import NLQCLean.Models.ClassicalCommunication.BorelMixedCompression
+public import NLQCLean.Models.ClassicalCommunication.BorelRankCompression
+public import NLQCLean.Bounds.Quantitative
+public import NLQCLean.Bounds.AlmostEveryExact
+public import NLQCLean.Bounds.PVMQualitativeGap
+public import NLQCLean.Approx.PVMRankFloor
+public import NLQCLean.Bounds.AlmostEveryQualitativeGap
+public import NLQCLean.Approx.GeneralizedBellBasis
+public import NLQCLean.Approx.GenericSpectralThresholds
+public import NLQCLean.Models.ClassicalCommunication.FiniteMixedCompression
+public import NLQCLean.Bounds.FiniteClassicalHaar
+public import NLQCLean.Bounds.FiniteClassicalAlmostEvery
+public import NLQCLean.Bounds.ArbitraryFiniteClassicalAlmostEvery
+public import NLQCLean.Bounds.FiniteClassicalQubits
+public import NLQCLean.Bounds.NearBellUniversalExplicit
+
+@[expose] public section
 
 /-!
 # Main projective-measurement results

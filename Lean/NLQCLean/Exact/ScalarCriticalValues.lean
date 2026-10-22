@@ -1,14 +1,18 @@
 /-
 Scalar Sard and unconditional exact exclusion.
 -/
-import NLQCLean.Geometry.ScalarSard
-import NLQCLean.Invariants.OperatorSchmidtPurity
-import NLQCLean.Models.ForwardReindex
-import NLQCLean.Models.UnitaryScore
-import NLQCLean.Models.UnitaryTask
-import NLQCLean.Rigidity.ForwardWitnessCalculus
-import NLQCLean.Geometry.CubicExtension
-import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+module
+
+public import NLQCLean.Geometry.ScalarSard
+public import NLQCLean.Invariants.OperatorSchmidtPurity
+public import NLQCLean.Models.ForwardReindex
+public import NLQCLean.Models.UnitaryScore
+public import NLQCLean.Models.UnitaryTask
+public import NLQCLean.Rigidity.ForwardWitnessCalculus
+public import NLQCLean.Geometry.CubicExtension
+public import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+
+@[expose] public section
 
 /-!
 # One fixed controlled phase excludes every finite exact implementation

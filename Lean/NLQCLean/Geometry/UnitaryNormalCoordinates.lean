@@ -1,7 +1,11 @@
-import NLQCLean.Geometry.UnitaryNormalEmbedding
-import NLQCLean.LinearAlgebra.EuclideanCoordinates
-import NLQCLean.LinearAlgebra.SchmidtOverlap
-import Mathlib.MeasureTheory.Measure.Haar.InnerProductSpace
+module
+
+public import NLQCLean.Geometry.UnitaryNormalEmbedding
+public import NLQCLean.LinearAlgebra.EuclideanCoordinates
+public import NLQCLean.LinearAlgebra.SchmidtOverlap
+public import Mathlib.MeasureTheory.Measure.Haar.InnerProductSpace
+
+@[expose] public section
 
 /-!
 # Euclidean coordinates for unitary normal volume

@@ -1,4 +1,8 @@
-import NLQCLean.Invariants.PVMMeanPurity
+module
+
+public import NLQCLean.Invariants.PVMMeanPurity
+
+@[expose] public section
 
 /-!
 # An explicit nonconstant family of ordered product-type PVM bases

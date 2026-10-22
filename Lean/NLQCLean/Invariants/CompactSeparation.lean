@@ -1,14 +1,18 @@
-import Mathlib.Topology.ContinuousMap.StoneWeierstrass
-import Mathlib.Topology.UrysohnsLemma
-import Mathlib.MeasureTheory.Group.Integral
-import Mathlib.MeasureTheory.Integral.Bochner.Basic
-import Mathlib.MeasureTheory.Function.LocallyIntegrable
-import Mathlib.RingTheory.Polynomial.Basic
-import Mathlib.RingTheory.MvPolynomial.Basic
-import Mathlib.Algebra.MvPolynomial.Monad
-import Mathlib.Algebra.MvPolynomial.Rename
-import Mathlib.Topology.Instances.Matrix
-import Mathlib.Topology.Algebra.MvPolynomial
+module
+
+public import Mathlib.Topology.ContinuousMap.StoneWeierstrass
+public import Mathlib.Topology.UrysohnsLemma
+public import Mathlib.MeasureTheory.Group.Integral
+public import Mathlib.MeasureTheory.Integral.Bochner.Basic
+public import Mathlib.MeasureTheory.Function.LocallyIntegrable
+public import Mathlib.RingTheory.Polynomial.Basic
+public import Mathlib.RingTheory.MvPolynomial.Basic
+public import Mathlib.Algebra.MvPolynomial.Monad
+public import Mathlib.Algebra.MvPolynomial.Rename
+public import Mathlib.Topology.Instances.Matrix
+public import Mathlib.Topology.Algebra.MvPolynomial
+
+@[expose] public section
 
 /-!
 # Polynomial invariants separate orbits of compact linear actions

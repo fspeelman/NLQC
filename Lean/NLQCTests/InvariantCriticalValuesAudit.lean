@@ -1,4 +1,8 @@
-import NLQCLean.Exact.InvariantCriticalValues
+module
+
+public import NLQCLean.Exact.InvariantCriticalValues
+
+@[expose] public section
 
 set_option pp.deepTerms true
 set_option pp.maxSteps 1000000

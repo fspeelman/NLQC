@@ -1,5 +1,9 @@
-import NLQCLean.LinearAlgebra.RealCoordinates
-import Mathlib.LinearAlgebra.Matrix.Trace
+module
+
+public import NLQCLean.LinearAlgebra.RealCoordinates
+public import Mathlib.LinearAlgebra.Matrix.Trace
+
+@[expose] public section
 
 /-!
 # Operator purity under a finite local basis equivalence

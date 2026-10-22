@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.ChannelUniformBound
+module
+
+public import NLQCLean.Models.ClassicalCommunication.ChannelUniformBound
+
+@[expose] public section
 
 /-! # Dimension-only bounds on CP trace-preserving operation norms -/
 

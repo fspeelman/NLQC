@@ -1,8 +1,12 @@
-import Mathlib.Algebra.MvPolynomial.PDeriv
-import Mathlib.Analysis.Calculus.FDeriv.Pi
-import Mathlib.Analysis.Calculus.FDeriv.Mul
-import Mathlib.Analysis.Calculus.LagrangeMultipliers
-import Mathlib.Topology.Algebra.MvPolynomial
+module
+
+public import Mathlib.Algebra.MvPolynomial.PDeriv
+public import Mathlib.Analysis.Calculus.FDeriv.Pi
+public import Mathlib.Analysis.Calculus.FDeriv.Mul
+public import Mathlib.Analysis.Calculus.LagrangeMultipliers
+public import Mathlib.Topology.Algebra.MvPolynomial
+
+@[expose] public section
 
 /-!
 # Strict derivatives of polynomial maps and Lagrange multipliers

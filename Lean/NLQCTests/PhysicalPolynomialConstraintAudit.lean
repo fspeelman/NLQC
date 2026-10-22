@@ -1,4 +1,8 @@
-import NLQCLean.Arithmetic.PhysicalPolynomialConstraints
+module
+
+public import NLQCLean.Arithmetic.PhysicalPolynomialConstraints
+
+@[expose] public section
 
 /-! # Integer normalization/isometry equations and their sum of squares -/
 

@@ -2,13 +2,17 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.ImageVolume.BoxMonomialCount
-import Mathlib.Analysis.Calculus.ContDiff.Operations
-import Mathlib.Analysis.Calculus.ContDiff.RCLike
-import Mathlib.Analysis.Calculus.InverseFunctionTheorem.FDeriv
-import Mathlib.Analysis.Calculus.FDeriv.Mul
-import Mathlib.Analysis.Normed.Module.FiniteDimension
-import Mathlib.Topology.Separation.Hausdorff
+module
+
+public import NLQCLean.ImageVolume.BoxMonomialCount
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
+public import Mathlib.Analysis.Calculus.ContDiff.RCLike
+public import Mathlib.Analysis.Calculus.InverseFunctionTheorem.FDeriv
+public import Mathlib.Analysis.Calculus.FDeriv.Mul
+public import Mathlib.Analysis.Normed.Module.FiniteDimension
+public import Mathlib.Topology.Separation.Hausdorff
+
+@[expose] public section
 
 /-!
 # Nondegenerate zeros of square polynomial systems

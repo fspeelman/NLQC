@@ -1,8 +1,12 @@
-import NLQCLean.Models.ClassicalCommunication.CPVectorInstrument
-import NLQCLean.Models.ClassicalCommunication.ChannelUniformBound
-import NLQCLean.Models.ClassicalCommunication.TensorChannels
-import Mathlib.Analysis.Normed.Operator.BoundedLinearMaps
-import Mathlib.MeasureTheory.Integral.Prod
+module
+
+public import NLQCLean.Models.ClassicalCommunication.CPVectorInstrument
+public import NLQCLean.Models.ClassicalCommunication.ChannelUniformBound
+public import NLQCLean.Models.ClassicalCommunication.TensorChannels
+public import Mathlib.Analysis.Normed.Operator.BoundedLinearMaps
+public import Mathlib.MeasureTheory.Integral.Prod
+
+@[expose] public section
 
 /-!
 # Joint channels of integrable instrument densities
@@ -56,7 +60,7 @@ local instance joint_density_channels_instance_6 {ι κ : Type*} [Fintype ι] [F
 local instance joint_density_channels_instance_7 {ι κ : Type*} [Fintype ι] [Fintype κ] :
     BorelSpace (MatrixOperation ι κ) := ⟨rfl⟩
 
-private def liftMatrixOperation {ι κ : Type*} [Fintype ι] [Fintype κ] :
+def liftMatrixOperation {ι κ : Type*} [Fintype ι] [Fintype κ] :
     (Matrix ι ι ℂ →ₗ[ℂ] Matrix κ κ ℂ) →ₗ[ℂ] MatrixOperation ι κ :=
   (LinearMap.toContinuousLinearMap :
     (Matrix ι ι ℂ →ₗ[ℂ] Matrix κ κ ℂ) ≃ₗ[ℂ] MatrixOperation ι κ).toLinearMap
@@ -87,7 +91,7 @@ def tensorContinuousChannelsLeftLinear (Ψ : MatrixOperation τ υ) :
   (liftMatrixOperation.comp (tensorChannelsLeftLinear Ψ.toLinearMap)).comp
     (ContinuousLinearMap.coeLM ℂ)
 
-private def tensorContinuousChannelsBilinearLinear :
+def tensorContinuousChannelsBilinearLinear :
     MatrixOperation ι κ →ₗ[ℂ]
       (MatrixOperation τ υ →L[ℂ] MatrixOperation (ι × τ) (κ × υ)) where
   toFun Φ := (tensorContinuousChannelsRightLinear Φ).toContinuousLinearMap

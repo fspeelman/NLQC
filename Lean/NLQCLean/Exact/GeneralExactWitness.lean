@@ -1,6 +1,10 @@
-import NLQCLean.Exact.InvariantCriticalValues
-import NLQCLean.Exact.LocalOrbitSaturation
-import NLQCLean.Exact.PolynomialWitnessMaps
+module
+
+public import NLQCLean.Exact.InvariantCriticalValues
+public import NLQCLean.Exact.LocalOrbitSaturation
+public import NLQCLean.Exact.PolynomialWitnessMaps
+
+@[expose] public section
 
 /-!
 # Exact witnesses for arbitrary local dimensions

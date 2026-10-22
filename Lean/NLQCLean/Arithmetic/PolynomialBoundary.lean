@@ -1,5 +1,9 @@
-import NLQCLean.Semialgebraic.LocalSignStability
-import Mathlib.MeasureTheory.Measure.OpenPos
+module
+
+public import NLQCLean.Semialgebraic.LocalSignStability
+public import Mathlib.MeasureTheory.Measure.OpenPos
+
+@[expose] public section
 
 /-!
 # Nonzero polynomial witnesses at sign-formula boundaries

@@ -1,9 +1,13 @@
-import NLQCLean.Models.ClassicalCommunication.InstrumentCompression
-import NLQCLean.Models.ClassicalCommunication.KrausRepresentation
-import NLQCLean.Models.ClassicalCommunication.FiniteProtocol
-import NLQCLean.Models.ClassicalCommunication.CoherentConversion
-import NLQCLean.Models.ClassicalCommunication.TensorChannels
-import NLQCLean.Models.ClassicalCommunication.ProtocolCompression
+module
+
+public import NLQCLean.Models.ClassicalCommunication.InstrumentCompression
+public import NLQCLean.Models.ClassicalCommunication.KrausRepresentation
+public import NLQCLean.Models.ClassicalCommunication.FiniteProtocol
+public import NLQCLean.Models.ClassicalCommunication.CoherentConversion
+public import NLQCLean.Models.ClassicalCommunication.TensorChannels
+public import NLQCLean.Models.ClassicalCommunication.ProtocolCompression
+
+@[expose] public section
 
 /-!
 # Finite instrument and charged conversion boundaries

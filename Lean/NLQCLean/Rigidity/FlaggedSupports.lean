@@ -1,5 +1,9 @@
-import NLQCLean.Approx.PVMBlockSpectrum
-import NLQCLean.Models.ForwardCompression
+module
+
+public import NLQCLean.Approx.PVMBlockSpectrum
+public import NLQCLean.Models.ForwardCompression
+
+@[expose] public section
 
 /-!
 # Flagged direct sums of Schmidt supports

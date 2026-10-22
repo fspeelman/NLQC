@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.ChoiVectorInstrument
+module
+
+public import NLQCLean.Models.ClassicalCommunication.ChoiVectorInstrument
+
+@[expose] public section
 
 /-! # Derived trace probability and countably additive Choi densities -/
 

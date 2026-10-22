@@ -1,6 +1,10 @@
-import NLQCLean.Bounds.NearBellMessages
-import NLQCLean.LinearAlgebra.FlatProductTail
-import NLQCLean.Approx.PVMRankFloor
+module
+
+public import NLQCLean.Bounds.NearBellMessages
+public import NLQCLean.LinearAlgebra.FlatProductTail
+public import NLQCLean.Approx.PVMRankFloor
+
+@[expose] public section
 
 /-!
 # Flat column spectra near a maximally entangled basis

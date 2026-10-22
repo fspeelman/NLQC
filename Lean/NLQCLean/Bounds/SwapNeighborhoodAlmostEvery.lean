@@ -1,7 +1,11 @@
-import NLQCLean.Geometry.DirectVolume.Assembly
-import NLQCLean.Bounds.StrongHaarConditional
-import NLQCLean.Bounds.AlmostEveryTargets
-import NLQCLean.Semialgebraic.ProjectionTheorem
+module
+
+public import NLQCLean.Geometry.DirectVolume.Assembly
+public import NLQCLean.Bounds.StrongHaarConditional
+public import NLQCLean.Bounds.AlmostEveryTargets
+public import NLQCLean.Semialgebraic.ProjectionTheorem
+
+@[expose] public section
 
 /-!
 # Almost-every unitary resource rates in the SWAP neighbourhood

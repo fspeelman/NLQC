@@ -1,6 +1,10 @@
-import NLQCLean.Arithmetic.PhaseTranscendence
-import NLQCLean.Exact.ExactPurityAlgebraicity
-import NLQCLean.Invariants.LocalUnitaryPurity
+module
+
+public import NLQCLean.Arithmetic.PhaseTranscendence
+public import NLQCLean.Exact.ExactPurityAlgebraicity
+public import NLQCLean.Invariants.LocalUnitaryPurity
+
+@[expose] public section
 
 /-!
 # Exact exclusion of algebraic-angle controlled phases

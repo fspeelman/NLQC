@@ -1,7 +1,11 @@
 /-
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import NLQCLean.Geometry.CriticalNormalImages
+module
+
+public import NLQCLean.Geometry.CriticalNormalImages
+
+@[expose] public section
 
 /-!
 # Audit of the critical normal-image lemmas

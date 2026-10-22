@@ -2,13 +2,17 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import Mathlib.Algebra.MvPolynomial.Degrees
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
-import Mathlib.LinearAlgebra.FiniteDimensional.Defs
-import Mathlib.RingTheory.Ideal.Span
-import Mathlib.Basic.Real.Basic
-import Mathlib.Data.Finsupp.Weight
+module
+
+public import Mathlib.Algebra.MvPolynomial.Degrees
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
+public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+public import Mathlib.RingTheory.Ideal.Span
+public import Mathlib.Basic.Real.Basic
+public import Mathlib.Data.Finsupp.Weight
+
+@[expose] public section
 
 /-!
 # Common zeros of a system with pure-power leading terms

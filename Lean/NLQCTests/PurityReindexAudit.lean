@@ -1,4 +1,8 @@
-import NLQCLean.Invariants.PurityReindex
+module
+
+public import NLQCLean.Invariants.PurityReindex
+
+@[expose] public section
 
 /-! Full statements and axioms of finite local basis invariance. -/
 

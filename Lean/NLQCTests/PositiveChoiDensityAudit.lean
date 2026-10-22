@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.ChoiDensityPositivity
+module
+
+public import NLQCLean.Models.ClassicalCommunication.ChoiDensityPositivity
+
+@[expose] public section
 
 /-! # Derived positive normalized instrument densities -/
 

@@ -22,7 +22,11 @@ tropical `max`-circuit (`linesTrop`), and a tropical circuit compiles exactly to
 (`compile`/`realize1_compile`). The general (non-convex) converse — `f` as a difference of two
 convex envelopes — and the forward direction (ReLU ⟹ CPL) are the staged extensions.
 -/
-import NLQCLean.Vendor.Sundog.RegionPoly
+module
+
+public import NLQCLean.Vendor.Sundog.RegionPoly
+
+@[expose] public section
 
 namespace Sundog.ExactRepr
 

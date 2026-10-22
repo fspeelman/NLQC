@@ -1,6 +1,10 @@
-import NLQCLean.LinearAlgebra.FlatSupport
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
+module
+
+public import NLQCLean.LinearAlgebra.FlatSupport
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
+
+@[expose] public section
 
 /-!
 # Support sizes for near-SWAP witnesses

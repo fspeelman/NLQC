@@ -1,5 +1,9 @@
-import NLQCLean.Exact.ControlledPhaseExclusion
-import NLQCLean.Results.Unitary
+module
+
+public import NLQCLean.Exact.ControlledPhaseExclusion
+public import NLQCLean.Results.Unitary
+
+@[expose] public section
 
 /-! Full types, arbitrary original register universes and standard axioms for unconditional controlled-phase exclusion. -/
 

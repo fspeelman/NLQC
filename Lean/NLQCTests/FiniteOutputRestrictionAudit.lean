@@ -1,5 +1,9 @@
-import NLQCLean.Models.ClassicalCommunication.FiniteOutputRestriction
-import NLQCLean.Results.Unitary
+module
+
+public import NLQCLean.Models.ClassicalCommunication.FiniteOutputRestriction
+public import NLQCLean.Results.Unitary
+
+@[expose] public section
 
 /-! # output protocols preserve charge and whole pure/mixed channels -/
 

@@ -1,13 +1,17 @@
-import NLQCLean.Semialgebraic.ScalarNullFinite
-import NLQCLean.Semialgebraic.PolynomialFunctions
-import NLQCLean.Exact.RationalPolynomialSmoothness
-import NLQCLean.Semialgebraic.ProjectionTheorem
-import Mathlib.Analysis.Calculus.ContDiff.WithLp
-import Mathlib.Analysis.Calculus.ImplicitContDiff
-import Mathlib.Algebra.MvPolynomial.PDeriv
-import Mathlib.Algebra.MvPolynomial.Funext
-import Mathlib.Topology.Order.LeftRightNhds
-import Mathlib.Analysis.Calculus.Deriv.Prod
+module
+
+public import NLQCLean.Semialgebraic.ScalarNullFinite
+public import NLQCLean.Semialgebraic.PolynomialFunctions
+public import NLQCLean.Exact.RationalPolynomialSmoothness
+public import NLQCLean.Semialgebraic.ProjectionTheorem
+public import Mathlib.Analysis.Calculus.ContDiff.WithLp
+public import Mathlib.Analysis.Calculus.ImplicitContDiff
+public import Mathlib.Algebra.MvPolynomial.PDeriv
+public import Mathlib.Algebra.MvPolynomial.Funext
+public import Mathlib.Topology.Order.LeftRightNhds
+public import Mathlib.Analysis.Calculus.Deriv.Prod
+
+@[expose] public section
 
 /-!
 # Continuous semialgebraic functions are piecewise C¹ (`fact:piecewise`)

@@ -1,6 +1,10 @@
-import NLQCLean.Arithmetic.EliminationSize
-import Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
-import Mathlib.Algebra.Polynomial.Roots
+module
+
+public import NLQCLean.Arithmetic.EliminationSize
+public import Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
+public import Mathlib.Algebra.Polynomial.Roots
+
+@[expose] public section
 
 /-!
 # Pure-power systems and the determinant trick

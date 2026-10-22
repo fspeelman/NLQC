@@ -1,5 +1,9 @@
-import NLQCLean.Arithmetic.GelfondDoubling
-import Mathlib.Analysis.Complex.ExponentialBounds
+module
+
+public import NLQCLean.Arithmetic.GelfondDoubling
+public import Mathlib.Analysis.Complex.ExponentialBounds
+
+@[expose] public section
 
 /-!
 # Numerics of Gelfond's method

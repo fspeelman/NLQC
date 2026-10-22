@@ -1,6 +1,10 @@
-import NLQCLean.Approx.SlimWitnessCalculus
-import NLQCLean.Approx.NormalizedCubicWitness
-import NLQCLean.Geometry.LocalMotionRank
+module
+
+public import NLQCLean.Approx.SlimWitnessCalculus
+public import NLQCLean.Approx.NormalizedCubicWitness
+public import NLQCLean.Geometry.LocalMotionRank
+
+@[expose] public section
 
 /-!
 # Normalized cubic extension of slim witnesses and its local rank

@@ -1,4 +1,8 @@
-import NLQCLean.Arithmetic.GelfondLiouville
+module
+
+public import NLQCLean.Arithmetic.GelfondLiouville
+
+@[expose] public section
 
 /-!
 # Elementary estimates for Gelfond's method

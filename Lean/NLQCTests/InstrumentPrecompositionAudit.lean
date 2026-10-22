@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.InstrumentPrecomposition
+module
+
+public import NLQCLean.Models.ClassicalCommunication.InstrumentPrecomposition
+
+@[expose] public section
 
 /-! # Isometric input precomposition of CP instruments -/
 

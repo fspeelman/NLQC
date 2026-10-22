@@ -1,6 +1,10 @@
-import NLQCLean.Arithmetic.PhysicalScorePolynomial
-import NLQCLean.Invariants.ControlledPhase
-import Mathlib.Algebra.MvPolynomial.Monad
+module
+
+public import NLQCLean.Arithmetic.PhysicalScorePolynomial
+public import NLQCLean.Invariants.ControlledPhase
+public import Mathlib.Algebra.MvPolynomial.Monad
+
+@[expose] public section
 
 /-!
 # Integer target-score polynomials for two real phase parameters

@@ -1,7 +1,11 @@
-import NLQCLean.Approx.PVMPolynomialWitnessThickening
-import NLQCLean.Geometry.UnitaryNormalVolume
-import NLQCLean.Geometry.UnitaryWitnessTube
-import NLQCLean.Geometry.TransverseTubeArithmetic
+module
+
+public import NLQCLean.Approx.PVMPolynomialWitnessThickening
+public import NLQCLean.Geometry.UnitaryNormalVolume
+public import NLQCLean.Geometry.UnitaryWitnessTube
+public import NLQCLean.Geometry.TransverseTubeArithmetic
+
+@[expose] public section
 
 /-!
 # Conditional PVM polynomial tube estimates

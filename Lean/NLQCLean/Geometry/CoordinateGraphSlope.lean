@@ -2,7 +2,11 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Geometry.CoordinateMinors
+module
+
+public import NLQCLean.Geometry.CoordinateMinors
+
+@[expose] public section
 
 /-!
 # Jacobian bound on the constructed coordinate charts

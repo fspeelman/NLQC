@@ -1,7 +1,11 @@
-import NLQCLean.Exact.PVMFiniteOrbits
-import NLQCLean.Geometry.LocalOrbitHaarNull
-import NLQCLean.Models.ProjectiveProtocolScore
-import NLQCLean.Models.ProjectiveExactness
+module
+
+public import NLQCLean.Exact.PVMFiniteOrbits
+public import NLQCLean.Geometry.LocalOrbitHaarNull
+public import NLQCLean.Models.ProjectiveProtocolScore
+public import NLQCLean.Models.ProjectiveExactness
+
+@[expose] public section
 
 /-!
 # Exactly implementable rank-one PVMs: architecture decomposition

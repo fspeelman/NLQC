@@ -1,9 +1,13 @@
-import NLQCLean.Semialgebraic.Definable
-import NLQCLean.Semialgebraic.FiniteRealOrder
-import Mathlib.Analysis.Calculus.Deriv.Polynomial
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
-import Mathlib.Topology.Algebra.Polynomial
-import Mathlib.Topology.Algebra.MvPolynomial
+module
+
+public import NLQCLean.Semialgebraic.Definable
+public import NLQCLean.Semialgebraic.FiniteRealOrder
+public import Mathlib.Analysis.Calculus.Deriv.Polynomial
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
+public import Mathlib.Topology.Algebra.Polynomial
+public import Mathlib.Topology.Algebra.MvPolynomial
+
+@[expose] public section
 
 /-!
 # Roots of a parametric family of polynomials

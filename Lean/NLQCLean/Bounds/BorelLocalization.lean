@@ -1,7 +1,11 @@
-import NLQCLean.Geometry.DirectVolume.Assembly
-import NLQCLean.Models.ClassicalCommunication.BorelLocalization
-import NLQCLean.Bounds.FiniteLocalization
-import NLQCLean.Approx.BorelClassicalSpectralFloors
+module
+
+public import NLQCLean.Geometry.DirectVolume.Assembly
+public import NLQCLean.Models.ClassicalCommunication.BorelLocalization
+public import NLQCLean.Bounds.FiniteLocalization
+public import NLQCLean.Approx.BorelClassicalSpectralFloors
+
+@[expose] public section
 
 /-!
 # Approximate localization with standard-Borel outcomes

@@ -1,5 +1,9 @@
-import NLQCLean.Approx.FiniteClassicalSpectralFloors
-import NLQCLean.Models.ClassicalCommunication.BorelSharedRandomness
+module
+
+public import NLQCLean.Approx.FiniteClassicalSpectralFloors
+public import NLQCLean.Models.ClassicalCommunication.BorelSharedRandomness
+
+@[expose] public section
 
 /-!
 # Quantum-footprint spectral floors for standard-Borel protocols

@@ -54,8 +54,12 @@ load-bearing property is that the computed *function* is monotone.)
   semirings*, JACM 1982 (monotone `(min,+)` lower bounds).
 * Razborov, Rudich, *Natural proofs*, 1997 (why monotone bounds do not extend).
 -/
-import NLQCLean.Vendor.Sundog.CircuitNet
-import Mathlib.Order.Monotone.Basic
+module
+
+public import NLQCLean.Vendor.Sundog.CircuitNet
+public import Mathlib.Order.Monotone.Basic
+
+@[expose] public section
 
 namespace Sundog.CancellationFree
 

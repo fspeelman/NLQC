@@ -1,6 +1,10 @@
-import NLQCLean.Geometry.PolynomialImageVolumeHypothesis
-import NLQCLean.LinearAlgebra.RealCoordinates
-import Mathlib.Algebra.MvPolynomial.CommRing
+module
+
+public import NLQCLean.Geometry.PolynomialImageVolumeHypothesis
+public import NLQCLean.LinearAlgebra.RealCoordinates
+public import Mathlib.Algebra.MvPolynomial.CommRing
+
+@[expose] public section
 
 /-!
 # Explicit polynomial-function degree certificates

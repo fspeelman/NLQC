@@ -33,8 +33,12 @@ sets, cell decomposition, or the monotonicity theorem. The modulus is **represen
 (tight for monotone/additive circuits, exponentially loose for folding ones — the same tree-vs-DAG
 honesty as U-3's cost bound), which is itself the honest verdict, not a defect.
 -/
-import NLQCLean.Vendor.Sundog.ExactRepr
-import NLQCLean.Vendor.Sundog.AnalyticGate
+module
+
+public import NLQCLean.Vendor.Sundog.ExactRepr
+public import NLQCLean.Vendor.Sundog.AnalyticGate
+
+@[expose] public section
 
 namespace Sundog.DefinableRate
 

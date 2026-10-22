@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.JointDensityChannels
+module
+
+public import NLQCLean.Models.ClassicalCommunication.JointDensityChannels
+
+@[expose] public section
 
 /-!
 # Conditional linear scores of actual instrument densities

@@ -1,6 +1,10 @@
-import NLQCLean.Approx.PVMPolynomialWitnessFamily
-import NLQCLean.Approx.PVMWitnessCoverage
-import NLQCLean.Approx.PVMRankFloor
+module
+
+public import NLQCLean.Approx.PVMPolynomialWitnessFamily
+public import NLQCLean.Approx.PVMWitnessCoverage
+public import NLQCLean.Approx.PVMRankFloor
+
+@[expose] public section
 
 /-!
 # Physical coverage by fixed-format PVM polynomial witnesses

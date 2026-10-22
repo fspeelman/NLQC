@@ -1,10 +1,14 @@
 /-
 Analytic plumbing for differentiable families of matrices.
 -/
-import NLQCLean.LinearAlgebra.Isometry
-import Mathlib.Analysis.Calculus.Deriv.Add
-import Mathlib.Analysis.Calculus.Deriv.Star
-import Mathlib.Topology.Algebra.Module.FiniteDimension
+module
+
+public import NLQCLean.LinearAlgebra.Isometry
+public import Mathlib.Analysis.Calculus.Deriv.Add
+public import Mathlib.Analysis.Calculus.Deriv.Star
+public import Mathlib.Topology.Algebra.Module.FiniteDimension
+
+@[expose] public section
 
 /-!
 # Differentiating the constructions that `prop:exact-velocity` needs

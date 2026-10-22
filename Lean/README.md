@@ -45,7 +45,9 @@ an error-to-score inequality.
 
 Import [NLQCLean.Results.Unitary](NLQCLean/Results/Unitary.lean) or
 [NLQCLean.Results.PVM](NLQCLean/Results/PVM.lean) for the public APIs.
-`import NLQCLean` imports the complete library. The code follows the
+`import NLQCLean` imports the complete library. Every file uses the Lean module
+system, so the library can be imported from module and non-module files alike;
+all declarations are public and definitions keep their bodies visible. The code follows the
 mathematical dependencies through Models, LinearAlgebra, Rigidity, Approx,
 Invariants, Geometry, Semialgebraic, Arithmetic and Bounds.
 

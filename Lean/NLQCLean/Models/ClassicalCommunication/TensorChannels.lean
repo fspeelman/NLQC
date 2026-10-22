@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.FiniteInstruments
+module
+
+public import NLQCLean.Models.ClassicalCommunication.FiniteInstruments
+
+@[expose] public section
 
 /-!
 # Tensor products of finite channel operations

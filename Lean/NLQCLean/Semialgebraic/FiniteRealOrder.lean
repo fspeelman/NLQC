@@ -1,8 +1,12 @@
-import Mathlib.Data.Set.Card
-import Mathlib.Basic.Real.Basic
-import Mathlib.Order.Interval.Set.Basic
-import Mathlib.Data.Set.Finite.Lattice
-import Mathlib.Order.Preorder.Finite
+module
+
+public import Mathlib.Data.Set.Card
+public import Mathlib.Basic.Real.Basic
+public import Mathlib.Order.Interval.Set.Basic
+public import Mathlib.Data.Set.Finite.Lattice
+public import Mathlib.Order.Preorder.Finite
+
+@[expose] public section
 
 /-!
 # Ordering a finite set of reals

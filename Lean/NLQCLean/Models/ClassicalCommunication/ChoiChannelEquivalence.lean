@@ -1,5 +1,9 @@
-import NLQCLean.Models.ClassicalCommunication.ChoiDensityPositivity
-import Mathlib.Data.Matrix.Basis
+module
+
+public import NLQCLean.Models.ClassicalCommunication.ChoiDensityPositivity
+public import Mathlib.Data.Matrix.Basis
+
+@[expose] public section
 
 /-!
 # The unnormalized Choi equivalence for finite channel operations

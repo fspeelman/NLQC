@@ -1,7 +1,11 @@
-import NLQCLean.Arithmetic.DeformationSystem
-import NLQCLean.Arithmetic.EliminationKKT
-import Mathlib.Topology.Algebra.MvPolynomial
-import Mathlib.Topology.Order.IntermediateValue
+module
+
+public import NLQCLean.Arithmetic.DeformationSystem
+public import NLQCLean.Arithmetic.EliminationKKT
+public import Mathlib.Topology.Algebra.MvPolynomial
+public import Mathlib.Topology.Order.IntermediateValue
+
+@[expose] public section
 
 /-!
 # Critical points of the deformed problem

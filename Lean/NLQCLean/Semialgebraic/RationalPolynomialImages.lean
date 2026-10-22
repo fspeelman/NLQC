@@ -2,7 +2,11 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Semialgebraic.RationalImages
+module
+
+public import NLQCLean.Semialgebraic.RationalImages
+
+@[expose] public section
 
 /-!
 # Rational polynomial graphs and images

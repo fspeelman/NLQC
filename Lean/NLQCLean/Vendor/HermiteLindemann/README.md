@@ -39,3 +39,11 @@ the same upstream pin and source manifest: in
 local torsion-freeness fact as `HasUniqueDiv R` (Mathlib renamed
 `IsAddTorsionFree.of_isTorsionFree` to `HasUniqueDiv.of_isTorsionFree`; the
 `IsAddTorsionFree` instance is derived from it). No other vendored file changed.
+
+Module system (22 October 2026): each vendored file again starts with
+`module`, makes all its imports `public` and opens `@[expose] public section`
+(a uniform project form, not the upstream visibility markers removed
+initially), because module files cannot import non-module files. In
+`AlgebraicPart.lean` the theorem `toFinsuppAux_apply_apply_mk` is no longer
+`private`, since the exposed definition `toFinsupp` uses it. Statements,
+proofs and notices are otherwise unchanged.

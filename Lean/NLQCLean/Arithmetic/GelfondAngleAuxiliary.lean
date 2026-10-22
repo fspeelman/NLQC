@@ -1,4 +1,8 @@
-import NLQCLean.Arithmetic.GelfondAngleLiouville
+module
+
+public import NLQCLean.Arithmetic.GelfondAngleLiouville
+
+@[expose] public section
 
 /-!
 # The auxiliary function of Gelfond's method for `e^ω`

@@ -1,8 +1,12 @@
-import NLQCLean.Exact.ScalarCriticalValues
-import NLQCLean.Invariants.PVMMeanPurity
-import NLQCLean.Rigidity.PVMFlagDifferential
-import NLQCLean.Models.ProjectiveProtocolScore
-import NLQCLean.Models.ProjectiveTask
+module
+
+public import NLQCLean.Exact.ScalarCriticalValues
+public import NLQCLean.Invariants.PVMMeanPurity
+public import NLQCLean.Rigidity.PVMFlagDifferential
+public import NLQCLean.Models.ProjectiveProtocolScore
+public import NLQCLean.Models.ProjectiveTask
+
+@[expose] public section
 
 /-!
 # Scalar Sard for exact two-sided PVM witnesses

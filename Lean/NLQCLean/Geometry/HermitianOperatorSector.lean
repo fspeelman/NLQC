@@ -1,8 +1,12 @@
-import NLQCLean.Geometry.FiniteDimensionalNets
-import NLQCLean.Geometry.EuclideanBallCaps
-import NLQCLean.Geometry.AdjointEuclideanCoordinates
-import NLQCLean.LinearAlgebra.ResidualSpectralCutoff
-import Mathlib.Analysis.Complex.ExponentialBounds
+module
+
+public import NLQCLean.Geometry.FiniteDimensionalNets
+public import NLQCLean.Geometry.EuclideanBallCaps
+public import NLQCLean.Geometry.AdjointEuclideanCoordinates
+public import NLQCLean.LinearAlgebra.ResidualSpectralCutoff
+public import Mathlib.Analysis.Complex.ExponentialBounds
+
+@[expose] public section
 
 /-!
 # The operator-small Hermitian and skew-Hermitian sectors

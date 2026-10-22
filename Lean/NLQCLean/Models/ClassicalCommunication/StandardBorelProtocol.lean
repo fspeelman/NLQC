@@ -1,7 +1,11 @@
-import NLQCLean.Models.ClassicalCommunication.JointDensityChannels
-import NLQCLean.Models.ClassicalCommunication.FiniteProtocol
-import NLQCLean.Models.StinespringDiamondContractivity
-import Mathlib.MeasureTheory.Constructions.Polish.Basic
+module
+
+public import NLQCLean.Models.ClassicalCommunication.JointDensityChannels
+public import NLQCLean.Models.ClassicalCommunication.FiniteProtocol
+public import NLQCLean.Models.StinespringDiamondContractivity
+public import Mathlib.MeasureTheory.Constructions.Polish.Basic
+
+@[expose] public section
 
 /-!
 # Actual standard-Borel simultaneous classical protocols

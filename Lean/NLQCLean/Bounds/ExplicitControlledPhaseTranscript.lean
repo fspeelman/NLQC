@@ -1,7 +1,11 @@
-import NLQCLean.Arithmetic.TranscriptHeight
-import NLQCLean.Bounds.ControlledPhaseEliminant
-import NLQCLean.Bounds.ExplicitControlledPhaseGelfond
-import NLQCLean.Bounds.SharedRandomLOSCC
+module
+
+public import NLQCLean.Arithmetic.TranscriptHeight
+public import NLQCLean.Bounds.ControlledPhaseEliminant
+public import NLQCLean.Bounds.ExplicitControlledPhaseGelfond
+public import NLQCLean.Bounds.SharedRandomLOSCC
+
+@[expose] public section
 
 /-!
 # The explicit bound for `C₁` with free classical messages (`eq:explicit-quantum-tradeoff`)

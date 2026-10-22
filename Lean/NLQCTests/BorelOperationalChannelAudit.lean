@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.BorelOperationalChannel
+module
+
+public import NLQCLean.Models.ClassicalCommunication.BorelOperationalChannel
+
+@[expose] public section
 
 /-! # Whole operational integrals independent of RN versions -/
 

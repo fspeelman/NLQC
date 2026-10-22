@@ -1,6 +1,10 @@
-import NLQCLean.Geometry.PolynomialDegree
-import NLQCLean.Geometry.RescaledCubicProjection
-import NLQCLean.Rigidity.Compression
+module
+
+public import NLQCLean.Geometry.PolynomialDegree
+public import NLQCLean.Geometry.RescaledCubicProjection
+public import NLQCLean.Rigidity.Compression
+
+@[expose] public section
 
 /-!
 # Polynomial degree certificates for the witness's matrix operations

@@ -1,5 +1,9 @@
-import NLQCLean.ImageVolume.PolynomialImageVolume
-import NLQCLean.Geometry.StrongPolynomialTubeConditional
+module
+
+public import NLQCLean.ImageVolume.PolynomialImageVolume
+public import NLQCLean.Geometry.StrongPolynomialTubeConditional
+
+@[expose] public section
 
 /-!
 # The slim witness tube with the actual witness degrees

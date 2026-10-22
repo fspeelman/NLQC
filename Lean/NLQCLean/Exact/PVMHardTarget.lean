@@ -1,6 +1,10 @@
-import NLQCLean.Exact.PVMScalarCriticalValues
-import NLQCLean.Invariants.PVMRotationFamily
-import NLQCLean.Models.ProjectiveMixedExactness
+module
+
+public import NLQCLean.Exact.PVMScalarCriticalValues
+public import NLQCLean.Invariants.PVMRotationFamily
+public import NLQCLean.Models.ProjectiveMixedExactness
+
+@[expose] public section
 
 /-!
 # An exactly hard ordered rank-one PVM

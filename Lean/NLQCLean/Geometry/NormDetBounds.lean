@@ -1,6 +1,10 @@
-import Mathlib.Analysis.InnerProductSpace.NormDet
-import Mathlib.Analysis.InnerProductSpace.GramSchmidtOrtho
-import Mathlib.Analysis.InnerProductSpace.ProdL2
+module
+
+public import Mathlib.Analysis.InnerProductSpace.NormDet
+public import Mathlib.Analysis.InnerProductSpace.GramSchmidtOrtho
+public import Mathlib.Analysis.InnerProductSpace.ProdL2
+
+@[expose] public section
 
 /-!
 # Determinant bounds in an adapted orthonormal basis

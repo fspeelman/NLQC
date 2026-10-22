@@ -1,5 +1,9 @@
-import NLQCLean.LinearAlgebra.SchmidtRank
-import NLQCLean.Models.SwapTarget
+module
+
+public import NLQCLean.LinearAlgebra.SchmidtRank
+public import NLQCLean.Models.SwapTarget
+
+@[expose] public section
 
 /-!
 # Choi realignment of SWAP

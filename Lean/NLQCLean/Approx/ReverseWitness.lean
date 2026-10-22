@@ -1,7 +1,11 @@
-import NLQCLean.LinearAlgebra.IsometricCompletion
-import NLQCLean.Approx.CrossGramDistance
-import NLQCLean.Models.ForwardCompression
-import Mathlib.LinearAlgebra.Complex.FiniteDimensional
+module
+
+public import NLQCLean.LinearAlgebra.IsometricCompletion
+public import NLQCLean.Approx.CrossGramDistance
+public import NLQCLean.Models.ForwardCompression
+public import Mathlib.LinearAlgebra.Complex.FiniteDimensional
+
+@[expose] public section
 
 /-!
 # Bounded six-block reverse witnesses

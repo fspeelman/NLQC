@@ -1,4 +1,8 @@
-import NLQCLean.Models.PVMPhysicalReachability
+module
+
+public import NLQCLean.Models.PVMPhysicalReachability
+
+@[expose] public section
 
 /-!
 # Pure and finite-mixed PVM reachability coincide

@@ -1,6 +1,10 @@
-import NLQCLean.Models.ForwardCompression
-import NLQCLean.Models.UnitaryScore
-import Mathlib.Topology.Order.Compact
+module
+
+public import NLQCLean.Models.ForwardCompression
+public import NLQCLean.Models.UnitaryScore
+public import Mathlib.Topology.Order.Compact
+
+@[expose] public section
 
 /-!
 # Compact physical forward families

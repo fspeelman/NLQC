@@ -1,7 +1,11 @@
-import NLQCLean.Arithmetic.PhysicalScorePolynomial
-import NLQCLean.Arithmetic.PhysicalPolynomialEncoding
-import NLQCLean.Models.PVMPhysicalReachability
-import NLQCLean.Models.ProjectiveScore
+module
+
+public import NLQCLean.Arithmetic.PhysicalScorePolynomial
+public import NLQCLean.Arithmetic.PhysicalPolynomialEncoding
+public import NLQCLean.Models.PVMPhysicalReachability
+public import NLQCLean.Models.ProjectiveScore
+
+@[expose] public section
 
 /-!
 # Integer-polynomial encoding of the PVM score

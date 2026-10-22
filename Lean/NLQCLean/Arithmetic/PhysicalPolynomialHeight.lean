@@ -1,5 +1,9 @@
-import NLQCLean.Arithmetic.ControlledPhaseScorePolynomial
-import NLQCLean.Arithmetic.CosineTransform
+module
+
+public import NLQCLean.Arithmetic.ControlledPhaseScorePolynomial
+public import NLQCLean.Arithmetic.CosineTransform
+
+@[expose] public section
 
 /-!
 # Explicit coefficient bounds for physical polynomials

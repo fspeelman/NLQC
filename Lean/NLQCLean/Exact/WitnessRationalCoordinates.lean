@@ -1,5 +1,9 @@
-import NLQCLean.Exact.ScalarCriticalValues
-import NLQCLean.Arithmetic.PhysicalPolynomialEncoding
+module
+
+public import NLQCLean.Exact.ScalarCriticalValues
+public import NLQCLean.Arithmetic.PhysicalPolynomialEncoding
+
+@[expose] public section
 
 /-!
 # Raw real coordinates for exact target witnesses

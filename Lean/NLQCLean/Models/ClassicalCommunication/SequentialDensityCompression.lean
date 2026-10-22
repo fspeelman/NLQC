@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.DensityCompression
+module
+
+public import NLQCLean.Models.ClassicalCommunication.DensityCompression
+
+@[expose] public section
 
 /-!
 # Sequential actual-outcome compression of two CP densities

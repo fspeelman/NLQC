@@ -1,5 +1,9 @@
-import NLQCLean.Geometry.StrongWitnessBarrierVolume
-import NLQCLean.Geometry.PVMPolynomialTubeConditional
+module
+
+public import NLQCLean.Geometry.StrongWitnessBarrierVolume
+public import NLQCLean.Geometry.PVMPolynomialTubeConditional
+
+@[expose] public section
 
 /-!
 # The PVM witness tube with the actual witness degrees

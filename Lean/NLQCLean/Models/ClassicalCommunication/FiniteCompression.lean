@@ -1,12 +1,16 @@
-import NLQCLean.Models.ClassicalCommunication.ResourceSupport
-import NLQCLean.Models.ClassicalCommunication.ProtocolCompression
-import NLQCLean.Models.ClassicalCommunication.TargetScores
-import NLQCLean.Models.ClassicalCommunication.CoherentConversion
-import NLQCLean.Rigidity.FlaggedSupports
-import NLQCLean.Models.PhysicalReachability
-import NLQCLean.Models.PVMPhysicalReachability
-import NLQCLean.Models.ProtocolMetrics
-import NLQCLean.Models.ProjectiveTV
+module
+
+public import NLQCLean.Models.ClassicalCommunication.ResourceSupport
+public import NLQCLean.Models.ClassicalCommunication.ProtocolCompression
+public import NLQCLean.Models.ClassicalCommunication.TargetScores
+public import NLQCLean.Models.ClassicalCommunication.CoherentConversion
+public import NLQCLean.Rigidity.FlaggedSupports
+public import NLQCLean.Models.PhysicalReachability
+public import NLQCLean.Models.PVMPhysicalReachability
+public import NLQCLean.Models.ProtocolMetrics
+public import NLQCLean.Models.ProjectiveTV
+
+@[expose] public section
 
 /-!
 # Finite classical compression into an actual charged protocol

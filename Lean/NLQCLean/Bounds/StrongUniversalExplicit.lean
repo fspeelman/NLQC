@@ -1,5 +1,9 @@
-import NLQCLean.Geometry.StrongWitnessBarrierVolume
-import NLQCLean.Bounds.StrongUniversalResources
+module
+
+public import NLQCLean.Geometry.StrongWitnessBarrierVolume
+public import NLQCLean.Bounds.StrongUniversalResources
+
+@[expose] public section
 
 /-!
 # Explicit constants for the universal unitary bounds

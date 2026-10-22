@@ -1,6 +1,10 @@
-import NLQCLean.Geometry.DirectVolume.Charts
-import NLQCLean.Geometry.SemialgebraicImageVolume
-import NLQCLean.Geometry.JacobianNeighborhood
+module
+
+public import NLQCLean.Geometry.DirectVolume.Charts
+public import NLQCLean.Geometry.SemialgebraicImageVolume
+public import NLQCLean.Geometry.JacobianNeighborhood
+
+@[expose] public section
 
 /-!
 # Direct image-volume route: assembly

@@ -1,7 +1,11 @@
 /-
 The exact two-sided outcome (rank-one PVM) task for a one-round protocol.
 -/
-import NLQCLean.Models.UnitaryTask
+module
+
+public import NLQCLean.Models.UnitaryTask
+
+@[expose] public section
 
 /-!
 # The two-sided outcome task

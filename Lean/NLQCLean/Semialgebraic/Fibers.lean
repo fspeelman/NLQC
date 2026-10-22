@@ -2,8 +2,12 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Semialgebraic.Dimension
-import NLQCLean.Semialgebraic.ParametricFormat
+module
+
+public import NLQCLean.Semialgebraic.Dimension
+public import NLQCLean.Semialgebraic.ParametricFormat
+
+@[expose] public section
 
 /-!
 # Finite fibers outside an explicit null set

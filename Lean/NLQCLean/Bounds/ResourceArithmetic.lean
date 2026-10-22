@@ -1,5 +1,9 @@
-import NLQCLean.Bounds.CodimensionArithmetic
-import Mathlib.Analysis.SpecialFunctions.Log.Base
+module
+
+public import NLQCLean.Bounds.CodimensionArithmetic
+public import Mathlib.Analysis.SpecialFunctions.Log.Base
+
+@[expose] public section
 
 /-!
 # Arithmetic of the universal resource lower bound

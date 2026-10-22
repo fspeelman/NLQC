@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.FiniteRandomCompression
+module
+
+public import NLQCLean.Models.ClassicalCommunication.FiniteRandomCompression
+
+@[expose] public section
 
 /-! # Integrated finite mixed-branch target scores -/
 

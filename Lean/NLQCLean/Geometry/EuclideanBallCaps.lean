@@ -1,6 +1,10 @@
-import Mathlib.MeasureTheory.Measure.Lebesgue.EqHaar
-import Mathlib.Analysis.InnerProductSpace.EuclideanDist
-import Mathlib.Analysis.SpecialFunctions.Sqrt
+module
+
+public import Mathlib.MeasureTheory.Measure.Lebesgue.EqHaar
+public import Mathlib.Analysis.InnerProductSpace.EuclideanDist
+public import Mathlib.Analysis.SpecialFunctions.Sqrt
+
+@[expose] public section
 
 /-!
 # Euclidean ball caps

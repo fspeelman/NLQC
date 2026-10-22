@@ -1,4 +1,8 @@
-import NLQCLean.Invariants.RectangularControlledPhase
+module
+
+public import NLQCLean.Invariants.RectangularControlledPhase
+
+@[expose] public section
 
 /-! # rectangular two-level and local-phase matrix identities -/
 

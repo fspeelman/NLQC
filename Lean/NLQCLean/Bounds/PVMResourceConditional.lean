@@ -1,7 +1,11 @@
-import NLQCLean.Bounds.PVMResourceArithmetic
-import NLQCLean.Bounds.PVMTVHaarConditional
-import NLQCLean.Approx.PVMRankFloor
-import NLQCLean.Models.PVMUniversalReachability
+module
+
+public import NLQCLean.Bounds.PVMResourceArithmetic
+public import NLQCLean.Bounds.PVMTVHaarConditional
+public import NLQCLean.Approx.PVMRankFloor
+public import NLQCLean.Models.PVMUniversalReachability
+
+@[expose] public section
 
 /-!
 # Conditional universal PVM footprint and qubit lower bounds

@@ -1,4 +1,8 @@
-import NLQCLean.Models.ForwardWitness
+module
+
+public import NLQCLean.Models.ForwardWitness
+
+@[expose] public section
 
 /-!
 # Relabeling the internal registers of a forward witness

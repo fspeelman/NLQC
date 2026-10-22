@@ -1,5 +1,9 @@
-import NLQCLean.Geometry.PolynomialThickening
-import NLQCLean.Approx.PVMWitnessJacobianBound
+module
+
+public import NLQCLean.Geometry.PolynomialThickening
+public import NLQCLean.Approx.PVMWitnessJacobianBound
+
+@[expose] public section
 
 /-!
 # The thickened witness family

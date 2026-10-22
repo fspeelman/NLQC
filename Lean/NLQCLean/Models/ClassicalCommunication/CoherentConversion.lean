@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.FiniteProtocol
+module
+
+public import NLQCLean.Models.ClassicalCommunication.FiniteProtocol
+
+@[expose] public section
 
 /-!
 # Channel semantics of finite coherent conversion

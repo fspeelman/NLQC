@@ -1,5 +1,9 @@
-import NLQCLean.Approx.SharpFreezing
-import NLQCLean.Bounds.SwapFloor
+module
+
+public import NLQCLean.Approx.SharpFreezing
+public import NLQCLean.Bounds.SwapFloor
+
+@[expose] public section
 
 /-!
 # Spectral footprint floors for unitary targets

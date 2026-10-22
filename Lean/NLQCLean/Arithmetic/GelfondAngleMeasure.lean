@@ -1,6 +1,10 @@
-import NLQCLean.Arithmetic.GelfondAngleNumerics
-import NLQCLean.Arithmetic.GelfondMeasure
-import NLQCLean.External.EffectiveArithmetic
+module
+
+public import NLQCLean.Arithmetic.GelfondAngleNumerics
+public import NLQCLean.Arithmetic.GelfondMeasure
+public import NLQCLean.External.EffectiveArithmetic
+
+@[expose] public section
 
 /-!
 # A polynomial-type transcendence measure for `e^{iθ}`, `θ` real algebraic

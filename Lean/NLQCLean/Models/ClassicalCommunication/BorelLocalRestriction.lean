@@ -1,6 +1,10 @@
-import NLQCLean.Models.ClassicalCommunication.InstrumentPrecomposition
-import NLQCLean.Models.ClassicalCommunication.BorelMixed
-import NLQCLean.Models.ClassicalCommunication.FiniteLogicalRestriction
+module
+
+public import NLQCLean.Models.ClassicalCommunication.InstrumentPrecomposition
+public import NLQCLean.Models.ClassicalCommunication.BorelMixed
+public import NLQCLean.Models.ClassicalCommunication.FiniteLogicalRestriction
+
+@[expose] public section
 
 /-!
 # Local restriction of actual standard-Borel protocols

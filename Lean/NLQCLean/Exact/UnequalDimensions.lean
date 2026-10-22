@@ -1,6 +1,10 @@
-import NLQCLean.Exact.GeneralExactWitness
-import NLQCLean.Exact.FiniteOrbits
-import NLQCLean.Geometry.LocalOrbitHaarNull
+module
+
+public import NLQCLean.Exact.GeneralExactWitness
+public import NLQCLean.Exact.FiniteOrbits
+public import NLQCLean.Geometry.LocalOrbitHaarNull
+
+@[expose] public section
 
 /-!
 # Exact impossibility for arbitrary local dimensions (`rem:qudits`)

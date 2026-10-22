@@ -1,5 +1,9 @@
-import NLQCLean.Models.ProjectiveScoreSemantics
-import NLQCLean.Models.ForwardWitness
+module
+
+public import NLQCLean.Models.ProjectiveScoreSemantics
+public import NLQCLean.Models.ForwardWitness
+
+@[expose] public section
 
 /-!
 # PVM score semantics for physical protocols

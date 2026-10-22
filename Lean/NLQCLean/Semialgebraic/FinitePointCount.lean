@@ -1,9 +1,13 @@
-import NLQCLean.Semialgebraic.PurePowerZeros
-import NLQCLean.Semialgebraic.PiecewiseC1
-import NLQCLean.Semialgebraic.FormatParameters
-import Mathlib.Topology.Algebra.MvPolynomial
-import Mathlib.Topology.Order.LocalExtr
-import Mathlib.Analysis.Calculus.LocalExtr.Basic
+module
+
+public import NLQCLean.Semialgebraic.PurePowerZeros
+public import NLQCLean.Semialgebraic.PiecewiseC1
+public import NLQCLean.Semialgebraic.FormatParameters
+public import Mathlib.Topology.Algebra.MvPolynomial
+public import Mathlib.Topology.Order.LocalExtr
+public import Mathlib.Analysis.Calculus.LocalExtr.Basic
+
+@[expose] public section
 
 /-!
 # Isolated zeros of a nonnegative polynomial

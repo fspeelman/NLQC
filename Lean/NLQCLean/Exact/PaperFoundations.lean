@@ -1,7 +1,11 @@
-import NLQCLean.Geometry.UnitaryHaar
-import NLQCLean.Models.ClassicalCommunication.KrausRepresentation
-import NLQCLean.Semialgebraic.Fibers
-import NLQCLean.Semialgebraic.ProjectionTheorem
+module
+
+public import NLQCLean.Geometry.UnitaryHaar
+public import NLQCLean.Models.ClassicalCommunication.KrausRepresentation
+public import NLQCLean.Semialgebraic.Fibers
+public import NLQCLean.Semialgebraic.ProjectionTheorem
+
+@[expose] public section
 
 /-!
 # Background facts stated in the exact paper

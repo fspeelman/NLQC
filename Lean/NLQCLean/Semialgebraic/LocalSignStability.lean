@@ -2,8 +2,12 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Semialgebraic.FormatParameters
-import NLQCLean.Geometry.PolynomialZeroMeasure
+module
+
+public import NLQCLean.Semialgebraic.FormatParameters
+public import NLQCLean.Geometry.PolynomialZeroMeasure
+
+@[expose] public section
 
 /-!
 # Local stability of convergent normalized polynomial descriptions

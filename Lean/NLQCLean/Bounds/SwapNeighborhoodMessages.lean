@@ -1,8 +1,12 @@
-import NLQCLean.LinearAlgebra.CrossedSinglet
-import NLQCLean.Approx.SharpFreezing
-import NLQCLean.Models.ForwardReindex
-import NLQCLean.Models.SwapNeighborhood
-import NLQCLean.Rigidity.FlaggedSupports
+module
+
+public import NLQCLean.LinearAlgebra.CrossedSinglet
+public import NLQCLean.Approx.SharpFreezing
+public import NLQCLean.Models.ForwardReindex
+public import NLQCLean.Models.SwapNeighborhood
+public import NLQCLean.Rigidity.FlaggedSupports
+
+@[expose] public section
 
 /-!
 # Near SWAP, both complete charged messages are large

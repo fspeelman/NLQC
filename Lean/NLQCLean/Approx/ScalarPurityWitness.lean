@@ -1,7 +1,11 @@
-import NLQCLean.Invariants.PurityEstimates
-import NLQCLean.Approx.PolynomialWitnessCoverage
-import NLQCLean.Models.MixedReachability
-import NLQCLean.Geometry.PolynomialThickening
+module
+
+public import NLQCLean.Invariants.PurityEstimates
+public import NLQCLean.Approx.PolynomialWitnessCoverage
+public import NLQCLean.Models.MixedReachability
+public import NLQCLean.Geometry.PolynomialThickening
+
+@[expose] public section
 
 /-!
 # A scalar purity witness for two-qubit targets

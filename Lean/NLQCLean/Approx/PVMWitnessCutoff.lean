@@ -1,7 +1,11 @@
-import NLQCLean.Approx.SlimWitnessDifferential
-import NLQCLean.Rigidity.PVMExtendedDifferential
-import NLQCLean.Approx.PVMWitnessVelocityBounds
-import NLQCLean.Bounds.NearBellWitnessCover
+module
+
+public import NLQCLean.Approx.SlimWitnessDifferential
+public import NLQCLean.Rigidity.PVMExtendedDifferential
+public import NLQCLean.Approx.PVMWitnessVelocityBounds
+public import NLQCLean.Bounds.NearBellWitnessCover
+
+@[expose] public section
 
 /-!
 # The strong measurement cutoff (`lem:bell-cutoff`)

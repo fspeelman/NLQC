@@ -1,5 +1,9 @@
-import Lean.Elab.Tactic.Omega
-import Mathlib.Data.Nat.Basic
+module
+
+public import Lean.Elab.Tactic.Omega
+public import Mathlib.Data.Nat.Basic
+
+@[expose] public section
 
 /-!
 # Flat spectral support counts

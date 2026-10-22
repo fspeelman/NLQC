@@ -1,4 +1,8 @@
-import NLQCLean.Exact.WitnessRationalCoordinates
+module
+
+public import NLQCLean.Exact.WitnessRationalCoordinates
+
+@[expose] public section
 
 /-! Full types and axioms for the original seven-block raw coordinates. -/
 

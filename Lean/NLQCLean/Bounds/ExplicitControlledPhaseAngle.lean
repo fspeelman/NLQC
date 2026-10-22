@@ -1,5 +1,9 @@
-import NLQCLean.Bounds.ExplicitControlledPhase
-import NLQCLean.Arithmetic.GelfondAngleMeasure
+module
+
+public import NLQCLean.Bounds.ExplicitControlledPhase
+public import NLQCLean.Arithmetic.GelfondAngleMeasure
+
+@[expose] public section
 
 /-!
 # Theorem E for every nonzero real algebraic angle

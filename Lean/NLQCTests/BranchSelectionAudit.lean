@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.BranchSelection
+module
+
+public import NLQCLean.Models.ClassicalCommunication.BranchSelection
+
+@[expose] public section
 
 /-! # high-score probability branch selection -/
 

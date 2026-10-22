@@ -1,5 +1,9 @@
-import NLQCLean.Approx.GenericSchmidtRank
-import NLQCLean.Models.DiamondReachability
+module
+
+public import NLQCLean.Approx.GenericSchmidtRank
+public import NLQCLean.Models.DiamondReachability
+
+@[expose] public section
 
 /-!
 # Target-dependent generic spectral thresholds

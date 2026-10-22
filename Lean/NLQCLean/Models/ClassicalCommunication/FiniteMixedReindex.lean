@@ -1,5 +1,9 @@
-import NLQCLean.Models.ClassicalCommunication.FiniteProtocolReindex
-import NLQCLean.Models.ClassicalCommunication.FiniteMixed
+module
+
+public import NLQCLean.Models.ClassicalCommunication.FiniteProtocolReindex
+public import NLQCLean.Models.ClassicalCommunication.FiniteMixed
+
+@[expose] public section
 
 /-! # Relabeling common-map finite mixed protocols
 

@@ -1,7 +1,11 @@
-import Lean.Elab.Tactic.Omega
-import Mathlib.Basic.Real.Basic
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
+module
+
+public import Lean.Elab.Tactic.Omega
+public import Mathlib.Basic.Real.Basic
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
+
+@[expose] public section
 
 /-!
 # Unitary and PVM codimension arithmetic

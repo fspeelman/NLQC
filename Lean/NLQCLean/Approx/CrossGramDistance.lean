@@ -1,4 +1,8 @@
-import NLQCLean.Approx.SharpFreezing
+module
+
+public import NLQCLean.Approx.SharpFreezing
+
+@[expose] public section
 
 /-!
 # Frobenius cross-Gram distance and leakage

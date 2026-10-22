@@ -1,7 +1,11 @@
-import NLQCLean.LinearAlgebra.FrobeniusInner
-import NLQCLean.LinearAlgebra.SchmidtTruncation
-import NLQCLean.LinearAlgebra.SchmidtRank
-import Mathlib.Analysis.Matrix.PosDef
+module
+
+public import NLQCLean.LinearAlgebra.FrobeniusInner
+public import NLQCLean.LinearAlgebra.SchmidtTruncation
+public import NLQCLean.LinearAlgebra.SchmidtRank
+public import Mathlib.Analysis.Matrix.PosDef
+
+@[expose] public section
 
 /-!
 # Best finite-rank Frobenius overlap

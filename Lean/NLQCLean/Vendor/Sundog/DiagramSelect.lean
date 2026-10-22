@@ -31,7 +31,11 @@ assignments: on each `SADef` cell "top coefficients vanish, next is live", membe
 behave as their truncations via `resolve_spec`) and the Dershowitz–Manna assembly
 closing `DiagramPartition` for every family.
 -/
-import NLQCLean.Vendor.Sundog.DiagramMaster
+module
+
+public import NLQCLean.Vendor.Sundog.DiagramMaster
+
+@[expose] public section
 
 namespace Sundog.TarskiQE
 

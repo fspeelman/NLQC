@@ -1,6 +1,10 @@
-import NLQCLean.Geometry.DirectVolume.Assembly
-import NLQCLean.Bounds.ControlledPhaseAlmostEvery
-import NLQCLean.Models.ClassicalCommunication.FiniteMixedCompression
+module
+
+public import NLQCLean.Geometry.DirectVolume.Assembly
+public import NLQCLean.Bounds.ControlledPhaseAlmostEvery
+public import NLQCLean.Models.ClassicalCommunication.FiniteMixedCompression
+
+@[expose] public section
 
 /-!
 # Almost-every controlled-phase rates for finite classical instruments

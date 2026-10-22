@@ -1,6 +1,10 @@
-import NLQCLean.Models.ProtocolMetrics
-import NLQCLean.Models.MixedReachability
-import NLQCLean.Models.UniversalReachability
+module
+
+public import NLQCLean.Models.ProtocolMetrics
+public import NLQCLean.Models.MixedReachability
+public import NLQCLean.Models.UniversalReachability
+
+@[expose] public section
 
 /-!
 # Operational diamond reachability on arbitrary finite registers

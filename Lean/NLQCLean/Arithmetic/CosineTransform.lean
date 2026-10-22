@@ -1,7 +1,11 @@
-import NLQCLean.Arithmetic.BivariateFactor
-import Mathlib.Algebra.Polynomial.BigOperators
-import Mathlib.Data.Nat.Choose.Sum
-import Mathlib.Analysis.Complex.Trigonometric
+module
+
+public import NLQCLean.Arithmetic.BivariateFactor
+public import Mathlib.Algebra.Polynomial.BigOperators
+public import Mathlib.Data.Nat.Choose.Sum
+public import Mathlib.Analysis.Complex.Trigonometric
+
+@[expose] public section
 
 /-!
 # Integral polynomial substitution for the cosine

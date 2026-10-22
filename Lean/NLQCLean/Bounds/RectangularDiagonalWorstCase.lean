@@ -1,4 +1,8 @@
-import NLQCLean.Bounds.BorelRectangularDiagonal
+module
+
+public import NLQCLean.Bounds.BorelRectangularDiagonal
+
+@[expose] public section
 
 /-!
 # Worst-case rectangular diagonal bounds

@@ -1,5 +1,9 @@
-import NLQCLean.Geometry.DirectVolume.Regularity
-import NLQCLean.Semialgebraic.FinitePointCount
+module
+
+public import NLQCLean.Geometry.DirectVolume.Regularity
+public import NLQCLean.Semialgebraic.FinitePointCount
+
+@[expose] public section
 
 /-!
 # Direct image-volume route: counting fiber points

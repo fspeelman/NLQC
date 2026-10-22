@@ -2,11 +2,15 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Semialgebraic.Dimension
-import Mathlib.Analysis.Calculus.InverseFunctionTheorem.ContDiff
-import Mathlib.MeasureTheory.Constructions.Polish.Basic
-import Mathlib.Topology.Compactness.Lindelof
-import Mathlib.Analysis.Normed.Operator.BoundedLinearMaps
+module
+
+public import NLQCLean.Semialgebraic.Dimension
+public import Mathlib.Analysis.Calculus.InverseFunctionTheorem.ContDiff
+public import Mathlib.MeasureTheory.Constructions.Polish.Basic
+public import Mathlib.Topology.Compactness.Lindelof
+public import Mathlib.Analysis.Normed.Operator.BoundedLinearMaps
+
+@[expose] public section
 
 /-!
 # coordinate graph charts

@@ -1,6 +1,10 @@
-import NLQCLean.Models.ClassicalCommunication.ResourceSupport
-import NLQCLean.Models.ClassicalCommunication.FiniteMixed
-import NLQCLean.Models.ClassicalCommunication.TwoLevelDecoder
+module
+
+public import NLQCLean.Models.ClassicalCommunication.ResourceSupport
+public import NLQCLean.Models.ClassicalCommunication.FiniteMixed
+public import NLQCLean.Models.ClassicalCommunication.TwoLevelDecoder
+
+@[expose] public section
 
 /-!
 # Local logical-input restrictions of actual finite classical protocols

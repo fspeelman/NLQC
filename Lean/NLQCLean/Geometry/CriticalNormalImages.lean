@@ -1,7 +1,11 @@
 /-
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import NLQCLean.Geometry.UnitaryNormalVolume
+module
+
+public import NLQCLean.Geometry.UnitaryNormalVolume
+
+@[expose] public section
 
 /-!
 # Critical normal images and Haar-null unitary sets

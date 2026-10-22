@@ -1,8 +1,12 @@
 /-
 Target geometry: local unitaries, double orbits, and PVM basis equivalence.
 -/
-import NLQCLean.LinearAlgebra.Bipartite
-import Mathlib.LinearAlgebra.UnitaryGroup
+module
+
+public import NLQCLean.LinearAlgebra.Bipartite
+public import Mathlib.LinearAlgebra.UnitaryGroup
+
+@[expose] public section
 
 /-!
 # Target geometry

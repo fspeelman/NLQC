@@ -1,5 +1,9 @@
-import NLQCLean.Geometry.RescaledCubicProjection
-import NLQCLean.Approx.WitnessDifferentialBounds
+module
+
+public import NLQCLean.Geometry.RescaledCubicProjection
+public import NLQCLean.Approx.WitnessDifferentialBounds
+
+@[expose] public section
 
 /-!
 # The normalized six-block cubic extension

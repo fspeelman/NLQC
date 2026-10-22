@@ -1,5 +1,9 @@
-import NLQCLean.Rigidity.ReverseWitnessCalculus
-import NLQCLean.Approx.WitnessVelocityBounds
+module
+
+public import NLQCLean.Rigidity.ReverseWitnessCalculus
+public import NLQCLean.Approx.WitnessVelocityBounds
+
+@[expose] public section
 
 /-!
 # Quantitative bounds for the raw ambient derivative

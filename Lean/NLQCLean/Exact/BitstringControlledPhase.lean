@@ -1,6 +1,10 @@
-import NLQCLean.Exact.SpectatorControlledPhase
-import NLQCLean.Exact.LocalChannelRestriction
-import Mathlib.Data.Fin.Tuple.Basic
+module
+
+public import NLQCLean.Exact.SpectatorControlledPhase
+public import NLQCLean.Exact.LocalChannelRestriction
+public import Mathlib.Data.Fin.Tuple.Basic
+
+@[expose] public section
 
 /-!
 # The first-qubit controlled phase on bitstrings

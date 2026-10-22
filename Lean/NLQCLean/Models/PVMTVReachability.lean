@@ -1,5 +1,9 @@
-import NLQCLean.Models.ProjectiveTV
-import NLQCLean.Models.PVMMixedReachability
+module
+
+public import NLQCLean.Models.ProjectiveTV
+public import NLQCLean.Models.PVMMixedReachability
+
+@[expose] public section
 
 /-!
 # Joint-TV reachability for ordered rank-one PVMs

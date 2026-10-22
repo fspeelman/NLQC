@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.BorelMixedCompression
+module
+
+public import NLQCLean.Models.ClassicalCommunication.BorelMixedCompression
+
+@[expose] public section
 
 /-! # Actual common-map mixed Borel channels, component selection and original-error adapters -/
 

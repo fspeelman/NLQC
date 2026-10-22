@@ -1,7 +1,11 @@
-import NLQCLean.Geometry.DirectVolume.Assembly
-import NLQCLean.Bounds.NearBellUniversal
-import NLQCLean.Bounds.SwapNeighborhoodAlmostEvery
-import NLQCLean.Models.PVMTVReachability
+module
+
+public import NLQCLean.Geometry.DirectVolume.Assembly
+public import NLQCLean.Bounds.NearBellUniversal
+public import NLQCLean.Bounds.SwapNeighborhoodAlmostEvery
+public import NLQCLean.Models.PVMTVReachability
+
+@[expose] public section
 
 /-!
 # Almost-every PVM resource rates near the Bell basis

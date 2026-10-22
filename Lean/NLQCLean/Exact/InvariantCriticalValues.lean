@@ -1,5 +1,9 @@
-import NLQCLean.Exact.ScalarCriticalValues
-import NLQCLean.Invariants.LocalOrbitDifferential
+module
+
+public import NLQCLean.Exact.ScalarCriticalValues
+public import NLQCLean.Invariants.LocalOrbitDifferential
+
+@[expose] public section
 
 /-!
 # Critical values of smooth local-unitary invariants

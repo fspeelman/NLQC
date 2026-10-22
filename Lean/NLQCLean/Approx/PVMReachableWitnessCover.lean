@@ -1,4 +1,8 @@
-import NLQCLean.Approx.PVMWitnessTargets
+module
+
+public import NLQCLean.Approx.PVMWitnessTargets
+
+@[expose] public section
 
 /-!
 # Physical PVM reachability lies in the inverse witness cover

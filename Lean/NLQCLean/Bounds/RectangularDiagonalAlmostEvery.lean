@@ -1,9 +1,13 @@
-import NLQCLean.Geometry.DirectVolume.Assembly
-import NLQCLean.Geometry.DiagonalPhaseMeasure
-import NLQCLean.Bounds.FiniteControlledPhaseQubits
-import NLQCLean.Bounds.ResourceArithmetic
-import NLQCLean.Bounds.FiniteClassicalQubits
-import NLQCLean.Models.ClassicalCommunication.FiniteOutputRestriction
+module
+
+public import NLQCLean.Geometry.DirectVolume.Assembly
+public import NLQCLean.Geometry.DiagonalPhaseMeasure
+public import NLQCLean.Bounds.FiniteControlledPhaseQubits
+public import NLQCLean.Bounds.ResourceArithmetic
+public import NLQCLean.Bounds.FiniteClassicalQubits
+public import NLQCLean.Models.ClassicalCommunication.FiniteOutputRestriction
+
+@[expose] public section
 
 /-!
 # Almost-every rectangular diagonal resource rates

@@ -1,5 +1,9 @@
-import NLQCLean.Exact.RigidityStatements
-import NLQCLean.Models.ForwardCompression
+module
+
+public import NLQCLean.Exact.RigidityStatements
+public import NLQCLean.Models.ForwardCompression
+
+@[expose] public section
 
 /-!
 # Fixing the resource rank and message dimensions (`rem:compression`)

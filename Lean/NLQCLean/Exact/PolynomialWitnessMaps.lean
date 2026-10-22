@@ -1,6 +1,10 @@
-import NLQCLean.Semialgebraic.PolynomialFunctions
-import NLQCLean.Exact.PVMInvariantCriticalValues
-import NLQCLean.Invariants.LocalOrbitSeparation
+module
+
+public import NLQCLean.Semialgebraic.PolynomialFunctions
+public import NLQCLean.Exact.PVMInvariantCriticalValues
+public import NLQCLean.Invariants.LocalOrbitSeparation
+
+@[expose] public section
 
 /-!
 # Protocol maps are polynomial in the strategy blocks

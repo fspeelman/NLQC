@@ -1,5 +1,9 @@
-import NLQCLean.Models.ClassicalCommunication.FiniteMixedReindex
-import NLQCLean.Models.ClassicalCommunication.FiniteReachability
+module
+
+public import NLQCLean.Models.ClassicalCommunication.FiniteMixedReindex
+public import NLQCLean.Models.ClassicalCommunication.FiniteReachability
+
+@[expose] public section
 
 /-! # Original finite registers in canonical classical score classes
 

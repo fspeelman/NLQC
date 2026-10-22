@@ -37,7 +37,11 @@ The constant case (`P'`-gap-entry zero) needs no lemma here: `spec_eq_zero_of_ga
 **Honest fence.** Toolkit only: the whole-diagram walk assembling these per-gap pieces
 into `Realizes g (P :: F) D̂`, and the branch-uniform packaging, are 2d-3's business.
 -/
-import NLQCLean.Vendor.Sundog.DiagramAugment
+module
+
+public import NLQCLean.Vendor.Sundog.DiagramAugment
+
+@[expose] public section
 
 namespace Sundog.TarskiQE
 

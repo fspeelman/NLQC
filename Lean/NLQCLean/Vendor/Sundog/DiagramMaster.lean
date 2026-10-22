@@ -35,7 +35,11 @@ outputs ARE the goal outputs.
 pinning `(εm, εp)` and the live leads (`truncChain` refinement), the drop-a-member
 projection (`Pd` out of the walked family), and the Dershowitz–Manna recursion.
 -/
-import NLQCLean.Vendor.Sundog.DiagramReads
+module
+
+public import NLQCLean.Vendor.Sundog.DiagramReads
+
+@[expose] public section
 
 namespace Sundog.TarskiQE
 

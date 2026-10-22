@@ -1,5 +1,9 @@
-import NLQCLean.Models.ClassicalCommunication.BorelRankCompression
-import NLQCLean.Models.ClassicalCommunication.FiniteMixed
+module
+
+public import NLQCLean.Models.ClassicalCommunication.BorelRankCompression
+public import NLQCLean.Models.ClassicalCommunication.FiniteMixed
+
+@[expose] public section
 
 /-!
 # Common-map finite mixed resources for standard-Borel instruments

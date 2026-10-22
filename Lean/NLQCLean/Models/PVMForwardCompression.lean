@@ -1,4 +1,8 @@
-import NLQCLean.Models.ForwardCompression
+module
+
+public import NLQCLean.Models.ForwardCompression
+
+@[expose] public section
 
 /-!
 # Exact encoder compression for PVM protocols

@@ -1,4 +1,8 @@
-import NLQCLean.Bounds.FiniteClassicalQubits
+module
+
+public import NLQCLean.Bounds.FiniteClassicalQubits
+
+@[expose] public section
 
 /-! # Quantum-footprint qubit forms, not initial-resource qubits -/
 

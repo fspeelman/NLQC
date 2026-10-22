@@ -1,8 +1,12 @@
-import NLQCLean.Invariants.PurityEstimates
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
-import Mathlib.Topology.Order.Compact
+module
+
+public import NLQCLean.Invariants.PurityEstimates
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
+public import Mathlib.Topology.Order.Compact
+
+@[expose] public section
 
 /-!
 # The full-angle two-qubit controlled phase

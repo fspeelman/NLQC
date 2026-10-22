@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Yuyang Zhao
 -/
 
-import Mathlib.FieldTheory.IsAlgClosed.Basic
+module
 
-import Mathlib.Algebra.Group.UniqueProds.VectorSpace
-import NLQCLean.Vendor.HermiteLindemann.FinsuppQuotient
-import Mathlib.FieldTheory.Galois.Basic
-import Mathlib.FieldTheory.Minpoly.ConjRootClass
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+
+public import Mathlib.Algebra.Group.UniqueProds.VectorSpace
+public import NLQCLean.Vendor.HermiteLindemann.FinsuppQuotient
+public import Mathlib.FieldTheory.Galois.Basic
+public import Mathlib.FieldTheory.Minpoly.ConjRootClass
+
+@[expose] public section
 
 /-!
 # The Lindemann-Weierstrass theorem
@@ -111,7 +115,7 @@ def toFinsuppAux : mapDomainFixed F R K ≃ (ConjRootClass F K →₀ R) := by
     exact congr_arg f (Quotient.sound (isConjRoot_iff_exists_algEquiv.mpr h))
 
 @[simp]
-private theorem toFinsuppAux_apply_apply_mk (f : mapDomainFixed F R K) (i : K) :
+theorem toFinsuppAux_apply_apply_mk (f : mapDomainFixed F R K) (i : K) :
     toFinsuppAux f (ConjRootClass.mk F i) = f.val.coeff i :=
   rfl
 

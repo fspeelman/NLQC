@@ -1,6 +1,10 @@
-import NLQCLean.Models.MixedReachability
-import NLQCLean.Models.ProtocolMetrics
-import NLQCLean.Models.UnitaryTask
+module
+
+public import NLQCLean.Models.MixedReachability
+public import NLQCLean.Models.ProtocolMetrics
+public import NLQCLean.Models.UnitaryTask
+
+@[expose] public section
 
 /-!
 # Compact parameter families with the rank/message budget

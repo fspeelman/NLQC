@@ -1,5 +1,9 @@
-import NLQCLean.Models.ClassicalCommunication.BarycenterSupport
-import NLQCLean.Models.ClassicalCommunication.FiniteMixed
+module
+
+public import NLQCLean.Models.ClassicalCommunication.BarycenterSupport
+public import NLQCLean.Models.ClassicalCommunication.FiniteMixed
+
+@[expose] public section
 
 /-!
 # Actual high-score branch selection

@@ -2,10 +2,14 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Semialgebraic.BasicClosedFormat
-import NLQCLean.Semialgebraic.Dimension
-import NLQCLean.Semialgebraic.ParametricFormat
-import Mathlib.Algebra.MvPolynomial.CommRing
+module
+
+public import NLQCLean.Semialgebraic.BasicClosedFormat
+public import NLQCLean.Semialgebraic.Dimension
+public import NLQCLean.Semialgebraic.ParametricFormat
+public import Mathlib.Algebra.MvPolynomial.CommRing
+
+@[expose] public section
 
 /-!
 # The polynomial graph has the fixed LRT format

@@ -1,4 +1,8 @@
-import NLQCLean.Bounds.AlmostEveryPhysical
+module
+
+public import NLQCLean.Bounds.AlmostEveryPhysical
+
+@[expose] public section
 
 /-!
 # Almost-every fixed-target qubit corollaries

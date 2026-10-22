@@ -34,10 +34,14 @@ lower-degree family `{derivative} ∪ {remainders}`.
 
 **Honest fence.** TS-2c only: no recursion, no correctness (2d).
 -/
-import NLQCLean.Vendor.Sundog.PseudoRemainder
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
-import Mathlib.Analysis.Calculus.Deriv.Polynomial
-import Mathlib.Analysis.Polynomial.Basic
+module
+
+public import NLQCLean.Vendor.Sundog.PseudoRemainder
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
+public import Mathlib.Analysis.Calculus.Deriv.Polynomial
+public import Mathlib.Analysis.Polynomial.Basic
+
+@[expose] public section
 
 namespace Sundog.TarskiQE
 

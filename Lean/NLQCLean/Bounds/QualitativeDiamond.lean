@@ -1,5 +1,9 @@
-import NLQCLean.Bounds.QualitativeDivergence
-import NLQCLean.Models.ProtocolMetrics
+module
+
+public import NLQCLean.Bounds.QualitativeDivergence
+public import NLQCLean.Models.ProtocolMetrics
+
+@[expose] public section
 
 /-!
 # Unconditional qualitative divergence in normalized diamond error

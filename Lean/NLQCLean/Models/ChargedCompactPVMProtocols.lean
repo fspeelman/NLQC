@@ -1,5 +1,9 @@
-import NLQCLean.Bounds.PVMQualitativeGap
-import NLQCLean.Models.PVMMixedReachability
+module
+
+public import NLQCLean.Bounds.PVMQualitativeGap
+public import NLQCLean.Models.PVMMixedReachability
+
+@[expose] public section
 
 /-!
 # Compact charged families for ordered rank-one PVM scores

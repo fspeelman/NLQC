@@ -1,5 +1,9 @@
-import NLQCLean.Semialgebraic.CylindricalRoots
-import NLQCLean.Semialgebraic.SAPaths
+module
+
+public import NLQCLean.Semialgebraic.CylindricalRoots
+public import NLQCLean.Semialgebraic.SAPaths
+
+@[expose] public section
 
 /-!
 # Cylindrical cells over a base

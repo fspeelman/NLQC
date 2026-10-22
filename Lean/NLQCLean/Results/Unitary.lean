@@ -1,34 +1,38 @@
-import NLQCLean.Exact.OrbitInvariantAlgebraicity
-import NLQCLean.Exact.ControlledPhaseExclusion
-import NLQCLean.Exact.BitstringExactExclusion
-import NLQCLean.Exact.SpectatorExactExclusion
-import NLQCLean.Invariants.SpectatorControlledPhasePurity
-import NLQCLean.Approx.FiniteClassicalSpectralFloors
-import NLQCLean.Models.ClassicalCommunication.BorelMixedCompression
-import NLQCLean.Bounds.UniversalMaxBounds
-import NLQCLean.Bounds.StrongUniversalExplicit
-import NLQCLean.Bounds.SwapNeighborhoodAlmostEvery
-import NLQCLean.Models.ClassicalCommunication.BorelRankCompression
-import NLQCLean.Bounds.Quantitative
-import NLQCLean.Bounds.AlmostEveryExact
-import NLQCLean.Bounds.QualitativeDiamond
-import NLQCLean.Bounds.StrongUniversalResources
-import NLQCLean.Bounds.SwapFloor
-import NLQCLean.Bounds.AlmostEveryQualitativeGap
-import NLQCLean.Approx.SpectralFootprintFloors
-import NLQCLean.Bounds.ControlledPhaseLength
-import NLQCLean.Approx.GenericSpectralThresholds
-import NLQCLean.Bounds.ControlledPhaseAlmostEvery
-import NLQCLean.Models.ClassicalCommunication.FiniteMixedCompression
-import NLQCLean.Bounds.FiniteControlledPhaseAlmostEvery
-import NLQCLean.Bounds.FiniteClassicalHaar
-import NLQCLean.Bounds.FiniteClassicalAlmostEvery
-import NLQCLean.Bounds.ArbitraryFiniteClassicalAlmostEvery
-import NLQCLean.Bounds.FiniteClassicalStrongUniversal
-import NLQCLean.Bounds.FiniteClassicalQubits
-import NLQCLean.Bounds.FiniteControlledPhaseQubits
-import NLQCLean.Bounds.FiniteControlledPhaseLength
-import NLQCLean.Models.ClassicalCommunication.FiniteOutputRestriction
+module
+
+public import NLQCLean.Exact.OrbitInvariantAlgebraicity
+public import NLQCLean.Exact.ControlledPhaseExclusion
+public import NLQCLean.Exact.BitstringExactExclusion
+public import NLQCLean.Exact.SpectatorExactExclusion
+public import NLQCLean.Invariants.SpectatorControlledPhasePurity
+public import NLQCLean.Approx.FiniteClassicalSpectralFloors
+public import NLQCLean.Models.ClassicalCommunication.BorelMixedCompression
+public import NLQCLean.Bounds.UniversalMaxBounds
+public import NLQCLean.Bounds.StrongUniversalExplicit
+public import NLQCLean.Bounds.SwapNeighborhoodAlmostEvery
+public import NLQCLean.Models.ClassicalCommunication.BorelRankCompression
+public import NLQCLean.Bounds.Quantitative
+public import NLQCLean.Bounds.AlmostEveryExact
+public import NLQCLean.Bounds.QualitativeDiamond
+public import NLQCLean.Bounds.StrongUniversalResources
+public import NLQCLean.Bounds.SwapFloor
+public import NLQCLean.Bounds.AlmostEveryQualitativeGap
+public import NLQCLean.Approx.SpectralFootprintFloors
+public import NLQCLean.Bounds.ControlledPhaseLength
+public import NLQCLean.Approx.GenericSpectralThresholds
+public import NLQCLean.Bounds.ControlledPhaseAlmostEvery
+public import NLQCLean.Models.ClassicalCommunication.FiniteMixedCompression
+public import NLQCLean.Bounds.FiniteControlledPhaseAlmostEvery
+public import NLQCLean.Bounds.FiniteClassicalHaar
+public import NLQCLean.Bounds.FiniteClassicalAlmostEvery
+public import NLQCLean.Bounds.ArbitraryFiniteClassicalAlmostEvery
+public import NLQCLean.Bounds.FiniteClassicalStrongUniversal
+public import NLQCLean.Bounds.FiniteClassicalQubits
+public import NLQCLean.Bounds.FiniteControlledPhaseQubits
+public import NLQCLean.Bounds.FiniteControlledPhaseLength
+public import NLQCLean.Models.ClassicalCommunication.FiniteOutputRestriction
+
+@[expose] public section
 
 /-!
 # Main unitary results

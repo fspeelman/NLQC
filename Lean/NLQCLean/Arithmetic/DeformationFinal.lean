@@ -1,5 +1,9 @@
-import NLQCLean.Arithmetic.DeformationEliminant
-import Mathlib.Algebra.MvPolynomial.Funext
+module
+
+public import NLQCLean.Arithmetic.DeformationEliminant
+public import Mathlib.Algebra.MvPolynomial.Funext
+
+@[expose] public section
 
 /-!
 # The optimization eliminant without external input

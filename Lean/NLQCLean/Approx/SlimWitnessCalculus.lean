@@ -1,6 +1,10 @@
-import NLQCLean.Approx.SlimReverseWitness
-import NLQCLean.Rigidity.ReverseWitnessCalculus
-import NLQCLean.Approx.WitnessVelocityBounds
+module
+
+public import NLQCLean.Approx.SlimReverseWitness
+public import NLQCLean.Rigidity.ReverseWitnessCalculus
+public import NLQCLean.Approx.WitnessVelocityBounds
+
+@[expose] public section
 
 /-!
 # Ambient calculus of slim reverse witnesses

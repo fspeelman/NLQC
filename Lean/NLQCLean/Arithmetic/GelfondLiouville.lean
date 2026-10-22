@@ -1,12 +1,16 @@
-import Mathlib.NumberTheory.Zsqrtd.GaussianInt
-import Mathlib.RingTheory.Polynomial.Resultant.Basic
-import Mathlib.RingTheory.Polynomial.GaussLemma
-import Mathlib.Analysis.Polynomial.MahlerMeasure
-import Mathlib.Analysis.Complex.Polynomial.Basic
-import Mathlib.Algebra.Polynomial.FieldDivision
-import Mathlib.RingTheory.Bezout
-import Mathlib.RingTheory.PrincipalIdealDomain
-import Mathlib.RingTheory.Polynomial.UniqueFactorization
+module
+
+public import Mathlib.NumberTheory.Zsqrtd.GaussianInt
+public import Mathlib.RingTheory.Polynomial.Resultant.Basic
+public import Mathlib.RingTheory.Polynomial.GaussLemma
+public import Mathlib.Analysis.Polynomial.MahlerMeasure
+public import Mathlib.Analysis.Complex.Polynomial.Basic
+public import Mathlib.Algebra.Polynomial.FieldDivision
+public import Mathlib.RingTheory.Bezout
+public import Mathlib.RingTheory.PrincipalIdealDomain
+public import Mathlib.RingTheory.Polynomial.UniqueFactorization
+
+@[expose] public section
 
 /-!
 # A Liouville inequality over the Gaussian integers

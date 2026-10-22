@@ -1,6 +1,10 @@
-import NLQCLean.Geometry.DirectVolume.Assembly
-import NLQCLean.Bounds.FiniteClassicalAlmostEvery
-import NLQCLean.Bounds.FiniteClassicalStrongUniversal
+module
+
+public import NLQCLean.Geometry.DirectVolume.Assembly
+public import NLQCLean.Bounds.FiniteClassicalAlmostEvery
+public import NLQCLean.Bounds.FiniteClassicalStrongUniversal
+
+@[expose] public section
 
 /-!
 # Quantum-footprint logarithms for finite-shape classical protocols

@@ -1,6 +1,10 @@
-import NLQCLean.LinearAlgebra.TensorOperatorNorm
-import NLQCLean.LinearAlgebra.SchmidtOverlap
-import Mathlib.LinearAlgebra.Complex.FiniteDimensional
+module
+
+public import NLQCLean.LinearAlgebra.TensorOperatorNorm
+public import NLQCLean.LinearAlgebra.SchmidtOverlap
+public import Mathlib.LinearAlgebra.Complex.FiniteDimensional
+
+@[expose] public section
 
 /-!
 # Pointwise spectral cutoff of a residual

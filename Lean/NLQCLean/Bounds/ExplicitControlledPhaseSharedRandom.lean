@@ -1,6 +1,10 @@
-import NLQCLean.Bounds.ExplicitControlledPhaseTranscript
-import NLQCLean.Models.ClassicalCommunication.BorelSharedRandomness
-import NLQCLean.Models.ClassicalCommunication.BranchSelection
+module
+
+public import NLQCLean.Bounds.ExplicitControlledPhaseTranscript
+public import NLQCLean.Models.ClassicalCommunication.BorelSharedRandomness
+public import NLQCLean.Models.ClassicalCommunication.BranchSelection
+
+@[expose] public section
 
 /-!
 # The explicit bound for `C₁` with free shared randomness

@@ -1,8 +1,12 @@
-import NLQCLean.Geometry.DirectVolume.Assembly
-import NLQCLean.Bounds.ControlledPhaseLength
-import NLQCLean.Bounds.AlmostEveryArithmetic
-import Mathlib.Topology.Instances.Rat
-import Mathlib.MeasureTheory.Measure.Restrict
+module
+
+public import NLQCLean.Geometry.DirectVolume.Assembly
+public import NLQCLean.Bounds.ControlledPhaseLength
+public import NLQCLean.Bounds.AlmostEveryArithmetic
+public import Mathlib.Topology.Instances.Rat
+public import Mathlib.MeasureTheory.Measure.Restrict
+
+@[expose] public section
 
 /-!
 # Almost-every fixed controlled-phase charged-footprint rates

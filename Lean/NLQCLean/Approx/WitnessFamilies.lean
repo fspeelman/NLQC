@@ -1,8 +1,12 @@
-import NLQCLean.Approx.ReachableWitnessCover
-import NLQCLean.Approx.PolynomialWitnessCoverage
-import NLQCLean.Approx.PVMReachableWitnessCover
-import NLQCLean.Approx.PVMWitnessJacobianBound
-import NLQCLean.Bounds.PVMHaarArithmetic
+module
+
+public import NLQCLean.Approx.ReachableWitnessCover
+public import NLQCLean.Approx.PolynomialWitnessCoverage
+public import NLQCLean.Approx.PVMReachableWitnessCover
+public import NLQCLean.Approx.PVMWitnessJacobianBound
+public import NLQCLean.Bounds.PVMHaarArithmetic
+
+@[expose] public section
 
 /-!
 # Witness families (`prop:witness`)

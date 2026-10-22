@@ -2,7 +2,11 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Vendor.TauCeti.Analysis.Calculus.Sard.VanishingDerivative
+module
+
+public import NLQCLean.Vendor.TauCeti.Analysis.Calculus.Sard.VanishingDerivative
+
+@[expose] public section
 
 /-!
 # Scalar Sard for a vanishing derivative

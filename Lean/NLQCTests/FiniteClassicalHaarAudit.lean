@@ -1,4 +1,8 @@
-import NLQCLean.Bounds.FiniteClassicalHaar
+module
+
+public import NLQCLean.Bounds.FiniteClassicalHaar
+
+@[expose] public section
 
 /-!
 # Finite-shape free-classical quantitative transfers

@@ -6,8 +6,12 @@ Modified for NLQCLean: rational coefficient restrictions and closure proofs;
 uses the original real sign-diagram semantics without changing them.
 -/
 
-import NLQCLean.Semialgebraic.RationalCoefficients
-import NLQCLean.Vendor.Sundog.SignDiagrams
+module
+
+public import NLQCLean.Semialgebraic.RationalCoefficients
+public import NLQCLean.Vendor.Sundog.SignDiagrams
+
+@[expose] public section
 
 /-!
 # Rational polynomial sign descriptions and diagram partitions

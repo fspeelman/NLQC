@@ -1,4 +1,8 @@
-import NLQCLean.Models.SwapTarget
+module
+
+public import NLQCLean.Models.SwapTarget
+
+@[expose] public section
 
 /-!
 # A normalized Frobenius neighborhood of SWAP

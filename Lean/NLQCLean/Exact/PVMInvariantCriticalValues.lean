@@ -1,5 +1,9 @@
-import NLQCLean.Exact.PVMScalarCriticalValues
-import NLQCLean.Invariants.PVMOrbitDifferential
+module
+
+public import NLQCLean.Exact.PVMScalarCriticalValues
+public import NLQCLean.Invariants.PVMOrbitDifferential
+
+@[expose] public section
 
 /-!
 # Critical values of smooth measurement-orbit invariants

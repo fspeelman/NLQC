@@ -1,9 +1,13 @@
-import NLQCLean.Bounds.NearBellWitnessCover
-import NLQCLean.Bounds.NearBellHaarArithmetic
-import NLQCLean.Geometry.PVMPolynomialTubeConditional
-import NLQCLean.Geometry.UnitaryHaarInverse
-import NLQCLean.Models.PVMMixedReachability
-import Mathlib.Analysis.Complex.ExponentialBounds
+module
+
+public import NLQCLean.Bounds.NearBellWitnessCover
+public import NLQCLean.Bounds.NearBellHaarArithmetic
+public import NLQCLean.Geometry.PVMPolynomialTubeConditional
+public import NLQCLean.Geometry.UnitaryHaarInverse
+public import NLQCLean.Models.PVMMixedReachability
+public import Mathlib.Analysis.Complex.ExponentialBounds
+
+@[expose] public section
 
 /-!
 # Haar volume near a maximally entangled basis (`thm:bell-haar`)

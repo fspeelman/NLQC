@@ -1,5 +1,9 @@
-import NLQCLean.Exact.TargetWitness
-import NLQCLean.Invariants.LocalOrbitSeparation
+module
+
+public import NLQCLean.Exact.TargetWitness
+public import NLQCLean.Invariants.LocalOrbitSeparation
+
+@[expose] public section
 
 /-!
 # Fixed-architecture exact targets are unions of full local orbits

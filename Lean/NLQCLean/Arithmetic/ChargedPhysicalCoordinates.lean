@@ -1,6 +1,10 @@
-import NLQCLean.Models.ChargedCompactProtocols
-import Mathlib.LinearAlgebra.Complex.FiniteDimensional
-import Mathlib.LinearAlgebra.Dimension.Constructions
+module
+
+public import NLQCLean.Models.ChargedCompactProtocols
+public import Mathlib.LinearAlgebra.Complex.FiniteDimensional
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+
+@[expose] public section
 
 /-!
 # Raw real coordinates of sharply compressed charged protocols

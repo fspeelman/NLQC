@@ -1,6 +1,10 @@
-import NLQCLean.Models.ClassicalCommunication.FiniteInstruments
-import NLQCLean.Models.ChoiMetrics
-import Mathlib.Analysis.Matrix.Order
+module
+
+public import NLQCLean.Models.ClassicalCommunication.FiniteInstruments
+public import NLQCLean.Models.ChoiMetrics
+public import Mathlib.Analysis.Matrix.Order
+
+@[expose] public section
 
 /-!
 # Finite completely positive maps and Kraus representations

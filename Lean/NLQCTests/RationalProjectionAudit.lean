@@ -1,4 +1,8 @@
-import NLQCLean.Semialgebraic.RationalImages
+module
+
+public import NLQCLean.Semialgebraic.RationalImages
+
+@[expose] public section
 
 /-! Full statements and axiom checks for coefficient-preserving projection. -/
 

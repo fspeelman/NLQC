@@ -2,11 +2,15 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.ImageVolume.NondegenerateZeroCount
-import Mathlib.Algebra.MvPolynomial.CommRing
-import NLQCLean.ImageVolume.BanachIndicatrix
-import NLQCLean.ImageVolume.BlockMinorBound
-import NLQCLean.ImageVolume.PolynomialDerivative
+module
+
+public import NLQCLean.ImageVolume.NondegenerateZeroCount
+public import Mathlib.Algebra.MvPolynomial.CommRing
+public import NLQCLean.ImageVolume.BanachIndicatrix
+public import NLQCLean.ImageVolume.BlockMinorBound
+public import NLQCLean.ImageVolume.PolynomialDerivative
+
+@[expose] public section
 
 /-!
 # Lagrange maps and coordinate charts

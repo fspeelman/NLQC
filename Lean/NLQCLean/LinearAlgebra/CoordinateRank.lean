@@ -2,10 +2,14 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Semialgebraic.CoordinateMaps
-import Mathlib.LinearAlgebra.Dual.Lemmas
-import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
-import Mathlib.Analysis.Normed.Module.FiniteDimension
+module
+
+public import NLQCLean.Semialgebraic.CoordinateMaps
+public import Mathlib.LinearAlgebra.Dual.Lemmas
+public import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
+public import Mathlib.Analysis.Normed.Module.FiniteDimension
+
+@[expose] public section
 
 /-!
 # Invertible coordinate selections of injective linear maps

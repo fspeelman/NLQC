@@ -1,8 +1,12 @@
 /-
 The cross-Gram orbit-rigidity lemma.
 -/
-import NLQCLean.Rigidity.RangeDefect
-import NLQCLean.Geometry.LocalOrbit
+module
+
+public import NLQCLean.Rigidity.RangeDefect
+public import NLQCLean.Geometry.LocalOrbit
+
+@[expose] public section
 
 /-!
 # Cross-Gram orbit rigidity

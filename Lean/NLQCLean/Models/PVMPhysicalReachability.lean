@@ -1,8 +1,12 @@
-import NLQCLean.Models.CompactForward
-import NLQCLean.Models.PVMForwardCompression
-import NLQCLean.Models.ProjectiveScoreSemantics
-import NLQCLean.Models.Targets
-import NLQCLean.Geometry.UnitaryNormalEmbedding
+module
+
+public import NLQCLean.Models.CompactForward
+public import NLQCLean.Models.PVMForwardCompression
+public import NLQCLean.Models.ProjectiveScoreSemantics
+public import NLQCLean.Models.Targets
+public import NLQCLean.Geometry.UnitaryNormalEmbedding
+
+@[expose] public section
 
 /-!
 # Pure PVM reachability is Borel

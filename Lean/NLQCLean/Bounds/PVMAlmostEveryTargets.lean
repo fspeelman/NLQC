@@ -1,5 +1,9 @@
-import NLQCLean.Bounds.AlmostEveryTargets
-import NLQCLean.Bounds.PVMHaarFractionConditional
+module
+
+public import NLQCLean.Bounds.AlmostEveryTargets
+public import NLQCLean.Bounds.PVMHaarFractionConditional
+
+@[expose] public section
 
 /-!
 # Almost every fixed PVM basis lift avoids an exponentially small forbidden error

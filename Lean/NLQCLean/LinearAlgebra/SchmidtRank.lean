@@ -1,4 +1,8 @@
-import NLQCLean.LinearAlgebra.SupportFactorization
+module
+
+public import NLQCLean.LinearAlgebra.SupportFactorization
+
+@[expose] public section
 
 /-!
 # Laboratory-cut rank accounting

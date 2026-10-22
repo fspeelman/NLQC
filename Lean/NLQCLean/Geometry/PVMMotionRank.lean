@@ -1,4 +1,8 @@
-import NLQCLean.Geometry.LocalMotionRank
+module
+
+public import NLQCLean.Geometry.LocalMotionRank
+
+@[expose] public section
 
 /-!
 # Real rank of PVM local and diagonal motion

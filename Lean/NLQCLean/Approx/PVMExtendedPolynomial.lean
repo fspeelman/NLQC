@@ -1,5 +1,9 @@
-import NLQCLean.Approx.PVMExtendedWitness
-import NLQCLean.Approx.PVMPolynomialCoverage
+module
+
+public import NLQCLean.Approx.PVMExtendedWitness
+public import NLQCLean.Approx.PVMPolynomialCoverage
+
+@[expose] public section
 
 /-!
 # Fixed-format cubic PVM witness map

@@ -1,5 +1,9 @@
-import NLQCLean.Models.ClassicalCommunication.StandardBorelProtocol
-import NLQCLean.Models.ClassicalCommunication.DensityScoreFunctionals
+module
+
+public import NLQCLean.Models.ClassicalCommunication.StandardBorelProtocol
+public import NLQCLean.Models.ClassicalCommunication.DensityScoreFunctionals
+
+@[expose] public section
 
 /-!
 # Operational integrals of original Borel instruments

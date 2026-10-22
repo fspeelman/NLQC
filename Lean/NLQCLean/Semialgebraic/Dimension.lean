@@ -2,9 +2,13 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Semialgebraic.C1Decomposition
-import NLQCLean.LinearAlgebra.CoordinateRank
-import Mathlib.Analysis.Calculus.InverseFunctionTheorem.FDeriv
+module
+
+public import NLQCLean.Semialgebraic.C1Decomposition
+public import NLQCLean.LinearAlgebra.CoordinateRank
+public import Mathlib.Analysis.Calculus.InverseFunctionTheorem.FDeriv
+
+@[expose] public section
 
 /-!
 # Coordinate dimension agrees with smooth cube dimension

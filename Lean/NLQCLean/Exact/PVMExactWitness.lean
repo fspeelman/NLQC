@@ -2,8 +2,12 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Approx.PVMReachableWitnessCover
-import NLQCLean.Approx.PVMWitnessJacobianBound
+module
+
+public import NLQCLean.Approx.PVMReachableWitnessCover
+public import NLQCLean.Approx.PVMWitnessJacobianBound
+
+@[expose] public section
 
 /-!
 # Exact PVM witnesses on the zero-leakage polynomial source

@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.ChoiChannelEquivalence
+module
+
+public import NLQCLean.Models.ClassicalCommunication.ChoiChannelEquivalence
+
+@[expose] public section
 
 /-!
 # Countably additive completely positive instruments

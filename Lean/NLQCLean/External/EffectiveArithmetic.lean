@@ -2,12 +2,16 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import Mathlib.Algebra.MvPolynomial.Degrees
-import Mathlib.Analysis.SpecialFunctions.Log.Basic
-import Mathlib.Analysis.SpecialFunctions.Exp
-import Mathlib.Analysis.Complex.Basic
-import Mathlib.Basic.Sign.Basic
-import Mathlib.RingTheory.Algebraic.Defs
+module
+
+public import Mathlib.Algebra.MvPolynomial.Degrees
+public import Mathlib.Analysis.SpecialFunctions.Log.Basic
+public import Mathlib.Analysis.SpecialFunctions.Exp
+public import Mathlib.Analysis.Complex.Basic
+public import Mathlib.Basic.Sign.Basic
+public import Mathlib.RingTheory.Algebraic.Defs
+
+@[expose] public section
 
 /-!
 # External inputs for the effective explicit-gate bound

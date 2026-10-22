@@ -1,4 +1,8 @@
-import NLQCLean.Bounds.ArbitraryFiniteClassicalAlmostEvery
+module
+
+public import NLQCLean.Bounds.ArbitraryFiniteClassicalAlmostEvery
+
+@[expose] public section
 
 /-! # Target threshold preceding all original registers, scores and errors -/
 

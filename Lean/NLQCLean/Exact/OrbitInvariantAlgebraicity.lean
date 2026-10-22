@@ -1,7 +1,11 @@
-import NLQCLean.Exact.ExactPurityAlgebraicity
-import NLQCLean.Exact.InvariantCriticalValues
-import NLQCLean.Exact.RationalInvariantPolynomial
-import NLQCLean.Invariants.LocalUnitaryPurity
+module
+
+public import NLQCLean.Exact.ExactPurityAlgebraicity
+public import NLQCLean.Exact.InvariantCriticalValues
+public import NLQCLean.Exact.RationalInvariantPolynomial
+public import NLQCLean.Invariants.LocalUnitaryPurity
+
+@[expose] public section
 
 /-!
 # Orbit invariants take algebraic values

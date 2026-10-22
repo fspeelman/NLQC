@@ -2,11 +2,15 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Geometry.PolynomialCoefficients
-import Mathlib.Algebra.MvPolynomial.Funext
-import Mathlib.Algebra.Polynomial.Roots
-import Mathlib.MeasureTheory.Constructions.Pi
-import Mathlib.MeasureTheory.Measure.Haar.InnerProductSpace
+module
+
+public import NLQCLean.Geometry.PolynomialCoefficients
+public import Mathlib.Algebra.MvPolynomial.Funext
+public import Mathlib.Algebra.Polynomial.Roots
+public import Mathlib.MeasureTheory.Constructions.Pi
+public import Mathlib.MeasureTheory.Measure.Haar.InnerProductSpace
+
+@[expose] public section
 
 /-!
 # Nonzero polynomial zero sets have Lebesgue measure zero

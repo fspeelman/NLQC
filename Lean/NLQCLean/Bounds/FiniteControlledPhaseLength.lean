@@ -1,6 +1,10 @@
-import NLQCLean.Geometry.DirectVolume.Assembly
-import NLQCLean.Bounds.ControlledPhaseLength
-import NLQCLean.Models.ClassicalCommunication.FiniteReachability
+module
+
+public import NLQCLean.Geometry.DirectVolume.Assembly
+public import NLQCLean.Bounds.ControlledPhaseLength
+public import NLQCLean.Models.ClassicalCommunication.FiniteReachability
+
+@[expose] public section
 
 /-!
 # Outer length and worst-case phases for finite classical protocols

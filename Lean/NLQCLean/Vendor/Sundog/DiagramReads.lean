@@ -37,7 +37,11 @@ accumulator — the last kept barrier `lo₀`, its flank tag `sa` (`FlankTag`-st
 its no-zero invariant — and discharges plan validity only at keep time, over the whole
 merged gap, via `readPlan_valid_*`; `colsFrom_widen` reattaches the output barriers.
 -/
-import NLQCLean.Vendor.Sundog.DiagramDescent
+module
+
+public import NLQCLean.Vendor.Sundog.DiagramDescent
+
+@[expose] public section
 
 namespace Sundog.TarskiQE
 

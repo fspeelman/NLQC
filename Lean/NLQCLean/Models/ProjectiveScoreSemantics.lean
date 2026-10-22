@@ -1,5 +1,9 @@
-import NLQCLean.Models.ProjectiveExactness
-import NLQCLean.LinearAlgebra.RealCoordinates
+module
+
+public import NLQCLean.Models.ProjectiveExactness
+public import NLQCLean.LinearAlgebra.RealCoordinates
+
+@[expose] public section
 
 /-!
 # Phase invariance and continuity of the PVM score

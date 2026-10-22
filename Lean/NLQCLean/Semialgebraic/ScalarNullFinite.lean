@@ -1,6 +1,10 @@
-import NLQCLean.Arithmetic.PolynomialBoundary
-import Mathlib.Algebra.MvPolynomial.Equiv
-import Mathlib.Algebra.Polynomial.Roots
+module
+
+public import NLQCLean.Arithmetic.PolynomialBoundary
+public import Mathlib.Algebra.MvPolynomial.Equiv
+public import Mathlib.Algebra.Polynomial.Roots
+
+@[expose] public section
 
 /-!
 # Null semialgebraic subsets of the line are finite

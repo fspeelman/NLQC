@@ -1,10 +1,14 @@
 /-
 The six-block forward witness and its smoothness.
 -/
-import NLQCLean.LinearAlgebra.RealCoordinates
-import NLQCLean.Models.OneRound
-import NLQCLean.Models.Resource
-import NLQCLean.Rigidity.FrozenDilation
+module
+
+public import NLQCLean.LinearAlgebra.RealCoordinates
+public import NLQCLean.Models.OneRound
+public import NLQCLean.Models.Resource
+public import NLQCLean.Rigidity.FrozenDilation
+
+@[expose] public section
 
 /-!
 # The six-block forward witness `H(x)` is smooth

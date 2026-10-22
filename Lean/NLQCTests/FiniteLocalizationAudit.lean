@@ -1,4 +1,8 @@
-import NLQCLean.Bounds.FiniteLocalization
+module
+
+public import NLQCLean.Bounds.FiniteLocalization
+
+@[expose] public section
 
 /-! Full types and logical-axiom audit for actual finite localization. -/
 

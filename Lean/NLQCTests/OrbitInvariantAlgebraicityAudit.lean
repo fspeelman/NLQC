@@ -1,5 +1,9 @@
-import NLQCLean.Results.Unitary
-import NLQCLean.Exact.OrbitInvariantAlgebraicity
+module
+
+public import NLQCLean.Results.Unitary
+public import NLQCLean.Exact.OrbitInvariantAlgebraicity
+
+@[expose] public section
 
 set_option pp.deepTerms true
 set_option pp.maxSteps 1000000

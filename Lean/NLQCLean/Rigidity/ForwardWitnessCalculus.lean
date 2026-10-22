@@ -1,5 +1,9 @@
-import NLQCLean.Models.ForwardWitness
-import NLQCLean.Rigidity.ForwardExactDifferential
+module
+
+public import NLQCLean.Models.ForwardWitness
+public import NLQCLean.Rigidity.ForwardExactDifferential
+
+@[expose] public section
 
 /-!
 # Shared calculus for forward witnesses

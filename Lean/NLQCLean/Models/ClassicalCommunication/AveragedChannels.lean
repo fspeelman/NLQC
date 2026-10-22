@@ -1,5 +1,9 @@
-import NLQCLean.Models.ClassicalCommunication.BorelMixedCompression
-import NLQCLean.Models.ClassicalCommunication.BranchSelection
+module
+
+public import NLQCLean.Models.ClassicalCommunication.BorelMixedCompression
+public import NLQCLean.Models.ClassicalCommunication.BranchSelection
+
+@[expose] public section
 
 /-!
 # Actual channel averages under arbitrary probability randomness

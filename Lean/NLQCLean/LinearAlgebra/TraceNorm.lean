@@ -1,5 +1,9 @@
-import NLQCLean.LinearAlgebra.SchmidtOverlap
-import NLQCLean.LinearAlgebra.TensorOperatorNorm
+module
+
+public import NLQCLean.LinearAlgebra.SchmidtOverlap
+public import NLQCLean.LinearAlgebra.TensorOperatorNorm
+
+@[expose] public section
 
 /-!
 # Finite matrix trace norm by operator-norm duality

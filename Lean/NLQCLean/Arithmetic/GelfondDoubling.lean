@@ -1,5 +1,9 @@
-import NLQCLean.Arithmetic.GelfondEstimates
-import NLQCLean.Arithmetic.GelfondSiegel
+module
+
+public import NLQCLean.Arithmetic.GelfondEstimates
+public import NLQCLean.Arithmetic.GelfondSiegel
+
+@[expose] public section
 
 /-!
 # The doubling step of Gelfond's method

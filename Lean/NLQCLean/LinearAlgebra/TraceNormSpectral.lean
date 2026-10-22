@@ -1,4 +1,8 @@
-import NLQCLean.LinearAlgebra.TraceNorm
+module
+
+public import NLQCLean.LinearAlgebra.TraceNorm
+
+@[expose] public section
 
 /-!
 # Spectral characterization of the trace norm

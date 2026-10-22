@@ -1,8 +1,12 @@
 /-
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import NLQCLean.Geometry.VectorSard
-import NLQCLean.Geometry.CriticalNormalImages
+module
+
+public import NLQCLean.Geometry.VectorSard
+public import NLQCLean.Geometry.CriticalNormalImages
+
+@[expose] public section
 
 /-!
 # Haar-null unitary sets from smooth rank-deficient covers

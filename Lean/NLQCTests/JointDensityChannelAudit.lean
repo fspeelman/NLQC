@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.JointDensityChannels
+module
+
+public import NLQCLean.Models.ClassicalCommunication.JointDensityChannels
+
+@[expose] public section
 
 /-! # measurable joint scores and derived integrability -/
 

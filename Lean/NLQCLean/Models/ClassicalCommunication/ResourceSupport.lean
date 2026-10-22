@@ -1,5 +1,9 @@
-import NLQCLean.Models.ClassicalCommunication.FiniteProtocol
-import NLQCLean.Models.ForwardCompression
+module
+
+public import NLQCLean.Models.ClassicalCommunication.FiniteProtocol
+public import NLQCLean.Models.ForwardCompression
+
+@[expose] public section
 
 /-!
 # Rank-based resource supports for finite instruments

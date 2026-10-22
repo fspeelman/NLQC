@@ -2,11 +2,15 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import Mathlib.Algebra.MvPolynomial.PDeriv
-import Mathlib.Algebra.MvPolynomial.Degrees
-import Mathlib.Data.Finsupp.Weight
-import Mathlib.Analysis.Calculus.FDeriv.Mul
-import Mathlib.Analysis.Calculus.FDeriv.Pi
+module
+
+public import Mathlib.Algebra.MvPolynomial.PDeriv
+public import Mathlib.Algebra.MvPolynomial.Degrees
+public import Mathlib.Data.Finsupp.Weight
+public import Mathlib.Analysis.Calculus.FDeriv.Mul
+public import Mathlib.Analysis.Calculus.FDeriv.Pi
+
+@[expose] public section
 
 /-!
 # Derivatives of polynomial evaluation

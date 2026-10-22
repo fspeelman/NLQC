@@ -1,9 +1,13 @@
-import NLQCLean.LinearAlgebra.CrossedSinglet
-import NLQCLean.Models.ClassicalCommunication.CoherentConversion
-import NLQCLean.Models.ClassicalCommunication.CoherentLabels
-import NLQCLean.Approx.GeneralizedBellBasis
-import NLQCLean.Approx.PVMSharpFreezing
-import NLQCLean.Approx.NearBellFreezing
+module
+
+public import NLQCLean.LinearAlgebra.CrossedSinglet
+public import NLQCLean.Models.ClassicalCommunication.CoherentConversion
+public import NLQCLean.Models.ClassicalCommunication.CoherentLabels
+public import NLQCLean.Approx.GeneralizedBellBasis
+public import NLQCLean.Approx.PVMSharpFreezing
+public import NLQCLean.Approx.NearBellFreezing
+
+@[expose] public section
 
 /-!
 # Reference entanglement and messages for near-Bell measurements

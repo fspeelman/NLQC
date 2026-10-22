@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.BorelRankCompression
+module
+
+public import NLQCLean.Models.ClassicalCommunication.BorelRankCompression
+
+@[expose] public section
 
 /-! # Rank-sized compression and original-error adapters for pure Borel protocols -/
 

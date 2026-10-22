@@ -1,6 +1,10 @@
-import NLQCLean.Exact.PVMHardTarget
-import NLQCLean.Models.PVMPhysicalReachability
-import NLQCLean.Models.ProjectiveTV
+module
+
+public import NLQCLean.Exact.PVMHardTarget
+public import NLQCLean.Models.PVMPhysicalReachability
+public import NLQCLean.Models.ProjectiveTV
+
+@[expose] public section
 
 /-!
 # Unconditional uniform fixed-target PVM gaps

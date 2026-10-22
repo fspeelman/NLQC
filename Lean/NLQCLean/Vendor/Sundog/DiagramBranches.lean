@@ -35,7 +35,11 @@ with finitely many possible values (`truncChain`). This module makes the branchi
 `famDegrees_induction`, and the per-cell composition of `realizes_readAnnot` +
 these transports into `DiagramPartition` for every family.
 -/
-import NLQCLean.Vendor.Sundog.DiagramSelect
+module
+
+public import NLQCLean.Vendor.Sundog.DiagramSelect
+
+@[expose] public section
 
 namespace Sundog.TarskiQE
 

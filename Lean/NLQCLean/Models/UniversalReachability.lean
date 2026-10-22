@@ -1,4 +1,8 @@
-import NLQCLean.Models.MixedReachability
+module
+
+public import NLQCLean.Models.MixedReachability
+
+@[expose] public section
 
 /-!
 # Universal score reachability

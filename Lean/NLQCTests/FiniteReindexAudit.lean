@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.ArbitraryFiniteReachability
+module
+
+public import NLQCLean.Models.ClassicalCommunication.ArbitraryFiniteReachability
+
+@[expose] public section
 
 /-! # Exact original-register finite protocol transport audit -/
 

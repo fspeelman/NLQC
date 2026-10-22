@@ -1,5 +1,9 @@
-import NLQCLean.Geometry.UnitaryNormalCoordinates
-import NLQCLean.Geometry.CubicProjection
+module
+
+public import NLQCLean.Geometry.UnitaryNormalCoordinates
+public import NLQCLean.Geometry.CubicProjection
+
+@[expose] public section
 
 /-!
 # The real Frobenius inner product

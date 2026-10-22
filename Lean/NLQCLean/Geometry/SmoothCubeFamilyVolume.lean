@@ -2,7 +2,11 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Geometry.FiniteFiberImageVolume
+module
+
+public import NLQCLean.Geometry.FiniteFiberImageVolume
+
+@[expose] public section
 
 /-!
 # One volume bound for all top-dimensional smooth cubes

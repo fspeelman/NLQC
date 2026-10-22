@@ -2,8 +2,12 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Geometry.GraphFiberMultiplicity
-import Mathlib.MeasureTheory.Function.Jacobian
+module
+
+public import NLQCLean.Geometry.GraphFiberMultiplicity
+public import Mathlib.MeasureTheory.Function.Jacobian
+
+@[expose] public section
 
 /-!
 # Image volume from square Jacobians and finite fibers

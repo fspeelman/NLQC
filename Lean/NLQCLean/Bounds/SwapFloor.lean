@@ -1,6 +1,10 @@
-import NLQCLean.Approx.SharpFreezing
-import NLQCLean.LinearAlgebra.SchmidtOverlap
-import NLQCLean.Models.SwapChoi
+module
+
+public import NLQCLean.Approx.SharpFreezing
+public import NLQCLean.LinearAlgebra.SchmidtOverlap
+public import NLQCLean.Models.SwapChoi
+
+@[expose] public section
 
 /-!
 # The unconditional SWAP resource floor

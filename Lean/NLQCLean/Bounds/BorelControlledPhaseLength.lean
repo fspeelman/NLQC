@@ -1,6 +1,10 @@
-import NLQCLean.Geometry.DirectVolume.Assembly
-import NLQCLean.Bounds.FiniteControlledPhaseLength
-import NLQCLean.Approx.BorelClassicalSpectralFloors
+module
+
+public import NLQCLean.Geometry.DirectVolume.Assembly
+public import NLQCLean.Bounds.FiniteControlledPhaseLength
+public import NLQCLean.Approx.BorelClassicalSpectralFloors
+
+@[expose] public section
 
 /-!
 # Outer length of controlled phases with free standard-Borel classical messages

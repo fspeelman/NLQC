@@ -1,6 +1,10 @@
-import NLQCLean.Models.MixedReachability
-import NLQCLean.Approx.PolynomialWitnessCoverage
-import NLQCLean.Geometry.PolynomialTubeConditional
+module
+
+public import NLQCLean.Models.MixedReachability
+public import NLQCLean.Approx.PolynomialWitnessCoverage
+public import NLQCLean.Geometry.PolynomialTubeConditional
+
+@[expose] public section
 
 /-!
 # Compact witness targets cover physical reachability

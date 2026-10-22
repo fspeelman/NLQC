@@ -1,8 +1,12 @@
 /-
 Cubic polynomial extensions of the isometry and sphere constraints.
 -/
-import NLQCLean.LinearAlgebra.RealCoordinates
-import Mathlib.Analysis.Calculus.Deriv.Prod
+module
+
+public import NLQCLean.LinearAlgebra.RealCoordinates
+public import Mathlib.Analysis.Calculus.Deriv.Prod
+
+@[expose] public section
 
 /-!
 # Cubic extensions of the constraints

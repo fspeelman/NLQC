@@ -1,5 +1,9 @@
-import NLQCLean.Geometry.DirectVolume.Count
-import NLQCLean.Geometry.C1PieceFamilyVolume
+module
+
+public import NLQCLean.Geometry.DirectVolume.Count
+public import NLQCLean.Geometry.C1PieceFamilyVolume
+
+@[expose] public section
 
 /-!
 # Direct image-volume route: charts of the Lagrange sets

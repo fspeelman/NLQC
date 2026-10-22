@@ -1,5 +1,9 @@
-import NLQCLean.Approx.PVMBlockNormalization
-import NLQCLean.Geometry.MatrixPolynomialDegree
+module
+
+public import NLQCLean.Approx.PVMBlockNormalization
+public import NLQCLean.Geometry.MatrixPolynomialDegree
+
+@[expose] public section
 
 /-!
 # Polynomial degrees of PVM reverse witnesses

@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.FiniteMixedCompression
+module
+
+public import NLQCLean.Models.ClassicalCommunication.FiniteMixedCompression
+
+@[expose] public section
 
 /-!
 # Finite-shape score reachability with free classical outcomes

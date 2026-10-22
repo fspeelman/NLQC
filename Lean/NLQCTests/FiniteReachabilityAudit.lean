@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.FiniteReachability
+module
+
+public import NLQCLean.Models.ClassicalCommunication.FiniteReachability
+
+@[expose] public section
 
 /-!
 # finite-shape reachability transfers

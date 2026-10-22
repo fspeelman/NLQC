@@ -1,520 +1,524 @@
-import NLQCLean.Approx.BorelClassicalSpectralFloors
-import NLQCLean.Approx.NearBellFreezing
-import NLQCLean.Bounds.BorelClassicalRates
-import NLQCLean.Bounds.FiniteLocalization
-import NLQCLean.Bounds.BorelLocalization
-import NLQCLean.Bounds.RectangularDiagonalAlmostEvery
-import NLQCLean.Bounds.BorelRectangularDiagonal
-import NLQCLean.Bounds.RectangularDiagonalWorstCase
-import NLQCLean.Bounds.TwoQubitDiagonalChoi
-import NLQCLean.Bounds.BorelSharedRandomRectangular
-import NLQCLean.Bounds.SharedRandomLOSCC
-import NLQCLean.Bounds.BorelClassicalUniversalMax
-import NLQCLean.Bounds.BorelControlledPhaseLength
-import NLQCLean.Geometry.DiagonalPhaseMeasure
-import NLQCLean.Models.ClassicalCommunication.ArbitraryFiniteReachability
-import NLQCLean.Models.ClassicalCommunication.AveragedChannels
-import NLQCLean.Models.ClassicalCommunication.BorelSharedRandomness
-import NLQCLean.Models.ClassicalCommunication.FiniteInstrumentReindex
-import NLQCLean.Models.ClassicalCommunication.FiniteLocalization
-import NLQCLean.Models.ClassicalCommunication.BorelLocalization
-import NLQCLean.Models.ClassicalCommunication.FiniteMixedReindex
-import NLQCLean.Models.ClassicalCommunication.FiniteProtocolReindex
-import NLQCLean.Models.NearBellResourceFloors
-import NLQCLean.Vendor.HermiteLindemann.AlgebraicPart
-import NLQCLean.Vendor.HermiteLindemann.Basic
-import NLQCLean.Vendor.HermiteLindemann.FinsuppQuotient
-import NLQCLean.Vendor.HermiteLindemann.SymmetricEval
-import NLQCLean.Models.ClassicalCommunication.FiniteBranchSchmidtRank
-import NLQCLean.Approx.FiniteClassicalSpectralFloors
-import NLQCLean.Models.ClassicalCommunication.BorelMixed
-import NLQCLean.Models.ClassicalCommunication.BorelMixedCompression
-import NLQCLean.Bounds.UniversalMaxBounds
-import NLQCLean.Bounds.SwapNeighborhoodAlmostEvery
-import NLQCLean.Models.ClassicalCommunication.BorelRankCompression
-import NLQCLean.LinearAlgebra.Basic
-import NLQCLean.LinearAlgebra.Isometry
-import NLQCLean.LinearAlgebra.TensorOperatorNorm
-import NLQCLean.LinearAlgebra.Calculus
-import NLQCLean.LinearAlgebra.RealCoordinates
-import NLQCLean.LinearAlgebra.Bipartite
-import NLQCLean.LinearAlgebra.AdjointDimension
-import NLQCLean.LinearAlgebra.SupportFactorization
-import NLQCLean.LinearAlgebra.SchmidtRank
-import NLQCLean.LinearAlgebra.SchmidtTruncation
-import NLQCLean.LinearAlgebra.TraceNorm
-import NLQCLean.LinearAlgebra.TraceNormSpectral
-import NLQCLean.LinearAlgebra.TraceDistance
-import NLQCLean.LinearAlgebra.TraceNormReindex
-import NLQCLean.LinearAlgebra.IsometricCompletion
-import NLQCLean.Geometry.LocalOrbit
-import NLQCLean.Geometry.LocalMotionRank
-import NLQCLean.Geometry.ScalarSard
-import NLQCLean.Vendor.TauCeti.Analysis.Normed.Operator.Surjective
-import NLQCLean.Vendor.TauCeti.MeasureTheory.Measure.Haar.NormedSpace
-import NLQCLean.Vendor.TauCeti.Analysis.Calculus.Sard.OutermostStratum
-import NLQCLean.Geometry.VectorSard
-import NLQCLean.Geometry.CubicExtension
-import NLQCLean.Geometry.CubicProjection
-import NLQCLean.Geometry.RescaledCubicProjection
-import NLQCLean.Geometry.RescaledSphereCubic
-import NLQCLean.Geometry.PolynomialImageVolumeHypothesis
-import NLQCLean.Semialgebraic.Format
-import NLQCLean.Semialgebraic.CoordinateMaps
-import NLQCLean.Geometry.PolynomialZeroMeasure
-import NLQCLean.Geometry.PolynomialCoefficients
-import NLQCLean.Semialgebraic.LocalSignStability
-import NLQCLean.Semialgebraic.ParametricFormat
-import NLQCLean.Semialgebraic.PolynomialSubstitution
-import NLQCLean.Semialgebraic.Projection
-import NLQCLean.Semialgebraic.FormatParameters
-import NLQCLean.Semialgebraic.Objects
-import NLQCLean.Semialgebraic.C1Decomposition
-import NLQCLean.LinearAlgebra.CoordinateRank
-import NLQCLean.Semialgebraic.Dimension
-import NLQCLean.Semialgebraic.Fibers
-import NLQCLean.Semialgebraic.CoordinateGraphs
-import NLQCLean.Semialgebraic.BasicClosedFormat
-import NLQCLean.Geometry.PolynomialGraphFormat
-import NLQCLean.Geometry.CoordinateGraphJacobian
-import NLQCLean.Geometry.CoordinateMinors
-import NLQCLean.Geometry.CoordinateGraphSlope
-import NLQCLean.Geometry.MaximalCoordinateGraphs
-import NLQCLean.Geometry.GraphFiberMultiplicity
-import NLQCLean.Geometry.FiniteFiberImageVolume
-import NLQCLean.Geometry.SmoothCubeFamilyVolume
-import NLQCLean.Geometry.C1PieceFamilyVolume
-import NLQCLean.Geometry.PolynomialStrictDeriv
-import NLQCLean.Geometry.SardSlices
-import NLQCLean.Geometry.DirectVolume.Assembly
-import NLQCLean.Geometry.SemialgebraicImageVolume
-import NLQCLean.Geometry.CoordinateProjectionNorms
-import NLQCLean.Geometry.JacobianNeighborhood
-import NLQCLean.External.SemialgebraicTextbook
-import NLQCLean.External.EffectiveArithmetic
-import NLQCLean.Vendor.Sundog.CircuitNet
-import NLQCLean.Vendor.Sundog.PieceCover
-import NLQCLean.Vendor.Sundog.RegionCount
-import NLQCLean.Vendor.Sundog.CancellationFree
-import NLQCLean.Vendor.Sundog.RegionPoly
-import NLQCLean.Vendor.Sundog.ExactRepr
-import NLQCLean.Vendor.Sundog.AnalyticGate
-import NLQCLean.Vendor.Sundog.DefinableRate
-import NLQCLean.Vendor.Sundog.OMinimalOne
-import NLQCLean.Vendor.Sundog.PolySignPartition
-import NLQCLean.Vendor.Sundog.PolyBranchTrees
-import NLQCLean.Vendor.Sundog.PseudoRemainder
-import NLQCLean.Vendor.Sundog.PolyDerivZones
-import NLQCLean.Vendor.Sundog.SignDiagrams
-import NLQCLean.Vendor.Sundog.DiagramNormalize
-import NLQCLean.Vendor.Sundog.DiagramAugment
-import NLQCLean.Vendor.Sundog.DiagramGraft
-import NLQCLean.Vendor.Sundog.DiagramWalk
-import NLQCLean.Vendor.Sundog.DiagramAnnotate
-import NLQCLean.Vendor.Sundog.DiagramDescent
-import NLQCLean.Vendor.Sundog.DiagramReads
-import NLQCLean.Vendor.Sundog.DiagramMaster
-import NLQCLean.Vendor.Sundog.DiagramSelect
-import NLQCLean.Vendor.Sundog.DiagramBranches
-import NLQCLean.Vendor.Sundog.DiagramAssembly
-import NLQCLean.Vendor.Sundog.SemialgebraicProjection
-import NLQCLean.Semialgebraic.SundogBridge
-import NLQCLean.Semialgebraic.ProjectionTheorem
-import NLQCLean.Semialgebraic.DimensionDef
-import NLQCLean.Rigidity.Compression
-import NLQCLean.Rigidity.RangeDefect
-import NLQCLean.Rigidity.CrossGram
-import NLQCLean.Rigidity.FrozenDilation
-import NLQCLean.Rigidity.ForwardExactDifferential
-import NLQCLean.Rigidity.ForwardWitnessCalculus
-import NLQCLean.Models.Targets
-import NLQCLean.Models.Channels
-import NLQCLean.Models.ChannelAmplification
-import NLQCLean.Models.ClassicalCommunication.FiniteInstruments
-import NLQCLean.Models.ClassicalCommunication.FiniteSupport
-import NLQCLean.Models.ClassicalCommunication.HermitianMomentSupport
-import NLQCLean.Models.ClassicalCommunication.InstrumentCompression
-import NLQCLean.Models.ClassicalCommunication.ScorePruning
-import NLQCLean.Models.ClassicalCommunication.KrausRepresentation
-import NLQCLean.Models.ClassicalCommunication.CoherentLabels
-import NLQCLean.Models.ClassicalCommunication.FiniteProtocol
-import NLQCLean.Models.ClassicalCommunication.CoherentConversion
-import NLQCLean.Models.ClassicalCommunication.TensorChannels
-import NLQCLean.Models.ClassicalCommunication.LabelContraction
-import NLQCLean.Models.ClassicalCommunication.ResourceSupport
-import NLQCLean.Models.ClassicalCommunication.BranchChannels
-import NLQCLean.Models.ClassicalCommunication.ProtocolCompression
-import NLQCLean.Models.ClassicalCommunication.TargetScores
-import NLQCLean.Models.ClassicalCommunication.FiniteCompression
-import NLQCLean.Models.ClassicalCommunication.FiniteMixed
-import NLQCLean.Models.ClassicalCommunication.FiniteMixedCompression
-import NLQCLean.Models.ClassicalCommunication.FiniteReachability
-import NLQCLean.Models.ClassicalCommunication.BarycenterSupport
-import NLQCLean.Models.ClassicalCommunication.BranchSelection
-import NLQCLean.Models.ClassicalCommunication.ChoiInstrumentDensities
-import NLQCLean.Models.ClassicalCommunication.ChoiVectorInstrument
-import NLQCLean.Models.ClassicalCommunication.ChoiDensityPositivity
-import NLQCLean.Models.ClassicalCommunication.ChoiChannelEquivalence
-import NLQCLean.Models.ClassicalCommunication.CPVectorInstrument
-import NLQCLean.Models.ClassicalCommunication.ChannelUniformBound
-import NLQCLean.Models.ClassicalCommunication.JointDensityChannels
-import NLQCLean.Models.ClassicalCommunication.ConditionalDensityChannels
-import NLQCLean.Models.ClassicalCommunication.DensityCompression
-import NLQCLean.Models.ClassicalCommunication.DensityScoreFunctionals
-import NLQCLean.Models.ClassicalCommunication.SequentialDensityCompression
-import NLQCLean.Models.ClassicalCommunication.StandardBorelProtocol
-import NLQCLean.Models.ClassicalCommunication.BorelOperationalChannel
-import NLQCLean.Models.ClassicalCommunication.BorelChannelNormalization
-import NLQCLean.Models.ClassicalCommunication.InstrumentPrecomposition
-import NLQCLean.Models.StinespringDiamondContractivity
-import NLQCLean.Models.ClassicalCommunication.TwoLevelDecoder
-import NLQCLean.Models.ClassicalCommunication.BorelFiniteCompression
-import NLQCLean.Models.ClassicalCommunication.FiniteLogicalRestriction
-import NLQCLean.Models.ClassicalCommunication.RectangularDiagonalRestriction
-import NLQCLean.Models.ClassicalCommunication.BorelLocalRestriction
-import NLQCLean.Models.ClassicalCommunication.FiniteOutputRestriction
-import NLQCLean.Models.ClassicalCommunication.FiniteRandomCompression
-import NLQCLean.Models.Metrics
-import NLQCLean.Models.ChoiAlgebra
-import NLQCLean.Models.ChoiMetrics
-import NLQCLean.Models.ProtocolMetrics
-import NLQCLean.Models.OneRound
-import NLQCLean.Models.Resource
-import NLQCLean.Models.UnitaryTask
-import NLQCLean.Models.ProjectiveTask
-import NLQCLean.Models.ProjectiveScore
-import NLQCLean.Models.ProjectiveProbability
-import NLQCLean.Models.ProjectiveExactness
-import NLQCLean.Models.ProjectiveScoreSemantics
-import NLQCLean.Models.ProjectiveProtocolScore
-import NLQCLean.Models.ProjectiveTV
-import NLQCLean.Models.ProjectiveMixedExactness
-import NLQCLean.LinearAlgebra.FlaggedSchmidtWeights
-import NLQCLean.Approx.PVMBlockSpectrum
-import NLQCLean.Approx.PVMChoiProjection
-import NLQCLean.Approx.PVMBlockTruncation
-import NLQCLean.Approx.PVMSharpFreezing
-import NLQCLean.Rigidity.FlaggedSupports
-import NLQCLean.Approx.PVMRankAllocations
-import NLQCLean.Models.PVMForwardCompression
-import NLQCLean.Approx.PVMReverseWitness
-import NLQCLean.Approx.PVMPhysicalReverse
-import NLQCLean.Approx.PVMWitnessCoverage
-import NLQCLean.Approx.PVMCoordinateCount
-import NLQCLean.Approx.PVMBlockNormalization
-import NLQCLean.Approx.PVMPolynomialDegree
-import NLQCLean.Approx.PVMWitnessCoordinates
-import NLQCLean.Approx.PVMPolynomialWitnessFamily
-import NLQCLean.Approx.PVMPolynomialCoverage
-import NLQCLean.Rigidity.PVMWitnessCalculus
-import NLQCLean.Approx.PVMNormalizedCubicWitness
-import NLQCLean.Approx.PVMWitnessVelocityBounds
-import NLQCLean.Approx.PVMWitnessDifferentialBounds
-import NLQCLean.Approx.PVMExtendedWitness
-import NLQCLean.Approx.PVMExtendedPolynomial
-import NLQCLean.Geometry.PVMMotionRank
-import NLQCLean.Geometry.SingularValueRankBound
-import NLQCLean.Rigidity.PVMReverseGenerator
-import NLQCLean.Rigidity.PVMExtendedDifferential
-import NLQCLean.Rigidity.PVMCoordinateDifferential
-import NLQCLean.Approx.PVMWitnessJacobianBound
-import NLQCLean.Approx.PVMWitnessSingularValues
-import NLQCLean.Approx.PVMPolynomialWitnessThickening
-import NLQCLean.Models.PVMPhysicalReachability
-import NLQCLean.Models.PVMMixedReachability
-import NLQCLean.Models.PVMTVReachability
-import NLQCLean.Models.PVMUniversalReachability
-import NLQCLean.Bounds.PVMHaarArithmetic
-import NLQCLean.Approx.PVMWitnessTargets
-import NLQCLean.Geometry.PVMPolynomialTubeConditional
-import NLQCLean.Approx.PVMReachableWitnessCover
-import NLQCLean.Geometry.UnitaryHaarInverse
-import NLQCLean.Bounds.CodimensionArithmetic
-import NLQCLean.Bounds.PVMHaarFractionConditional
-import NLQCLean.Bounds.PVMTVHaarConditional
-import NLQCLean.Bounds.PVMResourceArithmetic
-import NLQCLean.Bounds.PVMResourceConditional
-import NLQCLean.Invariants.PVMMeanPurity
-import NLQCLean.Invariants.PVMRotationFamily
-import NLQCLean.Rigidity.PVMFlagDifferential
-import NLQCLean.Exact.PVMScalarCriticalValues
-import NLQCLean.Exact.PVMHardTarget
-import NLQCLean.Bounds.PVMQualitativeGap
-import NLQCLean.Models.ChargedCompactProtocols
-import NLQCLean.Models.ChargedCompactPVMProtocols
-import NLQCLean.Models.ChargedProtocolExamples
-import NLQCLean.Bounds.GeneralTargetQualitativeGap
-import NLQCLean.Bounds.AlmostEveryQualitativeGap
-import NLQCLean.Approx.SpectralFootprintFloors
-import NLQCLean.Approx.PVMSpectralFootprintFloors
-import NLQCLean.Approx.GeneralizedBellBasis
-import NLQCLean.Invariants.PurityEstimates
-import NLQCLean.Invariants.ControlledPhase
-import NLQCLean.Invariants.RectangularControlledPhase
-import NLQCLean.Approx.ScalarPurityWitness
-import NLQCLean.Bounds.ControlledPhaseLength
-import NLQCLean.Bounds.ControlledPhaseAlmostEvery
-import NLQCLean.Bounds.FiniteControlledPhaseAlmostEvery
-import NLQCLean.Bounds.FiniteClassicalHaar
-import NLQCLean.Bounds.FiniteClassicalStrongUniversal
-import NLQCLean.Bounds.FiniteClassicalQubits
-import NLQCLean.Bounds.FiniteClassicalAlmostEvery
-import NLQCLean.Bounds.ArbitraryFiniteClassicalAlmostEvery
-import NLQCLean.Bounds.FiniteControlledPhaseQubits
-import NLQCLean.Bounds.FiniteControlledPhaseLength
-import NLQCLean.Arithmetic.PolynomialBoundary
-import NLQCLean.Arithmetic.BivariateFactor
-import NLQCLean.Arithmetic.CosineTransform
-import NLQCLean.Arithmetic.SeparationCertificate
-import NLQCLean.Arithmetic.ChargedPhysicalCoordinates
-import NLQCLean.Arithmetic.PhysicalPolynomialConstraints
-import NLQCLean.Arithmetic.PhysicalPolynomialEncoding
-import NLQCLean.Arithmetic.PhysicalScorePolynomial
-import NLQCLean.Arithmetic.PVMScorePolynomial
-import NLQCLean.Arithmetic.ControlledPhaseScorePolynomial
-import NLQCLean.Arithmetic.PhysicalPolynomialHeight
-import NLQCLean.Arithmetic.ControlledPhaseLeastDeficit
-import NLQCLean.Arithmetic.PurePowerReduction
-import NLQCLean.Arithmetic.DeformationSystem
-import NLQCLean.Arithmetic.DeformationAnalysis
-import NLQCLean.Arithmetic.DeformationEliminant
-import NLQCLean.Arithmetic.DeformationFinal
-import NLQCLean.Arithmetic.DeformationBounds
-import NLQCLean.Bounds.ControlledPhaseEliminant
-import NLQCLean.Bounds.ExplicitControlledPhase
-import NLQCLean.Bounds.AlmostEveryArithmetic
-import NLQCLean.Bounds.AlmostEveryTargets
-import NLQCLean.Bounds.PVMAlmostEveryTargets
-import NLQCLean.Bounds.AlmostEveryPhysical
-import NLQCLean.Bounds.AlmostEveryQubits
-import NLQCLean.Geometry.CriticalNormalImages
-import NLQCLean.Geometry.RankDeficientHaarNull
-import NLQCLean.Exact.UnitaryExactWitness
-import NLQCLean.Exact.PVMExactWitness
-import NLQCLean.Exact.UnitaryWitnessHaar
-import NLQCLean.Exact.PVMWitnessHaar
-import NLQCLean.Bounds.AlmostEveryExact
-import NLQCLean.Models.SwapTarget
-import NLQCLean.Models.SwapChoi
-import NLQCLean.Models.SwapNeighborhood
-import NLQCLean.LinearAlgebra.FlatSupport
-import NLQCLean.Approx.StrongSupport
-import NLQCLean.Bounds.StrongUnitaryTargets
-import NLQCLean.LinearAlgebra.CrossedSinglet
-import NLQCLean.Bounds.SwapNeighborhoodMessages
-import NLQCLean.LinearAlgebra.FlatProductTail
-import NLQCLean.Approx.SwapNeighborhoodFreezing
-import NLQCLean.Approx.SlimReverseWitness
-import NLQCLean.Approx.SlimWitnessCalculus
-import NLQCLean.Approx.SlimNormalizedCubic
-import NLQCLean.Approx.SlimWitnessCoordinates
-import NLQCLean.Approx.SlimPolynomialWitness
-import NLQCLean.LinearAlgebra.ResidualSpectralCutoff
-import NLQCLean.LinearAlgebra.FrobeniusInsertion
-import NLQCLean.Approx.SlimWitnessDifferential
-import NLQCLean.Geometry.FiniteDimensionalNets
-import NLQCLean.Geometry.EuclideanBallCaps
-import NLQCLean.Geometry.HermitianOperatorSector
-import NLQCLean.Geometry.OperatorNormalEmbedding
-import NLQCLean.Geometry.OperatorNormalMeasure
-import NLQCLean.Geometry.ScaledUnitaryNormalVolume
-import NLQCLean.Geometry.UnitaryFrobeniusVolume
-import NLQCLean.Approx.PVMWitnessCutoff
-import NLQCLean.Geometry.PolynomialTube
-import NLQCLean.Approx.WitnessFamilies
-import NLQCLean.Arithmetic.EliminationSize
-import NLQCLean.Arithmetic.EliminationKKT
-import NLQCLean.Arithmetic.GelfondZeroEstimate
-import NLQCLean.Arithmetic.GelfondInterpolation
-import NLQCLean.Arithmetic.GelfondSchwarz
-import NLQCLean.Arithmetic.GelfondLiouville
-import NLQCLean.Arithmetic.GelfondAuxiliary
-import NLQCLean.Arithmetic.GelfondSiegel
-import NLQCLean.Arithmetic.GelfondEstimates
-import NLQCLean.Arithmetic.GelfondDoubling
-import NLQCLean.Arithmetic.GelfondNumerics
-import NLQCLean.Arithmetic.GelfondMeasure
-import NLQCLean.Bounds.ExplicitControlledPhaseGelfond
-import NLQCLean.Arithmetic.GelfondAngleLiouville
-import NLQCLean.Arithmetic.GelfondAngleAuxiliary
-import NLQCLean.Arithmetic.GelfondAngleSiegel
-import NLQCLean.Arithmetic.GelfondAngleDoubling
-import NLQCLean.Arithmetic.GelfondAngleNumerics
-import NLQCLean.Arithmetic.GelfondAngleMeasure
-import NLQCLean.Bounds.ExplicitControlledPhaseAngle
-import NLQCLean.ImageVolume.PolynomialDerivative
-import NLQCLean.ImageVolume.BoxMonomialCount
-import NLQCLean.ImageVolume.NondegenerateZeroCount
-import NLQCLean.ImageVolume.BanachIndicatrix
-import NLQCLean.ImageVolume.BlockMinorBound
-import NLQCLean.ImageVolume.LagrangeCharts
-import NLQCLean.ImageVolume.BarrierImageVolume
-import NLQCLean.ImageVolume.PolynomialImageVolume
-import NLQCLean.Semialgebraic.Lojasiewicz
-import NLQCLean.Semialgebraic.PolynomialStability
-import NLQCLean.Bounds.FixedBudgetStability
-import NLQCLean.Bounds.FixedBudgetStabilityPVM
-import NLQCLean.LinearAlgebra.IsometryExtension
-import NLQCLean.Models.ClassicalCommunication.TranscriptCompression
-import NLQCLean.Arithmetic.TranscriptPolynomial
-import NLQCLean.Arithmetic.TranscriptHeight
-import NLQCLean.Bounds.ExplicitControlledPhaseTranscript
-import NLQCLean.Bounds.ExplicitControlledPhaseSharedRandom
-import NLQCLean.Bounds.SwapNeighborhoodHaar
-import NLQCLean.Geometry.StrongPolynomialTubeConditional
-import NLQCLean.Bounds.StrongHaarArithmetic
-import NLQCLean.Bounds.StrongHaarConditional
-import NLQCLean.Bounds.StrongUniversalResources
-import NLQCLean.Geometry.StrongWitnessBarrierVolume
-import NLQCLean.Bounds.StrongUniversalExplicit
-import NLQCLean.Approx.PVMRankFloor
-import NLQCLean.Models.ForwardWitness
-import NLQCLean.Models.ForwardReindex
-import NLQCLean.Models.ForwardCompression
-import NLQCLean.Models.CompactForward
-import NLQCLean.Models.UnitaryScore
-import NLQCLean.Invariants.OperatorSchmidtPurity
-import NLQCLean.Exact.ScalarCriticalValues
-import NLQCLean.Bounds.QualitativeDivergence
-import NLQCLean.Bounds.QualitativeDiamond
-import NLQCLean.Approx.ChoiRank
-import NLQCLean.LinearAlgebra.FrobeniusInner
-import NLQCLean.LinearAlgebra.SchmidtOverlap
-import NLQCLean.Approx.ChoiProjection
-import NLQCLean.Approx.SharpFreezing
-import NLQCLean.Approx.CrossGramDistance
-import NLQCLean.Approx.ReverseWitness
-import NLQCLean.Approx.WitnessVelocityBounds
-import NLQCLean.Rigidity.QuantitativeDifferential
-import NLQCLean.Rigidity.ReverseWitnessCalculus
-import NLQCLean.Approx.WitnessDifferentialBounds
-import NLQCLean.Approx.NormalizedCubicWitness
-import NLQCLean.Rigidity.ExtendedWitnessDifferential
-import NLQCLean.LinearAlgebra.EuclideanCoordinates
-import NLQCLean.Approx.WitnessEuclideanCoordinates
-import NLQCLean.Rigidity.CoordinateWitnessDifferential
-import NLQCLean.Approx.WitnessNormalization
-import NLQCLean.Geometry.PolynomialDegree
-import NLQCLean.Geometry.MatrixPolynomialDegree
-import NLQCLean.Approx.WitnessPolynomialDegree
-import NLQCLean.Approx.PolynomialWitnessFamily
-import NLQCLean.Approx.PolynomialWitnessCoverage
-import NLQCLean.Geometry.NormDetBounds
-import NLQCLean.Geometry.ThickenedJacobian
-import NLQCLean.Approx.WitnessJacobianBound
-import NLQCLean.Geometry.UnitaryNormalEmbedding
-import NLQCLean.Geometry.UnitaryHaar
-import NLQCLean.Geometry.UnitaryNormalCoordinates
-import NLQCLean.Geometry.UnitaryNormalMeasure
-import NLQCLean.Geometry.RealFrobeniusInner
-import NLQCLean.Geometry.AdjointEuclideanCoordinates
-import NLQCLean.Geometry.UnitaryCayley
-import NLQCLean.Geometry.UnitaryCayleyNormal
-import NLQCLean.Geometry.HaarPolynomialZero
-import NLQCLean.Approx.GenericSchmidtRank
-import NLQCLean.Approx.GenericSpectralThresholds
-import NLQCLean.Geometry.ExpandingDeterminant
-import NLQCLean.Geometry.UnitaryNormalVolume
-import NLQCLean.Geometry.PolynomialThickening
-import NLQCLean.Approx.PolynomialWitnessThickening
-import NLQCLean.Geometry.PolynomialTubeConditional
-import NLQCLean.Geometry.UnitaryWitnessTube
-import NLQCLean.Geometry.TransverseTubeArithmetic
-import NLQCLean.Bounds.SwapFloor
-import NLQCLean.Models.PhysicalReachability
-import NLQCLean.Models.MixedReachability
-import NLQCLean.Models.UniversalReachability
-import NLQCLean.Approx.ReachableWitnessCover
-import NLQCLean.Bounds.HaarFractionConditional
-import NLQCLean.Bounds.HaarArithmetic
-import NLQCLean.Bounds.HaarAbsorption
-import NLQCLean.Bounds.ResourceArithmetic
-import NLQCLean.Bounds.ResourceConditional
-import NLQCLean.Models.DiamondReachability
-import NLQCLean.Bounds.DiamondConditional
-import NLQCLean.Bounds.Quantitative
-import NLQCLean.Semialgebraic.RationalCoefficients
-import NLQCLean.Semialgebraic.RationalSignDiagrams
-import NLQCLean.Semialgebraic.RationalDiagramBranches
-import NLQCLean.Semialgebraic.RationalDiagramAssembly
-import NLQCLean.Semialgebraic.RationalProjection
-import NLQCLean.Semialgebraic.RationalImages
-import NLQCLean.Arithmetic.RationalSemialgebraicBoundary
-import NLQCLean.Arithmetic.PhaseTranscendence
-import NLQCLean.Invariants.LocalUnitaryPurity
-import NLQCLean.Semialgebraic.RationalPolynomialImages
-import NLQCLean.Arithmetic.ComplexMatrixPolynomials
-import NLQCLean.Arithmetic.RationalIntegerPolynomials
-import NLQCLean.Exact.TargetWitness
-import NLQCLean.Exact.WitnessRationalCoordinates
-import NLQCLean.Exact.TargetWitnessPolynomial
-import NLQCLean.Exact.ExactPurityAlgebraicity
-import NLQCLean.Exact.ControlledPhaseExclusion
-import NLQCLean.Exact.LocalChannelRestriction
-import NLQCLean.Exact.FiniteExactRestriction
-import NLQCLean.Exact.SpectatorControlledPhase
-import NLQCLean.Exact.SpectatorExactExclusion
-import NLQCLean.Exact.BitstringControlledPhase
-import NLQCLean.Exact.BitstringExactExclusion
-import NLQCLean.Invariants.PurityReindex
-import NLQCLean.Invariants.SpectatorControlledPhasePurity
-import NLQCLean.Invariants.LocalOrbitDifferential
-import NLQCLean.Exact.RationalPolynomialSmoothness
-import NLQCLean.Exact.RationalInvariantPolynomial
-import NLQCLean.Exact.InvariantCriticalValues
-import NLQCLean.Exact.OrbitInvariantAlgebraicity
-import NLQCLean.Invariants.CompactSeparation
-import NLQCLean.Invariants.LocalOrbitSeparation
-import NLQCLean.Semialgebraic.ScalarNullFinite
-import NLQCLean.Semialgebraic.PiecewiseC1
-import NLQCLean.Semialgebraic.PurePowerZeros
-import NLQCLean.Semialgebraic.FinitePointCount
-import NLQCLean.Semialgebraic.Definable
-import NLQCLean.Semialgebraic.FiniteRealOrder
-import NLQCLean.Semialgebraic.CylindricalRoots
-import NLQCLean.Semialgebraic.SAPaths
-import NLQCLean.Semialgebraic.Cells
-import NLQCLean.Semialgebraic.CellDecomposition
-import NLQCLean.Semialgebraic.Components
-import NLQCLean.Semialgebraic.DefinableChoice
-import NLQCLean.Semialgebraic.OneVariableContinuity
-import NLQCLean.Semialgebraic.CurveSelection
-import NLQCLean.Semialgebraic.Paths
-import NLQCLean.Exact.FiniteUnion
-import NLQCLean.Exact.LocalOrbitSaturation
-import NLQCLean.Exact.FiniteOrbits
-import NLQCLean.Geometry.LocalOrbitHaarNull
-import NLQCLean.Exact.ExactBadDecomposition
-import NLQCLean.Semialgebraic.PolynomialFunctions
-import NLQCLean.Invariants.PVMOrbitDifferential
-import NLQCLean.Exact.PVMInvariantCriticalValues
-import NLQCLean.Exact.PolynomialWitnessMaps
-import NLQCLean.Exact.PVMFiniteOrbits
-import NLQCLean.Exact.PVMBadDecomposition
-import NLQCLean.LinearAlgebra.LinearODE
-import NLQCLean.Exact.PathDerivatives
-import NLQCLean.Exact.RigidityStatements
-import NLQCLean.Exact.GeneralExactWitness
-import NLQCLean.Exact.UnequalDimensions
-import NLQCLean.Exact.CompressionFiniteOrbits
-import NLQCLean.Exact.PaperFoundations
-import NLQCLean.Exact.PVMPathFactorization
-import NLQCLean.Results.ExactPaper
-import NLQCLean.Results.Unitary
-import NLQCLean.Results.PVM
-import NLQCLean.Bounds.BorelClassicalQubits
-import NLQCLean.LinearAlgebra.FlatGroupedTail
-import NLQCLean.Bounds.NearBellMessages
-import NLQCLean.Bounds.NearBellSpectra
-import NLQCLean.Bounds.NearBellWitnessCover
-import NLQCLean.Bounds.NearBellHaarArithmetic
-import NLQCLean.Bounds.NearBellHaar
-import NLQCLean.Bounds.NearBellUniversal
-import NLQCLean.Geometry.PVMWitnessBarrierVolume
-import NLQCLean.Bounds.NearBellUniversalExplicit
-import NLQCLean.Bounds.NearBellAlmostEvery
-import NLQCLean.Bounds.BorelClassicalStrongPVM
-import NLQCLean.Results.RobustPaper
+module
+
+public import NLQCLean.Approx.BorelClassicalSpectralFloors
+public import NLQCLean.Approx.NearBellFreezing
+public import NLQCLean.Bounds.BorelClassicalRates
+public import NLQCLean.Bounds.FiniteLocalization
+public import NLQCLean.Bounds.BorelLocalization
+public import NLQCLean.Bounds.RectangularDiagonalAlmostEvery
+public import NLQCLean.Bounds.BorelRectangularDiagonal
+public import NLQCLean.Bounds.RectangularDiagonalWorstCase
+public import NLQCLean.Bounds.TwoQubitDiagonalChoi
+public import NLQCLean.Bounds.BorelSharedRandomRectangular
+public import NLQCLean.Bounds.SharedRandomLOSCC
+public import NLQCLean.Bounds.BorelClassicalUniversalMax
+public import NLQCLean.Bounds.BorelControlledPhaseLength
+public import NLQCLean.Geometry.DiagonalPhaseMeasure
+public import NLQCLean.Models.ClassicalCommunication.ArbitraryFiniteReachability
+public import NLQCLean.Models.ClassicalCommunication.AveragedChannels
+public import NLQCLean.Models.ClassicalCommunication.BorelSharedRandomness
+public import NLQCLean.Models.ClassicalCommunication.FiniteInstrumentReindex
+public import NLQCLean.Models.ClassicalCommunication.FiniteLocalization
+public import NLQCLean.Models.ClassicalCommunication.BorelLocalization
+public import NLQCLean.Models.ClassicalCommunication.FiniteMixedReindex
+public import NLQCLean.Models.ClassicalCommunication.FiniteProtocolReindex
+public import NLQCLean.Models.NearBellResourceFloors
+public import NLQCLean.Vendor.HermiteLindemann.AlgebraicPart
+public import NLQCLean.Vendor.HermiteLindemann.Basic
+public import NLQCLean.Vendor.HermiteLindemann.FinsuppQuotient
+public import NLQCLean.Vendor.HermiteLindemann.SymmetricEval
+public import NLQCLean.Models.ClassicalCommunication.FiniteBranchSchmidtRank
+public import NLQCLean.Approx.FiniteClassicalSpectralFloors
+public import NLQCLean.Models.ClassicalCommunication.BorelMixed
+public import NLQCLean.Models.ClassicalCommunication.BorelMixedCompression
+public import NLQCLean.Bounds.UniversalMaxBounds
+public import NLQCLean.Bounds.SwapNeighborhoodAlmostEvery
+public import NLQCLean.Models.ClassicalCommunication.BorelRankCompression
+public import NLQCLean.LinearAlgebra.Basic
+public import NLQCLean.LinearAlgebra.Isometry
+public import NLQCLean.LinearAlgebra.TensorOperatorNorm
+public import NLQCLean.LinearAlgebra.Calculus
+public import NLQCLean.LinearAlgebra.RealCoordinates
+public import NLQCLean.LinearAlgebra.Bipartite
+public import NLQCLean.LinearAlgebra.AdjointDimension
+public import NLQCLean.LinearAlgebra.SupportFactorization
+public import NLQCLean.LinearAlgebra.SchmidtRank
+public import NLQCLean.LinearAlgebra.SchmidtTruncation
+public import NLQCLean.LinearAlgebra.TraceNorm
+public import NLQCLean.LinearAlgebra.TraceNormSpectral
+public import NLQCLean.LinearAlgebra.TraceDistance
+public import NLQCLean.LinearAlgebra.TraceNormReindex
+public import NLQCLean.LinearAlgebra.IsometricCompletion
+public import NLQCLean.Geometry.LocalOrbit
+public import NLQCLean.Geometry.LocalMotionRank
+public import NLQCLean.Geometry.ScalarSard
+public import NLQCLean.Vendor.TauCeti.Analysis.Normed.Operator.Surjective
+public import NLQCLean.Vendor.TauCeti.MeasureTheory.Measure.Haar.NormedSpace
+public import NLQCLean.Vendor.TauCeti.Analysis.Calculus.Sard.OutermostStratum
+public import NLQCLean.Geometry.VectorSard
+public import NLQCLean.Geometry.CubicExtension
+public import NLQCLean.Geometry.CubicProjection
+public import NLQCLean.Geometry.RescaledCubicProjection
+public import NLQCLean.Geometry.RescaledSphereCubic
+public import NLQCLean.Geometry.PolynomialImageVolumeHypothesis
+public import NLQCLean.Semialgebraic.Format
+public import NLQCLean.Semialgebraic.CoordinateMaps
+public import NLQCLean.Geometry.PolynomialZeroMeasure
+public import NLQCLean.Geometry.PolynomialCoefficients
+public import NLQCLean.Semialgebraic.LocalSignStability
+public import NLQCLean.Semialgebraic.ParametricFormat
+public import NLQCLean.Semialgebraic.PolynomialSubstitution
+public import NLQCLean.Semialgebraic.Projection
+public import NLQCLean.Semialgebraic.FormatParameters
+public import NLQCLean.Semialgebraic.Objects
+public import NLQCLean.Semialgebraic.C1Decomposition
+public import NLQCLean.LinearAlgebra.CoordinateRank
+public import NLQCLean.Semialgebraic.Dimension
+public import NLQCLean.Semialgebraic.Fibers
+public import NLQCLean.Semialgebraic.CoordinateGraphs
+public import NLQCLean.Semialgebraic.BasicClosedFormat
+public import NLQCLean.Geometry.PolynomialGraphFormat
+public import NLQCLean.Geometry.CoordinateGraphJacobian
+public import NLQCLean.Geometry.CoordinateMinors
+public import NLQCLean.Geometry.CoordinateGraphSlope
+public import NLQCLean.Geometry.MaximalCoordinateGraphs
+public import NLQCLean.Geometry.GraphFiberMultiplicity
+public import NLQCLean.Geometry.FiniteFiberImageVolume
+public import NLQCLean.Geometry.SmoothCubeFamilyVolume
+public import NLQCLean.Geometry.C1PieceFamilyVolume
+public import NLQCLean.Geometry.PolynomialStrictDeriv
+public import NLQCLean.Geometry.SardSlices
+public import NLQCLean.Geometry.DirectVolume.Assembly
+public import NLQCLean.Geometry.SemialgebraicImageVolume
+public import NLQCLean.Geometry.CoordinateProjectionNorms
+public import NLQCLean.Geometry.JacobianNeighborhood
+public import NLQCLean.External.SemialgebraicTextbook
+public import NLQCLean.External.EffectiveArithmetic
+public import NLQCLean.Vendor.Sundog.CircuitNet
+public import NLQCLean.Vendor.Sundog.PieceCover
+public import NLQCLean.Vendor.Sundog.RegionCount
+public import NLQCLean.Vendor.Sundog.CancellationFree
+public import NLQCLean.Vendor.Sundog.RegionPoly
+public import NLQCLean.Vendor.Sundog.ExactRepr
+public import NLQCLean.Vendor.Sundog.AnalyticGate
+public import NLQCLean.Vendor.Sundog.DefinableRate
+public import NLQCLean.Vendor.Sundog.OMinimalOne
+public import NLQCLean.Vendor.Sundog.PolySignPartition
+public import NLQCLean.Vendor.Sundog.PolyBranchTrees
+public import NLQCLean.Vendor.Sundog.PseudoRemainder
+public import NLQCLean.Vendor.Sundog.PolyDerivZones
+public import NLQCLean.Vendor.Sundog.SignDiagrams
+public import NLQCLean.Vendor.Sundog.DiagramNormalize
+public import NLQCLean.Vendor.Sundog.DiagramAugment
+public import NLQCLean.Vendor.Sundog.DiagramGraft
+public import NLQCLean.Vendor.Sundog.DiagramWalk
+public import NLQCLean.Vendor.Sundog.DiagramAnnotate
+public import NLQCLean.Vendor.Sundog.DiagramDescent
+public import NLQCLean.Vendor.Sundog.DiagramReads
+public import NLQCLean.Vendor.Sundog.DiagramMaster
+public import NLQCLean.Vendor.Sundog.DiagramSelect
+public import NLQCLean.Vendor.Sundog.DiagramBranches
+public import NLQCLean.Vendor.Sundog.DiagramAssembly
+public import NLQCLean.Vendor.Sundog.SemialgebraicProjection
+public import NLQCLean.Semialgebraic.SundogBridge
+public import NLQCLean.Semialgebraic.ProjectionTheorem
+public import NLQCLean.Semialgebraic.DimensionDef
+public import NLQCLean.Rigidity.Compression
+public import NLQCLean.Rigidity.RangeDefect
+public import NLQCLean.Rigidity.CrossGram
+public import NLQCLean.Rigidity.FrozenDilation
+public import NLQCLean.Rigidity.ForwardExactDifferential
+public import NLQCLean.Rigidity.ForwardWitnessCalculus
+public import NLQCLean.Models.Targets
+public import NLQCLean.Models.Channels
+public import NLQCLean.Models.ChannelAmplification
+public import NLQCLean.Models.ClassicalCommunication.FiniteInstruments
+public import NLQCLean.Models.ClassicalCommunication.FiniteSupport
+public import NLQCLean.Models.ClassicalCommunication.HermitianMomentSupport
+public import NLQCLean.Models.ClassicalCommunication.InstrumentCompression
+public import NLQCLean.Models.ClassicalCommunication.ScorePruning
+public import NLQCLean.Models.ClassicalCommunication.KrausRepresentation
+public import NLQCLean.Models.ClassicalCommunication.CoherentLabels
+public import NLQCLean.Models.ClassicalCommunication.FiniteProtocol
+public import NLQCLean.Models.ClassicalCommunication.CoherentConversion
+public import NLQCLean.Models.ClassicalCommunication.TensorChannels
+public import NLQCLean.Models.ClassicalCommunication.LabelContraction
+public import NLQCLean.Models.ClassicalCommunication.ResourceSupport
+public import NLQCLean.Models.ClassicalCommunication.BranchChannels
+public import NLQCLean.Models.ClassicalCommunication.ProtocolCompression
+public import NLQCLean.Models.ClassicalCommunication.TargetScores
+public import NLQCLean.Models.ClassicalCommunication.FiniteCompression
+public import NLQCLean.Models.ClassicalCommunication.FiniteMixed
+public import NLQCLean.Models.ClassicalCommunication.FiniteMixedCompression
+public import NLQCLean.Models.ClassicalCommunication.FiniteReachability
+public import NLQCLean.Models.ClassicalCommunication.BarycenterSupport
+public import NLQCLean.Models.ClassicalCommunication.BranchSelection
+public import NLQCLean.Models.ClassicalCommunication.ChoiInstrumentDensities
+public import NLQCLean.Models.ClassicalCommunication.ChoiVectorInstrument
+public import NLQCLean.Models.ClassicalCommunication.ChoiDensityPositivity
+public import NLQCLean.Models.ClassicalCommunication.ChoiChannelEquivalence
+public import NLQCLean.Models.ClassicalCommunication.CPVectorInstrument
+public import NLQCLean.Models.ClassicalCommunication.ChannelUniformBound
+public import NLQCLean.Models.ClassicalCommunication.JointDensityChannels
+public import NLQCLean.Models.ClassicalCommunication.ConditionalDensityChannels
+public import NLQCLean.Models.ClassicalCommunication.DensityCompression
+public import NLQCLean.Models.ClassicalCommunication.DensityScoreFunctionals
+public import NLQCLean.Models.ClassicalCommunication.SequentialDensityCompression
+public import NLQCLean.Models.ClassicalCommunication.StandardBorelProtocol
+public import NLQCLean.Models.ClassicalCommunication.BorelOperationalChannel
+public import NLQCLean.Models.ClassicalCommunication.BorelChannelNormalization
+public import NLQCLean.Models.ClassicalCommunication.InstrumentPrecomposition
+public import NLQCLean.Models.StinespringDiamondContractivity
+public import NLQCLean.Models.ClassicalCommunication.TwoLevelDecoder
+public import NLQCLean.Models.ClassicalCommunication.BorelFiniteCompression
+public import NLQCLean.Models.ClassicalCommunication.FiniteLogicalRestriction
+public import NLQCLean.Models.ClassicalCommunication.RectangularDiagonalRestriction
+public import NLQCLean.Models.ClassicalCommunication.BorelLocalRestriction
+public import NLQCLean.Models.ClassicalCommunication.FiniteOutputRestriction
+public import NLQCLean.Models.ClassicalCommunication.FiniteRandomCompression
+public import NLQCLean.Models.Metrics
+public import NLQCLean.Models.ChoiAlgebra
+public import NLQCLean.Models.ChoiMetrics
+public import NLQCLean.Models.ProtocolMetrics
+public import NLQCLean.Models.OneRound
+public import NLQCLean.Models.Resource
+public import NLQCLean.Models.UnitaryTask
+public import NLQCLean.Models.ProjectiveTask
+public import NLQCLean.Models.ProjectiveScore
+public import NLQCLean.Models.ProjectiveProbability
+public import NLQCLean.Models.ProjectiveExactness
+public import NLQCLean.Models.ProjectiveScoreSemantics
+public import NLQCLean.Models.ProjectiveProtocolScore
+public import NLQCLean.Models.ProjectiveTV
+public import NLQCLean.Models.ProjectiveMixedExactness
+public import NLQCLean.LinearAlgebra.FlaggedSchmidtWeights
+public import NLQCLean.Approx.PVMBlockSpectrum
+public import NLQCLean.Approx.PVMChoiProjection
+public import NLQCLean.Approx.PVMBlockTruncation
+public import NLQCLean.Approx.PVMSharpFreezing
+public import NLQCLean.Rigidity.FlaggedSupports
+public import NLQCLean.Approx.PVMRankAllocations
+public import NLQCLean.Models.PVMForwardCompression
+public import NLQCLean.Approx.PVMReverseWitness
+public import NLQCLean.Approx.PVMPhysicalReverse
+public import NLQCLean.Approx.PVMWitnessCoverage
+public import NLQCLean.Approx.PVMCoordinateCount
+public import NLQCLean.Approx.PVMBlockNormalization
+public import NLQCLean.Approx.PVMPolynomialDegree
+public import NLQCLean.Approx.PVMWitnessCoordinates
+public import NLQCLean.Approx.PVMPolynomialWitnessFamily
+public import NLQCLean.Approx.PVMPolynomialCoverage
+public import NLQCLean.Rigidity.PVMWitnessCalculus
+public import NLQCLean.Approx.PVMNormalizedCubicWitness
+public import NLQCLean.Approx.PVMWitnessVelocityBounds
+public import NLQCLean.Approx.PVMWitnessDifferentialBounds
+public import NLQCLean.Approx.PVMExtendedWitness
+public import NLQCLean.Approx.PVMExtendedPolynomial
+public import NLQCLean.Geometry.PVMMotionRank
+public import NLQCLean.Geometry.SingularValueRankBound
+public import NLQCLean.Rigidity.PVMReverseGenerator
+public import NLQCLean.Rigidity.PVMExtendedDifferential
+public import NLQCLean.Rigidity.PVMCoordinateDifferential
+public import NLQCLean.Approx.PVMWitnessJacobianBound
+public import NLQCLean.Approx.PVMWitnessSingularValues
+public import NLQCLean.Approx.PVMPolynomialWitnessThickening
+public import NLQCLean.Models.PVMPhysicalReachability
+public import NLQCLean.Models.PVMMixedReachability
+public import NLQCLean.Models.PVMTVReachability
+public import NLQCLean.Models.PVMUniversalReachability
+public import NLQCLean.Bounds.PVMHaarArithmetic
+public import NLQCLean.Approx.PVMWitnessTargets
+public import NLQCLean.Geometry.PVMPolynomialTubeConditional
+public import NLQCLean.Approx.PVMReachableWitnessCover
+public import NLQCLean.Geometry.UnitaryHaarInverse
+public import NLQCLean.Bounds.CodimensionArithmetic
+public import NLQCLean.Bounds.PVMHaarFractionConditional
+public import NLQCLean.Bounds.PVMTVHaarConditional
+public import NLQCLean.Bounds.PVMResourceArithmetic
+public import NLQCLean.Bounds.PVMResourceConditional
+public import NLQCLean.Invariants.PVMMeanPurity
+public import NLQCLean.Invariants.PVMRotationFamily
+public import NLQCLean.Rigidity.PVMFlagDifferential
+public import NLQCLean.Exact.PVMScalarCriticalValues
+public import NLQCLean.Exact.PVMHardTarget
+public import NLQCLean.Bounds.PVMQualitativeGap
+public import NLQCLean.Models.ChargedCompactProtocols
+public import NLQCLean.Models.ChargedCompactPVMProtocols
+public import NLQCLean.Models.ChargedProtocolExamples
+public import NLQCLean.Bounds.GeneralTargetQualitativeGap
+public import NLQCLean.Bounds.AlmostEveryQualitativeGap
+public import NLQCLean.Approx.SpectralFootprintFloors
+public import NLQCLean.Approx.PVMSpectralFootprintFloors
+public import NLQCLean.Approx.GeneralizedBellBasis
+public import NLQCLean.Invariants.PurityEstimates
+public import NLQCLean.Invariants.ControlledPhase
+public import NLQCLean.Invariants.RectangularControlledPhase
+public import NLQCLean.Approx.ScalarPurityWitness
+public import NLQCLean.Bounds.ControlledPhaseLength
+public import NLQCLean.Bounds.ControlledPhaseAlmostEvery
+public import NLQCLean.Bounds.FiniteControlledPhaseAlmostEvery
+public import NLQCLean.Bounds.FiniteClassicalHaar
+public import NLQCLean.Bounds.FiniteClassicalStrongUniversal
+public import NLQCLean.Bounds.FiniteClassicalQubits
+public import NLQCLean.Bounds.FiniteClassicalAlmostEvery
+public import NLQCLean.Bounds.ArbitraryFiniteClassicalAlmostEvery
+public import NLQCLean.Bounds.FiniteControlledPhaseQubits
+public import NLQCLean.Bounds.FiniteControlledPhaseLength
+public import NLQCLean.Arithmetic.PolynomialBoundary
+public import NLQCLean.Arithmetic.BivariateFactor
+public import NLQCLean.Arithmetic.CosineTransform
+public import NLQCLean.Arithmetic.SeparationCertificate
+public import NLQCLean.Arithmetic.ChargedPhysicalCoordinates
+public import NLQCLean.Arithmetic.PhysicalPolynomialConstraints
+public import NLQCLean.Arithmetic.PhysicalPolynomialEncoding
+public import NLQCLean.Arithmetic.PhysicalScorePolynomial
+public import NLQCLean.Arithmetic.PVMScorePolynomial
+public import NLQCLean.Arithmetic.ControlledPhaseScorePolynomial
+public import NLQCLean.Arithmetic.PhysicalPolynomialHeight
+public import NLQCLean.Arithmetic.ControlledPhaseLeastDeficit
+public import NLQCLean.Arithmetic.PurePowerReduction
+public import NLQCLean.Arithmetic.DeformationSystem
+public import NLQCLean.Arithmetic.DeformationAnalysis
+public import NLQCLean.Arithmetic.DeformationEliminant
+public import NLQCLean.Arithmetic.DeformationFinal
+public import NLQCLean.Arithmetic.DeformationBounds
+public import NLQCLean.Bounds.ControlledPhaseEliminant
+public import NLQCLean.Bounds.ExplicitControlledPhase
+public import NLQCLean.Bounds.AlmostEveryArithmetic
+public import NLQCLean.Bounds.AlmostEveryTargets
+public import NLQCLean.Bounds.PVMAlmostEveryTargets
+public import NLQCLean.Bounds.AlmostEveryPhysical
+public import NLQCLean.Bounds.AlmostEveryQubits
+public import NLQCLean.Geometry.CriticalNormalImages
+public import NLQCLean.Geometry.RankDeficientHaarNull
+public import NLQCLean.Exact.UnitaryExactWitness
+public import NLQCLean.Exact.PVMExactWitness
+public import NLQCLean.Exact.UnitaryWitnessHaar
+public import NLQCLean.Exact.PVMWitnessHaar
+public import NLQCLean.Bounds.AlmostEveryExact
+public import NLQCLean.Models.SwapTarget
+public import NLQCLean.Models.SwapChoi
+public import NLQCLean.Models.SwapNeighborhood
+public import NLQCLean.LinearAlgebra.FlatSupport
+public import NLQCLean.Approx.StrongSupport
+public import NLQCLean.Bounds.StrongUnitaryTargets
+public import NLQCLean.LinearAlgebra.CrossedSinglet
+public import NLQCLean.Bounds.SwapNeighborhoodMessages
+public import NLQCLean.LinearAlgebra.FlatProductTail
+public import NLQCLean.Approx.SwapNeighborhoodFreezing
+public import NLQCLean.Approx.SlimReverseWitness
+public import NLQCLean.Approx.SlimWitnessCalculus
+public import NLQCLean.Approx.SlimNormalizedCubic
+public import NLQCLean.Approx.SlimWitnessCoordinates
+public import NLQCLean.Approx.SlimPolynomialWitness
+public import NLQCLean.LinearAlgebra.ResidualSpectralCutoff
+public import NLQCLean.LinearAlgebra.FrobeniusInsertion
+public import NLQCLean.Approx.SlimWitnessDifferential
+public import NLQCLean.Geometry.FiniteDimensionalNets
+public import NLQCLean.Geometry.EuclideanBallCaps
+public import NLQCLean.Geometry.HermitianOperatorSector
+public import NLQCLean.Geometry.OperatorNormalEmbedding
+public import NLQCLean.Geometry.OperatorNormalMeasure
+public import NLQCLean.Geometry.ScaledUnitaryNormalVolume
+public import NLQCLean.Geometry.UnitaryFrobeniusVolume
+public import NLQCLean.Approx.PVMWitnessCutoff
+public import NLQCLean.Geometry.PolynomialTube
+public import NLQCLean.Approx.WitnessFamilies
+public import NLQCLean.Arithmetic.EliminationSize
+public import NLQCLean.Arithmetic.EliminationKKT
+public import NLQCLean.Arithmetic.GelfondZeroEstimate
+public import NLQCLean.Arithmetic.GelfondInterpolation
+public import NLQCLean.Arithmetic.GelfondSchwarz
+public import NLQCLean.Arithmetic.GelfondLiouville
+public import NLQCLean.Arithmetic.GelfondAuxiliary
+public import NLQCLean.Arithmetic.GelfondSiegel
+public import NLQCLean.Arithmetic.GelfondEstimates
+public import NLQCLean.Arithmetic.GelfondDoubling
+public import NLQCLean.Arithmetic.GelfondNumerics
+public import NLQCLean.Arithmetic.GelfondMeasure
+public import NLQCLean.Bounds.ExplicitControlledPhaseGelfond
+public import NLQCLean.Arithmetic.GelfondAngleLiouville
+public import NLQCLean.Arithmetic.GelfondAngleAuxiliary
+public import NLQCLean.Arithmetic.GelfondAngleSiegel
+public import NLQCLean.Arithmetic.GelfondAngleDoubling
+public import NLQCLean.Arithmetic.GelfondAngleNumerics
+public import NLQCLean.Arithmetic.GelfondAngleMeasure
+public import NLQCLean.Bounds.ExplicitControlledPhaseAngle
+public import NLQCLean.ImageVolume.PolynomialDerivative
+public import NLQCLean.ImageVolume.BoxMonomialCount
+public import NLQCLean.ImageVolume.NondegenerateZeroCount
+public import NLQCLean.ImageVolume.BanachIndicatrix
+public import NLQCLean.ImageVolume.BlockMinorBound
+public import NLQCLean.ImageVolume.LagrangeCharts
+public import NLQCLean.ImageVolume.BarrierImageVolume
+public import NLQCLean.ImageVolume.PolynomialImageVolume
+public import NLQCLean.Semialgebraic.Lojasiewicz
+public import NLQCLean.Semialgebraic.PolynomialStability
+public import NLQCLean.Bounds.FixedBudgetStability
+public import NLQCLean.Bounds.FixedBudgetStabilityPVM
+public import NLQCLean.LinearAlgebra.IsometryExtension
+public import NLQCLean.Models.ClassicalCommunication.TranscriptCompression
+public import NLQCLean.Arithmetic.TranscriptPolynomial
+public import NLQCLean.Arithmetic.TranscriptHeight
+public import NLQCLean.Bounds.ExplicitControlledPhaseTranscript
+public import NLQCLean.Bounds.ExplicitControlledPhaseSharedRandom
+public import NLQCLean.Bounds.SwapNeighborhoodHaar
+public import NLQCLean.Geometry.StrongPolynomialTubeConditional
+public import NLQCLean.Bounds.StrongHaarArithmetic
+public import NLQCLean.Bounds.StrongHaarConditional
+public import NLQCLean.Bounds.StrongUniversalResources
+public import NLQCLean.Geometry.StrongWitnessBarrierVolume
+public import NLQCLean.Bounds.StrongUniversalExplicit
+public import NLQCLean.Approx.PVMRankFloor
+public import NLQCLean.Models.ForwardWitness
+public import NLQCLean.Models.ForwardReindex
+public import NLQCLean.Models.ForwardCompression
+public import NLQCLean.Models.CompactForward
+public import NLQCLean.Models.UnitaryScore
+public import NLQCLean.Invariants.OperatorSchmidtPurity
+public import NLQCLean.Exact.ScalarCriticalValues
+public import NLQCLean.Bounds.QualitativeDivergence
+public import NLQCLean.Bounds.QualitativeDiamond
+public import NLQCLean.Approx.ChoiRank
+public import NLQCLean.LinearAlgebra.FrobeniusInner
+public import NLQCLean.LinearAlgebra.SchmidtOverlap
+public import NLQCLean.Approx.ChoiProjection
+public import NLQCLean.Approx.SharpFreezing
+public import NLQCLean.Approx.CrossGramDistance
+public import NLQCLean.Approx.ReverseWitness
+public import NLQCLean.Approx.WitnessVelocityBounds
+public import NLQCLean.Rigidity.QuantitativeDifferential
+public import NLQCLean.Rigidity.ReverseWitnessCalculus
+public import NLQCLean.Approx.WitnessDifferentialBounds
+public import NLQCLean.Approx.NormalizedCubicWitness
+public import NLQCLean.Rigidity.ExtendedWitnessDifferential
+public import NLQCLean.LinearAlgebra.EuclideanCoordinates
+public import NLQCLean.Approx.WitnessEuclideanCoordinates
+public import NLQCLean.Rigidity.CoordinateWitnessDifferential
+public import NLQCLean.Approx.WitnessNormalization
+public import NLQCLean.Geometry.PolynomialDegree
+public import NLQCLean.Geometry.MatrixPolynomialDegree
+public import NLQCLean.Approx.WitnessPolynomialDegree
+public import NLQCLean.Approx.PolynomialWitnessFamily
+public import NLQCLean.Approx.PolynomialWitnessCoverage
+public import NLQCLean.Geometry.NormDetBounds
+public import NLQCLean.Geometry.ThickenedJacobian
+public import NLQCLean.Approx.WitnessJacobianBound
+public import NLQCLean.Geometry.UnitaryNormalEmbedding
+public import NLQCLean.Geometry.UnitaryHaar
+public import NLQCLean.Geometry.UnitaryNormalCoordinates
+public import NLQCLean.Geometry.UnitaryNormalMeasure
+public import NLQCLean.Geometry.RealFrobeniusInner
+public import NLQCLean.Geometry.AdjointEuclideanCoordinates
+public import NLQCLean.Geometry.UnitaryCayley
+public import NLQCLean.Geometry.UnitaryCayleyNormal
+public import NLQCLean.Geometry.HaarPolynomialZero
+public import NLQCLean.Approx.GenericSchmidtRank
+public import NLQCLean.Approx.GenericSpectralThresholds
+public import NLQCLean.Geometry.ExpandingDeterminant
+public import NLQCLean.Geometry.UnitaryNormalVolume
+public import NLQCLean.Geometry.PolynomialThickening
+public import NLQCLean.Approx.PolynomialWitnessThickening
+public import NLQCLean.Geometry.PolynomialTubeConditional
+public import NLQCLean.Geometry.UnitaryWitnessTube
+public import NLQCLean.Geometry.TransverseTubeArithmetic
+public import NLQCLean.Bounds.SwapFloor
+public import NLQCLean.Models.PhysicalReachability
+public import NLQCLean.Models.MixedReachability
+public import NLQCLean.Models.UniversalReachability
+public import NLQCLean.Approx.ReachableWitnessCover
+public import NLQCLean.Bounds.HaarFractionConditional
+public import NLQCLean.Bounds.HaarArithmetic
+public import NLQCLean.Bounds.HaarAbsorption
+public import NLQCLean.Bounds.ResourceArithmetic
+public import NLQCLean.Bounds.ResourceConditional
+public import NLQCLean.Models.DiamondReachability
+public import NLQCLean.Bounds.DiamondConditional
+public import NLQCLean.Bounds.Quantitative
+public import NLQCLean.Semialgebraic.RationalCoefficients
+public import NLQCLean.Semialgebraic.RationalSignDiagrams
+public import NLQCLean.Semialgebraic.RationalDiagramBranches
+public import NLQCLean.Semialgebraic.RationalDiagramAssembly
+public import NLQCLean.Semialgebraic.RationalProjection
+public import NLQCLean.Semialgebraic.RationalImages
+public import NLQCLean.Arithmetic.RationalSemialgebraicBoundary
+public import NLQCLean.Arithmetic.PhaseTranscendence
+public import NLQCLean.Invariants.LocalUnitaryPurity
+public import NLQCLean.Semialgebraic.RationalPolynomialImages
+public import NLQCLean.Arithmetic.ComplexMatrixPolynomials
+public import NLQCLean.Arithmetic.RationalIntegerPolynomials
+public import NLQCLean.Exact.TargetWitness
+public import NLQCLean.Exact.WitnessRationalCoordinates
+public import NLQCLean.Exact.TargetWitnessPolynomial
+public import NLQCLean.Exact.ExactPurityAlgebraicity
+public import NLQCLean.Exact.ControlledPhaseExclusion
+public import NLQCLean.Exact.LocalChannelRestriction
+public import NLQCLean.Exact.FiniteExactRestriction
+public import NLQCLean.Exact.SpectatorControlledPhase
+public import NLQCLean.Exact.SpectatorExactExclusion
+public import NLQCLean.Exact.BitstringControlledPhase
+public import NLQCLean.Exact.BitstringExactExclusion
+public import NLQCLean.Invariants.PurityReindex
+public import NLQCLean.Invariants.SpectatorControlledPhasePurity
+public import NLQCLean.Invariants.LocalOrbitDifferential
+public import NLQCLean.Exact.RationalPolynomialSmoothness
+public import NLQCLean.Exact.RationalInvariantPolynomial
+public import NLQCLean.Exact.InvariantCriticalValues
+public import NLQCLean.Exact.OrbitInvariantAlgebraicity
+public import NLQCLean.Invariants.CompactSeparation
+public import NLQCLean.Invariants.LocalOrbitSeparation
+public import NLQCLean.Semialgebraic.ScalarNullFinite
+public import NLQCLean.Semialgebraic.PiecewiseC1
+public import NLQCLean.Semialgebraic.PurePowerZeros
+public import NLQCLean.Semialgebraic.FinitePointCount
+public import NLQCLean.Semialgebraic.Definable
+public import NLQCLean.Semialgebraic.FiniteRealOrder
+public import NLQCLean.Semialgebraic.CylindricalRoots
+public import NLQCLean.Semialgebraic.SAPaths
+public import NLQCLean.Semialgebraic.Cells
+public import NLQCLean.Semialgebraic.CellDecomposition
+public import NLQCLean.Semialgebraic.Components
+public import NLQCLean.Semialgebraic.DefinableChoice
+public import NLQCLean.Semialgebraic.OneVariableContinuity
+public import NLQCLean.Semialgebraic.CurveSelection
+public import NLQCLean.Semialgebraic.Paths
+public import NLQCLean.Exact.FiniteUnion
+public import NLQCLean.Exact.LocalOrbitSaturation
+public import NLQCLean.Exact.FiniteOrbits
+public import NLQCLean.Geometry.LocalOrbitHaarNull
+public import NLQCLean.Exact.ExactBadDecomposition
+public import NLQCLean.Semialgebraic.PolynomialFunctions
+public import NLQCLean.Invariants.PVMOrbitDifferential
+public import NLQCLean.Exact.PVMInvariantCriticalValues
+public import NLQCLean.Exact.PolynomialWitnessMaps
+public import NLQCLean.Exact.PVMFiniteOrbits
+public import NLQCLean.Exact.PVMBadDecomposition
+public import NLQCLean.LinearAlgebra.LinearODE
+public import NLQCLean.Exact.PathDerivatives
+public import NLQCLean.Exact.RigidityStatements
+public import NLQCLean.Exact.GeneralExactWitness
+public import NLQCLean.Exact.UnequalDimensions
+public import NLQCLean.Exact.CompressionFiniteOrbits
+public import NLQCLean.Exact.PaperFoundations
+public import NLQCLean.Exact.PVMPathFactorization
+public import NLQCLean.Results.ExactPaper
+public import NLQCLean.Results.Unitary
+public import NLQCLean.Results.PVM
+public import NLQCLean.Bounds.BorelClassicalQubits
+public import NLQCLean.LinearAlgebra.FlatGroupedTail
+public import NLQCLean.Bounds.NearBellMessages
+public import NLQCLean.Bounds.NearBellSpectra
+public import NLQCLean.Bounds.NearBellWitnessCover
+public import NLQCLean.Bounds.NearBellHaarArithmetic
+public import NLQCLean.Bounds.NearBellHaar
+public import NLQCLean.Bounds.NearBellUniversal
+public import NLQCLean.Geometry.PVMWitnessBarrierVolume
+public import NLQCLean.Bounds.NearBellUniversalExplicit
+public import NLQCLean.Bounds.NearBellAlmostEvery
+public import NLQCLean.Bounds.BorelClassicalStrongPVM
+public import NLQCLean.Results.RobustPaper
+
+@[expose] public section
 
 /-!
 # One-round nonlocal quantum computation

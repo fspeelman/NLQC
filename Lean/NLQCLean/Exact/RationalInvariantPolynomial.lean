@@ -1,6 +1,10 @@
-import NLQCLean.Exact.WitnessRationalCoordinates
-import NLQCLean.Exact.RationalPolynomialSmoothness
-import Mathlib.Algebra.MvPolynomial.Rename
+module
+
+public import NLQCLean.Exact.WitnessRationalCoordinates
+public import NLQCLean.Exact.RationalPolynomialSmoothness
+public import Mathlib.Algebra.MvPolynomial.Rename
+
+@[expose] public section
 
 /-!
 # Rational polynomials in target-matrix entries

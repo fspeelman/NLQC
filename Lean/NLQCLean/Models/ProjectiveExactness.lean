@@ -1,4 +1,8 @@
-import NLQCLean.Models.ProjectiveProbability
+module
+
+public import NLQCLean.Models.ProjectiveProbability
+
+@[expose] public section
 
 /-!
 # Score one is exact two-sided PVM implementation

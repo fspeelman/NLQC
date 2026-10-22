@@ -33,7 +33,11 @@ samples, a valid annotation exists — so `realizes_graftWalk` fires. Everything
 plans depend on (derivative gap signs, sample signs, end signs) is transfer- or
 branch-readable; making them branch-CONSTANT is the descent's remaining business.
 -/
-import NLQCLean.Vendor.Sundog.DiagramWalk
+module
+
+public import NLQCLean.Vendor.Sundog.DiagramWalk
+
+@[expose] public section
 
 namespace Sundog.TarskiQE
 

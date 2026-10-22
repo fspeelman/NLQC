@@ -1,4 +1,8 @@
-import NLQCLean.Bounds.RectangularDiagonalAlmostEvery
+module
+
+public import NLQCLean.Bounds.RectangularDiagonalAlmostEvery
+
+@[expose] public section
 
 /-!
 # Rectangular diagonal measure, normalization and resource-rate audit

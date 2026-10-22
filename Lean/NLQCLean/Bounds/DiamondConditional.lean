@@ -1,5 +1,9 @@
-import NLQCLean.Models.DiamondReachability
-import NLQCLean.Bounds.ResourceConditional
+module
+
+public import NLQCLean.Models.DiamondReachability
+public import NLQCLean.Bounds.ResourceConditional
+
+@[expose] public section
 
 /-!
 # Conditional operational resource, qubit and Haar bounds

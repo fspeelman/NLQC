@@ -28,7 +28,11 @@ knows them: a point-column with no zero entry. This module removes them, branch-
 **Honest fence.** 2d-2a only: the P-column augmentation (2d-2b) and the root-insertion
 splice (2d-2c) are the remaining pitches of the surgery.
 -/
-import NLQCLean.Vendor.Sundog.SignDiagrams
+module
+
+public import NLQCLean.Vendor.Sundog.SignDiagrams
+
+@[expose] public section
 
 namespace Sundog.TarskiQE
 

@@ -1,4 +1,8 @@
-import NLQCLean.Bounds.BorelClassicalRates
+module
+
+public import NLQCLean.Bounds.BorelClassicalRates
+
+@[expose] public section
 
 /-! Full types and standard-axiom guards for actual original-channel Borel rates.
 The intrinsic data and target definitions are printed alongside their witnesses.

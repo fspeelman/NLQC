@@ -1,5 +1,9 @@
-import NLQCLean.LinearAlgebra.SchmidtRank
-import NLQCLean.Models.Resource
+module
+
+public import NLQCLean.LinearAlgebra.SchmidtRank
+public import NLQCLean.Models.Resource
+
+@[expose] public section
 
 /-!
 # Rank of a protocol's purified Choi vector

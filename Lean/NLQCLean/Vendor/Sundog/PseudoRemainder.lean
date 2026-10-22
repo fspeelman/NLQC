@@ -32,7 +32,11 @@ strictly smaller `y`-degree. This is the elimination's degree-descent engine.
 
 **Honest fence.** TS-2b only: no between-roots analysis (2c), no recursion (2d).
 -/
-import NLQCLean.Vendor.Sundog.PolyBranchTrees
+module
+
+public import NLQCLean.Vendor.Sundog.PolyBranchTrees
+
+@[expose] public section
 
 namespace Sundog.TarskiQE
 

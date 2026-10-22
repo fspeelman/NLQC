@@ -1,8 +1,12 @@
 /-
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import NLQCLean.Geometry.RankDeficientHaarNull
-import NLQCLean.Exact.UnitaryExactWitness
+module
+
+public import NLQCLean.Geometry.RankDeficientHaarNull
+public import NLQCLean.Exact.UnitaryExactWitness
+
+@[expose] public section
 
 /-!
 # Exactly reachable unitaries are Haar-null

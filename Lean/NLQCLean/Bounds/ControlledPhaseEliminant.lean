@@ -1,7 +1,11 @@
-import NLQCLean.Arithmetic.DeformationBounds
-import NLQCLean.Arithmetic.ControlledPhaseLeastDeficit
-import NLQCLean.External.EffectiveArithmetic
-import NLQCLean.Arithmetic.TranscriptPolynomial
+module
+
+public import NLQCLean.Arithmetic.DeformationBounds
+public import NLQCLean.Arithmetic.ControlledPhaseLeastDeficit
+public import NLQCLean.External.EffectiveArithmetic
+public import NLQCLean.Arithmetic.TranscriptPolynomial
+
+@[expose] public section
 
 /-!
 # Controlled-phase eliminants without external input

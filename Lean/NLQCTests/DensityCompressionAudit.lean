@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.SequentialDensityCompression
+module
+
+public import NLQCLean.Models.ClassicalCommunication.SequentialDensityCompression
+
+@[expose] public section
 
 /-! # finite density selections and sequential good sections -/
 

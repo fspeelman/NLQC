@@ -1,8 +1,12 @@
-import NLQCLean.Bounds.PVMAlmostEveryTargets
-import NLQCLean.Bounds.DiamondConditional
-import NLQCLean.Bounds.PVMTVHaarConditional
-import NLQCLean.Models.ProjectiveProtocolScore
-import NLQCLean.Models.ProjectiveMixedExactness
+module
+
+public import NLQCLean.Bounds.PVMAlmostEveryTargets
+public import NLQCLean.Bounds.DiamondConditional
+public import NLQCLean.Bounds.PVMTVHaarConditional
+public import NLQCLean.Models.ProjectiveProtocolScore
+public import NLQCLean.Models.ProjectiveMixedExactness
+
+@[expose] public section
 
 /-!
 # Almost-every fixed-target resource bounds for all small errors

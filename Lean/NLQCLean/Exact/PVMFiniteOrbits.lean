@@ -1,5 +1,9 @@
-import NLQCLean.Exact.PolynomialWitnessMaps
-import NLQCLean.Exact.FiniteOrbits
+module
+
+public import NLQCLean.Exact.PolynomialWitnessMaps
+public import NLQCLean.Exact.FiniteOrbits
+
+@[expose] public section
 
 /-!
 # Finitely many measurement orbits per architecture

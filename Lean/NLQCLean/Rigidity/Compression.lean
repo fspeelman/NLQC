@@ -1,8 +1,12 @@
 /-
 Local compression: the only calculation about the interior of a protocol.
 -/
-import NLQCLean.LinearAlgebra.Bipartite
-import NLQCLean.LinearAlgebra.Isometry
+module
+
+public import NLQCLean.LinearAlgebra.Bipartite
+public import NLQCLean.LinearAlgebra.Isometry
+
+@[expose] public section
 
 /-!
 # Local compression

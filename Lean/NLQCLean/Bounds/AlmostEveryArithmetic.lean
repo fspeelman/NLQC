@@ -1,7 +1,11 @@
-import Mathlib.MeasureTheory.OuterMeasure.BorelCantelli
-import Mathlib.MeasureTheory.Measure.MeasureSpaceDef
-import Mathlib.Analysis.SpecificLimits.Basic
-import Mathlib.Analysis.SpecialFunctions.Pow.Real
+module
+
+public import Mathlib.MeasureTheory.OuterMeasure.BorelCantelli
+public import Mathlib.MeasureTheory.Measure.MeasureSpaceDef
+public import Mathlib.Analysis.SpecificLimits.Basic
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+
+@[expose] public section
 
 /-!
 # Arithmetic and first Borel–Cantelli helpers for almost-every targets

@@ -1,7 +1,11 @@
-import NLQCLean.Exact.SpectatorControlledPhase
-import NLQCLean.Exact.BitstringControlledPhase
-import NLQCLean.Invariants.PurityReindex
-import NLQCLean.Invariants.PurityEstimates
+module
+
+public import NLQCLean.Exact.SpectatorControlledPhase
+public import NLQCLean.Exact.BitstringControlledPhase
+public import NLQCLean.Invariants.PurityReindex
+public import NLQCLean.Invariants.PurityEstimates
+
+@[expose] public section
 
 /-!
 # Operator purity of a controlled phase with spectators

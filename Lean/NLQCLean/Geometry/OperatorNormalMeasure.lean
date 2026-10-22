@@ -1,5 +1,9 @@
-import NLQCLean.Geometry.OperatorNormalEmbedding
-import NLQCLean.Geometry.UnitaryNormalVolume
+module
+
+public import NLQCLean.Geometry.OperatorNormalEmbedding
+public import NLQCLean.Geometry.UnitaryNormalVolume
+
+@[expose] public section
 
 /-!
 # The operator-normal image measure

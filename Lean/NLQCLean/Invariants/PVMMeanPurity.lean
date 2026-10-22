@@ -1,5 +1,9 @@
-import NLQCLean.Invariants.OperatorSchmidtPurity
-import NLQCLean.LinearAlgebra.Bipartite
+module
+
+public import NLQCLean.Invariants.OperatorSchmidtPurity
+public import NLQCLean.LinearAlgebra.Bipartite
+
+@[expose] public section
 
 /-!
 # Mean reduced purity of a basis matrix

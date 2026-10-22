@@ -1,6 +1,10 @@
-import NLQCLean.Approx.PVMWitnessCoordinates
-import NLQCLean.Approx.PVMPolynomialDegree
-import NLQCLean.Approx.PolynomialWitnessFamily
+module
+
+public import NLQCLean.Approx.PVMWitnessCoordinates
+public import NLQCLean.Approx.PVMPolynomialDegree
+public import NLQCLean.Approx.PolynomialWitnessFamily
+
+@[expose] public section
 
 /-!
 # Exact fixed-format polynomial PVM witness domain

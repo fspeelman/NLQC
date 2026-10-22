@@ -1,5 +1,9 @@
-import NLQCLean.Models.CompactForward
-import NLQCLean.Geometry.UnitaryNormalEmbedding
+module
+
+public import NLQCLean.Models.CompactForward
+public import NLQCLean.Geometry.UnitaryNormalEmbedding
+
+@[expose] public section
 
 /-!
 # Physical reachability is Borel

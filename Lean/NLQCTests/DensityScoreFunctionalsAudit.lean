@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.DensityScoreFunctionals
+module
+
+public import NLQCLean.Models.ClassicalCommunication.DensityScoreFunctionals
+
+@[expose] public section
 
 /-! # Continuity is derived for original operation score functionals -/
 

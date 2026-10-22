@@ -2,8 +2,12 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Vendor.Sundog.PseudoRemainder
-import Mathlib.Algebra.Polynomial.Eval.Subring
+module
+
+public import NLQCLean.Vendor.Sundog.PseudoRemainder
+public import Mathlib.Algebra.Polynomial.Eval.Subring
+
+@[expose] public section
 
 /-!
 # Coefficient preservation in constructive polynomial elimination

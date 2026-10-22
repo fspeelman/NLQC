@@ -1,9 +1,13 @@
-import NLQCLean.LinearAlgebra.FlatProductTail
-import NLQCLean.Approx.StrongSupport
-import NLQCLean.Approx.SharpFreezing
-import NLQCLean.Models.ProtocolMetrics
-import NLQCLean.Models.SwapChoi
-import NLQCLean.Models.SwapNeighborhood
+module
+
+public import NLQCLean.LinearAlgebra.FlatProductTail
+public import NLQCLean.Approx.StrongSupport
+public import NLQCLean.Approx.SharpFreezing
+public import NLQCLean.Models.ProtocolMetrics
+public import NLQCLean.Models.SwapChoi
+public import NLQCLean.Models.SwapNeighborhood
+
+@[expose] public section
 
 /-!
 # Near SWAP, the frozen environment needs only `⌈K/⌈D/2⌉⌉` Schmidt terms

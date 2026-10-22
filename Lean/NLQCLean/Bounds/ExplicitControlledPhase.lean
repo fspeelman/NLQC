@@ -1,8 +1,12 @@
-import NLQCLean.Bounds.ControlledPhaseEliminant
-import NLQCLean.Arithmetic.SeparationCertificate
-import NLQCLean.Arithmetic.BivariateFactor
-import NLQCLean.Arithmetic.PhaseTranscendence
-import Mathlib.Analysis.Complex.ExponentialBounds
+module
+
+public import NLQCLean.Bounds.ControlledPhaseEliminant
+public import NLQCLean.Arithmetic.SeparationCertificate
+public import NLQCLean.Arithmetic.BivariateFactor
+public import NLQCLean.Arithmetic.PhaseTranscendence
+public import Mathlib.Analysis.Complex.ExponentialBounds
+
+@[expose] public section
 
 /-!
 # Effective bound for an explicit controlled phase (`thm:explicit`)

@@ -1,8 +1,12 @@
-import NLQCLean.Geometry.DirectVolume.Assembly
-import NLQCLean.Bounds.BorelSharedRandomRectangular
-import NLQCLean.Bounds.FiniteControlledPhaseQubits
-import NLQCLean.Bounds.AlmostEveryPhysical
-import NLQCLean.Bounds.Quantitative
+module
+
+public import NLQCLean.Geometry.DirectVolume.Assembly
+public import NLQCLean.Bounds.BorelSharedRandomRectangular
+public import NLQCLean.Bounds.FiniteControlledPhaseQubits
+public import NLQCLean.Bounds.AlmostEveryPhysical
+public import NLQCLean.Bounds.Quantitative
+
+@[expose] public section
 
 /-!
 # Initial resource qubits in LOSCC with free shared randomness

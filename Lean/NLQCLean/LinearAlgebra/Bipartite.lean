@@ -1,10 +1,14 @@
 /-
 Bipartite index structure: amplifications, local algebras, partial traces.
 -/
-import NLQCLean.LinearAlgebra.Basic
-import Mathlib.LinearAlgebra.Matrix.Kronecker
-import Mathlib.Algebra.Star.Module
-import Mathlib.LinearAlgebra.Matrix.Trace
+module
+
+public import NLQCLean.LinearAlgebra.Basic
+public import Mathlib.LinearAlgebra.Matrix.Kronecker
+public import Mathlib.Algebra.Star.Module
+public import Mathlib.LinearAlgebra.Matrix.Trace
+
+@[expose] public section
 
 /-!
 # Bipartite matrices

@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.ConditionalDensityChannels
+module
+
+public import NLQCLean.Models.ClassicalCommunication.ConditionalDensityChannels
+
+@[expose] public section
 
 /-! # Every-outcome conditional integration and linear scores -/
 

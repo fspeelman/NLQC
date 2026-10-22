@@ -1,5 +1,9 @@
-import NLQCLean.Arithmetic.PhysicalScorePolynomial
-import NLQCLean.LinearAlgebra.RealCoordinates
+module
+
+public import NLQCLean.Arithmetic.PhysicalScorePolynomial
+public import NLQCLean.LinearAlgebra.RealCoordinates
+
+@[expose] public section
 
 /-!
 # Integer polynomial operations on complex matrices

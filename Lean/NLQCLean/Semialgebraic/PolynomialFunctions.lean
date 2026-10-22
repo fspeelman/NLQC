@@ -1,10 +1,14 @@
-import NLQCLean.Semialgebraic.Projection
-import NLQCLean.Semialgebraic.ProjectionTheorem
-import Mathlib.LinearAlgebra.Dimension.Free
-import Mathlib.LinearAlgebra.Matrix.Kronecker
-import Mathlib.Topology.Algebra.Module.FiniteDimension
-import Mathlib.Topology.Algebra.MvPolynomial
-import Mathlib.Analysis.Complex.Basic
+module
+
+public import NLQCLean.Semialgebraic.Projection
+public import NLQCLean.Semialgebraic.ProjectionTheorem
+public import Mathlib.LinearAlgebra.Dimension.Free
+public import Mathlib.LinearAlgebra.Matrix.Kronecker
+public import Mathlib.Topology.Algebra.Module.FiniteDimension
+public import Mathlib.Topology.Algebra.MvPolynomial
+public import Mathlib.Analysis.Complex.Basic
+
+@[expose] public section
 
 /-!
 # Polynomial functions on finite-dimensional real spaces

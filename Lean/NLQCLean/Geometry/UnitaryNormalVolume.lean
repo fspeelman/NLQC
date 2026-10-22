@@ -1,7 +1,11 @@
-import NLQCLean.Geometry.UnitaryCayleyNormal
-import NLQCLean.Geometry.ExpandingDeterminant
-import NLQCLean.Geometry.UnitaryNormalMeasure
-import Mathlib.MeasureTheory.Function.Jacobian
+module
+
+public import NLQCLean.Geometry.UnitaryCayleyNormal
+public import NLQCLean.Geometry.ExpandingDeterminant
+public import NLQCLean.Geometry.UnitaryNormalMeasure
+public import Mathlib.MeasureTheory.Function.Jacobian
+
+@[expose] public section
 
 /-!
 # Unconditional normal-volume and Haar tube lower bounds

@@ -1,11 +1,15 @@
-import Mathlib.Algebra.MvPolynomial.Degrees
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.LinearAlgebra.Dimension.Finrank
-import Mathlib.Data.Set.Card
-import Mathlib.Basic.Real.Basic
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Algebra.MvPolynomial.Degrees
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.Data.Set.Card
+public import Mathlib.Basic.Real.Basic
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
+
+@[expose] public section
 
 /-!
 # Common zeros of pure-power polynomial systems

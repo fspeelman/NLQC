@@ -1,5 +1,9 @@
-import NLQCLean.Exact.BitstringControlledPhase
-import NLQCLean.Exact.FiniteExactRestriction
+module
+
+public import NLQCLean.Exact.BitstringControlledPhase
+public import NLQCLean.Exact.FiniteExactRestriction
+
+@[expose] public section
 
 /-!
 # Exact exclusion of the source first-qubit gate

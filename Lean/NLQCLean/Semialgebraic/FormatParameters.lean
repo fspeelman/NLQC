@@ -2,9 +2,13 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Semialgebraic.Objects
-import NLQCLean.Geometry.PolynomialCoefficients
-import Mathlib.Topology.Sequences
+module
+
+public import NLQCLean.Semialgebraic.Objects
+public import NLQCLean.Geometry.PolynomialCoefficients
+public import Mathlib.Topology.Sequences
+
+@[expose] public section
 
 /-!
 # Fixed finite templates for bounded polynomial formats

@@ -1,4 +1,8 @@
-import NLQCLean.Models.StinespringDiamondContractivity
+module
+
+public import NLQCLean.Models.StinespringDiamondContractivity
+
+@[expose] public section
 
 /-! # All-complex-matrix and all-ancilla diamond contractivity -/
 

@@ -2,9 +2,13 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import Mathlib.MeasureTheory.Function.Jacobian
-import Mathlib.Analysis.Calculus.InverseFunctionTheorem.FDeriv
-import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+module
+
+public import Mathlib.MeasureTheory.Function.Jacobian
+public import Mathlib.Analysis.Calculus.InverseFunctionTheorem.FDeriv
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+
+@[expose] public section
 
 /-!
 # Multiplicity form of the change-of-variables inequality

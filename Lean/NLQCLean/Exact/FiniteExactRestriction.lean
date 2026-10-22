@@ -1,5 +1,9 @@
-import NLQCLean.Exact.ControlledPhaseExclusion
-import NLQCLean.Models.ClassicalCommunication.FiniteOutputRestriction
+module
+
+public import NLQCLean.Exact.ControlledPhaseExclusion
+public import NLQCLean.Models.ClassicalCommunication.FiniteOutputRestriction
+
+@[expose] public section
 
 /-!
 # Exact finite implementations under local logical restriction

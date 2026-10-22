@@ -1,6 +1,10 @@
-import NLQCLean.Vendor.HermiteLindemann.Basic
-import NLQCLean.Invariants.ControlledPhase
-import Mathlib.RingTheory.Localization.Integral
+module
+
+public import NLQCLean.Vendor.HermiteLindemann.Basic
+public import NLQCLean.Invariants.ControlledPhase
+public import Mathlib.RingTheory.Localization.Integral
+
+@[expose] public section
 
 /-!
 # Transcendence of algebraic controlled-phase angles

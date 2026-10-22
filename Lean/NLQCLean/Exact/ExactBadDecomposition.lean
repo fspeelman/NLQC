@@ -1,5 +1,9 @@
-import NLQCLean.Exact.FiniteOrbits
-import NLQCLean.Geometry.LocalOrbitHaarNull
+module
+
+public import NLQCLean.Exact.FiniteOrbits
+public import NLQCLean.Geometry.LocalOrbitHaarNull
+
+@[expose] public section
 
 /-!
 # The exactly implementable unitaries: architecture decomposition

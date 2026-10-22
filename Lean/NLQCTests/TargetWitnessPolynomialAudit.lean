@@ -1,4 +1,8 @@
-import NLQCLean.Exact.TargetWitnessPolynomial
+module
+
+public import NLQCLean.Exact.TargetWitnessPolynomial
+
+@[expose] public section
 
 /-! Full statements and standard-axiom checks for the actual target-witness equations. -/
 

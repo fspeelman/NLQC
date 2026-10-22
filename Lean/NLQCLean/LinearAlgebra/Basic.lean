@@ -1,9 +1,13 @@
 /-
 Norm conventions for the NLQC formalization.
 -/
-import Mathlib.Analysis.Matrix.Normed
-import Mathlib.Analysis.CStarAlgebra.Matrix
-import Mathlib.Analysis.InnerProductSpace.PiL2
+module
+
+public import Mathlib.Analysis.Matrix.Normed
+public import Mathlib.Analysis.CStarAlgebra.Matrix
+public import Mathlib.Analysis.InnerProductSpace.PiL2
+
+@[expose] public section
 
 /-!
 # Matrix norm conventions

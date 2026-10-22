@@ -1,4 +1,8 @@
-import NLQCLean.Bounds.HaarArithmetic
+module
+
+public import NLQCLean.Bounds.HaarArithmetic
+
+@[expose] public section
 
 /-!
 # Both numerical regimes of the Haar estimate

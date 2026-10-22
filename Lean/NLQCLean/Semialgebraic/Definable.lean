@@ -1,5 +1,9 @@
-import NLQCLean.Vendor.Sundog.SemialgebraicProjection
-import NLQCLean.Semialgebraic.SundogBridge
+module
+
+public import NLQCLean.Vendor.Sundog.SemialgebraicProjection
+public import NLQCLean.Semialgebraic.SundogBridge
+
+@[expose] public section
 
 /-!
 # First-order definability of semialgebraic sets

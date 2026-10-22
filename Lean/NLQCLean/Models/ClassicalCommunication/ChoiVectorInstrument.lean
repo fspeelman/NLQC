@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.ChoiInstrumentDensities
+module
+
+public import NLQCLean.Models.ClassicalCommunication.ChoiInstrumentDensities
+
+@[expose] public section
 
 /-!
 # Countably additive positive Choi instruments
@@ -80,7 +84,7 @@ def traceProbabilitySigned : SignedMeasure α :=
     P.traceProbabilitySigned S =
       (Fintype.card ι : ℝ)⁻¹ * (P.choiMeasure S).trace.re := rfl
 
-private theorem traceProbabilitySigned_nonneg : 0 ≤[univ] P.traceProbabilitySigned := by
+theorem traceProbabilitySigned_nonneg : 0 ≤[univ] P.traceProbabilitySigned := by
   rw [VectorMeasure.le_restrict_univ_iff_le]
   apply VectorMeasure.le_iff.mpr
   intro S hS

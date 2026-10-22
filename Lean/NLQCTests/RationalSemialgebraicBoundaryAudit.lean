@@ -1,4 +1,8 @@
-import NLQCLean.Arithmetic.RationalSemialgebraicBoundary
+module
+
+public import NLQCLean.Arithmetic.RationalSemialgebraicBoundary
+
+@[expose] public section
 
 /-! Full types and axioms for algebraicity of rational semialgebraic null sets. -/
 

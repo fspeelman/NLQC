@@ -1,5 +1,9 @@
-import NLQCLean.Bounds.ControlledPhaseAlmostEvery
-import NLQCLean.Bounds.FiniteControlledPhaseAlmostEvery
+module
+
+public import NLQCLean.Bounds.ControlledPhaseAlmostEvery
+public import NLQCLean.Bounds.FiniteControlledPhaseAlmostEvery
+
+@[expose] public section
 
 /-!
 # Charged almost-every controlled-phase resource rates

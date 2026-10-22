@@ -1,8 +1,12 @@
 /-
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import NLQCLean.Geometry.RankDeficientHaarNull
-import NLQCLean.Exact.PVMExactWitness
+module
+
+public import NLQCLean.Geometry.RankDeficientHaarNull
+public import NLQCLean.Exact.PVMExactWitness
+
+@[expose] public section
 
 /-!
 # Exactly reachable PVM basis lifts are Haar-null

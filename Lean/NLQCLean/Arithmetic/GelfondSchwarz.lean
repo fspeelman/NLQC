@@ -1,7 +1,11 @@
-import NLQCLean.Arithmetic.GelfondInterpolation
-import Mathlib.Analysis.Complex.AbsMax
-import Mathlib.Analysis.Complex.Liouville
-import Mathlib.Analysis.Calculus.Deriv.Polynomial
+module
+
+public import NLQCLean.Arithmetic.GelfondInterpolation
+public import Mathlib.Analysis.Complex.AbsMax
+public import Mathlib.Analysis.Complex.Liouville
+public import Mathlib.Analysis.Calculus.Deriv.Polynomial
+
+@[expose] public section
 
 /-!
 # An approximate Schwarz lemma for polynomials

@@ -1,4 +1,8 @@
-import NLQCLean.Models.ProjectiveProtocolScore
+module
+
+public import NLQCLean.Models.ProjectiveProtocolScore
+
+@[expose] public section
 
 /-!
 # Exact PVM semantics for finite mixed resources

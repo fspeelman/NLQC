@@ -2,8 +2,12 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.ImageVolume.BarrierImageVolume
-import NLQCLean.Geometry.PolynomialImageVolumeHypothesis
+module
+
+public import NLQCLean.ImageVolume.BarrierImageVolume
+public import NLQCLean.Geometry.PolynomialImageVolumeHypothesis
+
+@[expose] public section
 
 /-!
 # Proof of the polynomial image-volume bound

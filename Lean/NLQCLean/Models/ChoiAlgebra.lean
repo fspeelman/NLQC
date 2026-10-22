@@ -1,5 +1,9 @@
-import NLQCLean.Models.Metrics
-import NLQCLean.Models.UnitaryScore
+module
+
+public import NLQCLean.Models.Metrics
+public import NLQCLean.Models.UnitaryScore
+
+@[expose] public section
 
 /-!
 # Normalized Choi states and the unitary test projection

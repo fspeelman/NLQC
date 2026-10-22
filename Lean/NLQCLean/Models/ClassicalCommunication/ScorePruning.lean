@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.InstrumentCompression
+module
+
+public import NLQCLean.Models.ClassicalCommunication.InstrumentCompression
+
+@[expose] public section
 
 /-!
 # Score-nondecreasing pruning of instrument outcomes

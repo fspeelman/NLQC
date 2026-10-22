@@ -1,4 +1,8 @@
-import NLQCLean.Arithmetic.DeformationFinal
+module
+
+public import NLQCLean.Arithmetic.DeformationFinal
+
+@[expose] public section
 
 /-!
 # Size bounds of the deformation eliminant in the epigraph form

@@ -1,6 +1,10 @@
-import NLQCLean.Geometry.DirectVolume.Assembly
-import NLQCLean.Bounds.BorelClassicalQubits
-import NLQCLean.Bounds.NearBellUniversal
+module
+
+public import NLQCLean.Geometry.DirectVolume.Assembly
+public import NLQCLean.Bounds.BorelClassicalQubits
+public import NLQCLean.Bounds.NearBellUniversal
+
+@[expose] public section
 
 /-!
 # Free classical communication: the strong universal PVM rate

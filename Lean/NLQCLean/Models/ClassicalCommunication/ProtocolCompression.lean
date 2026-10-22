@@ -1,7 +1,11 @@
-import NLQCLean.Models.ClassicalCommunication.BranchChannels
-import NLQCLean.Models.ClassicalCommunication.InstrumentCompression
-import NLQCLean.Models.ClassicalCommunication.ScorePruning
-import NLQCLean.LinearAlgebra.SupportFactorization
+module
+
+public import NLQCLean.Models.ClassicalCommunication.BranchChannels
+public import NLQCLean.Models.ClassicalCommunication.InstrumentCompression
+public import NLQCLean.Models.ClassicalCommunication.ScorePruning
+public import NLQCLean.LinearAlgebra.SupportFactorization
+
+@[expose] public section
 
 /-!
 # Score-preserving finite classical outcome compression

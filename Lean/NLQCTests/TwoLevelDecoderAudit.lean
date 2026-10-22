@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.TwoLevelDecoder
+module
+
+public import NLQCLean.Models.ClassicalCommunication.TwoLevelDecoder
+
+@[expose] public section
 
 /-! # local CP/TP decoding and rectangular ideal channel restriction -/
 

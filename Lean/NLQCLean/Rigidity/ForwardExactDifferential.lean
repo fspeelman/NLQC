@@ -1,10 +1,14 @@
 /-
 The skew-Hermitian lift of an isometry tangent.
 -/
-import NLQCLean.LinearAlgebra.Isometry
-import NLQCLean.Geometry.CubicExtension
-import NLQCLean.Rigidity.Compression
-import NLQCLean.Models.OneRound
+module
+
+public import NLQCLean.LinearAlgebra.Isometry
+public import NLQCLean.Geometry.CubicExtension
+public import NLQCLean.Rigidity.Compression
+public import NLQCLean.Models.OneRound
+
+@[expose] public section
 
 /-!
 # An elementary skew-Hermitian lift of an isometry tangent

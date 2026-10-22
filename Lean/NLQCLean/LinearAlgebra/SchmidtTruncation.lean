@@ -1,11 +1,16 @@
-import Mathlib.Data.Finset.Lattice.Fold
-import Mathlib.Data.Finset.Powerset
-import Mathlib.Algebra.Order.BigOperators.Group.Finset
-import Mathlib.Algebra.BigOperators.Ring.Finset
-import Mathlib.Data.Fintype.Prod
-import Mathlib.Data.Fin.Tuple.Sort
-import Mathlib.Basic.Real.Basic
-import Mathlib.Tactic.Linarith
+module
+
+public import Mathlib.Data.Finset.Lattice.Fold
+public import Mathlib.Data.Finset.Powerset
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
+public import Mathlib.Algebra.BigOperators.Ring.Finset
+public import Mathlib.Data.Fintype.Prod
+public import Mathlib.Data.Fin.Tuple.Sort
+public import Mathlib.Basic.Real.Basic
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Data.Fintype.Fin
+
+@[expose] public section
 
 /-!
 # Finite weights for Schmidt truncation

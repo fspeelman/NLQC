@@ -1,5 +1,9 @@
-import NLQCLean.Models.ClassicalCommunication.FiniteLogicalRestriction
-import NLQCLean.Models.ClassicalCommunication.RectangularDiagonalRestriction
+module
+
+public import NLQCLean.Models.ClassicalCommunication.FiniteLogicalRestriction
+public import NLQCLean.Models.ClassicalCommunication.RectangularDiagonalRestriction
+
+@[expose] public section
 
 /-!
 # Actual finite-protocol output restriction

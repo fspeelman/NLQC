@@ -1,6 +1,10 @@
-import NLQCLean.Geometry.DirectVolume.Assembly
-import NLQCLean.Bounds.FiniteControlledPhaseAlmostEvery
-import Mathlib.Analysis.SpecialFunctions.Log.Base
+module
+
+public import NLQCLean.Geometry.DirectVolume.Assembly
+public import NLQCLean.Bounds.FiniteControlledPhaseAlmostEvery
+public import Mathlib.Analysis.SpecialFunctions.Log.Base
+
+@[expose] public section
 
 /-!
 # Initial-resource qubits for finite LOSCC controlled-phase protocols

@@ -28,12 +28,16 @@ The pipeline:
   i.e. the region count is **linear in circuit size**. Polynomial, where the (cancellation-using)
   tent is `2^d` for circuit size `O(d)` along the composition axis.
 -/
-import NLQCLean.Vendor.Sundog.PieceCover
-import NLQCLean.Vendor.Sundog.RegionCount
-import NLQCLean.Vendor.Sundog.CancellationFree
-import Mathlib.Analysis.Convex.Function
-import Mathlib.Analysis.Convex.Continuous
-import Mathlib.Analysis.Convex.Slope
+module
+
+public import NLQCLean.Vendor.Sundog.PieceCover
+public import NLQCLean.Vendor.Sundog.RegionCount
+public import NLQCLean.Vendor.Sundog.CancellationFree
+public import Mathlib.Analysis.Convex.Function
+public import Mathlib.Analysis.Convex.Continuous
+public import Mathlib.Analysis.Convex.Slope
+
+@[expose] public section
 
 namespace Sundog.RegionPoly
 

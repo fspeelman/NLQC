@@ -1,5 +1,9 @@
-import NLQCLean.Approx.NormalizedCubicWitness
-import NLQCLean.Geometry.LocalMotionRank
+module
+
+public import NLQCLean.Approx.NormalizedCubicWitness
+public import NLQCLean.Geometry.LocalMotionRank
+
+@[expose] public section
 
 /-!
 # Ambient rank and error bounds for the cubic witness extension

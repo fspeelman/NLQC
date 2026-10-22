@@ -1,11 +1,15 @@
 /-
 The unitary score: bounds, exactness and mixed-resource affinity.
 -/
-import NLQCLean.LinearAlgebra.RealCoordinates
-import NLQCLean.Models.Channels
-import NLQCLean.Models.Resource
-import NLQCLean.Models.OneRound
-import NLQCLean.Rigidity.FrozenDilation
+module
+
+public import NLQCLean.LinearAlgebra.RealCoordinates
+public import NLQCLean.Models.Channels
+public import NLQCLean.Models.Resource
+public import NLQCLean.Models.OneRound
+public import NLQCLean.Rigidity.FrozenDilation
+
+@[expose] public section
 
 /-!
 # The unitary score `f(Φ, U)`, its bounds, and exact freezing

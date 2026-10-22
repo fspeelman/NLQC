@@ -1,4 +1,8 @@
-import NLQCLean.Geometry.DirectVolume.Lagrange
+module
+
+public import NLQCLean.Geometry.DirectVolume.Lagrange
+
+@[expose] public section
 
 /-!
 # Direct image-volume route: regularity of the Lagrange level sets

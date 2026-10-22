@@ -6,8 +6,12 @@ Modified for NLQCLean: rational coefficient restrictions and closure proofs;
 the resolution map and all specialization semantics are unchanged.
 -/
 
-import NLQCLean.Semialgebraic.RationalSignDiagrams
-import NLQCLean.Vendor.Sundog.DiagramBranches
+module
+
+public import NLQCLean.Semialgebraic.RationalSignDiagrams
+public import NLQCLean.Vendor.Sundog.DiagramBranches
+
+@[expose] public section
 
 /-!
 # Rational descriptions of resolution fibers

@@ -1,6 +1,10 @@
-import NLQCLean.Geometry.PolynomialStrictDeriv
-import NLQCLean.Geometry.PolynomialGraphFormat
-import NLQCLean.Exact.RationalPolynomialSmoothness
+module
+
+public import NLQCLean.Geometry.PolynomialStrictDeriv
+public import NLQCLean.Geometry.PolynomialGraphFormat
+public import NLQCLean.Exact.RationalPolynomialSmoothness
+
+@[expose] public section
 
 /-!
 # Direct image-volume route: polynomial evaluation in Euclidean coordinates

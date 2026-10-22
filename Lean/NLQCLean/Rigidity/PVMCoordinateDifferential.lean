@@ -1,4 +1,8 @@
-import NLQCLean.Rigidity.PVMExtendedDifferential
+module
+
+public import NLQCLean.Rigidity.PVMExtendedDifferential
+
+@[expose] public section
 
 /-!
 # PVM ambient rank and leakage in padded Euclidean coordinates

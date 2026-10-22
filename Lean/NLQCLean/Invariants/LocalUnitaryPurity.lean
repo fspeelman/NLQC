@@ -1,5 +1,9 @@
-import NLQCLean.Invariants.OperatorSchmidtPurity
-import NLQCLean.Models.Targets
+module
+
+public import NLQCLean.Invariants.OperatorSchmidtPurity
+public import NLQCLean.Models.Targets
+
+@[expose] public section
 
 /-!
 # Purity on finite local-unitary orbits

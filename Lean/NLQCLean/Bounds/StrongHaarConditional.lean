@@ -1,7 +1,11 @@
-import NLQCLean.Bounds.StrongHaarArithmetic
-import NLQCLean.Bounds.StrongUnitaryTargets
-import NLQCLean.Geometry.StrongPolynomialTubeConditional
-import NLQCLean.Models.MixedReachability
+module
+
+public import NLQCLean.Bounds.StrongHaarArithmetic
+public import NLQCLean.Bounds.StrongUnitaryTargets
+public import NLQCLean.Geometry.StrongPolynomialTubeConditional
+public import NLQCLean.Models.MixedReachability
+
+@[expose] public section
 
 /-!
 # The restricted strong Haar bound over the full error range

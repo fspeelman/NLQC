@@ -1,8 +1,13 @@
-import NLQCLean.Models.ClassicalCommunication.HermitianMomentSupport
-import Mathlib.Analysis.Convex.Integral
-import Mathlib.Analysis.LocallyConvex.Separation
-import Mathlib.Analysis.Normed.Affine.AddTorsorBases
-import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
+module
+
+public import NLQCLean.Models.ClassicalCommunication.HermitianMomentSupport
+public import Mathlib.Analysis.Convex.Integral
+public import Mathlib.Analysis.LocallyConvex.Separation
+public import Mathlib.Analysis.Normed.Affine.AddTorsorBases
+public import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
+public import Mathlib.RingTheory.Finiteness.Prod
+
+@[expose] public section
 
 /-!
 # Finite support for an attained-value barycenter

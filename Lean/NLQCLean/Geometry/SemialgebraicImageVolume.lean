@@ -2,7 +2,11 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Geometry.SmoothCubeFamilyVolume
+module
+
+public import NLQCLean.Geometry.SmoothCubeFamilyVolume
+
+@[expose] public section
 
 /-!
 # The coordinate-graph image-volume inequality

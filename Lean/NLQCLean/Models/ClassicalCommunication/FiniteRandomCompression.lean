@@ -1,5 +1,9 @@
-import NLQCLean.Models.ClassicalCommunication.BranchSelection
-import NLQCLean.Models.ClassicalCommunication.FiniteMixedCompression
+module
+
+public import NLQCLean.Models.ClassicalCommunication.BranchSelection
+public import NLQCLean.Models.ClassicalCommunication.FiniteMixedCompression
+
+@[expose] public section
 
 /-!
 # Compression from integrated finite-branch scores

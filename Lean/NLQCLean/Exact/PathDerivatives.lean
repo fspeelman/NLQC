@@ -1,7 +1,11 @@
-import NLQCLean.Exact.PVMFiniteOrbits
-import NLQCLean.Exact.InvariantCriticalValues
-import Mathlib.Analysis.Calculus.Deriv.Shift
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
+module
+
+public import NLQCLean.Exact.PVMFiniteOrbits
+public import NLQCLean.Exact.InvariantCriticalValues
+public import Mathlib.Analysis.Calculus.Deriv.Shift
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+
+@[expose] public section
 
 /-!
 # Derivatives along differentiable families of exact strategies

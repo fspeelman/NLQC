@@ -1,5 +1,9 @@
-import NLQCLean.Models.NearBellResourceFloors
-import NLQCLean.Bounds.SwapNeighborhoodMessages
+module
+
+public import NLQCLean.Models.NearBellResourceFloors
+public import NLQCLean.Bounds.SwapNeighborhoodMessages
+
+@[expose] public section
 
 /-!
 # Both message floors near a maximally entangled basis

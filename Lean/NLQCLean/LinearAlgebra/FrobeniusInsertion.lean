@@ -1,5 +1,9 @@
-import NLQCLean.Approx.WitnessDifferentialBounds
-import NLQCLean.Approx.ChoiProjection
+module
+
+public import NLQCLean.Approx.WitnessDifferentialBounds
+public import NLQCLean.Approx.ChoiProjection
+
+@[expose] public section
 
 /-!
 # Frobenius tensor-insertion bounds

@@ -1,7 +1,11 @@
-import NLQCLean.Exact.LocalOrbitSaturation
-import NLQCLean.Exact.OrbitInvariantAlgebraicity
-import NLQCLean.Semialgebraic.ScalarNullFinite
-import NLQCLean.Semialgebraic.ProjectionTheorem
+module
+
+public import NLQCLean.Exact.LocalOrbitSaturation
+public import NLQCLean.Exact.OrbitInvariantAlgebraicity
+public import NLQCLean.Semialgebraic.ScalarNullFinite
+public import NLQCLean.Semialgebraic.ProjectionTheorem
+
+@[expose] public section
 
 /-!
 # Finitely many local orbits per architecture

@@ -1,4 +1,8 @@
-import NLQCLean.Models.ProjectiveProtocolScore
+module
+
+public import NLQCLean.Models.ProjectiveProtocolScore
+
+@[expose] public section
 
 /-!
 # Worst-case joint total variation for the PVM task

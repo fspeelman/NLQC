@@ -1,6 +1,10 @@
-import NLQCLean.Approx.PVMRankFloor
-import NLQCLean.Approx.SpectralFootprintFloors
-import NLQCLean.LinearAlgebra.FlaggedSchmidtWeights
+module
+
+public import NLQCLean.Approx.PVMRankFloor
+public import NLQCLean.Approx.SpectralFootprintFloors
+public import NLQCLean.LinearAlgebra.FlaggedSchmidtWeights
+
+@[expose] public section
 
 /-!
 # Target spectral allocation for ordered rank-one PVMs

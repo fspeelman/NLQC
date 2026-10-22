@@ -1,16 +1,20 @@
-import NLQCLean.Exact.PVMPathFactorization
-import NLQCLean.Exact.PaperFoundations
-import NLQCLean.Semialgebraic.PiecewiseC1
-import NLQCLean.Semialgebraic.Paths
-import NLQCLean.Exact.FiniteUnion
-import NLQCLean.Exact.CompressionFiniteOrbits
-import NLQCLean.Exact.UnequalDimensions
-import NLQCLean.Exact.RigidityStatements
-import NLQCLean.Exact.BitstringExactExclusion
-import NLQCLean.Exact.OrbitInvariantAlgebraicity
-import NLQCLean.Bounds.AlmostEveryExact
-import NLQCLean.Bounds.FiniteLocalization
-import NLQCLean.Invariants.SpectatorControlledPhasePurity
+module
+
+public import NLQCLean.Exact.PVMPathFactorization
+public import NLQCLean.Exact.PaperFoundations
+public import NLQCLean.Semialgebraic.PiecewiseC1
+public import NLQCLean.Semialgebraic.Paths
+public import NLQCLean.Exact.FiniteUnion
+public import NLQCLean.Exact.CompressionFiniteOrbits
+public import NLQCLean.Exact.UnequalDimensions
+public import NLQCLean.Exact.RigidityStatements
+public import NLQCLean.Exact.BitstringExactExclusion
+public import NLQCLean.Exact.OrbitInvariantAlgebraicity
+public import NLQCLean.Bounds.AlmostEveryExact
+public import NLQCLean.Bounds.FiniteLocalization
+public import NLQCLean.Invariants.SpectatorControlledPhasePurity
+
+@[expose] public section
 
 /-!
 # The exact paper, by source label

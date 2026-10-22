@@ -1,4 +1,8 @@
-import NLQCLean.Bounds.SwapNeighborhoodAlmostEvery
+module
+
+public import NLQCLean.Bounds.SwapNeighborhoodAlmostEvery
+
+@[expose] public section
 
 /-!
 # Restricted almost-every unitary precision rate

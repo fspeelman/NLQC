@@ -1,4 +1,8 @@
-import NLQCLean.Models.PVMTVReachability
+module
+
+public import NLQCLean.Models.PVMTVReachability
+
+@[expose] public section
 
 /-!
 # Universal PVM reachability

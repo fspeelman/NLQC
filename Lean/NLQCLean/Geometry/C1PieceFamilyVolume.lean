@@ -1,4 +1,8 @@
-import NLQCLean.Geometry.SmoothCubeFamilyVolume
+module
+
+public import NLQCLean.Geometry.SmoothCubeFamilyVolume
+
+@[expose] public section
 
 /-!
 # Volume of images of C¹ pieces with measurable domains

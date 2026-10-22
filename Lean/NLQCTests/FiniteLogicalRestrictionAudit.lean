@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.FiniteLogicalRestriction
+module
+
+public import NLQCLean.Models.ClassicalCommunication.FiniteLogicalRestriction
+
+@[expose] public section
 
 /-! # pure and common-map mixed logical-input protocol restrictions -/
 

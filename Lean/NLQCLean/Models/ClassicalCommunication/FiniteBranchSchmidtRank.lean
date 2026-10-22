@@ -1,6 +1,10 @@
-import NLQCLean.Models.ClassicalCommunication.CoherentConversion
-import NLQCLean.Approx.ChoiProjection
-import NLQCLean.Models.ProtocolMetrics
+module
+
+public import NLQCLean.Models.ClassicalCommunication.CoherentConversion
+public import NLQCLean.Approx.ChoiProjection
+public import NLQCLean.Models.ProtocolMetrics
+
+@[expose] public section
 
 /-!
 # Schmidt rank and trace weights of finite classical branches

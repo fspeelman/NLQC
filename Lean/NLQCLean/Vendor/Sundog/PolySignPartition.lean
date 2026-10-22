@@ -28,8 +28,12 @@ plumbing, so TS-2 composes directly.
 **Honest fence.** TS-1 only: no sign matrix at the cuts, no parametric coefficients, no
 elimination (TS-2a–d).
 -/
-import NLQCLean.Vendor.Sundog.OMinimalOne
-import Mathlib.Topology.Order.IntermediateValue
+module
+
+public import NLQCLean.Vendor.Sundog.OMinimalOne
+public import Mathlib.Topology.Order.IntermediateValue
+
+@[expose] public section
 
 namespace Sundog.TarskiQE
 

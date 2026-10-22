@@ -1,7 +1,11 @@
-import NLQCLean.Arithmetic.ChargedPhysicalCoordinates
-import NLQCLean.LinearAlgebra.EuclideanCoordinates
-import Mathlib.Algebra.MvPolynomial.CommRing
-import Mathlib.Algebra.MvPolynomial.Degrees
+module
+
+public import NLQCLean.Arithmetic.ChargedPhysicalCoordinates
+public import NLQCLean.LinearAlgebra.EuclideanCoordinates
+public import Mathlib.Algebra.MvPolynomial.CommRing
+public import Mathlib.Algebra.MvPolynomial.Degrees
+
+@[expose] public section
 
 /-!
 # Integer-polynomial equations for physical constraints

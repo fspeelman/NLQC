@@ -1,4 +1,8 @@
-import NLQCLean.Geometry.DirectVolume.Basic
+module
+
+public import NLQCLean.Geometry.DirectVolume.Basic
+
+@[expose] public section
 
 /-!
 # Direct image-volume route: outer perturbation of the source

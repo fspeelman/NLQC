@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.BorelFiniteCompression
+module
+
+public import NLQCLean.Models.ClassicalCommunication.BorelFiniteCompression
+
+@[expose] public section
 
 /-! # finite protocols selected from original Borel instruments -/
 

@@ -7,8 +7,12 @@ add coefficient preservation through truncation, differentiation and remainders.
 The degree descent and sign-diagram reconstruction are the original proofs.
 -/
 
-import NLQCLean.Semialgebraic.RationalDiagramBranches
-import NLQCLean.Vendor.Sundog.DiagramAssembly
+module
+
+public import NLQCLean.Semialgebraic.RationalDiagramBranches
+public import NLQCLean.Vendor.Sundog.DiagramAssembly
+
+@[expose] public section
 
 /-!
 # Rational coefficient-preserving sign-vector elimination

@@ -1,4 +1,8 @@
-import NLQCLean.Semialgebraic.Cells
+module
+
+public import NLQCLean.Semialgebraic.Cells
+
+@[expose] public section
 
 /-!
 # Decomposition into semialgebraically path-connected pieces

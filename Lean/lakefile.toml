@@ -1,9 +1,6 @@
 name = "nlqc-lean"
 version = "0.1.0"
 defaultTargets = ["NLQCLean"]
-# The library is not written for the Lean module system; Mathlib is.  This
-# silences the per-import notice without changing elaboration or checking.
-allowNonModules = true
 
 [[require]]
 name = "mathlib"

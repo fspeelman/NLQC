@@ -1,5 +1,9 @@
-import NLQCLean.Geometry.UnitaryCayley
-import NLQCLean.Geometry.AdjointEuclideanCoordinates
+module
+
+public import NLQCLean.Geometry.UnitaryCayley
+public import NLQCLean.Geometry.AdjointEuclideanCoordinates
+
+@[expose] public section
 
 /-!
 # The equal-dimensional normal Cayley chart

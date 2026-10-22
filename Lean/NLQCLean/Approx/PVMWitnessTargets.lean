@@ -1,5 +1,9 @@
-import NLQCLean.Models.PVMMixedReachability
-import NLQCLean.Approx.PVMExtendedPolynomial
+module
+
+public import NLQCLean.Models.PVMMixedReachability
+public import NLQCLean.Approx.PVMExtendedPolynomial
+
+@[expose] public section
 
 /-!
 # Compact PVM polynomial-witness target sets

@@ -1,8 +1,12 @@
-import NLQCLean.Geometry.DirectVolume.Assembly
-import NLQCLean.Bounds.RectangularDiagonalAlmostEvery
-import NLQCLean.Bounds.BorelClassicalRates
-import NLQCLean.Models.ClassicalCommunication.BorelLocalRestriction
-import NLQCLean.Models.ClassicalCommunication.RectangularDiagonalRestriction
+module
+
+public import NLQCLean.Geometry.DirectVolume.Assembly
+public import NLQCLean.Bounds.RectangularDiagonalAlmostEvery
+public import NLQCLean.Bounds.BorelClassicalRates
+public import NLQCLean.Models.ClassicalCommunication.BorelLocalRestriction
+public import NLQCLean.Models.ClassicalCommunication.RectangularDiagonalRestriction
+
+@[expose] public section
 
 /-!
 # Rectangular diagonal gates with free standard-Borel classical messages

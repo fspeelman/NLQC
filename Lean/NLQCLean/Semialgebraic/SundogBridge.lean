@@ -2,9 +2,13 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Vendor.Sundog.SignDiagrams
-import NLQCLean.Semialgebraic.CoordinateMaps
-import NLQCLean.External.SemialgebraicTextbook
+module
+
+public import NLQCLean.Vendor.Sundog.SignDiagrams
+public import NLQCLean.Semialgebraic.CoordinateMaps
+public import NLQCLean.External.SemialgebraicTextbook
+
+@[expose] public section
 
 /-!
 # Finite sign descriptions and Sundog's semialgebraic sets

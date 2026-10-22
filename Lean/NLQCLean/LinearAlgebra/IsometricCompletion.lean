@@ -1,6 +1,10 @@
-import NLQCLean.LinearAlgebra.Isometry
-import Mathlib.Analysis.Matrix.Order
-import Mathlib.Data.Matrix.ColumnRowPartitioned
+module
+
+public import NLQCLean.LinearAlgebra.Isometry
+public import Mathlib.Analysis.Matrix.Order
+public import Mathlib.Data.Matrix.ColumnRowPartitioned
+
+@[expose] public section
 
 /-!
 # Finite isometric completion of contractions

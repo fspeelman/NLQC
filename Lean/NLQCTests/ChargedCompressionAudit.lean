@@ -1,5 +1,9 @@
-import NLQCLean.Models.ForwardCompression
-import NLQCLean.Bounds.PVMQualitativeGap
+module
+
+public import NLQCLean.Models.ForwardCompression
+public import NLQCLean.Bounds.PVMQualitativeGap
+
+@[expose] public section
 
 /-!
 # Support-charge preservation audit

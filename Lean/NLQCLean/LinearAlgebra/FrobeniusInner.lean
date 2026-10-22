@@ -1,5 +1,9 @@
-import NLQCLean.LinearAlgebra.Isometry
-import Mathlib.Analysis.InnerProductSpace.Orthonormal
+module
+
+public import NLQCLean.LinearAlgebra.Isometry
+public import Mathlib.Analysis.InnerProductSpace.Orthonormal
+
+@[expose] public section
 
 /-!
 # Frobenius inner products for finite complex matrices

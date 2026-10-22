@@ -1,6 +1,10 @@
-import NLQCLean.Approx.ReverseWitness
-import NLQCLean.Rigidity.ForwardExactDifferential
-import NLQCLean.Rigidity.CrossGram
+module
+
+public import NLQCLean.Approx.ReverseWitness
+public import NLQCLean.Rigidity.ForwardExactDifferential
+public import NLQCLean.Rigidity.CrossGram
+
+@[expose] public section
 
 /-!
 # Quantitative cross-Gram differential

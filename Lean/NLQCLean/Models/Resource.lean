@@ -1,8 +1,12 @@
 /-
 The Schmidt-transcript footprint `K = R m_A m_B` and the mixed-resource model.
 -/
-import NLQCLean.Models.OneRound
-import Mathlib.LinearAlgebra.Matrix.Rank
+module
+
+public import NLQCLean.Models.OneRound
+public import Mathlib.LinearAlgebra.Matrix.Rank
+
+@[expose] public section
 
 /-!
 # The finite footprint and mixed resources

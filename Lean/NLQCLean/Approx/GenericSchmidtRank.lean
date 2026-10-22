@@ -1,6 +1,10 @@
-import NLQCLean.Geometry.HaarPolynomialZero
-import NLQCLean.Approx.GeneralizedBellBasis
-import NLQCLean.Models.SwapChoi
+module
+
+public import NLQCLean.Geometry.HaarPolynomialZero
+public import NLQCLean.Approx.GeneralizedBellBasis
+public import NLQCLean.Models.SwapChoi
+
+@[expose] public section
 
 /-!
 # Haar-generic full Schmidt rank

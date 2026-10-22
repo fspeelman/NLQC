@@ -1,4 +1,8 @@
-import NLQCLean.Approx.PVMPhysicalReverse
+module
+
+public import NLQCLean.Approx.PVMPhysicalReverse
+
+@[expose] public section
 
 /-!
 # Finite physical PVM witness coverage

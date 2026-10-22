@@ -1,5 +1,9 @@
-import NLQCLean.Approx.PVMWitnessJacobianBound
-import NLQCLean.Geometry.SingularValueRankBound
+module
+
+public import NLQCLean.Approx.PVMWitnessJacobianBound
+public import NLQCLean.Geometry.SingularValueRankBound
+
+@[expose] public section
 
 /-!
 # Singular values of the ambient PVM witness derivative

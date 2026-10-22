@@ -1,10 +1,14 @@
-import Mathlib.Analysis.Calculus.LagrangeMultipliers
-import Mathlib.Analysis.Calculus.FDeriv.Mul
-import Mathlib.Analysis.Calculus.Deriv.Comp
-import Mathlib.Analysis.Calculus.Deriv.Pow
-import Mathlib.Analysis.Calculus.Deriv.Mul
-import Mathlib.Analysis.Calculus.Deriv.Polynomial
-import Mathlib.Algebra.MvPolynomial.PDeriv
+module
+
+public import Mathlib.Analysis.Calculus.LagrangeMultipliers
+public import Mathlib.Analysis.Calculus.FDeriv.Mul
+public import Mathlib.Analysis.Calculus.Deriv.Comp
+public import Mathlib.Analysis.Calculus.Deriv.Pow
+public import Mathlib.Analysis.Calculus.Deriv.Mul
+public import Mathlib.Analysis.Calculus.Deriv.Polynomial
+public import Mathlib.Algebra.MvPolynomial.PDeriv
+
+@[expose] public section
 
 /-!
 # Strict derivatives of integer polynomials

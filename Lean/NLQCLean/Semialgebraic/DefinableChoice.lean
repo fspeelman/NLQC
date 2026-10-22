@@ -1,4 +1,8 @@
-import NLQCLean.Semialgebraic.CellDecomposition
+module
+
+public import NLQCLean.Semialgebraic.CellDecomposition
+
+@[expose] public section
 
 /-!
 # Semialgebraic choice

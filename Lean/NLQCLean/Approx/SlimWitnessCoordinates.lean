@@ -1,5 +1,9 @@
-import NLQCLean.Approx.SlimNormalizedCubic
-import NLQCLean.Approx.WitnessNormalization
+module
+
+public import NLQCLean.Approx.SlimNormalizedCubic
+public import NLQCLean.Approx.WitnessNormalization
+
+@[expose] public section
 
 /-!
 # Common Euclidean coordinates for slim witnesses

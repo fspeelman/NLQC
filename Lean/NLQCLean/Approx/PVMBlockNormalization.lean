@@ -1,5 +1,9 @@
-import NLQCLean.Approx.PVMReverseWitness
-import NLQCLean.Approx.WitnessNormalization
+module
+
+public import NLQCLean.Approx.PVMReverseWitness
+public import NLQCLean.Approx.WitnessNormalization
+
+@[expose] public section
 
 /-!
 # Normalization of the six PVM reverse-witness blocks

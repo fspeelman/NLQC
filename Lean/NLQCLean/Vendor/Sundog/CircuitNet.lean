@@ -74,8 +74,12 @@ on the imported definability machinery.
 * Cormen–Leiserson–Rivest–Stein, *Introduction to Algorithms*, §24 (Bellman–Ford / the
   min-plus relaxation step).
 -/
-import Mathlib.Basic.Real.Basic
-import Mathlib.Tactic
+module
+
+public import Mathlib.Basic.Real.Basic
+public import Mathlib.Tactic
+
+@[expose] public section
 
 namespace Sundog.CircuitNet
 

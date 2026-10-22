@@ -1,4 +1,8 @@
-import NLQCLean.Exact.SpectatorControlledPhase
+module
+
+public import NLQCLean.Exact.SpectatorControlledPhase
+
+@[expose] public section
 
 /-! Full statements and standard-axiom checks for actual spectator controlled-phase restriction. -/
 

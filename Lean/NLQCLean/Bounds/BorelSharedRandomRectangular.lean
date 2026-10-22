@@ -1,6 +1,10 @@
-import NLQCLean.Geometry.DirectVolume.Assembly
-import NLQCLean.Bounds.TwoQubitDiagonalChoi
-import NLQCLean.Models.ClassicalCommunication.BorelSharedRandomness
+module
+
+public import NLQCLean.Geometry.DirectVolume.Assembly
+public import NLQCLean.Bounds.TwoQubitDiagonalChoi
+public import NLQCLean.Models.ClassicalCommunication.BorelSharedRandomness
+
+@[expose] public section
 
 /-!
 # Rectangular diagonal gates with shared randomness

@@ -2,9 +2,13 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Semialgebraic.RationalProjection
-import NLQCLean.Semialgebraic.SundogBridge
-import NLQCLean.Semialgebraic.Projection
+module
+
+public import NLQCLean.Semialgebraic.RationalProjection
+public import NLQCLean.Semialgebraic.SundogBridge
+public import NLQCLean.Semialgebraic.Projection
+
+@[expose] public section
 
 /-!
 # Rational descriptions in Euclidean coordinates

@@ -1,10 +1,14 @@
-import NLQCLean.Semialgebraic.PolynomialStability
-import NLQCLean.Arithmetic.PhysicalPolynomialEncoding
-import NLQCLean.Arithmetic.PhysicalScorePolynomial
-import NLQCLean.Models.ChargedCompactProtocols
-import NLQCLean.Exact.ExactBadDecomposition
-import NLQCLean.Exact.FiniteOrbits
-import NLQCLean.Exact.CompressionFiniteOrbits
+module
+
+public import NLQCLean.Semialgebraic.PolynomialStability
+public import NLQCLean.Arithmetic.PhysicalPolynomialEncoding
+public import NLQCLean.Arithmetic.PhysicalScorePolynomial
+public import NLQCLean.Models.ChargedCompactProtocols
+public import NLQCLean.Exact.ExactBadDecomposition
+public import NLQCLean.Exact.FiniteOrbits
+public import NLQCLean.Exact.CompressionFiniteOrbits
+
+@[expose] public section
 
 /-!
 # Fixed-budget stability (`cor:fixed-budget-stability`)

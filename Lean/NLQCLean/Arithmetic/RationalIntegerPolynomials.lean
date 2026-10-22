@@ -1,5 +1,9 @@
-import NLQCLean.Semialgebraic.RationalPolynomialImages
-import NLQCLean.Arithmetic.PhysicalPolynomialConstraints
+module
+
+public import NLQCLean.Semialgebraic.RationalPolynomialImages
+public import NLQCLean.Arithmetic.PhysicalPolynomialConstraints
+
+@[expose] public section
 
 /-! Integer equations give rational sign descriptions with the same evaluation. -/
 

@@ -1,6 +1,10 @@
-import NLQCLean.Approx.PVMExtendedWitness
-import NLQCLean.Rigidity.PVMReverseGenerator
-import NLQCLean.Geometry.PVMMotionRank
+module
+
+public import NLQCLean.Approx.PVMExtendedWitness
+public import NLQCLean.Rigidity.PVMReverseGenerator
+public import NLQCLean.Geometry.PVMMotionRank
+
+@[expose] public section
 
 /-!
 # Ambient PVM motion and leakage decomposition

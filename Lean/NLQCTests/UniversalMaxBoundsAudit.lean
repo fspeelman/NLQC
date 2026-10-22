@@ -1,4 +1,8 @@
-import NLQCLean.Bounds.UniversalMaxBounds
+module
+
+public import NLQCLean.Bounds.UniversalMaxBounds
+
+@[expose] public section
 
 /-! # Universal floor and precision maximum audit -/
 

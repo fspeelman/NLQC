@@ -1,4 +1,8 @@
-import NLQCLean.Invariants.LocalOrbitDifferential
+module
+
+public import NLQCLean.Invariants.LocalOrbitDifferential
+
+@[expose] public section
 
 /-! Full statements and standard-axiom checks for local-orbit scalar derivatives. -/
 

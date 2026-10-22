@@ -1,5 +1,9 @@
-import NLQCLean.Exact.BitstringExactExclusion
-import NLQCLean.Results.Unitary
+module
+
+public import NLQCLean.Exact.BitstringExactExclusion
+public import NLQCLean.Results.Unitary
+
+@[expose] public section
 
 set_option pp.deepTerms true
 set_option pp.maxSteps 1000000

@@ -1,7 +1,11 @@
 /-
 The one-round architecture record and the global Stinespring isometry.
 -/
-import NLQCLean.Rigidity.FrozenDilation
+module
+
+public import NLQCLean.Rigidity.FrozenDilation
+
+@[expose] public section
 
 /-!
 # One simultaneous round: the architecture record and `eq:global-isometry`

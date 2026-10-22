@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.FiniteMixedCompression
+module
+
+public import NLQCLean.Models.ClassicalCommunication.FiniteMixedCompression
+
+@[expose] public section
 
 /-!
 # finite classical compression and operational-error transfer

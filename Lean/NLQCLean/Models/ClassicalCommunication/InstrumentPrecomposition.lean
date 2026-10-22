@@ -1,5 +1,9 @@
-import NLQCLean.Models.ClassicalCommunication.DensityCompression
-import NLQCLean.Models.ClassicalCommunication.StandardBorelProtocol
+module
+
+public import NLQCLean.Models.ClassicalCommunication.DensityCompression
+public import NLQCLean.Models.ClassicalCommunication.StandardBorelProtocol
+
+@[expose] public section
 
 /-!
 # Isometric input precomposition of actual CP instruments

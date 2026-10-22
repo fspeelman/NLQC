@@ -2,8 +2,12 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Approx.ReachableWitnessCover
-import NLQCLean.Approx.PolynomialWitnessFamily
+module
+
+public import NLQCLean.Approx.ReachableWitnessCover
+public import NLQCLean.Approx.PolynomialWitnessFamily
+
+@[expose] public section
 
 /-!
 # Exact unitary witnesses on the zero-leakage polynomial source

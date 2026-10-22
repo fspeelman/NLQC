@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.BorelSharedRandomness
+module
+
+public import NLQCLean.Models.ClassicalCommunication.BorelSharedRandomness
+
+@[expose] public section
 
 /-! # Original averaged Borel channels and branchwise cap-preserving score transfer -/
 

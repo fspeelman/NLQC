@@ -1,4 +1,8 @@
-import NLQCLean.Arithmetic.GelfondNumerics
+module
+
+public import NLQCLean.Arithmetic.GelfondNumerics
+
+@[expose] public section
 
 /-!
 # A polynomial-type transcendence measure for `e^i`

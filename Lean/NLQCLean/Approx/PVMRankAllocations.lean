@@ -1,5 +1,9 @@
-import Mathlib.Combinatorics.Enumerative.Composition
-import NLQCLean.Approx.PolynomialWitnessCoverage
+module
+
+public import Mathlib.Combinatorics.Enumerative.Composition
+public import NLQCLean.Approx.PolynomialWitnessCoverage
+
+@[expose] public section
 
 /-!
 # Finite positive rank allocations for PVM reverse witnesses

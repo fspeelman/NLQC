@@ -1,4 +1,8 @@
-import NLQCLean.Geometry.CubicProjection
+module
+
+public import NLQCLean.Geometry.CubicProjection
+
+@[expose] public section
 
 /-!
 # Cubic projection for rescaled isometry blocks

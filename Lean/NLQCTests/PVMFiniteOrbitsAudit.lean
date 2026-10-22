@@ -1,4 +1,8 @@
-import NLQCLean.Exact.PVMBadDecomposition
+module
+
+public import NLQCLean.Exact.PVMBadDecomposition
+
+@[expose] public section
 
 set_option pp.deepTerms true
 set_option pp.maxSteps 1000000

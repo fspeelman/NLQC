@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.BorelChannelNormalization
+module
+
+public import NLQCLean.Models.ClassicalCommunication.BorelChannelNormalization
+
+@[expose] public section
 
 /-! # Derived complete positivity and trace preservation of Borel operational channels -/
 

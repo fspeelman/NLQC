@@ -1,4 +1,8 @@
-import NLQCLean.Arithmetic.ControlledPhaseScorePolynomial
+module
+
+public import NLQCLean.Arithmetic.ControlledPhaseScorePolynomial
+
+@[expose] public section
 
 /-! # Two phase coordinates and exact denominator sixteen -/
 

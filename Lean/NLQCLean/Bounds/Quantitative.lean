@@ -2,15 +2,19 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Geometry.DirectVolume.Assembly
-import NLQCLean.Semialgebraic.ProjectionTheorem
-import NLQCLean.Bounds.HaarFractionConditional
-import NLQCLean.Bounds.ResourceConditional
-import NLQCLean.Bounds.DiamondConditional
-import NLQCLean.Bounds.PVMResourceConditional
-import NLQCLean.Bounds.AlmostEveryQubits
-import NLQCLean.Bounds.StrongHaarConditional
-import NLQCLean.Bounds.StrongUniversalResources
+module
+
+public import NLQCLean.Geometry.DirectVolume.Assembly
+public import NLQCLean.Semialgebraic.ProjectionTheorem
+public import NLQCLean.Bounds.HaarFractionConditional
+public import NLQCLean.Bounds.ResourceConditional
+public import NLQCLean.Bounds.DiamondConditional
+public import NLQCLean.Bounds.PVMResourceConditional
+public import NLQCLean.Bounds.AlmostEveryQubits
+public import NLQCLean.Bounds.StrongHaarConditional
+public import NLQCLean.Bounds.StrongUniversalResources
+
+@[expose] public section
 
 /-!
 # Full-group, almost-every and near-SWAP quantitative bounds

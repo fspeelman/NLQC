@@ -1,5 +1,9 @@
-import NLQCLean.LinearAlgebra.AdjointDimension
-import NLQCLean.Geometry.LocalOrbit
+module
+
+public import NLQCLean.LinearAlgebra.AdjointDimension
+public import NLQCLean.Geometry.LocalOrbit
+
+@[expose] public section
 
 /-!
 # Real rank of local two-sided motion

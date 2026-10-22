@@ -1,6 +1,10 @@
-import NLQCLean.Rigidity.QuantitativeDifferential
-import NLQCLean.Rigidity.ForwardWitnessCalculus
-import NLQCLean.Geometry.CubicProjection
+module
+
+public import NLQCLean.Rigidity.QuantitativeDifferential
+public import NLQCLean.Rigidity.ForwardWitnessCalculus
+public import NLQCLean.Geometry.CubicProjection
+
+@[expose] public section
 
 /-!
 # Ambient calculus of the reverse witness

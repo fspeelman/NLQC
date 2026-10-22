@@ -1,4 +1,8 @@
-import NLQCLean.Arithmetic.PhysicalScorePolynomial
+module
+
+public import NLQCLean.Arithmetic.PhysicalScorePolynomial
+
+@[expose] public section
 
 /-! # integer score encoding with separate target coordinates -/
 

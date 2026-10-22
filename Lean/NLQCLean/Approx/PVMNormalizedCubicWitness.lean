@@ -1,8 +1,12 @@
-import NLQCLean.Approx.NormalizedCubicWitness
-import NLQCLean.Approx.PVMBlockNormalization
-import NLQCLean.Approx.PVMCoordinateCount
-import NLQCLean.Geometry.RescaledSphereCubic
-import NLQCLean.Rigidity.PVMWitnessCalculus
+module
+
+public import NLQCLean.Approx.NormalizedCubicWitness
+public import NLQCLean.Approx.PVMBlockNormalization
+public import NLQCLean.Approx.PVMCoordinateCount
+public import NLQCLean.Geometry.RescaledSphereCubic
+public import NLQCLean.Rigidity.PVMWitnessCalculus
+
+@[expose] public section
 
 /-!
 # The normalized blockwise cubic extension for PVM witnesses

@@ -1,6 +1,10 @@
-import NLQCLean.Geometry.UnitaryNormalCoordinates
-import NLQCLean.Geometry.UnitaryHaar
-import Mathlib.MeasureTheory.Measure.Comap
+module
+
+public import NLQCLean.Geometry.UnitaryNormalCoordinates
+public import NLQCLean.Geometry.UnitaryHaar
+public import Mathlib.MeasureTheory.Measure.Comap
+
+@[expose] public section
 
 /-!
 # The finite normal-image measure

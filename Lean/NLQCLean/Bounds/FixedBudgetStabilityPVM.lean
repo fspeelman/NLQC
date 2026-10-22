@@ -1,8 +1,12 @@
-import NLQCLean.Bounds.FixedBudgetStability
-import NLQCLean.Arithmetic.PVMScorePolynomial
-import NLQCLean.Models.ChargedCompactPVMProtocols
-import NLQCLean.Exact.PVMBadDecomposition
-import NLQCLean.Exact.PVMFiniteOrbits
+module
+
+public import NLQCLean.Bounds.FixedBudgetStability
+public import NLQCLean.Arithmetic.PVMScorePolynomial
+public import NLQCLean.Models.ChargedCompactPVMProtocols
+public import NLQCLean.Exact.PVMBadDecomposition
+public import NLQCLean.Exact.PVMFiniteOrbits
+
+@[expose] public section
 
 /-!
 # Fixed-budget stability for measurement targets

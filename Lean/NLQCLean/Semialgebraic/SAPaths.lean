@@ -1,8 +1,12 @@
-import NLQCLean.Semialgebraic.Definable
-import Mathlib.Topology.Connected.Basic
-import Mathlib.Topology.Order.Basic
-import Mathlib.Topology.Algebra.Order.Field
-import Mathlib.Order.Interval.Set.Basic
+module
+
+public import NLQCLean.Semialgebraic.Definable
+public import Mathlib.Topology.Connected.Basic
+public import Mathlib.Topology.Order.Basic
+public import Mathlib.Topology.Algebra.Order.Field
+public import Mathlib.Order.Interval.Set.Basic
+
+@[expose] public section
 
 /-!
 # Semialgebraic paths

@@ -1,5 +1,9 @@
-import NLQCLean.Geometry.DirectVolume.LevelFamily
-import NLQCLean.Geometry.SardSlices
+module
+
+public import NLQCLean.Geometry.DirectVolume.LevelFamily
+public import NLQCLean.Geometry.SardSlices
+
+@[expose] public section
 
 /-!
 # Direct image-volume route: singular values of the strata

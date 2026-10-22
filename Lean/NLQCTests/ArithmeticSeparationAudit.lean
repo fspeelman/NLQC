@@ -1,4 +1,8 @@
-import NLQCLean.Arithmetic.SeparationCertificate
+module
+
+public import NLQCLean.Arithmetic.SeparationCertificate
+
+@[expose] public section
 
 /-!
 # Unconditional integer factor and cosine certificates

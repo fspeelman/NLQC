@@ -1,7 +1,11 @@
-import NLQCLean.Geometry.DirectVolume.Assembly
-import NLQCLean.Approx.BorelClassicalSpectralFloors
-import NLQCLean.Bounds.FiniteClassicalStrongUniversal
-import NLQCLean.Bounds.ArbitraryFiniteClassicalAlmostEvery
+module
+
+public import NLQCLean.Geometry.DirectVolume.Assembly
+public import NLQCLean.Approx.BorelClassicalSpectralFloors
+public import NLQCLean.Bounds.FiniteClassicalStrongUniversal
+public import NLQCLean.Bounds.ArbitraryFiniteClassicalAlmostEvery
+
+@[expose] public section
 
 /-!
 # Rates for actual standard-Borel classical protocols

@@ -1,4 +1,8 @@
-import NLQCLean.Approx.PVMReverseWitness
+module
+
+public import NLQCLean.Approx.PVMReverseWitness
+
+@[expose] public section
 
 /-!
 # Coordinate counts for PVM reverse witnesses

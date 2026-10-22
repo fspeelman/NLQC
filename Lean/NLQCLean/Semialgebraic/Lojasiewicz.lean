@@ -1,4 +1,8 @@
-import NLQCLean.Semialgebraic.OneVariableContinuity
+module
+
+public import NLQCLean.Semialgebraic.OneVariableContinuity
+
+@[expose] public section
 
 /-!
 # The semialgebraic Łojasiewicz inequality

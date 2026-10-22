@@ -1,6 +1,10 @@
-import NLQCLean.Semialgebraic.DefinableChoice
-import NLQCLean.Semialgebraic.Components
-import NLQCLean.Semialgebraic.PiecewiseC1
+module
+
+public import NLQCLean.Semialgebraic.DefinableChoice
+public import NLQCLean.Semialgebraic.Components
+public import NLQCLean.Semialgebraic.PiecewiseC1
+
+@[expose] public section
 
 /-!
 # Continuity of one-variable semialgebraic functions near `0⁺`

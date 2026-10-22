@@ -1,4 +1,8 @@
-import NLQCLean.Bounds.FiniteClassicalAlmostEvery
+module
+
+public import NLQCLean.Bounds.FiniteClassicalAlmostEvery
+
+@[expose] public section
 
 /-! # Fixed-target finite-shape logarithm transfers -/
 

@@ -4,16 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Yuyang Zhao
 -/
 
-import Mathlib.Analysis.SpecialFunctions.Complex.Log
-import Mathlib.RingTheory.Algebraic.Defs
-import Mathlib.RingTheory.AlgebraicIndependent.Defs
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+module
 
-import Mathlib.Analysis.Complex.Polynomial.Basic
-import Mathlib.Analysis.Complex.IsIntegral
-import NLQCLean.Vendor.HermiteLindemann.AlgebraicPart
-import Mathlib.NumberTheory.Transcendental.Lindemann.AnalyticalPart
-import NLQCLean.Vendor.HermiteLindemann.SymmetricEval
+public import Mathlib.Analysis.SpecialFunctions.Complex.Log
+public import Mathlib.RingTheory.Algebraic.Defs
+public import Mathlib.RingTheory.AlgebraicIndependent.Defs
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+
+public import Mathlib.Analysis.Complex.Polynomial.Basic
+public import Mathlib.Analysis.Complex.IsIntegral
+public import NLQCLean.Vendor.HermiteLindemann.AlgebraicPart
+public import Mathlib.NumberTheory.Transcendental.Lindemann.AnalyticalPart
+public import NLQCLean.Vendor.HermiteLindemann.SymmetricEval
+
+@[expose] public section
 
 /-!
 # The Lindemann-Weierstrass theorem

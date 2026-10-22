@@ -1,10 +1,14 @@
 /-
 The principal-angle defect and its symmetry.
 -/
-import NLQCLean.LinearAlgebra.Isometry
-import Mathlib.Analysis.Matrix.Spectrum
-import Mathlib.Analysis.CStarAlgebra.Spectrum
-import Mathlib.LinearAlgebra.Matrix.Charpoly.Basic
+module
+
+public import NLQCLean.LinearAlgebra.Isometry
+public import Mathlib.Analysis.Matrix.Spectrum
+public import Mathlib.Analysis.CStarAlgebra.Spectrum
+public import Mathlib.LinearAlgebra.Matrix.Charpoly.Basic
+
+@[expose] public section
 
 /-!
 # The principal-angle defect

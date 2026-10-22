@@ -2,9 +2,13 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Geometry.PolynomialImageVolumeHypothesis
-import Mathlib.Algebra.MvPolynomial.Monad
-import Mathlib.Topology.Algebra.MvPolynomial
+module
+
+public import NLQCLean.Geometry.PolynomialImageVolumeHypothesis
+public import Mathlib.Algebra.MvPolynomial.Monad
+public import Mathlib.Topology.Algebra.MvPolynomial
+
+@[expose] public section
 
 /-!
 # Concrete polynomial sign descriptions

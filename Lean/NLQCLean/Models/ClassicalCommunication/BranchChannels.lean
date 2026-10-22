@@ -1,5 +1,9 @@
-import NLQCLean.Models.ClassicalCommunication.FiniteProtocol
-import NLQCLean.Models.ClassicalCommunication.TensorChannels
+module
+
+public import NLQCLean.Models.ClassicalCommunication.FiniteProtocol
+public import NLQCLean.Models.ClassicalCommunication.TensorChannels
+
+@[expose] public section
 
 /-!
 # Actual outcome channels and channel-slot linearity

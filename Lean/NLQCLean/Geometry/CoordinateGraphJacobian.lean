@@ -2,9 +2,13 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Geometry.PolynomialImageVolumeHypothesis
-import NLQCLean.Semialgebraic.CoordinateGraphs
-import Mathlib.Analysis.InnerProductSpace.ExteriorPower
+module
+
+public import NLQCLean.Geometry.PolynomialImageVolumeHypothesis
+public import NLQCLean.Semialgebraic.CoordinateGraphs
+public import Mathlib.Analysis.InnerProductSpace.ExteriorPower
+
+@[expose] public section
 
 /-!
 # Rectangular Jacobians and coordinate minors

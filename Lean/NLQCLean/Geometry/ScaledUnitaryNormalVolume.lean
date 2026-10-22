@@ -1,5 +1,9 @@
-import NLQCLean.Geometry.OperatorNormalMeasure
-import NLQCLean.Geometry.HermitianOperatorSector
+module
+
+public import NLQCLean.Geometry.OperatorNormalMeasure
+public import NLQCLean.Geometry.HermitianOperatorSector
+
+@[expose] public section
 
 /-!
 # Dimension-correct normal volume and the strong Haar tube lower bound

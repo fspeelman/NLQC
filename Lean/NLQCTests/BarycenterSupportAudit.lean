@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.BarycenterSupport
+module
+
+public import NLQCLean.Models.ClassicalCommunication.BarycenterSupport
+
+@[expose] public section
 
 /-!
 # good-set integral support

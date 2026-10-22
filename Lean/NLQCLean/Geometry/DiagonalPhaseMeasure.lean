@@ -1,8 +1,12 @@
-import NLQCLean.Invariants.RectangularControlledPhase
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.Periodic
-import Mathlib.MeasureTheory.Constructions.Pi
-import Mathlib.MeasureTheory.Measure.Haar.Unique
-import Mathlib.Analysis.SpecialFunctions.Complex.Circle
+module
+
+public import NLQCLean.Invariants.RectangularControlledPhase
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.Periodic
+public import Mathlib.MeasureTheory.Constructions.Pi
+public import Mathlib.MeasureTheory.Measure.Haar.Unique
+public import Mathlib.Analysis.SpecialFunctions.Complex.Circle
+
+@[expose] public section
 
 /-!
 # Uniform alternating phases of rectangular diagonal unitaries

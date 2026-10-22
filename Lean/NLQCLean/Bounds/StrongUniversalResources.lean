@@ -1,6 +1,10 @@
-import NLQCLean.Bounds.StrongHaarConditional
-import NLQCLean.Bounds.SwapNeighborhoodHaar
-import NLQCLean.Bounds.DiamondConditional
+module
+
+public import NLQCLean.Bounds.StrongHaarConditional
+public import NLQCLean.Bounds.SwapNeighborhoodHaar
+public import NLQCLean.Bounds.DiamondConditional
+
+@[expose] public section
 
 /-!
 # Universal `d²` resource and qubit bounds

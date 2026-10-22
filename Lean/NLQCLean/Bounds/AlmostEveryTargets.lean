@@ -1,6 +1,10 @@
-import NLQCLean.Bounds.AlmostEveryArithmetic
-import NLQCLean.Bounds.HaarFractionConditional
-import NLQCLean.Models.PVMMixedReachability
+module
+
+public import NLQCLean.Bounds.AlmostEveryArithmetic
+public import NLQCLean.Bounds.HaarFractionConditional
+public import NLQCLean.Models.PVMMixedReachability
+
+@[expose] public section
 
 /-!
 # Almost every fixed unitary avoids an exponentially small forbidden error

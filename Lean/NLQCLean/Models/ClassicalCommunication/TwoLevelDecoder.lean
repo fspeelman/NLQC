@@ -1,8 +1,12 @@
-import NLQCLean.Invariants.RectangularControlledPhase
-import NLQCLean.Models.ClassicalCommunication.BranchChannels
-import NLQCLean.Models.ClassicalCommunication.CoherentConversion
-import NLQCLean.Models.ForwardReindex
-import NLQCLean.Models.UnitaryScore
+module
+
+public import NLQCLean.Invariants.RectangularControlledPhase
+public import NLQCLean.Models.ClassicalCommunication.BranchChannels
+public import NLQCLean.Models.ClassicalCommunication.CoherentConversion
+public import NLQCLean.Models.ForwardReindex
+public import NLQCLean.Models.UnitaryScore
+
+@[expose] public section
 
 /-!
 # Actual trace-preserving decoding of selected two-level systems

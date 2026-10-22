@@ -1,4 +1,8 @@
-import NLQCLean.Vendor.HermiteLindemann.Basic
+module
+
+public import NLQCLean.Vendor.HermiteLindemann.Basic
+
+@[expose] public section
 
 /-! Full statements and standard-axiom checks for the compatibility port. -/
 

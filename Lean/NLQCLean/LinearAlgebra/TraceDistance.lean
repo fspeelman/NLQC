@@ -1,4 +1,8 @@
-import NLQCLean.LinearAlgebra.TraceNormSpectral
+module
+
+public import NLQCLean.LinearAlgebra.TraceNormSpectral
+
+@[expose] public section
 
 /-!
 # Positive matrices and trace-distance tests

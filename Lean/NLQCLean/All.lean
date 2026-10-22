@@ -1,4 +1,8 @@
-import NLQCLean
+module
+
+public import NLQCLean
+
+@[expose] public section
 
 /-!
 # Complete NLQCLean library

@@ -33,7 +33,11 @@ The elimination's target and its data structures, plus the first rung of the ind
 **Honest fence.** 2d-1 only: the reconstruction step (2d-2) and the descent assembly (2d-3)
 are the remaining climb; `QE_COMBINATORICS_WALL` watches there.
 -/
-import NLQCLean.Vendor.Sundog.PolyDerivZones
+module
+
+public import NLQCLean.Vendor.Sundog.PolyDerivZones
+
+@[expose] public section
 
 namespace Sundog.TarskiQE
 

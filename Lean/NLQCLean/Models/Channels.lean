@@ -1,9 +1,13 @@
 /-
 Channels of purified isometries, Choi matrices, and the unitary target score.
 -/
-import NLQCLean.LinearAlgebra.Bipartite
-import NLQCLean.LinearAlgebra.FrobeniusInner
-import NLQCLean.LinearAlgebra.Isometry
+module
+
+public import NLQCLean.LinearAlgebra.Bipartite
+public import NLQCLean.LinearAlgebra.FrobeniusInner
+public import NLQCLean.LinearAlgebra.Isometry
+
+@[expose] public section
 
 /-!
 # Channels and the scalar score

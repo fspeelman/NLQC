@@ -1,6 +1,10 @@
-import NLQCLean.Exact.TargetWitnessPolynomial
-import NLQCLean.Arithmetic.RationalIntegerPolynomials
-import NLQCLean.Arithmetic.RationalSemialgebraicBoundary
+module
+
+public import NLQCLean.Exact.TargetWitnessPolynomial
+public import NLQCLean.Arithmetic.RationalIntegerPolynomials
+public import NLQCLean.Arithmetic.RationalSemialgebraicBoundary
+
+@[expose] public section
 
 /-!
 # Algebraicity of exact finite-architecture purity values

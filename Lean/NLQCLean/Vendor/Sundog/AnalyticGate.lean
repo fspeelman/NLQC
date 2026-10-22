@@ -30,7 +30,11 @@ so `0 ≤ secant(x) − x²` on `[a,b]` and `secant(x) − x² ≤ ((b−a)/2)²
 here — the named falsifier `RATE_NOT_POLYLOG` stands at exactly that gap. So this is S3-4's first
 strike: the ε > 0 milestone (an analytic gate IS a ReLU net to any ε, proved), at the poly rate.
 -/
-import NLQCLean.Vendor.Sundog.ExactRepr
+module
+
+public import NLQCLean.Vendor.Sundog.ExactRepr
+
+@[expose] public section
 
 namespace Sundog.AnalyticGate
 

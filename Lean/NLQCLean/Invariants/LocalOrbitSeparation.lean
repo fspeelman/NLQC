@@ -1,8 +1,12 @@
-import NLQCLean.Invariants.CompactSeparation
-import NLQCLean.Geometry.UnitaryNormalEmbedding
-import NLQCLean.Models.Targets
-import Mathlib.Analysis.Complex.Circle
-import Mathlib.MeasureTheory.Measure.Haar.Basic
+module
+
+public import NLQCLean.Invariants.CompactSeparation
+public import NLQCLean.Geometry.UnitaryNormalEmbedding
+public import NLQCLean.Models.Targets
+public import Mathlib.Analysis.Complex.Circle
+public import Mathlib.MeasureTheory.Measure.Haar.Basic
+
+@[expose] public section
 
 /-!
 # Finitely many polynomial invariants separate local orbits

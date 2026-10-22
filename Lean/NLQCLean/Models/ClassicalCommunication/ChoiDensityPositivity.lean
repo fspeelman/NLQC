@@ -1,7 +1,11 @@
-import NLQCLean.Models.ClassicalCommunication.ChoiVectorInstrument
-import Mathlib.MeasureTheory.Function.AEEqOfIntegral
-import Mathlib.Topology.DenseEmbedding
-import Mathlib.Topology.Instances.Matrix
+module
+
+public import NLQCLean.Models.ClassicalCommunication.ChoiVectorInstrument
+public import Mathlib.MeasureTheory.Function.AEEqOfIntegral
+public import Mathlib.Topology.DenseEmbedding
+public import Mathlib.Topology.Instances.Matrix
+
+@[expose] public section
 
 /-!
 # Positive normalized densities of Choi instruments

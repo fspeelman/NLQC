@@ -1,6 +1,10 @@
-import NLQCLean.Approx.PVMExtendedPolynomial
-import NLQCLean.Rigidity.PVMCoordinateDifferential
-import NLQCLean.Geometry.ThickenedJacobian
+module
+
+public import NLQCLean.Approx.PVMExtendedPolynomial
+public import NLQCLean.Rigidity.PVMCoordinateDifferential
+public import NLQCLean.Geometry.ThickenedJacobian
+
+@[expose] public section
 
 /-!
 # The PVM polynomial witness Jacobian bound

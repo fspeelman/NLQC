@@ -1,7 +1,11 @@
-import NLQCLean.Geometry.RealFrobeniusInner
-import Mathlib.Analysis.Calculus.FDeriv.Mul
-import Mathlib.Analysis.SpecificLimits.Normed
-import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
+module
+
+public import NLQCLean.Geometry.RealFrobeniusInner
+public import Mathlib.Analysis.Calculus.FDeriv.Mul
+public import Mathlib.Analysis.SpecificLimits.Normed
+public import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
+
+@[expose] public section
 
 /-!
 # The unitary Cayley chart

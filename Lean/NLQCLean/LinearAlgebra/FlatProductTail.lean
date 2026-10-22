@@ -1,5 +1,9 @@
-import NLQCLean.LinearAlgebra.FlatSupport
-import NLQCLean.LinearAlgebra.SchmidtOverlap
+module
+
+public import NLQCLean.LinearAlgebra.FlatSupport
+public import NLQCLean.LinearAlgebra.SchmidtOverlap
+
+@[expose] public section
 
 /-!
 # Flat spectra and the product top-mass tail

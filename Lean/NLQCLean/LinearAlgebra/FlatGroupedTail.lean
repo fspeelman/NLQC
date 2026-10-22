@@ -1,4 +1,8 @@
-import NLQCLean.LinearAlgebra.FlatProductTail
+module
+
+public import NLQCLean.LinearAlgebra.FlatProductTail
+
+@[expose] public section
 
 /-!
 # Top-mass tails of grouped products with flat fibres

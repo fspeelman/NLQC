@@ -1,6 +1,10 @@
-import NLQCLean.Invariants.LocalOrbitSeparation
-import NLQCLean.Geometry.HaarPolynomialZero
-import NLQCLean.Invariants.PVMRotationFamily
+module
+
+public import NLQCLean.Invariants.LocalOrbitSeparation
+public import NLQCLean.Geometry.HaarPolynomialZero
+public import NLQCLean.Invariants.PVMRotationFamily
+
+@[expose] public section
 
 /-!
 # Local orbits are Haar-null

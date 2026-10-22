@@ -1,5 +1,9 @@
-import NLQCLean.Models.ClassicalCommunication.ConditionalDensityChannels
-import NLQCLean.Models.ClassicalCommunication.BarycenterSupport
+module
+
+public import NLQCLean.Models.ClassicalCommunication.ConditionalDensityChannels
+public import NLQCLean.Models.ClassicalCommunication.BarycenterSupport
+
+@[expose] public section
 
 /-!
 # Finite instruments selected from actual CP densities

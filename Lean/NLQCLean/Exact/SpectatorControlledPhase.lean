@@ -1,5 +1,9 @@
-import NLQCLean.Invariants.ControlledPhase
-import NLQCLean.Models.ClassicalCommunication.TwoLevelDecoder
+module
+
+public import NLQCLean.Invariants.ControlledPhase
+public import NLQCLean.Models.ClassicalCommunication.TwoLevelDecoder
+
+@[expose] public section
 
 /-!
 # Controlled phases with identity spectators

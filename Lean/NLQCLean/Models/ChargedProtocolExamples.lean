@@ -1,5 +1,9 @@
-import NLQCLean.Models.ChargedCompactProtocols
-import NLQCLean.Models.ChargedCompactPVMProtocols
+module
+
+public import NLQCLean.Models.ChargedCompactProtocols
+public import NLQCLean.Models.ChargedCompactPVMProtocols
+
+@[expose] public section
 
 /-!
 # Physical examples for charged compact optimization

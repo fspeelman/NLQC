@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.RectangularDiagonalRestriction
+module
+
+public import NLQCLean.Models.ClassicalCommunication.RectangularDiagonalRestriction
+
+@[expose] public section
 
 /-! # Corrected rectangular channels and original normalized error -/
 

@@ -1,5 +1,9 @@
-import NLQCLean.LinearAlgebra.SchmidtOverlap
-import Mathlib.Algebra.Order.Chebyshev
+module
+
+public import NLQCLean.LinearAlgebra.SchmidtOverlap
+public import Mathlib.Algebra.Order.Chebyshev
+
+@[expose] public section
 
 /-!
 # The crossed-pair amplitude is bounded by the message dimension

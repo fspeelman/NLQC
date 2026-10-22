@@ -1,4 +1,8 @@
-import NLQCLean.LinearAlgebra.TraceDistance
+module
+
+public import NLQCLean.LinearAlgebra.TraceDistance
+
+@[expose] public section
 
 /-!
 # Finite channel amplification and an ancilla-uniform trace-norm bound

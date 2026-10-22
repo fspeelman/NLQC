@@ -1,6 +1,10 @@
-import Mathlib.Algebra.Polynomial.FieldDivision
-import Mathlib.Algebra.Polynomial.Derivative
-import Mathlib.Basic.Complex.Basic
+module
+
+public import Mathlib.Algebra.Polynomial.FieldDivision
+public import Mathlib.Algebra.Polynomial.Derivative
+public import Mathlib.Basic.Complex.Basic
+
+@[expose] public section
 
 /-!
 # A one-point zero estimate for exponential polynomials

@@ -1,4 +1,8 @@
-import NLQCLean.Rigidity.ForwardExactDifferential
+module
+
+public import NLQCLean.Rigidity.ForwardExactDifferential
+
+@[expose] public section
 
 /-!
 # Forward differential at an exact PVM witness

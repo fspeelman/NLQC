@@ -4,7 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Yuyang Zhao
 -/
 
-import Mathlib.Data.Finsupp.Defs
+module
+
+public import Mathlib.Data.Finsupp.Defs
+
+@[expose] public section
 
 /-!
 # Lifts a `Finsupp` from an underlying type to a `Finsupp` on a quotient

@@ -6,7 +6,11 @@ Modified for NLQCLean: coefficient-preserving sign characterization and
 rational projection; original variable rotation and evaluation proof retained.
 -/
 
-import NLQCLean.Semialgebraic.RationalDiagramAssembly
+module
+
+public import NLQCLean.Semialgebraic.RationalDiagramAssembly
+
+@[expose] public section
 
 /-!
 # Rational Tarski–Seidenberg projection

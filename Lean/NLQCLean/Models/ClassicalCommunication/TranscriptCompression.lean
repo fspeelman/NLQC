@@ -1,7 +1,11 @@
-import NLQCLean.Models.ClassicalCommunication.CoherentConversion
-import NLQCLean.Models.ClassicalCommunication.FiniteProtocolReindex
-import NLQCLean.Models.ForwardCompression
-import NLQCLean.LinearAlgebra.IsometryExtension
+module
+
+public import NLQCLean.Models.ClassicalCommunication.CoherentConversion
+public import NLQCLean.Models.ClassicalCommunication.FiniteProtocolReindex
+public import NLQCLean.Models.ForwardCompression
+public import NLQCLean.LinearAlgebra.IsometryExtension
+
+@[expose] public section
 
 /-!
 # The direct transcript parametrization of free-classical protocols

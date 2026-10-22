@@ -1,4 +1,8 @@
-import NLQCLean.Exact.ExactPurityAlgebraicity
+module
+
+public import NLQCLean.Exact.ExactPurityAlgebraicity
+
+@[expose] public section
 
 /-! Full statements and axioms for actual finite-architecture purity algebraicity. -/
 

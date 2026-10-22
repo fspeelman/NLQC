@@ -1,7 +1,11 @@
-import NLQCLean.Bounds.NearBellSpectra
-import NLQCLean.Approx.NearBellFreezing
-import NLQCLean.Approx.PVMPolynomialCoverage
-import NLQCLean.Approx.PVMReachableWitnessCover
+module
+
+public import NLQCLean.Bounds.NearBellSpectra
+public import NLQCLean.Approx.NearBellFreezing
+public import NLQCLean.Approx.PVMPolynomialCoverage
+public import NLQCLean.Approx.PVMReachableWitnessCover
+
+@[expose] public section
 
 /-!
 # Slim witnesses near a maximally entangled basis

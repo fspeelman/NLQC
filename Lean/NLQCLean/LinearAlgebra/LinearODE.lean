@@ -1,10 +1,14 @@
-import Mathlib.Analysis.ODE.ExistUnique
-import Mathlib.Analysis.Calculus.Deriv.Comp
-import Mathlib.Analysis.Calculus.Deriv.Shift
-import Mathlib.Topology.Order.OrderClosed
-import Mathlib.Topology.Algebra.Module.FiniteDimension
-import Mathlib.Analysis.Normed.Module.FiniteDimension
-import Mathlib.LinearAlgebra.Matrix.ToLin
+module
+
+public import Mathlib.Analysis.ODE.ExistUnique
+public import Mathlib.Analysis.Calculus.Deriv.Comp
+public import Mathlib.Analysis.Calculus.Deriv.Shift
+public import Mathlib.Topology.Order.OrderClosed
+public import Mathlib.Topology.Algebra.Module.FiniteDimension
+public import Mathlib.Analysis.Normed.Module.FiniteDimension
+public import Mathlib.LinearAlgebra.Matrix.ToLin
+
+@[expose] public section
 
 /-!
 # Linear differential equations on intervals

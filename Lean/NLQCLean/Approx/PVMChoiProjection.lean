@@ -1,5 +1,9 @@
-import NLQCLean.Approx.PVMBlockSpectrum
-import NLQCLean.Models.ProjectiveExactness
+module
+
+public import NLQCLean.Approx.PVMBlockSpectrum
+public import NLQCLean.Models.ProjectiveExactness
+
+@[expose] public section
 
 /-!
 # good-flag Choi projection

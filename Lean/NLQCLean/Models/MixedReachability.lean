@@ -1,4 +1,8 @@
-import NLQCLean.Models.PhysicalReachability
+module
+
+public import NLQCLean.Models.PhysicalReachability
+
+@[expose] public section
 
 /-!
 # Pure and finite-mixed reachability coincide

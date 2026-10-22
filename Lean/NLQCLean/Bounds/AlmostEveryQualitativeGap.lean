@@ -1,5 +1,9 @@
-import NLQCLean.Bounds.GeneralTargetQualitativeGap
-import NLQCLean.Bounds.AlmostEveryExact
+module
+
+public import NLQCLean.Bounds.GeneralTargetQualitativeGap
+public import NLQCLean.Bounds.AlmostEveryExact
+
+@[expose] public section
 
 /-!
 # Unconditional almost-every fixed-target qualitative gaps

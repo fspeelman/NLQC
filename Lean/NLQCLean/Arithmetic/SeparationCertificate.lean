@@ -1,4 +1,8 @@
-import NLQCLean.Arithmetic.CosineTransform
+module
+
+public import NLQCLean.Arithmetic.CosineTransform
+
+@[expose] public section
 
 /-!
 # Polynomial value-separation certificates

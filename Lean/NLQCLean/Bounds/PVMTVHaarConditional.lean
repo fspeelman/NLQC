@@ -1,5 +1,9 @@
-import NLQCLean.Models.PVMTVReachability
-import NLQCLean.Bounds.PVMHaarFractionConditional
+module
+
+public import NLQCLean.Models.PVMTVReachability
+public import NLQCLean.Bounds.PVMHaarFractionConditional
+
+@[expose] public section
 
 /-!
 # Conditional Haar outer measure for worst-case joint PVM TV

@@ -1,6 +1,10 @@
-import NLQCLean.Approx.ChoiRank
-import NLQCLean.LinearAlgebra.SchmidtOverlap
-import NLQCLean.Models.UnitaryScore
+module
+
+public import NLQCLean.Approx.ChoiRank
+public import NLQCLean.LinearAlgebra.SchmidtOverlap
+public import NLQCLean.Models.UnitaryScore
+
+@[expose] public section
 
 /-!
 # Normalized Choi projection and sharp freezing

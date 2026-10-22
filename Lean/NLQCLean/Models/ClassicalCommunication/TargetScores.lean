@@ -1,5 +1,9 @@
-import NLQCLean.Models.UnitaryScore
-import NLQCLean.Models.ProjectiveScore
+module
+
+public import NLQCLean.Models.UnitaryScore
+public import NLQCLean.Models.ProjectiveScore
+
+@[expose] public section
 
 /-!
 # The actual target scores as real-linear channel functionals

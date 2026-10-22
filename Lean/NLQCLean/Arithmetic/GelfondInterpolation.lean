@@ -1,8 +1,12 @@
-import NLQCLean.Arithmetic.GelfondZeroEstimate
-import Mathlib.LinearAlgebra.Matrix.AbsoluteValue
-import Mathlib.LinearAlgebra.Matrix.ToLinearEquiv
-import Mathlib.LinearAlgebra.Matrix.Adjugate
-import Mathlib.Analysis.Complex.Basic
+module
+
+public import NLQCLean.Arithmetic.GelfondZeroEstimate
+public import Mathlib.LinearAlgebra.Matrix.AbsoluteValue
+public import Mathlib.LinearAlgebra.Matrix.ToLinearEquiv
+public import Mathlib.LinearAlgebra.Matrix.Adjugate
+public import Mathlib.Analysis.Complex.Basic
+
+@[expose] public section
 
 /-!
 # Confluent Hermite interpolation with explicit coefficient bounds

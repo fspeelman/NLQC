@@ -2,7 +2,11 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import NLQCLean.Semialgebraic.Objects
+module
+
+public import NLQCLean.Semialgebraic.Objects
+
+@[expose] public section
 
 /-!
 # Enumerated external semialgebraic textbook propositions

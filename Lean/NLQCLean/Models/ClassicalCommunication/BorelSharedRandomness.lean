@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.AveragedChannels
+module
+
+public import NLQCLean.Models.ClassicalCommunication.AveragedChannels
+
+@[expose] public section
 
 /-!
 # Actual standard-Borel protocols with free shared probability randomness

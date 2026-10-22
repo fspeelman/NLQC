@@ -1,5 +1,9 @@
-import NLQCLean.Bounds.BorelClassicalRates
-import NLQCLean.Bounds.FiniteClassicalQubits
+module
+
+public import NLQCLean.Bounds.BorelClassicalRates
+public import NLQCLean.Bounds.FiniteClassicalQubits
+
+@[expose] public section
 
 /-!
 # Quantum-footprint logarithms for actual standard-Borel protocols

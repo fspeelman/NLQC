@@ -1,4 +1,8 @@
-import NLQCLean.Models.ClassicalCommunication.ChoiChannelEquivalence
+module
+
+public import NLQCLean.Models.ClassicalCommunication.ChoiChannelEquivalence
+
+@[expose] public section
 
 /-!
 # Uniform norms of actual completely positive trace-preserving channels
