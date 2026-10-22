@@ -47,3 +47,9 @@ initially), because module files cannot import non-module files. In
 `AlgebraicPart.lean` the theorem `toFinsuppAux_apply_apply_mk` is no longer
 `private`, since the exposed definition `toFinsupp` uses it. Statements,
 proofs and notices are otherwise unchanged.
+
+CI compatibility (22 October 2026): `mem_mapDomainFixed_iff` uses its existing
+explicit `simp only` proof step directly. The `simp? ... says ...` wrapper
+also tested the exact tactic suggestion in CI; that suggestion changed under
+the pinned toolchain after module conversion. Removing this suggestion-output
+check preserves the proof tactic, theorem statement and kernel checking.

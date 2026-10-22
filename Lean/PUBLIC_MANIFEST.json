@@ -1983,7 +1983,7 @@
     },
     {
       "path": "NLQCLean/Vendor/HermiteLindemann/AlgebraicPart.lean",
-      "sha256": "bb8b7dacdb39cc9b725e1bd5ff2759fe6952f13ad32d7db2edf9dd1606a200c9"
+      "sha256": "3cdd7cc723f52c96cf331eb5146442f59b4a2a9c5366592b76c4e12635b44bf3"
     },
     {
       "path": "NLQCLean/Vendor/HermiteLindemann/Basic.lean",
@@ -1999,7 +1999,7 @@
     },
     {
       "path": "NLQCLean/Vendor/HermiteLindemann/README.md",
-      "sha256": "bbc4ba966c90fb15a0b467d94958739ca44abde77a65903b99625a1065208f43"
+      "sha256": "7a4607600f5a202b4b70d65bf7f1435dcc9ff67f14d9b30b73d6bc3546e0d1b2"
     },
     {
       "path": "NLQCLean/Vendor/HermiteLindemann/SOURCE_MANIFEST.json",
